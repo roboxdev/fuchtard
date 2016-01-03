@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+{% load static from staticfiles %}
+
+{% block body_class %}{{ block.super }} food-menu{% endblock body_class %}
+
+{% block body_content %}
+    <a href="javascript:void(0)" class="btn btn-primary btn-fab"><i class="material-icons">grade</i></a>
+    <div class="food-menu">
+        {% for food_category in object_list %}
+            {% if food_category.fooditem_set.exists %}
+                {% include 'food/includes/food-category.html' %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock body_content %}

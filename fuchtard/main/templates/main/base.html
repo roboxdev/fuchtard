@@ -1,0 +1,52 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+            Сервис заказа еды в Алматы — Maxisushi
+        {% endblock title %}
+    </title>
+    {% block css %}
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'components/bootstrap-material-design/dist/css/material.min.css' %}" rel="stylesheet">
+        <link href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}" rel="stylesheet">
+    {% endblock css %}
+
+</head>
+
+{% block body %}
+<body class="{% block body_class %}{% endblock body_class %}">
+    {% block header %}
+        {% include 'main/header.html' %}
+    {% endblock header %}
+
+    {% block body_content %}
+
+    {% endblock body_content %}
+
+    {% block footer %}
+        {% include 'main/footer.html' %}
+    {% endblock footer %}
+
+    {% block js %}
+        <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'components/bootstrap-material-design/dist/js/material.min.js' %}"></script>
+        <script src="{% static 'components/bootstrap-material-design/dist/js/ripples.min.js' %}"></script>
+        <script>
+            $(function () {
+                $.material.init();
+            });
+        </script>
+    {% endblock js %}
+
+</body>
+{% endblock body %}
+
+</html>

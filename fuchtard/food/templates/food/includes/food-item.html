@@ -1,0 +1,19 @@
+{% load static from staticfiles %}
+<div class="list-group-item food-item">
+    <div class="row-picture food-photo"><img src="{% static food_item.photo.url %}"></div>
+    <div class="row-content">
+
+        <h4 class="list-group-item-heading food-title"><a class="" role="button" data-toggle="collapse" href="#food-category-{{ food_category.id }}-item-{{ food_item.id }}-details" aria-expanded="false" aria-controls="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">{{ food_item.title }}</a></h4>
+        <div class="list-group-item-text food-description">
+            {% for food_tag in food_item.tags.all %}
+                <span class="label label-warning">{{ food_tag.title }}</span>
+            {% endfor %}
+            <p>{{ food_item.description }}</p>
+        </div>
+        <div class="least-content food-price">{{ food_item.price }} 〒</div>
+        <div class="list-group-item-text food-details collapse" id="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">
+            {% include 'food/includes/food-details.html' %}
+        </div>
+    </div>
+    <a href="javascript:void(0)" class="btn btn-raised btn-primary pull-right"><i class="material-icons">add_shopping_cart</i><div class="ripple-container"></div></a>
+</div>

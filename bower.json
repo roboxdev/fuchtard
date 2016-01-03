@@ -1,0 +1,25 @@
+{
+  "name": "fuchtard",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-material-design": "~0.4.4",
+    "jquery-ui": "latest",
+    "jquery-mobile": "latest"
+  },
+  "resolutions": {
+    "jquery": "~2.1.1",
+    "jquery-ui": "1.11.4"
+  }
+}
