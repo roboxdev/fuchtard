@@ -25,7 +25,7 @@ SECRET_KEY = '9t!sc1+#0zh@%c+xyiq&dlg_ri-_*7jfl!tg!lt#c0+1s9e6%p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'debug_toolbar',
+    'static_precompiler',
     'main',
     'food',
     'order',
@@ -145,6 +146,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'static', )
 STATICFILES_DIRS = [
     ('components', os.path.join(BASE_DIR, '..', '..', 'bower_components', ), ),
 ]
+
+STATIC_PRECOMPILER_OUTPUT_DIR = ''
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'media', )

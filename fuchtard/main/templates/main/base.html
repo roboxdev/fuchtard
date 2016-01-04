@@ -1,4 +1,5 @@
 {% load static from staticfiles %}
+{% load compile_static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,10 +13,11 @@
     </title>
     {% block css %}
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
-        <link href="{% static 'components/bootstrap-material-design/dist/css/material.min.css' %}" rel="stylesheet">
-        <link href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/material.min.css' %}">
+        <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
+        <link rel="stylesheet" href="{% static 'food/css/styles.less'|compile %}" type="text/css" />
     {% endblock css %}
 
 </head>

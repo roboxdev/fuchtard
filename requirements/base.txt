@@ -4,3 +4,4 @@ psycopg2==2.6.1
 Pillow==3.0.0
 django-debug-toolbar
 python-social-auth
+django-static-precompiler
