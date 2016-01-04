@@ -25,7 +25,7 @@
 {% block body %}
 <body class="{% block body_class %}{% endblock body_class %}">
     {% block header %}
-        {% include 'main/header.html' %}
+        {% include 'main/includes/header.html' %}
     {% endblock header %}
 
     {% block body_content %}
@@ -33,7 +33,7 @@
     {% endblock body_content %}
 
     {% block footer %}
-        {% include 'main/footer.html' %}
+        {% include 'main/includes/footer.html' %}
     {% endblock footer %}
 
     {% block js %}
