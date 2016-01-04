@@ -1,5 +1,4 @@
 /node_modules
-*.css
-*.js
-*.js.map
-!Gulpfile.js
+**/css/*.css
+**/js/*.js
+**/js/*.js.map
