@@ -23,9 +23,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('main.urls')),
-    url(r'^', include('food.urls')),
-    url(r'^', include('order.urls')),
+    url(r'^', include('main.urls', namespace='main')),
+    url(r'^', include('food.urls', namespace='food')),
+    url(r'^', include('order.urls', namespace='order')),
 
 ]
 

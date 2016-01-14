@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'django.contrib.humanize',
     'debug_toolbar',
     'static_precompiler',
     'main',

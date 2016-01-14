@@ -3,52 +3,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        {% block title %}
-            Сервис заказа еды в Алматы — Maxisushi
-        {% endblock title %}
-    </title>
-    {% block css %}
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/material.min.css' %}">
-        <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
-        <link rel="stylesheet" href="{% static 'food/css/styles.less'|compile %}" type="text/css" />
-    {% endblock css %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% block title %}
+      Сервис заказа еды в Алматы — Maxisushi
+    {% endblock title %}
+  </title>
+  {% block css %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'main/img/favicon.png' %}"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css' %}">
+    <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
+    <link rel="stylesheet" href="{% static 'food/css/styles.less'|compile %}" type="text/css"/>
+  {% endblock css %}
 
 </head>
 
 {% block body %}
-<body class="{% block body_class %}{% endblock body_class %}">
-    {% block header %}
-        {% include 'main/includes/header.html' %}
-    {% endblock header %}
+  <body class="{% block body_class %}{% endblock body_class %}">
+  {% block header %}
+    {% include 'main/includes/header.html' %}
+  {% endblock header %}
 
-    {% block body_content %}
+  {% block body_content %}
 
-    {% endblock body_content %}
+  {% endblock body_content %}
 
-    {% block footer %}
-        {% include 'main/includes/footer.html' %}
-    {% endblock footer %}
+  {% block footer %}
+    {% include 'main/includes/footer.html' %}
+  {% endblock footer %}
 
-    {% block js %}
-        <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
-        <script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'components/bootstrap-material-design/dist/js/material.min.js' %}"></script>
-        <script src="{% static 'components/bootstrap-material-design/dist/js/ripples.min.js' %}"></script>
-        <script>
-            $(function () {
-                $.material.init();
-            });
-        </script>
-    {% endblock js %}
+  {% block js %}
+    <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'components/bootstrap-material-design/dist/js/material.min.js' %}"></script>
+    <script src="{% static 'components/bootstrap-material-design/dist/js/ripples.min.js' %}"></script>
+    <script>
+      $(function () {
+        $.material.init();
+      });
+    </script>
+  {% endblock js %}
 
-</body>
+  </body>
 {% endblock body %}
 
 </html>

@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-<div class="list-group-item food-item">
+<div class="list-group-item food-item" data-food-id="{{ food_item.id }}" data-food-title="{{ food_item.title }}" data-food-price="{{ food_item.price }}">
     <div class="row-picture food-photo"><img src="{% static food_item.photo.url %}"></div>
     <div class="row-content">
 
@@ -15,5 +15,14 @@
             {% include 'food/includes/food-details.html' %}
         </div>
     </div>
-    <a href="javascript:void(0)" class="btn btn-raised btn-primary pull-right"><i class="material-icons">add_shopping_cart</i><div class="ripple-container"></div></a>
+    <div class="row">
+      <div class="pull-right">
+        <div class="quantity-buttons btn-group btn-group-justified btn-group-raised">
+          <a href="javascript:void(0)" onclick="update_quantity_button(this)" class="btn btn-primary quantity-decrease">-<div class="ripple-container"></div></a>
+          <a href="javascript:void(0)" class="btn quantity-counter">0</a>
+          <a href="javascript:void(0)" onclick="update_quantity_button(this)" class="btn btn-primary quantity-increase"><i class="material-icons">add_shopping_cart</i><div class="ripple-container"></div></a>
+        </div>
+      </div>
+    </div>
+
 </div>

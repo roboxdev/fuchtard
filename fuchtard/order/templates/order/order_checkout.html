@@ -1,134 +1,173 @@
 {% extends 'main/base.html' %}
 {% load static from staticfiles %}
+{% load compile_static %}
+{% load humanize %}
 
 {% block body_class %}{{ block.super }} order-checkout{% endblock body_class %}
 
+{% block js %}
+  {{ block.super }}
+  <script src="{% static 'order/js/order-checkout-compiled.js' %}"></script>
+{% endblock js %}
+
 {% block body_content %}
-    <a href="javascript:void(0)" class="btn btn-primary btn-fab"><i class="material-icons">grade</i></a>
-<div>
-    <form class="form-horizontal">
-      <fieldset>
-        <legend>Legend</legend>
-        <div class="form-group">
-          <label for="inputEmail" class="col-md-2 control-label">Email</label>
 
-          <div class="col-md-10">
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" class="col-md-2 control-label">Password</label>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>Legend</legend>
+          <div class="form-group">
+            <label for="inputEmail" class="col-md-2 control-label">Email</label>
 
-          <div class="col-md-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-
-            <!--
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Checkbox
-              </label>
-              <label>
-                <input type="checkbox" disabled> Disabled Checkbox
-              </label>
-            </div>
-            <br>
-
-            <div class="togglebutton">
-              <label>
-                <input type="checkbox" checked> Toggle button
-              </label>
-            </div>
-            -->
-          </div>
-        </div>
-        <div class="form-group" style="margin-top: 0;"> <!-- inline style is just to demo custom css to put checkbox below input above -->
-          <div class="col-md-offset-2 col-md-10">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Checkbox
-              </label>
-              <label>
-                <input type="checkbox" disabled=""> Disabled Checkbox
-              </label>
+            <div class="col-md-10">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-2 col-md-10">
-            <div class="togglebutton">
-              <label>
-                <input type="checkbox" checked=""> Toggle button
-              </label>
+          <div class="form-group">
+            <label for="inputPassword" class="col-md-2 control-label">Password</label>
+
+            <div class="col-md-10">
+              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+
+              <!--
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Checkbox
+                </label>
+                <label>
+                  <input type="checkbox" disabled> Disabled Checkbox
+                </label>
+              </div>
+              <br>
+
+              <div class="togglebutton">
+                <label>
+                  <input type="checkbox" checked> Toggle button
+                </label>
+              </div>
+              -->
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="inputFile" class="col-md-2 control-label">File</label>
-
-          <div class="col-md-10">
-            <input type="text" readonly="" class="form-control" placeholder="Browse...">
-            <input type="file" id="inputFile" multiple="">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="textArea" class="col-md-2 control-label">Textarea</label>
-
-          <div class="col-md-10">
-            <textarea class="form-control" rows="3" id="textArea"></textarea>
-            <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">Radios</label>
-
-          <div class="col-md-10">
-            <div class="radio radio-primary">
-              <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                Option one is this
-              </label>
-            </div>
-            <div class="radio radio-primary">
-              <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                Option two can be something else
-              </label>
+          <div class="form-group" style="margin-top: 0;">
+            <!-- inline style is just to demo custom css to put checkbox below input above -->
+            <div class="col-md-offset-2 col-md-10">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox"> Checkbox
+                </label>
+                <label>
+                  <input type="checkbox" disabled=""> Disabled Checkbox
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="select111" class="col-md-2 control-label">Select</label>
+          <div class="form-group">
+            <label for="textArea" class="col-md-2 control-label">Комментарий</label>
+            <div class="col-md-10">
+              <textarea class="form-control" rows="2" id="textArea"></textarea>
+              <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label">Адрес</label>
 
-          <div class="col-md-10">
-            <select id="select111" class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="select222" class="col-md-2 control-label">Select Multiple</label>
+            <div class="col-md-10">
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="addressRadios" id="addressRadios1" value="option1"
+                         checked="">
+                  Микрорайон 7, дом 47, квартира 50, этаж 5
+                </label>
+              </div>
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="addressRadios" id="addressRadios2" value="new">
+                  <p>Указать новый</p>
+                </label>
+                <div class="new-address-form">
+                  <div class="form-group label-floating">
+                    <label class="control-label" for="focusedInput1">Улица или микрорайон</label>
+                    <input class="form-control" id="focusedInput1" type="text">
+                  </div>
+                  <div class="form-group label-floating">
+                    <label class="control-label" for="focusedInput1">Номер дома</label>
+                    <input class="form-control" id="focusedInput1" type="text">
+                  </div>
+                  <div class="form-group label-floating">
+                    <label class="control-label" for="focusedInput1">Номер квартиры или офиса</label>
+                    <input class="form-control" id="focusedInput1" type="text">
+                  </div>
+                  <div class="form-group label-floating">
+                    <label class="control-label" for="focusedInput1">Этаж</label>
+                    <input class="form-control" id="focusedInput1" type="number">
+                  </div>
+                </div>
 
-          <div class="col-md-10">
-            <select id="select222" multiple="" class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-10 col-md-offset-2">
-            <button type="button" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="form-group">
+            <label class="col-md-2 control-label">Телефон</label>
+
+            <div class="col-md-10">
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="phoneRadios" id="phoneRadios1" value="option1" checked="">
+                  +7 708 313-13-37
+                </label>
+              </div>
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="phoneRadios" id="phoneRadios2" value="new">
+                  Указать новый
+                </label>
+                {#              <label for="inputEmail" class="col-md-2 control-label">Email</label>#}
+                <div class="col-md-10">
+                  <input type="tel" class="form-control" id="newPhoneInput"
+                         placeholder="+7 708 313-13-37">
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </fieldset>
-    </form>
-</div>
+          <div class="form-group">
+            <label class="col-md-2 control-label">Доставка</label>
+
+            <div class="col-md-10">
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="when-to-deliver" id="when-to-deliver-instant" value="instant" checked="">
+                  В ближайшее время
+                </label>
+              </div>
+              <div class="radio radio-primary">
+                <label>
+                  <input type="radio" name="when-to-deliver" id="when-to-deliver-deferred" value="deferred">
+                  Ко времени
+                  <div class="col-md-10">
+                    <select id="select111" class="form-control">
+                      {% for day in view.get_deferred_delivery_dates %}
+                        <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </label>
+                {#              <label for="inputEmail" class="col-md-2 control-label">Email</label>#}
+                <div class="col-md-10">
+                  <input type="tel" class="form-control" id="newPhoneInput"
+                         placeholder="+7 708 313-13-37">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
 {% endblock body_content %}

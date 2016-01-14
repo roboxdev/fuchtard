@@ -1,4 +1,4 @@
 /node_modules
 **/css/*.css
-**/js/*.js
-**/js/*.js.map
+**/js/*-compiled.js
+**/js/*-compiled.js.map

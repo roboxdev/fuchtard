@@ -26,5 +26,8 @@
     "gulp-sass": "latest",
     "yargs": "latest",
     "autoprefixer": "latest"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.0"
   }
 }

@@ -14,9 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-material-design": "~0.4.4",
     "jquery-ui": "latest",
-    "jquery-mobile": "latest"
+    "jquery-mobile": "latest",
+    "bootstrap-material-design": "0.5.7",
+    "mdi": "~1.4.57"
   },
   "resolutions": {
     "jquery": "~2.1.1",

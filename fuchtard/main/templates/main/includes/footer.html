@@ -1,8 +1,8 @@
 <footer>
 {% with request.resolver_match.url_name as url_name %}
-<p><a class="{% if url_name == 'contacts-view' %}active{% endif %}" href="{% url 'contacts-view' %}">О компании и контакты</a></p>
-<p><a class="{% if url_name == 'faq-view' %}active{% endif %}" href="{% url 'faq-view' %}">Вопросы и ответы</a></p>
-<p><a class="{% if url_name == 'eula-view' %}active{% endif %}" href="{% url 'eula-view' %}">Пользовательское соглашение</a></p>
+<p><a class="{% if url_name == 'contacts-view' %}active{% endif %}" href="{% url 'main:contacts-view' %}">О компании и контакты</a></p>
+<p><a class="{% if url_name == 'faq-view' %}active{% endif %}" href="{% url 'main:faq-view' %}">Вопросы и ответы</a></p>
+<p><a class="{% if url_name == 'eula-view' %}active{% endif %}" href="{% url 'main:eula-view' %}">Пользовательское соглашение</a></p>
 {% endwith %}
 <p><a href="tel:+77270000000">+7 (727) 000 00 00</a></p>
 <p>© 2015 TОО «Fuchtard»</p>
