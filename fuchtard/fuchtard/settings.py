@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'django.contrib.humanize',
+    'django_extensions',
     'debug_toolbar',
     'static_precompiler',
     'main',
@@ -64,6 +65,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
+        # 'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -73,6 +75,12 @@ TEMPLATES = [
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ],
+            # 'loaders': [
+            #     ('django.template.loaders.cached.Loader', [
+            #         'django.template.loaders.filesystem.Loader',
+            #         'django.template.loaders.app_directories.Loader',
+            #     ]),
+            # ],
         },
     },
 ]
@@ -85,8 +93,12 @@ WSGI_APPLICATION = 'fuchtard.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '..', '..', 'dev_db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fuchtard',
+        'USER': 'fuchtard',
+        'PASSWORD': 'fuchtard',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 

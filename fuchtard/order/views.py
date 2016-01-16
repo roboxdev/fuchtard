@@ -1,8 +1,10 @@
 import datetime
 
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.generic import FormView, UpdateView, View
 
+from order.models import Cart
 from .forms import OrderCheckoutForm
 
 
@@ -50,4 +52,9 @@ class OrderCheckoutView(FormView):
 
 class CartUpdateView(View):
     def post(self, request, *args, **kwargs):
-        pass
+        cart_id = self.request.session.get('cart_id', None)
+        cart = Cart.objects.get_or_create(id__exact=cart_id)[0]
+        self.request.session['cart_id'] = cart.id
+        json_cart = request.body.decode('utf-8')
+        cart.json_update(json_cart=json_cart)
+        return JsonResponse({'result': 'ok'})

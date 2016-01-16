@@ -1,13 +1,6 @@
 class Cart {
     constructor() {
         this.content = {
-            '5': 1,
-            '4': 2,
-            '2': 3,
-            '3': 3,
-            '6': 3,
-            '7': 3,
-            '1': 3,
         };
     }
 
@@ -138,19 +131,32 @@ function update_quantity_in_menu(food_id, quantity) {
 }
 
 function checkout_button(this_button) {
-    var action = $(this_button).data('action');
-    var data = cart.content;
-    $.post(action,
-        data,
-        function () {
-
-        });
+    var button = $(this_button);
+    var action = button.data('action');
+    var data = JSON.stringify(cart.content);
+    console.log(data);
+    button.button('loading');
+    $.ajax({
+        url: action,
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: data,
+        dataType: 'text',
+        success: function(result) {
+            console.log(result);
+            window.location.replace(button.data('order-page-url'));
+        }
+    });
 }
 
 function load_cart() {
+    var preloaded_cart = $('#cart-overlay').data('preloaded-cart');
+    if (preloaded_cart) {
+        cart.content = preloaded_cart;
+    }
     $.each(cart.content, function(index, value) {
         update_quantity_in_menu_and_cart(index, value);
-    })
+    });
 }
 
 load_cart();

@@ -1,4 +1,4 @@
-<div id="cart-overlay">
+<div id="cart-overlay" {% if cart %}data-preloaded-cart="{{ cart.json_repr }}"{% endif %}>
   <div class="list-group food-items-container">
     {#  {% for food_item in food_category.fooditem_set.all %}#}
 
@@ -34,7 +34,7 @@
     {#  {% endfor %}#}
   </div>
   <div>
-    <a href="javascript:void(0)" onclick="checkout_button(this)" class="btn btn-raised btn-danger" id="checkout-button" data-action="{% url 'order:cart-update-view' %}">Оформить заказ</a>
+    <a href="javascript:void(0)" onclick="checkout_button(this)" class="btn btn-raised btn-danger" id="checkout-button" data-action="{% url 'order:cart-update-view' %}" data-order-page-url="{% url 'order:order-checkout-view' %}" data-loading-text="Подождите...">Оформить заказ</a>
   </div>
 
 </div>
