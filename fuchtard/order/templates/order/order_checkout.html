@@ -14,154 +14,122 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <form class="form-horizontal">
+      <form class="form-horizontal col-md-10">
         <fieldset>
-          <legend>Legend</legend>
-          <div class="form-group">
-            <label for="inputEmail" class="col-md-2 control-label">Email</label>
+          <legend>Оформление заказа</legend>
 
-            <div class="col-md-10">
-              <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+          <div class="form-group label-floating">
+            <label for="input_name" class="control-label">Имя</label>
+            <div class="">
+              <input type="text" class="form-control" id="input_name" placeholder="">
+              <span class="help-block">Как к вам обращаться?</span>
             </div>
           </div>
-          <div class="form-group">
-            <label for="inputPassword" class="col-md-2 control-label">Password</label>
 
-            <div class="col-md-10">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-
-              <!--
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Checkbox
-                </label>
-                <label>
-                  <input type="checkbox" disabled> Disabled Checkbox
-                </label>
-              </div>
-              <br>
-
-              <div class="togglebutton">
-                <label>
-                  <input type="checkbox" checked> Toggle button
-                </label>
-              </div>
-              -->
+          <div class="form-group label-floating">
+            <label for="input_email" class="control-label">Email</label>
+            <div class="">
+              <input type="email" class="form-control" id="input_email" placeholder="" required="required">
+              <span class="help-block">Мы вышлем вам на почту информацию о заказе.</span>
             </div>
           </div>
-          <div class="form-group" style="margin-top: 0;">
-            <!-- inline style is just to demo custom css to put checkbox below input above -->
-            <div class="col-md-offset-2 col-md-10">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Checkbox
-                </label>
-                <label>
-                  <input type="checkbox" disabled=""> Disabled Checkbox
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="textArea" class="col-md-2 control-label">Комментарий</label>
-            <div class="col-md-10">
-              <textarea class="form-control" rows="2" id="textArea"></textarea>
-              <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Адрес</label>
-
-            <div class="col-md-10">
-              <div class="radio radio-primary">
-                <label>
-                  <input type="radio" name="addressRadios" id="addressRadios1" value="option1"
-                         checked="">
-                  Микрорайон 7, дом 47, квартира 50, этаж 5
-                </label>
-              </div>
-              <div class="radio radio-primary">
-                <label>
-                  <input type="radio" name="addressRadios" id="addressRadios2" value="new">
-                  <p>Указать новый</p>
-                </label>
-                <div class="new-address-form">
-                  <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput1">Улица или микрорайон</label>
-                    <input class="form-control" id="focusedInput1" type="text">
-                  </div>
-                  <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput1">Номер дома</label>
-                    <input class="form-control" id="focusedInput1" type="text">
-                  </div>
-                  <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput1">Номер квартиры или офиса</label>
-                    <input class="form-control" id="focusedInput1" type="text">
-                  </div>
-                  <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput1">Этаж</label>
-                    <input class="form-control" id="focusedInput1" type="number">
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Телефон</label>
-
-            <div class="col-md-10">
-              <div class="radio radio-primary">
-                <label>
-                  <input type="radio" name="phoneRadios" id="phoneRadios1" value="option1" checked="">
-                  +7 708 313-13-37
-                </label>
-              </div>
-              <div class="radio radio-primary">
-                <label>
-                  <input type="radio" name="phoneRadios" id="phoneRadios2" value="new">
-                  Указать новый
-                </label>
-                {#              <label for="inputEmail" class="col-md-2 control-label">Email</label>#}
-                <div class="col-md-10">
-                  <input type="tel" class="form-control" id="newPhoneInput"
-                         placeholder="+7 708 313-13-37">
+          {% if asdf.phone %}
+            <div class="form-group with-hidden-fields label-floating">
+              <label class="control-label">Телефон</label>
+              <div class="">
+                {#                            <div class="radio radio-primary">#}
+                {#                              <label>#}
+                {#                                <input type="radio" name="phone_radios" id="phoneRadios1" value="option1">#}
+                {#                                +7 789 123-45-67#}
+                {#                              </label>#}
+                {#                              <span class="pull-right"><i class="material-icons">delete</i></span>#}
+                {#                            </div>#}
+                <div class="radio radio-primary">
+                  <label>
+                    <input type="radio" class="expand-hidden-fields" name="phone_radios" id="phone_radios_new"
+                           value="new"
+                           checked="checked">
+                    Указать новый
+                  </label>
                 </div>
               </div>
+              <div class="col-md-10 collapse in">
+                {% include 'order/_phone_form.html' %}
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Доставка</label>
+          {% else %}
+            {% include 'order/_phone_form.html' %}
+          {% endif %}
+          {% if asdf.address %}
+            <div class="form-group with-hidden-fields">
+              {#            <label class="control-label">Адрес</label>#}
+              <div class="">
+                {#              <div class="radio radio-primary">#}
+                {#                <label>#}
+                {#                  <input type="radio" name="addressRadios" id="addressRadios1" value="option1">#}
+                {#                  Микрорайон 7, дом 47, квартира 50, этаж 5#}
+                {#                </label>#}
+                {#                <span class="pull-right"><i class="material-icons">delete</i></span>#}
+                {#              </div>#}
+                <div class="radio radio-primary">
+                  <label>
+                    <input type="radio" class="expand-hidden-fields" name="address_radios" id="address_radios_new"
+                           value="new"
+                           checked="checked">
+                    <p>Указать новый</p>
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-10 collapse in">
+                {% include 'order/_address_form.html' %}
+              </div>
+            </div>
+          {% else %}
+            {% include 'order/_address_form.html' %}
+          {% endif %}
 
-            <div class="col-md-10">
+          <div class="form-group with-hidden-fields delivery-select">
+            <label class=" control-label">Доставка</label>
+
+            <div class="">
               <div class="radio radio-primary">
                 <label>
-                  <input type="radio" name="when-to-deliver" id="when-to-deliver-instant" value="instant" checked="">
+                  <input type="radio" name="when-to-deliver" id="when-to-deliver-instant" value="instant"
+                         checked="checked">
                   В ближайшее время
                 </label>
               </div>
               <div class="radio radio-primary">
                 <label>
-                  <input type="radio" name="when-to-deliver" id="when-to-deliver-deferred" value="deferred">
+                  <input type="radio" class="expand-hidden-fields" name="when-to-deliver" id="when-to-deliver-deferred"
+                         value="deferred">
                   Ко времени
-                  <div class="col-md-10">
-                    <select id="select111" class="form-control">
-                      {% for day in view.get_deferred_delivery_dates %}
-                        <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>
-                      {% endfor %}
-                    </select>
-                  </div>
                 </label>
-                {#              <label for="inputEmail" class="col-md-2 control-label">Email</label>#}
-                <div class="col-md-10">
-                  <input type="tel" class="form-control" id="newPhoneInput"
-                         placeholder="+7 708 313-13-37">
+
+                <div class="collapse">
+                  <select id="select111" class="form-control">
+                    {% for day in view.get_deferred_delivery_dates %}
+                      <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>
+                    {% endfor %}
+                  </select>
+                  <select id="select222" class="form-control">
+                    <option value="asdf">asdf</option>
+                    <option value="qwer">qwer</option>
+                  </select>
+
                 </div>
               </div>
             </div>
           </div>
+          <div class="form-group label-floating">
+            <label for="textArea" class=" control-label">Комментарий</label>
+            <div class="">
+              <textarea class="form-control" rows="1" id="textArea"></textarea>
+              <span class="help-block">Оставьте комментарий к заказу</span>
+            </div>
+          </div>
           <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
+            <div class=" col-md-offset-2">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </div>
