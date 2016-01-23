@@ -1,7 +1,7 @@
 import datetime
 
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import FormView, UpdateView, View
 
 from order.models import Cart
@@ -11,6 +11,18 @@ from .forms import OrderCheckoutForm
 class OrderCheckoutView(FormView):
     form_class = OrderCheckoutForm
     template_name = 'order/order_checkout.html'
+
+    def get_initial(self):
+        initial = super(OrderCheckoutView, self).get_initial()
+
+        initial['address'] = {
+            'street': 'a',
+            'building': 'b',
+            'apartment': 'c',
+            'flood': 1,
+        }
+
+        return initial
 
     def get_deferred_delivery_dates(self):
         humanized = (
@@ -55,6 +67,6 @@ class CartUpdateView(View):
         cart_id = self.request.session.get('cart_id', None)
         cart = Cart.objects.get_or_create(id__exact=cart_id)[0]
         self.request.session['cart_id'] = cart.id
-        json_cart = request.body.decode('utf-8')
+        json_cart = request.POST.get('cart_data')
         cart.json_update(json_cart=json_cart)
-        return JsonResponse({'result': 'ok'})
+        return redirect('order:order-checkout-view')

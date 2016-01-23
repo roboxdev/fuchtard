@@ -1,5 +1,6 @@
+{% load widget_tweaks %}
 <div class="form-group label-floating">
   <label class="control-label">Телефон</label>
-  <input type="tel" class="form-control" id="input_phone_new" placeholder="">
+  {% render_field form.phone class='form-control' %}
   <span class="help-block">Укажите сотовый, чтобы курьер мог быстро связаться с Вами.</span>
 </div>

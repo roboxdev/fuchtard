@@ -1,9 +1,11 @@
 import json
 
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from food.models import FoodItem
+from order.helpers import shifthash
 
 
 class Cart(models.Model):
@@ -42,23 +44,21 @@ class CartItem(models.Model):
 
 class OrderManager(models.Manager):
     def get_by_hash(self, hashed_id):
-        return self.get(id=Order.hash(hashed_id))
+        return self.get(id=shifthash(hashed_id))
 
 
 class Order(models.Model):
     objects = OrderManager()
-    user = models.ForeignKey(User)
-    # phone = models.ForeignKey()
-    # address = models.
-    cart = models.ForeignKey(Cart)
-    deliver_at = models.DateTimeField(null=True)
-    comment = models.TextField()
-
+    email = models.CharField(verbose_name='Email', max_length=60)
+    user = models.CharField(verbose_name='Имя', max_length=60)
+    phone = models.CharField(verbose_name='Телефон', max_length=20)
+    address = JSONField(verbose_name='Адрес', )
+    cart = models.OneToOneField(Cart)
+    deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True)
+    comment = models.TextField(verbose_name='Комментарий', )
 
     @property
     def hashed_id(self):
-        return self._hash(self.id)
+        return shifthash(self.id)
 
-    @staticmethod
-    def hash(n):
-        return ((0x000FFF & n) << 12) + ((0xFFF000 & n) >> 12)
+

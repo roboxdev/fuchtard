@@ -6,3 +6,5 @@ django-debug-toolbar
 python-social-auth
 django-static-precompiler
 django-extensions
+django-crispy-forms
+django-widget-tweaks

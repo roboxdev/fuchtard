@@ -34,7 +34,10 @@
     {#  {% endfor %}#}
   </div>
   <div>
-    <a href="javascript:void(0)" onclick="checkout_button(this)" class="btn btn-raised btn-danger" id="checkout-button" data-action="{% url 'order:cart-update-view' %}" data-order-page-url="{% url 'order:order-checkout-view' %}" data-loading-text="Подождите...">Оформить заказ</a>
+    <form id='cart_form' action="{% url 'order:cart-update-view' %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-block btn-raised btn-danger" data-loading-text="Подождите...">Перейти к оформлению заказа</button>
+    </form>
   </div>
 
 </div>

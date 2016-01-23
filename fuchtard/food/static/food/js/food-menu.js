@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    load_cart();
+    $('#cart_form').submit(cart_form_submit);
+});
+
+
 class Cart {
     constructor() {
         this.content = {
@@ -130,25 +136,6 @@ function update_quantity_in_menu(food_id, quantity) {
     $(`.food-item[data-food-id='${food_id}']`).find('.quantity-counter').html(quantity);
 }
 
-function checkout_button(this_button) {
-    var button = $(this_button);
-    var action = button.data('action');
-    var data = JSON.stringify(cart.content);
-    console.log(data);
-    button.button('loading');
-    $.ajax({
-        url: action,
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: data,
-        dataType: 'text',
-        success: function(result) {
-            console.log(result);
-            window.location.replace(button.data('order-page-url'));
-        }
-    });
-}
-
 function load_cart() {
     var preloaded_cart = $('#cart-overlay').data('preloaded-cart');
     if (preloaded_cart) {
@@ -159,4 +146,15 @@ function load_cart() {
     });
 }
 
-load_cart();
+
+function cart_form_submit() {
+    var data = JSON.stringify(cart.content);
+    var cart_data = $("<input type='hidden' name='cart_data'/>");
+
+    $(this).find('button[type=submit]').button('loading');
+    cart_data.val(data);
+    $(this).append(cart_data);
+    console.log(data);
+    return true;
+
+}

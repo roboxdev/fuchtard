@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load compile_static %}
 {% load humanize %}
+{% load widget_tweaks %}
 
 {% block body_class %}{{ block.super }} order-checkout{% endblock body_class %}
 
@@ -14,14 +15,14 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <form class="form-horizontal col-md-10">
+      <form class="form-horizontal col-md-10" id="order_form" action="" method="POST">
         <fieldset>
           <legend>Оформление заказа</legend>
 
           <div class="form-group label-floating">
             <label for="input_name" class="control-label">Имя</label>
             <div class="">
-              <input type="text" class="form-control" id="input_name" placeholder="">
+              {% render_field form.user class='form-control' %}
               <span class="help-block">Как к вам обращаться?</span>
             </div>
           </div>
@@ -29,7 +30,9 @@
           <div class="form-group label-floating">
             <label for="input_email" class="control-label">Email</label>
             <div class="">
-              <input type="email" class="form-control" id="input_email" placeholder="" required="required">
+              {% render_field form.email class='form-control' required='required' %}
+              <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+              <span id="inputWarning2Status" class="sr-only">(warning)</span>
               <span class="help-block">Мы вышлем вам на почту информацию о заказе.</span>
             </div>
           </div>
@@ -130,7 +133,7 @@
           </div>
           <div class="form-group">
             <div class=" col-md-offset-2">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-block btn-raised btn-danger">Оформить заказ</button>
             </div>
           </div>
         </fieldset>
