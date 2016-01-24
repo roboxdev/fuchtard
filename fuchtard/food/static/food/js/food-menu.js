@@ -76,23 +76,24 @@ function update_quantity_in_cart(food_id, quantity) {
     var food_title = food_item.data('food-title');
     var food_price = food_item.data('food-price');
     var cart_item_total_price = food_price * quantity;
+
+    var quantity_decrease_button = cart_item.find('.quantity-decrease');
+    var quantity_counter = cart_item.find('.quantity-counter');
+    var quantity_increase_button = cart_item.find('.quantity-increase');
+
     if (cart_item.length) {
         if (quantity == 0) {
             cart_item.remove();
         } else {
             cart_item.find('.food-price').html(cart_item_total_price);
-
+            quantity_decrease_button.html('-');
             if (quantity == 1) {
-                // bin counter plus
-            } else if (quantity >= 10) {
-                // minus counter plus_disabled
-            } else {
-                // minus counter plus
+                quantity_decrease_button.html('<i class="material-icons">cancel</i>');
             }
         }
 
 
-        food_item.find('.quantity-counter').html(quantity);
+        quantity_counter.html(quantity);
     } else if (quantity) {
         cart_overlay.find('.list-group').append(
             `
@@ -124,16 +125,29 @@ function update_quantity_in_cart(food_id, quantity) {
 }
 
 function update_quantity_in_menu(food_id, quantity) {
+    var menu_item = $(`.food-item[data-food-id=${food_id}]`);
+    console.log(menu_item);
+    var quantity_decrease_button = menu_item.find('.quantity-decrease');
+    var quantity_counter = menu_item.find('.quantity-counter');
+    var quantity_increase_button = menu_item.find('.quantity-increase');
+
     if (quantity == 0) {
-        // plus_cart
-    } else if (quantity == 1) {
-        // bin counter plus
-    } else if (quantity >= 10) {
-        // minus counter plus_disabled
+        quantity_decrease_button.addClass('hidden');
+        quantity_counter.addClass('hidden');
+        quantity_increase_button.html('<i class="material-icons">add_shopping_cart</i>');
     } else {
-        // minus counter plus
+        quantity_decrease_button.removeClass('hidden');
+        quantity_counter.removeClass('hidden');
+        quantity_decrease_button.html('-');
+        quantity_increase_button.html('+');
+
+        if (quantity == 1) {
+            quantity_decrease_button.html('<i class="material-icons">cancel</i>');
+        }
+
     }
-    $(`.food-item[data-food-id='${food_id}']`).find('.quantity-counter').html(quantity);
+    quantity_counter.html(quantity);
+
 }
 
 function load_cart() {
