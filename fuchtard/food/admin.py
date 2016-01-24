@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FoodTag, FoodCategory, FoodItem
+from .models import FoodTag, FoodCategory, FoodItem, Discount
 
 
 @admin.register(FoodTag)
@@ -15,3 +15,12 @@ class FoodCategoryAdmin(admin.ModelAdmin):
 @admin.register(FoodItem)
 class FoodItemAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Discount)
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = [
+        'amount',
+        'content_type',
+        'object_id',
+    ]
