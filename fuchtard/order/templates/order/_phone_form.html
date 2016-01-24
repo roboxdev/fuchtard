@@ -1,6 +1,7 @@
 {% load widget_tweaks %}
 <div class="form-group label-floating">
   <label class="control-label">Телефон</label>
-  {% render_field form.phone class='form-control' %}
+  {% render_field form.phone class='form-control' required='required' %}
+  <span class="form-control-feedback glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="help-block">Укажите сотовый, чтобы курьер мог быстро связаться с Вами.</span>
 </div>

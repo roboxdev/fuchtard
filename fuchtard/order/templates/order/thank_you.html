@@ -1,0 +1,10 @@
+{% extends 'main/base.html' %}
+{% load static from staticfiles %}
+
+{% block body_class %}{{ block.super }} thank_you{% endblock body_class %}
+
+{% block body_content %}
+  <h1>Спасибо за заказ!</h1>
+  Номер заказа: {{ order_hashed_id }}
+
+{% endblock body_content %}

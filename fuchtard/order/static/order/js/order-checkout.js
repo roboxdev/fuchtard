@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    $('#order_form').submit(order_form_submit);
+    $('#id_phone').mask('+7 999 999-99-99');
+});
+
+
 $('.with-hidden-fields input[type=radio]').change(function() {
     var radiobutton = $(this);
     var hidden_fields = radiobutton.parents('.with-hidden-fields').find('.collapse');
@@ -8,8 +14,20 @@ $('.with-hidden-fields input[type=radio]').change(function() {
     }
 });
 
-$('#input_phone_new').mask('+7 999 999-99-99');
 
-$('#order_form').submit(function() {
+function order_form_submit() {
+    var address = $("<input type='hidden' name='address'/>");
+    var address_obj = JSON.stringify({
+        'street': $('#input_street').val(),
+        'building': $('#input_building').val(),
+        'apartment': $('#input_apartment').val(),
+        'flood': $('#input_floor').val(),
+    });
 
-});
+    $(this).find('button[type=submit]').button('loading');
+    address.val(address_obj);
+    $(this).append(address);
+    //console.log(data);
+    return true;
+
+}

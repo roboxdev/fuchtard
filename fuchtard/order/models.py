@@ -52,10 +52,10 @@ class Order(models.Model):
     email = models.CharField(verbose_name='Email', max_length=60)
     user = models.CharField(verbose_name='Имя', max_length=60)
     phone = models.CharField(verbose_name='Телефон', max_length=20)
-    address = JSONField(verbose_name='Адрес', )
+    address = JSONField(verbose_name='Адрес')
     cart = models.OneToOneField(Cart)
-    deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True)
-    comment = models.TextField(verbose_name='Комментарий', )
+    deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True, blank=True)
+    comment = models.TextField(verbose_name='Комментарий', blank=True)
 
     @property
     def hashed_id(self):

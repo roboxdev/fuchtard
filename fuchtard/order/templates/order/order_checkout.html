@@ -16,6 +16,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <form class="form-horizontal col-md-10" id="order_form" action="" method="POST">
+      {% csrf_token %}
         <fieldset>
           <legend>Оформление заказа</legend>
 
@@ -31,8 +32,7 @@
             <label for="input_email" class="control-label">Email</label>
             <div class="">
               {% render_field form.email class='form-control' required='required' %}
-              <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
-              <span id="inputWarning2Status" class="sr-only">(warning)</span>
+              <span class="form-control-feedback glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
               <span class="help-block">Мы вышлем вам на почту информацию о заказе.</span>
             </div>
           </div>
@@ -110,14 +110,15 @@
                 </label>
 
                 <div class="collapse">
-                  <select id="select111" class="form-control">
-                    {% for day in view.get_deferred_delivery_dates %}
-                      <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>
-                    {% endfor %}
+                  <select id="deferred_day" class="form-control">
+{#                    {% for day in view.get_deferred_delivery_dates %}#}
+{#                      <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>#}
+{#                    {% endfor %}#}
                   </select>
-                  <select id="select222" class="form-control">
-                    <option value="asdf">asdf</option>
-                    <option value="qwer">qwer</option>
+                  <select id="deferred_hour" class="form-control">
+{#                    {% for hour in view.get_deferred_delivery_hours %}#}
+{#                      <option value="asdf">asdf</option>#}
+{#                    {% endfor %}#}
                   </select>
 
                 </div>
@@ -127,7 +128,8 @@
           <div class="form-group label-floating">
             <label for="textArea" class=" control-label">Комментарий</label>
             <div class="">
-              <textarea class="form-control" rows="1" id="textArea"></textarea>
+              {% render_field form.comment class='form-control' rows='1' %}
+{#              <textarea class="form-control" rows="1" id="textArea"></textarea>#}
               <span class="help-block">Оставьте комментарий к заказу</span>
             </div>
           </div>
@@ -136,6 +138,7 @@
               <button type="submit" class="btn btn-block btn-raised btn-danger">Оформить заказ</button>
             </div>
           </div>
+          {% render_field form.cart class='form-control' %}
         </fieldset>
       </form>
     </div>

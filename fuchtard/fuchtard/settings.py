@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'debug_toolbar',
     'static_precompiler',
+    'widget_tweaks',
     'main',
     'food',
     'order',
