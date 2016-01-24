@@ -12,14 +12,14 @@
         </div>
         <div class="least-content food-price">{{ food_item.price }} 〒</div>
         <div class="list-group-item-text food-details collapse" id="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">
-            {% include 'food/includes/food-details.html' %}
+{#            {% include 'food/includes/food-details.html' %}#}
         </div>
     </div>
     <div class="row">
       <div class="pull-right col-xs-7 col-lg-4">
         <div class="quantity-buttons btn-group-sm btn-group-justified btn-group-raised">
-          <a href="javascript:void(0)" onclick="update_quantity_button(this)" class="btn btn-primary quantity-decrease">-<div class="ripple-container"></div></a>
-          <a href="javascript:void(0)" class="btn quantity-counter">0</a>
+          <a href="javascript:void(0)" onclick="update_quantity_button(this)" class="btn btn-primary quantity-decrease hidden">-<div class="ripple-container"></div></a>
+          <a href="javascript:void(0)" class="btn quantity-counter hidden">0</a>
           <a href="javascript:void(0)" onclick="update_quantity_button(this)" class="btn btn-primary quantity-increase"><i class="material-icons">add_shopping_cart</i><div class="ripple-container"></div></a>
         </div>
       </div>
