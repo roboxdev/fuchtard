@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'main',
     'food',
     'order',
+    'panel',
 ]
 
 MIDDLEWARE_CLASSES = [
