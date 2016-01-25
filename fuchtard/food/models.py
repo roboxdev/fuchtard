@@ -73,7 +73,7 @@ class FoodItem(models.Model):
         # discounts.extend(list(self.category.values_list('discount__amount', flat=True)))
         # discounts.extend(list(self.tags.values_list('discount__amount', flat=True)))
         if discounts:
-            discounts_amount = [(lambda x: x*self.raw_price if x <= 1 else x)(d) for d in discounts]
+            discounts_amount = [d*self.raw_price if d <= 1 else d for d in discounts]
             max_discount = max(discounts_amount)
             return max(0, self.raw_price-max_discount)
         return self.raw_price
