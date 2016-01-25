@@ -7,4 +7,3 @@ python-social-auth
 django-static-precompiler
 django-extensions
 django-widget-tweaks
-django-braces
