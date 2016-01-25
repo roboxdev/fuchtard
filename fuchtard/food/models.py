@@ -65,11 +65,10 @@ class FoodItem(models.Model):
     @property
     def price(self):
         discounts = [i.amount for i in self.discount.all()]
-        # discounts.extend([i.amount for i in self.category.filter(discount)])
-        # discounts.extend([i.amount for i in Discount.objects.filter(food_categories=self.category.all())])
-        # discounts.extend([i.amount for i in Discount.objects.filter(food_tags__in=self.tags.all())])
         for cat in self.category.all():
             discounts.extend([i.amount for i in cat.discount.all()])
+        for tag in self.tags.all():
+            discounts.extend([i.amount for i in tag.discount.all()])
         # discounts = list(self.discount.values_list('amount', flat=True))
         # discounts.extend(list(self.category.values_list('discount__amount', flat=True)))
         # discounts.extend(list(self.tags.values_list('discount__amount', flat=True)))

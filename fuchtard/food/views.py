@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 
 from order.models import Cart
-from .models import FoodItem, FoodCategory
+from .models import FoodCategory
 
 
 class FoodMenuView(ListView):
@@ -19,5 +19,11 @@ class FoodMenuView(ListView):
 
     def get_queryset(self):
         qs = super(FoodMenuView, self).get_queryset()
-        qs = qs.prefetch_related('fooditem_set', 'fooditem_set__tags')
+        qs = qs.prefetch_related(
+                'fooditem_set',
+                'fooditem_set__tags',
+                'fooditem_set__discount',
+                'fooditem_set__category__discount',
+                'fooditem_set__tags__discount',
+        )
         return qs
