@@ -2,6 +2,7 @@ Django==1.9
 django-hosts==1.2
 psycopg2==2.6.1
 Pillow==3.0.0
+gunicorn==19.4.5
 django-debug-toolbar
 python-social-auth
 django-static-precompiler
