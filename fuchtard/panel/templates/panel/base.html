@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css' %}">
     <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
     <link rel="stylesheet" href="{% static 'panel/css/styles.less'|compile %}" type="text/css"/>
   {% endblock css %}
@@ -24,15 +25,27 @@
 </head>
 
 {% block body %}
-  <body class="{% block body_class %}{% endblock body_class %} container">
-  {% block navbar %}
-    {% include 'panel/_navbar.html' %}
-  {% endblock navbar %}
+  <body class="{% block body_class %}{% endblock body_class %}">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3">
+        {% block navbar %}
+          <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+            <li><a href="{% url 'panel:dashboard-view' %}">Сводка</a></li>
+            <li class="active"><a href="{% url 'panel:orders-view' %}">Заказы</a></li>
+            {% block order %}
+            {% endblock order %}
+            <li><a href="{% url 'admin:index' %}">Админка</a></li>
+          </ul>
+        {% endblock navbar %}
+      </div>
+      <div class="col-sm-9">
+        {% block body_content %}
 
-  {% block body_content %}
-
-  {% endblock body_content %}
-
+        {% endblock body_content %}
+      </div>
+    </div>
+  </div>
   {% block js %}
     <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>

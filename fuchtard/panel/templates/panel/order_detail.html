@@ -1,0 +1,16 @@
+{% extends 'panel/base.html' %}
+
+{% block body_content %}
+  номер заказа: {{ object.hashed_id }}
+  email: {{ object.email  }}
+  user: {{ object.user  }}
+  phone: {{ object.phone  }}
+  address: {{ object.address  }}
+  cart: {{ object.cart  }}
+  deliver_at: {{ object.deliver_at  }}
+  comment: {{ object.comment  }}
+{% endblock body_content %}
+
+{% block order %}
+  <li class="active"><a href="">&nbsp;&nbsp;&nbsp;Заказ {{ object.hashed_id }}</a></li>
+{% endblock order %}

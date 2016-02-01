@@ -1,5 +1,25 @@
 {% extends 'panel/base.html' %}
 
 {% block body_content %}
-orders
+  <table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Column heading</th>
+      <th>Column heading</th>
+      <th>Column heading</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in object_list %}
+      <tr data-href="{% url 'panel:order-detail-view' hashed_id=order.hashed_id %}">
+        <td>{{ forloop.counter }}</td>
+        <td><a href="{% url 'panel:order-detail-view' hashed_id=order.hashed_id %}">{{ order.hashed_id }}</a></td>
+        <td>Column content</td>
+        <td>Column content</td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
 {% endblock body_content %}
