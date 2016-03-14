@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "dependencies": {
     "bower": "latest",
+    "less": "latest",
     "coffee-script": "latest",
     "autoprefixer-core": "^6.0.1",
     "browser-sync": "^2.10.0",
