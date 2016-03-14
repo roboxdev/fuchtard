@@ -2,7 +2,7 @@
     <div class="food-category-title"><a class="" role="button" data-toggle="collapse" href="#food-items-{{ food_category.id }}" aria-expanded="{% if food_category.expanded %}true{% else %}false{% endif %}" aria-controls="food-items-{{ food_category.id }}">{{ food_category.title }}</a></div>
     <div class="list-group food-items-container collapse{% if food_category.expanded %} in{% endif %}" id="food-items-{{ food_category.id }}">
     {% for food_item in food_category.fooditem_set.all %}
-        {% include 'food/includes/food-item.html' %}
+        {% include 'food/_food-item.html' %}
         {% if not forloop.last %}
             <div class="list-group-separator"></div>
         {% endif %}

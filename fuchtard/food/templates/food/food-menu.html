@@ -16,10 +16,10 @@
     <div class="food-menu">
         {% for food_category in object_list %}
             {% if food_category.fooditem_set.exists %}
-                {% include 'food/includes/food-category.html' %}
+                {% include 'food/_food-category.html' %}
             {% endif %}
         {% endfor %}
     </div>
-    {% include 'food/includes/cart.html' %}
+    {% include 'food/_cart.html' %}
 
 {% endblock body_content %}
