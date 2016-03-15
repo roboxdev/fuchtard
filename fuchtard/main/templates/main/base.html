@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{% static 'components/bootstrap/dist/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css' %}">
     <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
     <link rel="stylesheet" href="{% static 'food/css/styles.less'|compile %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'order/css/styles.less'|compile %}" type="text/css"/>
@@ -25,17 +26,17 @@
 </head>
 
 {% block body %}
-  <body class="{% block body_class %}{% endblock body_class %} container">
+  <body class="{% block body_class %}{% endblock body_class %}">
   {% block header %}
-    {% include 'main/includes/header.html' %}
+    {% include 'main/_header.html' %}
   {% endblock header %}
+  <div class="container">
+    {% block body_content %}
 
-  {% block body_content %}
-
-  {% endblock body_content %}
-
+    {% endblock body_content %}
+  </div>
   {% block footer %}
-    {% include 'main/includes/footer.html' %}
+    {% include 'main/_footer.html' %}
   {% endblock footer %}
 
   {% block js %}
