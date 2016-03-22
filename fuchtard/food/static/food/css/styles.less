@@ -2,11 +2,17 @@
 //  background-color: #a66aa9;
 //}
 
-.btn.btn-warning.btn-fab {
+.sticky_bar {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
   z-index: 50;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  //background-color: #d4d4d4;
+}
+
+.btn.btn-warning.btn-fab {
+  //margin: 5px;
 }
 
 #cart-overlay {
@@ -18,14 +24,19 @@
   //left: 0;
   //top: 0;
   z-index: 10;
-  height:100%;
-  width:100%;
-  position:fixed;
-  left:0;
-  top:0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
   //z-index:1 !important;
   //background-color:black;
   //top: 0; bottom: 0; left: 0; right: 0;
   overflow: auto;
+}
+
+.food-raw-price {
+  color: darkred;
+  text-decoration: line-through;
 }
 

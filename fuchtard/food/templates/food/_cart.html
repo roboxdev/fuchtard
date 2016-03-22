@@ -33,11 +33,5 @@
     {#    {% endif %}#}
     {#  {% endfor %}#}
   </div>
-  <div>
-    <form id='cart_form' action="{% url 'order:cart-update-view' %}" method="POST">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-block btn-raised btn-danger" data-loading-text="Подождите...">Перейти к оформлению заказа</button>
-    </form>
-  </div>
 
 </div>

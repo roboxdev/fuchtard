@@ -1,6 +1,6 @@
 $(document).ready(function() {
     load_cart();
-    $('#cart_form').submit(cart_form_submit);
+    $('#cart_form_submit_button').click(cart_form_submit);
 });
 
 
@@ -29,6 +29,16 @@ class Cart {
                 return this.content[food_item_id];
             }
         }
+    }
+
+    get_total_price() {
+        var total_price = 0;
+        $.each(this.content, function(food_item_id, food_item_quantity) {
+            var food_item = $(`.food-item[data-food-id='${food_item_id}']`);
+            var food_price = parseInt(food_item.data('food-price'));
+            total_price += food_price * food_item_quantity;
+        });
+        return total_price;
     }
 }
 
@@ -60,12 +70,13 @@ function update_quantity_button(this_button) {
     else if (button.hasClass('quantity-decrease'))
         quantity = cart.remove_from_cart(food_id);
 
-    update_quantity_in_menu_and_cart(food_id, quantity);
+    update_price_and_quantity_in_menu_and_cart(food_id, quantity);
 }
 
-function update_quantity_in_menu_and_cart(food_id, quantity) {
+function update_price_and_quantity_in_menu_and_cart(food_id, quantity) {
     update_quantity_in_cart(food_id, quantity);
     update_quantity_in_menu(food_id, quantity);
+    update_cart_total_price();
     console.log('update_quantity', food_id, quantity);
 }
 
@@ -74,7 +85,7 @@ function update_quantity_in_cart(food_id, quantity) {
     var cart_item = cart_overlay.find(`.cart-item[data-food-id='${food_id}']`);
     var food_item = $(`.food-item[data-food-id='${food_id}']`);
     var food_title = food_item.data('food-title');
-    var food_price = food_item.data('food-price');
+    var food_price = parseInt(food_item.data('food-price'));
     var cart_item_total_price = food_price * quantity;
 
     var quantity_decrease_button = cart_item.find('.quantity-decrease');
@@ -150,25 +161,34 @@ function update_quantity_in_menu(food_id, quantity) {
 
 }
 
+
+function update_cart_total_price() {
+    $('#cart-total-price').text(cart.get_total_price());
+}
+
+
 function load_cart() {
     var preloaded_cart = $('#cart-overlay').data('preloaded-cart');
     if (preloaded_cart) {
         cart.content = preloaded_cart;
     }
     $.each(cart.content, function(index, value) {
-        update_quantity_in_menu_and_cart(index, value);
+        update_price_and_quantity_in_menu_and_cart(index, value);
     });
 }
 
 
 function cart_form_submit() {
+    console.log(this);
+    var cart_form = $(this).parents('form');
     var data = JSON.stringify(cart.content);
     var cart_data = $("<input type='hidden' name='cart_data'/>");
 
-    $(this).find('button[type=submit]').button('loading');
+    $(this).button('loading');
     cart_data.val(data);
-    $(this).append(cart_data);
+    cart_form.append(cart_data);
+    cart_form.submit();
     console.log(data);
-    return true;
+    //return true;
 
 }
