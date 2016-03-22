@@ -48,17 +48,24 @@ var cart = new Cart;
 function cart_overlay_button(this_button) {
     var button = $(this_button);
     if (!(button.hasClass('toggled'))) {
-        console.log('show_cart_overlay');
         button.addClass('toggled');
         $('#cart-overlay').show();
         button.find('i').html('restaurant_menu');
     } else {
-        console.log('hide_cart_overlay');
         button.removeClass('toggled');
         $('#cart-overlay').hide();
         button.find('i').html('shopping_cart');
     }
 }
+
+
+function hide_cart_overlay_if_cart_is_empty() {
+    var button = $('#cart-overlay-button');
+    if ($.isEmptyObject(cart.content) && button.hasClass('toggled')) {
+        button.click();
+    }
+}
+
 
 function update_quantity_button(this_button) {
     var button = $(this_button);
@@ -71,6 +78,7 @@ function update_quantity_button(this_button) {
         quantity = cart.remove_from_cart(food_id);
 
     update_price_and_quantity_in_menu_and_cart(food_id, quantity);
+    hide_cart_overlay_if_cart_is_empty();
 }
 
 function update_price_and_quantity_in_menu_and_cart(food_id, quantity) {
