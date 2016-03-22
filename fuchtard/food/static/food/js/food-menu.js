@@ -71,22 +71,35 @@ function update_quantity_button(this_button) {
     var button = $(this_button);
     var food_id = button.parents('.food-item').data('food-id');
     var quantity = 0;
-    if (button.hasClass('quantity-increase'))
+    if (button.hasClass('quantity-increase')) {
         quantity = cart.add_to_cart(food_id);
-    //    TODO: animate FAB
+        $('.sticky_bar').effect('shake');
+    }
     else if (button.hasClass('quantity-decrease'))
         quantity = cart.remove_from_cart(food_id);
 
     update_price_and_quantity_in_menu_and_cart(food_id, quantity);
-    hide_cart_overlay_if_cart_is_empty();
 }
 
+
 function update_price_and_quantity_in_menu_and_cart(food_id, quantity) {
+    hide_cart_overlay_if_cart_is_empty();
+    hide_sticky_bar_if_cart_is_empty();
     update_quantity_in_cart(food_id, quantity);
     update_quantity_in_menu(food_id, quantity);
     update_cart_total_price();
     console.log('update_quantity', food_id, quantity);
 }
+
+
+function hide_sticky_bar_if_cart_is_empty() {
+    if ($.isEmptyObject(cart.content)) {
+        $('.sticky_bar').hide();
+    } else {
+        $('.sticky_bar').show();
+    }
+}
+
 
 function update_quantity_in_cart(food_id, quantity) {
     var cart_overlay = $('#cart-overlay');
