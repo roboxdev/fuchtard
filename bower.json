@@ -17,7 +17,8 @@
     "jquery-ui": "latest",
     "jquery-mobile": "latest",
     "bootstrap-material-design": "0.5.7",
-    "mdi": "~1.4.57"
+    "mdi": "*",
+    "matchHeight": "matchheight#~0.7.0"
   },
   "resolutions": {
     "jquery": "~2.1.1",
