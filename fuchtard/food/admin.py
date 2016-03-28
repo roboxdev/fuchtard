@@ -9,7 +9,7 @@ class FoodTagAdmin(admin.ModelAdmin):
 
 @admin.register(FoodCategory)
 class FoodCategoryAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {'slug': ('title', ), }
 
 
 @admin.register(FoodItem)

@@ -35,8 +35,8 @@ class FoodCategory(models.Model):
     enabled = models.BooleanField(default=True)
     position = models.IntegerField()
     expanded = models.BooleanField(default=True)
-    # slug = models.SlugField()
     title = models.CharField(max_length=60)
+    slug = models.SlugField()
     discount = GenericRelation(Discount, related_query_name='food_categories')
 
     def __str__(self):
