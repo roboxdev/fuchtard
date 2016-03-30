@@ -31,3 +31,8 @@ $.ajaxSetup({
         }
     }
 });
+
+
+function is_breakpoint( alias ) {
+    return $('.device-' + alias).is(':visible');
+}
