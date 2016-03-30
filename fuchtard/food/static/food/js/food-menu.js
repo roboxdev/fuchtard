@@ -1,13 +1,16 @@
-$(document).ready(function() {
+$(document).ready(function () {
     load_cart();
+    switch_collapse_arrows();
+    collapse_categories_on_mobile();
+    set_same_height_for_food_Items();
     $('#cart_form_submit_button').click(cart_form_submit);
+    $('#cart-overlay-button').click(cart_overlay_button);
 });
 
 
 class Cart {
     constructor() {
-        this.content = {
-        };
+        this.content = {};
     }
 
     add_to_cart(food_item_id) {
@@ -33,8 +36,8 @@ class Cart {
 
     get_total_price() {
         var total_price = 0;
-        $.each(this.content, function(food_item_id, food_item_quantity) {
-            var food_item = $(`.food-item[data-food-id='${food_item_id}']`);
+        $.each(this.content, function (food_item_id, food_item_quantity) {
+            var food_item = $(`.food-menu .food-item[data-food-id='${food_item_id}']`);
             var food_price = parseInt(food_item.data('food-price'));
             total_price += food_price * food_item_quantity;
         });
@@ -45,24 +48,58 @@ class Cart {
 var cart = new Cart;
 
 
-function cart_overlay_button(this_button) {
-    var button = $(this_button);
-    if (!(button.hasClass('toggled'))) {
-        button.addClass('toggled');
-        $('#cart-overlay').show();
-        button.find('i').html('restaurant_menu');
+function set_same_height_for_food_Items() {
+    $(function () {
+        $('.food-menu .food-item').matchHeight();
+    });
+}
+
+
+function set_cart_overlay_size_and_position() {
+    var cart_overlay = $('#cart-overlay');
+
+    var new_width = 200;
+    var new_inner_width = 200;
+
+    if( is_breakpoint('xs') ) {
+        new_width = $('#cart_form').find('.btn-group').outerWidth();
+        new_inner_width = new_width;
     } else {
-        button.removeClass('toggled');
-        $('#cart-overlay').hide();
-        button.find('i').html('shopping_cart');
+        new_width = $('#cart-overlay-button').outerWidth();
+        new_inner_width = $('.food-item-container').filter(':first').outerWidth();
+    }
+    cart_overlay.width(new_width);
+    cart_overlay.find('.cart-overlay-inner').width(new_inner_width);
+}
+
+function cart_overlay_show() {
+    var button = $('#cart-overlay-button');
+    button.addClass('toggled');
+    set_cart_overlay_size_and_position();
+    $('#cart-overlay').removeClass('hidden');
+    button.find('i').html('restaurant_menu');
+}
+
+function cart_overlay_hide() {
+    var button = $('#cart-overlay-button');
+    button.removeClass('toggled');
+    $('#cart-overlay').addClass('hidden');
+    button.find('i').html('shopping_cart');
+}
+
+
+function cart_overlay_button() {
+    if ($('#cart-overlay-button').hasClass('toggled')) {
+        cart_overlay_hide();
+    } else {
+        cart_overlay_show();
     }
 }
 
 
 function hide_cart_overlay_if_cart_is_empty() {
-    var button = $('#cart-overlay-button');
-    if ($.isEmptyObject(cart.content) && button.hasClass('toggled')) {
-        button.click();
+    if ($.isEmptyObject(cart.content)) {
+        cart_overlay_hide();
     }
 }
 
@@ -73,7 +110,6 @@ function update_quantity_button(this_button) {
     var quantity = 0;
     if (button.hasClass('quantity-increase')) {
         quantity = cart.add_to_cart(food_id);
-        $('.sticky_bar').effect('shake');
     }
     else if (button.hasClass('quantity-decrease'))
         quantity = cart.remove_from_cart(food_id);
@@ -88,15 +124,14 @@ function update_price_and_quantity_in_menu_and_cart(food_id, quantity) {
     update_quantity_in_cart(food_id, quantity);
     update_quantity_in_menu(food_id, quantity);
     update_cart_total_price();
-    console.log('update_quantity', food_id, quantity);
 }
 
 
 function hide_sticky_bar_if_cart_is_empty() {
     if ($.isEmptyObject(cart.content)) {
-        $('.sticky_bar').hide();
+        $('.sticky_bar').addClass('hidden');
     } else {
-        $('.sticky_bar').show();
+        $('.sticky_bar').removeClass('hidden');
     }
 }
 
@@ -104,7 +139,7 @@ function hide_sticky_bar_if_cart_is_empty() {
 function update_quantity_in_cart(food_id, quantity) {
     var cart_overlay = $('#cart-overlay');
     var cart_item = cart_overlay.find(`.cart-item[data-food-id='${food_id}']`);
-    var food_item = $(`.food-item[data-food-id='${food_id}']`);
+    var food_item = $(`.food-menu .food-item[data-food-id='${food_id}']`);
     var food_title = food_item.data('food-title');
     var food_price = parseInt(food_item.data('food-price'));
     var cart_item_total_price = food_price * quantity;
@@ -127,26 +162,26 @@ function update_quantity_in_cart(food_id, quantity) {
 
         quantity_counter.html(quantity);
     } else if (quantity) {
-        cart_overlay.find('.list-group').append(
+        cart_overlay.find('.cart-items-container').append(
             `
-            <div class="list-group-item cart-item food-item" data-food-id="${food_id}">
-              <div class="row-content">
-                <h4 class="list-group-item-heading food-title">${food_title}</h4>
-                <div class="least-content food-price">${cart_item_total_price} 〒</div>
-              </div>
+            <div class="cart-item food-item" data-food-id="${food_id}">
+                <h4 class="food-title">${food_title}</h4>
               <div class="row">
-                <div class="pull-right">
-                  <div class="quantity-buttons btn-group btn-group-justified btn-group-raised">
-                    <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-                       class="btn btn-primary quantity-decrease">-
-                      <div class="ripple-container"></div>
-                    </a>
-                    <a href="javascript:void(0)" class="btn quantity-counter">${quantity}</a>
-                    <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-                       class="btn btn-primary quantity-increase"><i class="material-icons">add_shopping_cart</i>
-                      <div class="ripple-container"></div>
-                    </a>
+                  <div class="col-xs-4">
+                      <div class="food-price">${cart_item_total_price} 〒</div>
                   </div>
+                  <div class="col-xs-8">
+                      <div class="quantity-buttons btn-group-sm btn-group-justified btn-group-raised">
+                        <a href="javascript:void(0)" onclick="update_quantity_button(this)"
+                           class="btn btn-primary quantity-decrease">-
+                          <div class="ripple-container"></div>
+                        </a>
+                        <a href="javascript:void(0)" class="btn quantity-counter">${quantity}</a>
+                        <a href="javascript:void(0)" onclick="update_quantity_button(this)"
+                           class="btn btn-primary quantity-increase">+
+                          <div class="ripple-container"></div>
+                        </a>
+                      </div>
                 </div>
               </div>
             </div>
@@ -157,19 +192,18 @@ function update_quantity_in_cart(food_id, quantity) {
 }
 
 function update_quantity_in_menu(food_id, quantity) {
-    var menu_item = $(`.food-item[data-food-id=${food_id}]`);
-    console.log(menu_item);
+    var menu_item = $(`.food-menu .food-item[data-food-id=${food_id}]`);
     var quantity_decrease_button = menu_item.find('.quantity-decrease');
     var quantity_counter = menu_item.find('.quantity-counter');
     var quantity_increase_button = menu_item.find('.quantity-increase');
 
     if (quantity == 0) {
-        quantity_decrease_button.addClass('hidden');
-        quantity_counter.addClass('hidden');
+        quantity_decrease_button.addClass('invisible');
+        quantity_counter.addClass('invisible');
         quantity_increase_button.html('<i class="material-icons">add_shopping_cart</i>');
     } else {
-        quantity_decrease_button.removeClass('hidden');
-        quantity_counter.removeClass('hidden');
+        quantity_decrease_button.removeClass('invisible');
+        quantity_counter.removeClass('invisible');
         quantity_decrease_button.html('-');
         quantity_increase_button.html('+');
 
@@ -193,14 +227,20 @@ function load_cart() {
     if (preloaded_cart) {
         cart.content = preloaded_cart;
     }
-    $.each(cart.content, function(index, value) {
+    $.each(cart.content, function (index, value) {
         update_price_and_quantity_in_menu_and_cart(index, value);
     });
 }
 
 
+function collapse_categories_on_mobile() {
+    if( is_breakpoint('xs') ) {
+        $('.food-items-container.collapse').collapse('hide');
+    }
+}
+
+
 function cart_form_submit() {
-    console.log(this);
     var cart_form = $(this).parents('form');
     var data = JSON.stringify(cart.content);
     var cart_data = $("<input type='hidden' name='cart_data'/>");
@@ -209,7 +249,12 @@ function cart_form_submit() {
     cart_data.val(data);
     cart_form.append(cart_data);
     cart_form.submit();
-    console.log(data);
-    //return true;
+}
 
+function switch_collapse_arrows() {
+    $('.food-items-container.collapse').on('shown.bs.collapse', function () {
+        $(this).parent().find(".collapse-arrow").text('keyboard_arrow_up');
+    }).on('hidden.bs.collapse', function () {
+        $(this).parent().find(".collapse-arrow").text('keyboard_arrow_down');
+    });
 }
