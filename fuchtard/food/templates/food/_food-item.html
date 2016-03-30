@@ -1,46 +1,53 @@
 {% load static from staticfiles %}
-<div class="food-item" data-food-id="{{ food_item.id }}" data-food-title="{{ food_item.title }}"
-     data-food-price="{{ food_item.price }}">
-  <div class="food-photo"><img class="img-responsive" src="{% static food_item.photo.url %}"></div>
-  <div class="">
-    <h4 class="list-group-item-heading food-title">
-      <a class="" role="button" data-toggle="collapse"
-         href="#food-category-{{ food_category.id }}-item-{{ food_item.id }}-details"
-         aria-expanded="false"
-         aria-controls="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">{{ food_item.title }}</a>
-    </h4>
-    <div class="food-description">
-      {% for food_tag in food_item.tags.all %}
-        <span class="label label-warning">{{ food_tag.title }}</span>
-      {% endfor %}
-      <p>{{ food_item.description }}</p>
-    </div>
-    <div class="food-details collapse"
-         id="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">
-      {#            {% include 'food/_food-details.html' %}#}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-5">
-      {% if food_item.raw_price != food_item.price %}
-        <p class="food-raw-price">{{ food_item.raw_price|floatformat:"0" }} 〒</p>
-        {# TODO: discount hint maybe? #}
-      {% endif %}
-        <p class="food-price">{{ food_item.price|floatformat:"0" }} 〒</p>
-    </div>
-    <div class="col-xs-7 col-lg-4">
-      <div class="quantity-buttons btn-group-sm btn-group-justified btn-group-raised">
-        <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-           class="btn btn-primary quantity-decrease hidden">-
-          <div class="ripple-container"></div>
-        </a>
-        <a href="javascript:void(0)" class="btn quantity-counter hidden">0</a>
-        <a href="javascript:void(0)" onclick="update_quantity_button(this)" class="btn btn-primary quantity-increase"><i
-            class="material-icons">add_shopping_cart</i>
-          <div class="ripple-container"></div>
-        </a>
+<div class="food-item-container col-xs-12 col-sm-4 col-md-3">
+  <div class="food-item" data-food-id="{{ food_item.id }}" data-food-title="{{ food_item.title }}"
+       data-food-price="{{ food_item.price }}">
+    <div class="food-photo"><img class="img-responsive" src="{% static food_item.photo.url %}"></div>
+    <div class="food-text">
+      <h4 class="food-title">
+        <a class="" role="button" data-toggle="collapse"
+           href="#food-category-{{ food_category.id }}-item-{{ food_item.id }}-details"
+           aria-expanded="false"
+           aria-controls="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">{{ food_item.title }}</a>
+      </h4>
+      <div class="food-description">
+        <p>{{ food_item.description }}</p>
+      </div>
+      <div class="food-details collapse"
+           id="food-category-{{ food_category.id }}-item-{{ food_item.id }}-details">
+        {#            {% include 'food/_food-details.html' %}#}
+      </div>
+      <div class="food-tags">
+        {% for food_tag in food_item.tags.all %}
+          <span class="label label-warning">{{ food_tag.title }}</span>
+        {% endfor %}
       </div>
     </div>
-  </div>
+    <div class="buttons-and-price-block row">
+      <div class="">
+        <div class="col-xs-4 price-block">
+          {% if food_item.raw_price != food_item.price %}
+            <p class="food-raw-price">{{ food_item.raw_price|floatformat:"0" }} 〒</p>
+            {# TODO: discount hint maybe? #}
+          {% endif %}
+          <p class="food-price">{{ food_item.price|floatformat:"0" }} 〒</p>
+        </div>
+        <div class="col-xs-8">
+          <div class="quantity-buttons btn-group btn-group-justified btn-group-raised">
+            <a href="javascript:void(0)" onclick="update_quantity_button(this)"
+               class="btn btn-primary quantity-decrease invisible">-
+              <div class="ripple-container"></div>
+            </a>
+            <a href="javascript:void(0)" class="btn quantity-counter invisible">0</a>
+            <a href="javascript:void(0)" onclick="update_quantity_button(this)"
+               class="btn btn-primary quantity-increase"><i
+                class="material-icons">add_shopping_cart</i>
+              <div class="ripple-container"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
+  </div>
 </div>
