@@ -62,3 +62,6 @@ class Order(models.Model):
         return shifthash(self.id)
 
 
+class Gift(models.Model):
+    food_item = models.ForeignKey(FoodItem)
+    requirement = models.IntegerField()
