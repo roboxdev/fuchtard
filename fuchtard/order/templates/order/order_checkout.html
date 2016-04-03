@@ -15,10 +15,43 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
+      <div class="cart-content">
+        {% for cart_item in view.cart_object.cartitem_set.all %}
+          <p>
+            <span>{{ cart_item.product }}</span>
+            <span>{{ cart_item.quantity }}</span>
+            <span>{{ cart_item.price|floatformat:"0" }}</span>
+          </p>
+        {% endfor %}
+        <p>total: {{ view.cart_object.total_price }}</p>
+        <a href="{% url 'food:food-menu-view' %}">Вернуться в меню</a>
+      </div>
       <form class="form-horizontal col-md-10" id="order_form" action="" method="POST">
-      {% csrf_token %}
+        {% csrf_token %}
         <fieldset>
           <legend>Оформление заказа</legend>
+
+          <div class="form-group">
+            <div class="col-md-10">
+              {% for radio in form.gift_food_item %}
+                <div class="radio radio-primary">
+                  <label for="{{ radio.id_for_label }}">
+                    {{ radio.choice_label }}
+                    {{ radio.tag }}
+                  </label>
+                </div>
+              {% endfor %}
+              {% for gift in view.get_unavailable_gifts_list %}
+                <div class="radio radio-primary">
+                  <label>
+                    <input type="radio" name="gift_food_item" id="gift_food_item{{ gift.food_item.id }}"
+                           value="{{ gift.food_item.id }}" disabled="disabled">
+                    {{ gift.title }}
+                  </label>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
 
           <div class="form-group label-floating">
             <label for="input_name" class="control-label">Имя</label>
@@ -111,14 +144,14 @@
 
                 <div class="collapse">
                   <select id="deferred_day" class="form-control">
-{#                    {% for day in view.get_deferred_delivery_dates %}#}
-{#                      <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>#}
-{#                    {% endfor %}#}
+                    {#                    {% for day in view.get_deferred_delivery_dates %}#}
+                    {#                      <option value="{{ day }}">{{ day.0 }} ({{ day.1|date:"D, j N"|lower }})</option>#}
+                    {#                    {% endfor %}#}
                   </select>
                   <select id="deferred_hour" class="form-control">
-{#                    {% for hour in view.get_deferred_delivery_hours %}#}
-{#                      <option value="asdf">asdf</option>#}
-{#                    {% endfor %}#}
+                    {#                    {% for hour in view.get_deferred_delivery_hours %}#}
+                    {#                      <option value="asdf">asdf</option>#}
+                    {#                    {% endfor %}#}
                   </select>
 
                 </div>
@@ -129,7 +162,7 @@
             <label for="textArea" class=" control-label">Комментарий</label>
             <div class="">
               {% render_field form.comment class='form-control' rows='1' %}
-{#              <textarea class="form-control" rows="1" id="textArea"></textarea>#}
+              {#              <textarea class="form-control" rows="1" id="textArea"></textarea>#}
               <span class="help-block">Оставьте комментарий к заказу</span>
             </div>
           </div>
@@ -138,7 +171,11 @@
               <button type="submit" class="btn btn-block btn-raised btn-danger">Оформить заказ</button>
             </div>
           </div>
-          {% render_field form.cart class='form-control' visibility="hidden" %}
+          <div class="form-group">
+            <select class="form-control" id="id_cart" name="cart">
+              <option value="{{ view.cart_object.id }}"></option>
+            </select>
+          </div>
         </fieldset>
       </form>
     </div>

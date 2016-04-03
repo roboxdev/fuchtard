@@ -9,4 +9,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Gift)
 class GiftAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['food_item', 'requirement']
