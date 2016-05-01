@@ -21,7 +21,7 @@ function order_form_submit() {
         'street': $('#input_street').val(),
         'building': $('#input_building').val(),
         'apartment': $('#input_apartment').val(),
-        'flood': $('#input_floor').val(),
+        'floor': $('#input_floor').val(),
     });
 
     $(this).find('button[type=submit]').button('loading');
