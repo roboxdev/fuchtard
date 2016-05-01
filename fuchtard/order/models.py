@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, F
 
 from food.models import FoodItem
 from order.helpers import shifthash
@@ -12,8 +12,8 @@ from order.helpers import shifthash
 class Cart(models.Model):
     @property
     def total_price(self):
-        total = self.cartitem_set.aggregate(Sum('history_price')).get('history_price__sum', 0)
-        # return 8000
+        total = self.cartitem_set.aggregate(cart_total_price=Sum(F('history_price') * F('quantity')))\
+            .get('cart_total_price', 0)
         return total
 
     def json_repr(self):
