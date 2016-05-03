@@ -61,6 +61,7 @@ class Order(models.Model):
     cart = models.OneToOneField(Cart)
     deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', blank=True)
+    gift_food_item = models.ForeignKey(FoodItem, null=True, blank=True)
 
     @property
     def hashed_id(self):
