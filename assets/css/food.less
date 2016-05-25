@@ -1,5 +1,48 @@
 body {
   background-color: #f8f8f8;
+  position: relative;
+}
+
+#carousel-example-generic {
+  .item {
+    height: 250px;
+    background-size: cover;
+    background: center center no-repeat;
+    &.carousel-1 {
+      background-image: url('/media/images/carousel-img-1.jpg');
+    }
+    &.carousel-2 {
+      background-image: url('/media/images/carousel-img-2.jpg');
+    }
+    &.carousel-3 {
+      background-image: url('/media/images/carousel-img-3.jpg');
+    }
+  }
+  .carousel-caption {
+    padding: 20px;
+    margin-bottom: 40px;
+    background-color: rgba(10, 10, 10, 0.4);
+  }
+}
+
+.scrollbar {
+  .navbar-header,
+  .navbar-header > .navbar-nav,
+  .navbar-header > .navbar-nav > .dropdown {
+    float: none;
+  }
+  .navbar-nav {
+    margin: 0;
+    #current_category {
+      text-align: center;
+    }
+  }
+
+  .scrollable-menu {
+    height: auto;
+    max-height: 400px;
+    overflow-x: hidden;
+  }
 }
 
 .sticky_bar {
@@ -8,7 +51,14 @@ body {
   bottom: 0;
   right: 0;
   width: 100%;
-  //background-color: #d4d4d4;
+  .cart-progress-container {
+    position: relative;
+    top: 2px;
+
+    #cart-progress {
+      //height: 16px;
+    }
+  }
 }
 
 #cart-overlay {
@@ -31,7 +81,7 @@ body {
   //border-radius: 3px;
   //z-index: 1 !important;
   //transition: width 0.3s ease;
-  z-index: 10;
+  z-index: 50;
   width: 200px;
   position: fixed;
   bottom: 60px;
@@ -43,6 +93,7 @@ body {
     border: 1px #8e8e8e solid;
     background-color: #f7fffe;
     padding: 10px 0;
+    z-index: 200;
   }
 
   //&::after {
@@ -60,6 +111,17 @@ body {
   //  -webkit-transform: rotate(-45deg);
   //  box-shadow: -12px 12px 15px 0px rgba(0, 0, 0, .24);
   //}
+
+  .fade-overlay {
+    cursor: pointer;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 //}
@@ -69,6 +131,10 @@ body {
   .btn {
     padding: 0;
     height: 35px;
+    & > .material-icons {
+      position: relative;
+      top: -2px;
+    }
     &.quantity-increase, &.quantity-decrease {
       font-size: 1.7em;
       font-weight: bold;
@@ -81,6 +147,7 @@ body {
     font-size: 18px;
     a {
       display: block;
+      font-weight: bold;
     }
   }
 }

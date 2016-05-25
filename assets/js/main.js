@@ -19,6 +19,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 var csrftoken = getCookie('csrftoken');
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
@@ -33,6 +34,6 @@ $.ajaxSetup({
 });
 
 
-function is_breakpoint( alias ) {
+export function is_breakpoint( alias ) {
     return $('.device-' + alias).is(':visible');
 }

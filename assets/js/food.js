@@ -1,12 +1,4 @@
-$(document).ready(function () {
-    load_cart();
-    switch_collapse_arrows();
-    collapse_categories_on_mobile();
-    set_same_height_for_food_Items();
-    $('#cart_form_submit_button').click(cart_form_submit);
-    $('#cart-overlay-button').click(cart_overlay_button);
-});
-
+import {is_breakpoint} from './main';
 
 class Cart {
     constructor() {
@@ -61,7 +53,7 @@ function set_cart_overlay_size_and_position() {
     var new_width = 200;
     var new_inner_width = 200;
 
-    if( is_breakpoint('xs') ) {
+    if (is_breakpoint('xs')) {
         new_width = $('#cart_form').find('.btn-group').outerWidth();
         new_inner_width = new_width;
     } else {
@@ -77,14 +69,12 @@ function cart_overlay_show() {
     button.addClass('toggled');
     set_cart_overlay_size_and_position();
     $('#cart-overlay').removeClass('hidden');
-    button.find('i').html('restaurant_menu');
 }
 
 function cart_overlay_hide() {
     var button = $('#cart-overlay-button');
     button.removeClass('toggled');
     $('#cart-overlay').addClass('hidden');
-    button.find('i').html('shopping_cart');
 }
 
 
@@ -104,8 +94,9 @@ function hide_cart_overlay_if_cart_is_empty() {
 }
 
 
-function update_quantity_button(this_button) {
-    var button = $(this_button);
+function update_quantity_button(event) {
+    event.preventDefault();
+    var button = $(this);
     var food_id = button.parents('.food-item').data('food-id');
     var quantity = 0;
     if (button.hasClass('quantity-increase')) {
@@ -114,16 +105,17 @@ function update_quantity_button(this_button) {
     else if (button.hasClass('quantity-decrease'))
         quantity = cart.remove_from_cart(food_id);
 
-    update_price_and_quantity_in_menu_and_cart(food_id, quantity);
+    update_everything_with_new_price(food_id, quantity);
 }
 
 
-function update_price_and_quantity_in_menu_and_cart(food_id, quantity) {
+function update_everything_with_new_price(food_id, quantity) {
     hide_cart_overlay_if_cart_is_empty();
     hide_sticky_bar_if_cart_is_empty();
     update_quantity_in_cart(food_id, quantity);
     update_quantity_in_menu(food_id, quantity);
     update_cart_total_price();
+    update_cart_progress();
 }
 
 
@@ -164,27 +156,27 @@ function update_quantity_in_cart(food_id, quantity) {
     } else if (quantity) {
         cart_overlay.find('.cart-items-container').append(
             `
-            <div class="cart-item food-item" data-food-id="${food_id}">
-                <h4 class="food-title">${food_title}</h4>
-              <div class="row">
-                  <div class="col-xs-4">
+                <div class="cart-item food-item" data-food-id="${food_id}">
+                  <h4 class="food-title">${food_title}</h4>
+                  <div class="row">
+                    <div class="col-xs-4">
                       <div class="food-price">${cart_item_total_price} 〒</div>
-                  </div>
-                  <div class="col-xs-8">
+                    </div>
+                    <div class="col-xs-8">
                       <div class="quantity-buttons btn-group-sm btn-group-justified btn-group-raised">
-                        <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-                           class="btn btn-primary quantity-decrease">-
+                        <a href="#" class="btn btn-primary quantity-button quantity-decrease">
+                          -
                           <div class="ripple-container"></div>
                         </a>
-                        <a href="javascript:void(0)" class="btn quantity-counter">${quantity}</a>
-                        <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-                           class="btn btn-primary quantity-increase">+
+                        <a href="#" class="btn quantity-counter">0</a>
+                        <a href="#" class="btn btn-primary quantity-button quantity-increase">
+                          +
                           <div class="ripple-container"></div>
                         </a>
                       </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
             `
         );
         update_quantity_in_cart(food_id, quantity)
@@ -228,15 +220,34 @@ function load_cart() {
         cart.content = preloaded_cart;
     }
     $.each(cart.content, function (index, value) {
-        update_price_and_quantity_in_menu_and_cart(index, value);
+        update_everything_with_new_price(index, value);
     });
 }
 
+function scrollspy_misc() {
+    $("#navbar-container").on("activate.bs.scrollspy", function () {
+        var navbar = $('#navbar-container');
+        if (navbar.find(".dropdown-menu li:first-child.active > a").length) {
+            $('.scrollbar').addClass('hidden');
+            $('#navbar-container').collapse('hide');
+        } else {
+            $('.scrollbar').removeClass('hidden');
+            $("#current_category").empty().html(navbar.find(".dropdown-menu li.active > a").text());
+        }
+    })
+}
 
-function collapse_categories_on_mobile() {
-    if( is_breakpoint('xs') ) {
-        $('.food-items-container.collapse').collapse('hide');
-    }
+
+function collapse_nav_on_click() {
+    $("#navbar-container").find('.dropdown-menu a').on('click', function (event) {
+        event.preventDefault();
+        var hash = this.hash;
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+        }, 400, function () {
+            window.location.hash = hash;
+        });
+    });
 }
 
 
@@ -258,3 +269,39 @@ function switch_collapse_arrows() {
         $(this).parent().find(".collapse-arrow").text('keyboard_arrow_down');
     });
 }
+
+function cart_progress_init() {
+    var cart_progress = $('#cart-progress');
+    var max_range = cart_progress.data('gift-breakpoints').slice(-1)[0];
+
+    cart_progress.radialProgress('init', {
+        'size': 15,
+        'fill': 3,
+        'text-color': "transparent",
+        'color': 'rgba(255,255,255,.84)',
+        'range': [0, max_range]
+    });
+
+}
+
+function update_cart_progress() {
+    var cart_progress = $('#cart-progress');
+    cart_progress.radialProgress('to', {'perc': cart.get_total_price(), 'time': 20})
+
+}
+
+$(document).ready(function () {
+    if ($('body').hasClass('food-menu-page')) {
+        cart_progress_init();
+        load_cart();
+        switch_collapse_arrows();
+        scrollspy_misc();
+        collapse_nav_on_click();
+        set_same_height_for_food_Items();
+        $('#cart_form_submit_button').click(cart_form_submit);
+        $('#cart-overlay-button').click(cart_overlay_button);
+        $('.fade-overlay').click(cart_overlay_hide);
+        // $('.quantity-button').click(update_quantity_button);
+        $(document).on('click', '.quantity-button', update_quantity_button);
+    }
+});
