@@ -7,6 +7,7 @@ from django.views.generic import View, TemplateView, CreateView
 from food.models import FoodItem
 from order.forms import GiftForm
 from .models import Cart, Order
+from .helpers import send_templated_email
 
 
 class OrderCheckoutView(CreateView):
@@ -14,15 +15,15 @@ class OrderCheckoutView(CreateView):
     model = Order
     form_class = GiftForm
 
-    def get(self, request, *args, **kwargs):
-        if not self.request.session.get('cart_id'):
-            return redirect('food:food-menu-view')
-        return super(OrderCheckoutView, self).get(request, *args, **kwargs)
-
     def dispatch(self, request, *args, **kwargs):
-        self.cart_object = self.get_cart_object()
-        self.cart_object_total_price = self.cart_object.total_price
-        return super(OrderCheckoutView, self).dispatch(request, *args, **kwargs)
+        cart_id = self.request.session.get('cart_id', None)
+        if cart_id:
+            cart_object = Cart.objects.filter(id__exact=cart_id, order__isnull=True)
+            if cart_object.exists():
+                self.cart_object = self.get_cart_object()
+                self.cart_object_total_price = self.cart_object.total_price
+                return super(OrderCheckoutView, self).dispatch(request, *args, **kwargs)
+        return redirect('food:food-menu-view')
 
     def get_form_kwargs(self):
         kwargs = super(OrderCheckoutView, self).get_form_kwargs()
@@ -41,7 +42,8 @@ class OrderCheckoutView(CreateView):
         return cart_object
 
     def get_unavailable_gifts_list(self):
-        gifts_qs = FoodItem.objects.filter(gift__requirement__gt=self.cart_object_total_price)
+        gifts_qs = FoodItem.objects.filter(gift__requirement__gt=self.cart_object_total_price) \
+            .order_by('gift__requirement')
         return gifts_qs
 
     @staticmethod
@@ -90,8 +92,20 @@ class OrderCheckoutView(CreateView):
         return super(OrderCheckoutView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
+        form = super(OrderCheckoutView, self).form_valid(form)
         self.request.session.pop('cart_id')
-        return super(OrderCheckoutView, self).form_valid(form)
+        order_hashed_id = self.object.hashed_id
+        email_params = {
+            'template': 'order/email_new_order',
+            'template_params': {'order_url':
+                                    reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id})
+                                },
+            'subject': 'Новый заказ №{}'.format(order_hashed_id),
+            'from_email': 'Maxi Sushi <noreply@maxisushi.kz>',
+            'recipient_list': ['order@maxisushi.kz']
+        }
+        send_templated_email(email_params)
+        return form
 
     def form_invalid(self, form):
         return super(OrderCheckoutView, self).form_invalid(form)
@@ -100,7 +114,7 @@ class OrderCheckoutView(CreateView):
 class CartUpdateView(View):
     def post(self, request, *args, **kwargs):
         cart_id = self.request.session.get('cart_id', None)
-        cart = Cart.objects.get_or_create(id__exact=cart_id)[0]
+        cart = Cart.objects.get_or_create(id__exact=cart_id, order__isnull=True)[0]
         self.request.session.set_expiry(int(datetime.timedelta(days=5).total_seconds()))
         self.request.session['cart_id'] = cart.id
         json_cart = request.POST.get('cart_data')
