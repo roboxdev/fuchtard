@@ -12,7 +12,7 @@ from order.helpers import shifthash
 class Cart(models.Model):
     @property
     def total_price(self):
-        total = self.cartitem_set.aggregate(cart_total_price=Sum(F('history_price') * F('quantity')))\
+        total = self.cartitem_set.aggregate(cart_total_price=Sum(F('history_price') * F('quantity'))) \
             .get('cart_total_price', 0)
         return total
 
@@ -77,3 +77,9 @@ class Gift(models.Model):
 
     def __str__(self):
         return self.food_item.title
+
+    def json_repr(self):
+        return json.dumps({
+            'food_item__title': self.food_item.title,
+            'requirement': self.requirement
+        })
