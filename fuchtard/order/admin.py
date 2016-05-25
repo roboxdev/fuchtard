@@ -2,9 +2,11 @@ from django.contrib import admin
 from .models import Order, Gift
 
 
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ['cart']
+
 
 
 @admin.register(Gift)
