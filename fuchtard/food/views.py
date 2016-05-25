@@ -1,6 +1,8 @@
+import json
+
 from django.views.generic import ListView
 
-from order.models import Cart
+from order.models import Cart, Gift
 from .models import FoodCategory
 
 
@@ -27,3 +29,9 @@ class FoodMenuView(ListView):
                 'fooditem_set__tags__discount',
         )
         return qs
+
+    def get_gift_breakpoints(self):
+        gifts = Gift.objects.order_by('requirement')
+        gift_breakpoints = [gift.requirement for gift in gifts]
+        gift_breakpoints.insert(0, 3000)
+        return json.dumps(gift_breakpoints)
