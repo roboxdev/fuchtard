@@ -1,17 +1,16 @@
 from django import forms
 from food.models import FoodItem
-from order.models import Order
+from order.models import Order, CartItem
 
 
 class GiftForm(forms.ModelForm):
-    gift_food_item = forms.ModelChoiceField(FoodItem.objects.none(), widget=forms.RadioSelect, empty_label=None)
 
     def __init__(self, *args, **kwargs):
-        qs = kwargs.pop('cart_object_total_price')
+        cart_object_total_price = kwargs.pop('cart_object_total_price')
         super(GiftForm, self).__init__(*args, **kwargs)
-        qs = FoodItem.objects.filter(gift__requirement__lte=qs).order_by('gift__requirement')
+        qs = FoodItem.objects.filter(gift__requirement__lte=cart_object_total_price).order_by('gift__requirement')
         self.fields['gift_food_item'].queryset = qs
-
+        self.fields['gift_food_item'].empty_label = None
         self.fields['gift_food_item'].initial = qs.last()
 
     class Meta:
@@ -26,3 +25,6 @@ class GiftForm(forms.ModelForm):
             'comment',
             'gift_food_item',
         ]
+        widgets = {
+            'gift_food_item': forms.RadioSelect,
+        }
