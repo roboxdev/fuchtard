@@ -27,21 +27,20 @@
       <div class="">
         <div class="col-xs-4 price-block">
           {% if food_item.raw_price != food_item.price %}
-            <p class="food-raw-price">{{ food_item.raw_price|floatformat:"0" }} 〒</p>
+            <p class="food-raw-price">{{ food_item.raw_price|floatformat:"0" }}&nbsp;〒</p>
             {# TODO: discount hint maybe? #}
           {% endif %}
-          <p class="food-price">{{ food_item.price|floatformat:"0" }} 〒</p>
+          <p class="food-price">{{ food_item.price|floatformat:"0" }}&nbsp;〒</p>
         </div>
         <div class="col-xs-8">
           <div class="quantity-buttons btn-group btn-group-justified btn-group-raised">
-            <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-               class="btn btn-primary quantity-decrease invisible">-
+            <a href="#" class="btn btn-primary quantity-button quantity-decrease invisible">
+              -
               <div class="ripple-container"></div>
             </a>
-            <a href="javascript:void(0)" class="btn quantity-counter invisible">0</a>
-            <a href="javascript:void(0)" onclick="update_quantity_button(this)"
-               class="btn btn-primary quantity-increase"><i
-                class="material-icons">add_shopping_cart</i>
+            <a href="#" class="btn quantity-counter invisible">0</a>
+            <a href="#" class="btn btn-primary quantity-button quantity-increase">
+              <i class="material-icons">add_shopping_cart</i>
               <div class="ripple-container"></div>
             </a>
           </div>

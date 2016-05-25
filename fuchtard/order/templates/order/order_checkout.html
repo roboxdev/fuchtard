@@ -1,15 +1,9 @@
 {% extends 'main/base.html' %}
 {% load static from staticfiles %}
-{% load compile_static %}
 {% load humanize %}
 {% load widget_tweaks %}
 
 {% block body_class %}{{ block.super }} order-checkout{% endblock body_class %}
-
-{% block js %}
-  {{ block.super }}
-  <script src="{% static 'order/js/order-checkout-compiled.js' %}"></script>
-{% endblock js %}
 
 {% block body_content %}
 

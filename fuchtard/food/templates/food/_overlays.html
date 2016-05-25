@@ -1,0 +1,57 @@
+<div class="scrollbar navbar navbar-default navbar-fixed-top hidden">
+  <div class="container">
+    <div id="navbar-container" class="navbar-header">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a id="current_category" href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+            <b class="caret"></b></a>
+          <ul class="dropdown-menu scrollable-menu">
+            <li><a href="#scroll-to-top">В начало</a></li>
+            <li class="divider"></li>
+            {% for food_category in object_list %}
+              {% if food_category.enabled and food_category.visible and food_category.fooditem_set.exists %}
+                <li><a href="#{{ food_category.slug }}">{{ food_category.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="cart-overlay" {% if cart %}data-preloaded-cart="{{ cart.json_repr }}"{% endif %} class="hidden">
+  <div class="cart-overlay-inner">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="cart-items-container">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fade-overlay"></div>
+</div>
+
+
+<div class="sticky_bar hidden">
+  <div class="container">
+    <div class="row-fluid">
+      <form id='cart_form' action="{% url 'order:cart-update-view' %}" method="POST">
+        {% csrf_token %}
+        <div class="btn-group btn-group-justified btn-group-raised">
+          <a href="#" onClick="return false;" class="btn btn-primary"
+             id="cart-overlay-button">
+            <span class="cart-progress-container">
+              <span id="cart-progress" data-gift-breakpoints="{{ view.get_gift_breakpoints }}"></span>
+            </span>
+            <span><span id="cart-total-price">0</span> 〒</span>
+          </a>
+          <a href="#" class="btn btn-danger" id="cart_form_submit_button"
+             data-loading-text="Подождите...">Заказать</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

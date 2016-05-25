@@ -2,62 +2,19 @@
 {% load static from staticfiles %}
 
 {% block body_class %}{{ block.super }} food-menu-page{% endblock body_class %}
+{##}
+{#{% block js %}#}
+{#  {{ block.super }}#}
+{#  <script src="{% static 'food/js/food-menu-compiled.js' %}"></script>#}
+{#{% endblock js %}#}
 
-{% block js %}
-  {{ block.super }}
-  <script src="{% static 'food/js/food-menu-compiled.js' %}"></script>
-{% endblock js %}
+{% block body_attributes %}
+  data-spy="scroll" data-target="#navbar-container"
+{% endblock body_attributes %}
 
 {% block body_content %}
-  <div class="social-links">
-    <p><a href="tel:+77273573030">+7 (727) 357 30 30</a></p>
-    <i class="mdi mdi-facebook-box" aria-hidden="true"></i>
-    <i class="mdi mdi-instagram" aria-hidden="true"></i>
-    <i class="mdi mdi-vk" aria-hidden="true"></i>
-  </div>
 
   {% include 'food/_carousel.html' %}
-
-
-  <div id="cart-overlay" {% if cart %}data-preloaded-cart="{{ cart.json_repr }}"{% endif %} class="hidden">
-    <div class="cart-overlay-inner">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="cart-items-container">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sticky_bar hidden">
-    <div class="container">
-      <div class="row-fluid">
-        <form id='cart_form' action="{% url 'order:cart-update-view' %}" method="POST">
-          {% csrf_token %}
-
-          <div class="btn-group btn-group-justified btn-group-raised">
-            <a href="#" onClick="return false;" class="btn btn-primary"
-               id="cart-overlay-button">
-              <i class="material-icons">shopping_cart</i><span><span id="cart-total-price">0</span> 〒</span>
-            </a>
-            <a href="#" class="btn btn-danger" id="cart_form_submit_button"
-               data-loading-text="Подождите...">Заказать</a>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div class="scrollbar">
-    {% for food_category in object_list %}
-      {% if food_category.enabled and food_category.visible and food_category.fooditem_set.exists %}
-        <a href="#{{ food_category.slug }}">{{ food_category.title }}</a>
-      {% endif %}
-    {% endfor %}
-  </div>
 
   <div class="food-menu">
     {% for food_category in object_list %}
@@ -68,5 +25,7 @@
   </div>
 
   {% include 'food/_seo_about.html' %}
+
+  {% include 'food/_overlays.html' %}
 
 {% endblock body_content %}
