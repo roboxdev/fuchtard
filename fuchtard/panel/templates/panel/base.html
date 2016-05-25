@@ -1,5 +1,4 @@
 {% load static from staticfiles %}
-{% load compile_static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,7 +18,7 @@
     <link rel="stylesheet"
           href="{% static 'components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css' %}">
     <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
-    <link rel="stylesheet" href="{% static 'panel/css/styles.less'|compile %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'panel/css/styles.css' %}" type="text/css"/>
   {% endblock css %}
 
 </head>
