@@ -5,9 +5,8 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import View, TemplateView, CreateView
 
-from food.models import FoodItem
 from order.forms import GiftForm
-from .models import Cart, Order
+from .models import Cart, Order, Gift
 from .helpers import send_templated_email
 
 
@@ -43,8 +42,7 @@ class OrderCheckoutView(CreateView):
         return cart_object
 
     def get_unavailable_gifts_list(self):
-        gifts_qs = FoodItem.objects.filter(gift__requirement__gt=self.cart_object_total_price) \
-            .order_by('gift__requirement')
+        gifts_qs = Gift.objects.filter(requirement__gt=self.cart_object_total_price).select_related('food_item')
         return gifts_qs
 
     @staticmethod
