@@ -138,7 +138,6 @@ function update_quantity_in_cart(food_id, quantity) {
 
     var quantity_decrease_button = cart_item.find('.quantity-decrease');
     var quantity_counter = cart_item.find('.quantity-counter');
-    var quantity_increase_button = cart_item.find('.quantity-increase');
 
     if (cart_item.length) {
         if (quantity == 0) {
@@ -157,18 +156,18 @@ function update_quantity_in_cart(food_id, quantity) {
         cart_overlay.find('.cart-items-container').append(
             `
                 <div class="cart-item food-item" data-food-id="${food_id}">
-                  <h4 class="food-title">${food_title}</h4>
                   <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-8">
+                      <span>${food_title}</span><span> × </span><span class="quantity-counter">0</span>
                       <div class="food-price">${cart_item_total_price} 〒</div>
                     </div>
-                    <div class="col-xs-8">
-                      <div class="quantity-buttons btn-group-sm btn-group-justified btn-group-raised">
+                    <div class="col-xs-4">
+                      <div class="quantity-buttons btn-group btn-group-justified btn-group-raised">
                         <a href="#" class="btn btn-primary quantity-button quantity-decrease">
                           -
                           <div class="ripple-container"></div>
                         </a>
-                        <a href="#" class="btn quantity-counter">0</a>
+                        
                         <a href="#" class="btn btn-primary quantity-button quantity-increase">
                           +
                           <div class="ripple-container"></div>

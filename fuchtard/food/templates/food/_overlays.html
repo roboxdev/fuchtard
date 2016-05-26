@@ -21,15 +21,13 @@
 </div>
 
 <div id="cart-overlay" {% if cart %}data-preloaded-cart="{{ cart.json_repr }}"{% endif %} class="hidden">
-  <div class="cart-overlay-inner">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="cart-items-container">
-          </div>
-        </div>
-      </div>
+  <div class="cart-overlay-inner panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Корзина</h3>
     </div>
+          <div class="panel-body cart-items-container">
+
+          </div>
   </div>
   <div class="fade-overlay"></div>
 </div>

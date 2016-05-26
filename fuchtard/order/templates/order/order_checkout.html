@@ -9,42 +9,58 @@
 
   <div class="panel panel-default">
     <div class="panel-body">
-      <div class="cart-content">
-        {% for cart_item in view.cart_object.cartitem_set.all %}
-          <p>
-            <span>{{ cart_item.product }}</span>
-            <span>{{ cart_item.quantity }}</span>
-            <span>{{ cart_item.price|floatformat:"0" }}</span>
-          </p>
-        {% endfor %}
-        <p>total: {{ view.cart_object.total_price }}</p>
-        <a href="{% url 'food:food-menu-view' %}">Вернуться в меню</a>
-      </div>
-      <form class="form-horizontal col-md-10" id="order_form" action="" method="POST">
+
+      <form class="form-horizontal col-md-8 col-md-offset-2" id="order_form" action="" method="POST">
         {% csrf_token %}
         <fieldset>
           <legend>Оформление заказа</legend>
-
           <div class="form-group">
-            <div class="col-md-10">
-              {% for radio in form.gift_food_item %}
-                <div class="radio radio-primary">
-                  <label for="{{ radio.id_for_label }}">
-                    {{ radio.choice_label }}
-                    {{ radio.tag }}
-                  </label>
+
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="panel panel-primary cart-content">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Корзина</h3>
+                    </div>
+                    <div class="panel-body">
+                      <ul class="leaders">
+                        {% for cart_item in view.cart_object.cartitem_set.all %}
+                          <li>
+                            <span>{{ cart_item.product }} × {{ cart_item.quantity }}</span>
+                            <span>{{ cart_item.total_item_price|floatformat:"0" }}</span>
+                          </li>
+                        {% endfor %}
+                        <li class="total_price"><span>Итого</span><span>{{ view.cart_object.total_price }}</span></li>
+                      </ul>
+                      <a class="btn btn-primary back-button" href="{% url 'food:food-menu-view' %}">Вернуться в меню</a>
+                    </div>
+                  </div>
                 </div>
-              {% endfor %}
-              {% for gift in view.get_unavailable_gifts_list %}
-                <div class="radio radio-primary">
-                  <label>
-                    <input type="radio" name="gift_food_item" id="gift_food_item{{ gift.food_item.id }}"
-                           value="{{ gift.food_item.id }}" disabled="disabled">
-                    {{ gift.title }}
-                  </label>
+                <div class="col-sm-6 gift_selector">
+                  <div class="col-sm-10 col-sm-offset-1">
+                    <h4>Выберите подарок</h4>
+                    {% for radio in form.gift_food_item %}
+                      <div class="radio radio-primary available">
+                        <label for="{{ radio.id_for_label }}">
+                          {{ radio.choice_label }}
+                          {{ radio.tag }}
+                        </label>
+                      </div>
+                    {% endfor %}
+                    {% for gift in view.get_unavailable_gifts_list %}
+                      <div class="radio radio-primary">
+                        <label>
+                          <input type="radio" name="gift_food_item" value="{{ gift.food_item.id }}" disabled="disabled">
+                          {{ gift.food_item.title }} ({{ gift.requirement }}&nbsp;〒)
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
                 </div>
-              {% endfor %}
+              </div>
             </div>
+
           </div>
 
           <div class="form-group label-floating">
@@ -161,7 +177,7 @@
             </div>
           </div>
           <div class="form-group">
-            <div class=" col-md-offset-2">
+            <div class="col-sm-6 col-sm-offset-3">
               <button type="submit" class="btn btn-block btn-raised btn-danger">Оформить заказ</button>
             </div>
           </div>
