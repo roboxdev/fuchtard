@@ -69,8 +69,8 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
     objects = OrderManager()
-    email = models.CharField(verbose_name='Email', max_length=60)
-    user = models.CharField(verbose_name='Имя', max_length=60)
+    email = models.CharField(verbose_name='Email', max_length=60, null=True, blank=True)
+    name = models.CharField(verbose_name='Имя', max_length=60, null=True, blank=True)
     phone = models.CharField(verbose_name='Телефон', max_length=20)
     address = JSONField(verbose_name='Адрес')
     cart = models.OneToOneField(Cart)

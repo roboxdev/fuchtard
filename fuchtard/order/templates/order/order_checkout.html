@@ -74,8 +74,7 @@
           <div class="form-group label-floating">
             <label for="input_email" class="control-label">Email</label>
             <div class="">
-              {% render_field form.email class='form-control' required='required' %}
-              <span class="form-control-feedback glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              {% render_field form.email class='form-control' %}
               <span class="help-block">Мы вышлем вам на почту информацию о заказе.</span>
             </div>
           </div>
@@ -171,7 +170,7 @@
           <div class="form-group label-floating">
             <label for="textArea" class=" control-label">Комментарий</label>
             <div class="">
-              {% render_field form.comment class='form-control' rows='1' %}
+              {% render_field form.comment class='form-control' rows='2' %}
               {#              <textarea class="form-control" rows="1" id="textArea"></textarea>#}
               <span class="help-block">Оставьте комментарий к заказу</span>
             </div>

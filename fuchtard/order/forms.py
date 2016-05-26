@@ -17,7 +17,7 @@ class GiftForm(forms.ModelForm):
         model = Order
         fields = [
             'email',
-            'user',
+            'name',
             'phone',
             'address',
             'cart',
