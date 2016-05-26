@@ -4,7 +4,8 @@
 {% block body_class %}{{ block.super }} thank_you{% endblock body_class %}
 
 {% block body_content %}
-  <h1>Спасибо за заказ!</h1>
-  Номер заказа: {{ order_hashed_id }}
+  <h2>Спасибо за заказ!</h2>
+  <p>Наш оператор вскоре свяжется с вами.</p>
+  <p>Номер заказа: <span class="order_number">{{ order_hashed_id }}</span></p>
 
 {% endblock body_content %}
