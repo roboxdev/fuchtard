@@ -118,7 +118,7 @@
             {% include 'order/_address_form.html' %}
           {% endif %}
 
-          <div class="form-group with-hidden-fields delivery-select">
+          <div class="form-group with-hidden-fields delivery-select hidden">
             <label class=" control-label">Доставка</label>
 
             <div class="">
@@ -165,7 +165,7 @@
               <button type="submit" class="btn btn-block btn-raised btn-danger">Оформить заказ</button>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group hidden">
             <select class="form-control" id="id_cart" name="cart">
               <option value="{{ view.cart_object.id }}"></option>
             </select>
