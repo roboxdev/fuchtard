@@ -174,5 +174,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'media', )
 
 
 # EMAIL
-SPARKPOST_API_KEY = 'fc52712a253df3d28d69fdb10fd521271c36eb09'
 EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
