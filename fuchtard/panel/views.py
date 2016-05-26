@@ -20,6 +20,7 @@ class DashboardView(CanEditOrderPermissionRequiredMixin, TemplateView):
 class OrdersView(CanEditOrderPermissionRequiredMixin, ListView):
     template_name = 'panel/orders.html'
     model = Order
+    queryset = Order.objects.order_by('-order_created_timestamp')[:100]
 
 
 class OrderDetailView(CanEditOrderPermissionRequiredMixin, DetailView):
