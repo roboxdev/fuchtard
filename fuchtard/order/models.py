@@ -54,6 +54,10 @@ class CartItem(models.Model):
     def price(self):
         return self.product.price
 
+    @property
+    def total_item_price(self):
+        return self.price * self.quantity
+
 
 class OrderManager(models.Manager):
     def get_by_hash(self, hashed_id):
