@@ -77,6 +77,7 @@ class Order(models.Model):
     deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', blank=True)
     gift_food_item = models.ForeignKey(FoodItem, null=True, blank=True)
+    order_created_timestamp = models.DateTimeField('Заказ создан', auto_now_add=True)
 
     @property
     def hashed_id(self):
