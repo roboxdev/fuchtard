@@ -10,6 +10,10 @@ from order.helpers import shifthash
 
 
 class Cart(models.Model):
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
+
     @property
     def total_price(self):
         total = self.cartitem_set.aggregate(cart_total_price=Sum(F('history_price') * F('quantity'))) \
@@ -37,6 +41,10 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
+    class Meta:
+        verbose_name = 'Содержимое корзины'
+        verbose_name_plural = 'Содержимое корзины'
+
     cart = models.ForeignKey(Cart)
     product = models.ForeignKey(FoodItem)
     quantity = models.IntegerField()
@@ -53,6 +61,9 @@ class OrderManager(models.Manager):
 
 
 class Order(models.Model):
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
     objects = OrderManager()
     email = models.CharField(verbose_name='Email', max_length=60)
     user = models.CharField(verbose_name='Имя', max_length=60)
@@ -69,11 +80,12 @@ class Order(models.Model):
 
 
 class Gift(models.Model):
+    class Meta:
+        verbose_name = 'Подарок'
+        verbose_name_plural = 'Подарки'
+        ordering = ('requirement', )
     food_item = models.ForeignKey(FoodItem)
     requirement = models.IntegerField()
-
-    class Meta:
-        ordering = ['requirement']
 
     def __str__(self):
         return self.food_item.title
