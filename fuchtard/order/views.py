@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import View, TemplateView, CreateView
@@ -101,8 +102,8 @@ class OrderCheckoutView(CreateView):
                                     reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id})
                                 },
             'subject': 'Новый заказ №{}'.format(order_hashed_id),
-            'from_email': 'Maxi Sushi <noreply@maxisushi.kz>',
-            'recipient_list': ['order@maxisushi.kz']
+            'from_email': settings.FUCHTARD_NOREPLY_EMAIL,
+            'recipient_list': [settings.FUCHTARD_ORDERS_EMAIL]
         }
         send_templated_email(email_params)
         return form
