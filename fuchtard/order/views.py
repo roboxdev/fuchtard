@@ -96,9 +96,9 @@ class OrderCheckoutView(CreateView):
         order_hashed_id = self.object.hashed_id
         email_params = {
             'template': 'order/email_new_order',
-            'template_params': {'order_url':
-                                    reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id})
-                                },
+            'template_params': {
+                'order_url': reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id}),
+            },
             'subject': 'Новый заказ №{}'.format(order_hashed_id),
             'from_email': settings.FUCHTARD_NOREPLY_EMAIL,
             'recipient_list': [settings.FUCHTARD_ORDERS_EMAIL]
