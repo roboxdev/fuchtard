@@ -1,6 +1,8 @@
 $(document).ready(function() {
-    $('#order_form').submit(order_form_submit);
-    $('#id_phone').mask('+7 999 999-99-99');
+    if ($('body').hasClass(' order-checkout')) {
+        $('#order_form').submit(order_form_submit);
+        $('#id_phone').mask('+7 999 999-99-99');
+    }
 });
 
 
