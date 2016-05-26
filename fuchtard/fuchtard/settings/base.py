@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default',
     'django.contrib.humanize',
     'django_extensions',
     'debug_toolbar',
@@ -74,8 +73,6 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
-                'social.apps.django_app.context_processors.backends',
-                'social.apps.django_app.context_processors.login_redirect',
             ],
             # 'loaders': [
             #     ('django.template.loaders.cached.Loader', [
@@ -103,37 +100,6 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-AUTHENTICATION_BACKENDS = (
-    'social.backends.vk.VKOAuth2',
-    # 'social.backends.mailru.MailruOAuth2',
-    # 'social.backends.odnoklassniki.OdnoklassnikiOAuth2',
-    # 'social.backends.twitter.TwitterOAuth',
-    # 'social.backends.facebook.Facebook2OAuth2',
-    # 'social.backends.google.GoogleOpenId',
-    # 'social.backends.google.GoogleOAuth2',
-    # 'social.backends.google.GoogleOAuth',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
