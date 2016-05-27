@@ -22,11 +22,9 @@ git pull -q >/dev/null
 # Run django scripts
 echo " - Running scripts..."
 echo "   - Migrating database..."
-python fuchtard/manage.py migrate --noinput >/dev/null
+python $APPNAME/manage.py migrate --noinput >/dev/null
 echo "   - Collecting static files..."
-python fuchtard/manage.py collectstatic --noinput >/dev/null
-#echo "   - Compiling translations..."
-#python fuchtard/manage.py compilemessages >/dev/null
+python $APPNAME/manage.py collectstatic --noinput >/dev/null
 
 pip3 install -r requirements.txt
 
