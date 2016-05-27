@@ -18,6 +18,7 @@ cd "$DIR/.."
 . ../../../.venvs/$APPNAME/bin/activate
 # Update repository
 echo " - Getting latest version..."
+git clean -d -fx ""
 git pull -q >/dev/null
 # Run django scripts
 echo " - Running scripts..."
