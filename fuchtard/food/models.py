@@ -7,8 +7,12 @@ class Discount(models.Model):
     class Meta:
         verbose_name = 'Скидка'
         verbose_name_plural = 'Скидки'
+    _content_type_limit = models.Q(app_label='food', model='foodtag') |\
+            models.Q(app_label='food', model='foodcategory') |\
+            models.Q(app_label='food', model='fooditem')
+
     amount = models.DecimalField(max_digits=7, decimal_places=2)
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, limit_choices_to=_content_type_limit)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
 
