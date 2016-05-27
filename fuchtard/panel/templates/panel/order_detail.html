@@ -1,14 +1,23 @@
 {% extends 'panel/base.html' %}
 
+{% block body_class %}{{ block.super }} order_detail{% endblock body_class %}
+
 {% block body_content %}
-  номер заказа: {{ object.hashed_id }}
-  email: {{ object.email  }}
-  user: {{ object.user  }}
-  phone: {{ object.phone  }}
-  address: {{ object.address  }}
-  cart: {{ object.cart  }}
-  deliver_at: {{ object.deliver_at  }}
-  comment: {{ object.comment  }}
+  <p>Номер заказа: {{ object.hashed_id }}</p>
+  <p>Заказ создан: {{ object.order_created_timestamp  }}</p>
+  <p>Имя: {{ object.name  }}</p>
+  <p>Email: {{ object.email  }}</p>
+  <p>Телефон: {{ object.phone  }}</p>
+  <p>Улица: {{ object.address.street  }}</p>
+  <p>Дом: {{ object.address.building  }}</p>
+  <p>Квартира: {{ object.address.apartment  }}</p>
+  <p>Этаж: {{ object.address.floor  }}</p>
+  <p>Комментарий: {{ object.comment  }}</p>
+  <p></p>
+  {% for cart_item in object.cart.cartitem_set.all %}
+  <p><span>{{ cart_item.product.title}}</span><span> × </span><span>{{ cart_item.quantity }}</span>
+  <span>{{ cart_item.history_price }}</span></p>
+  {% endfor %}
 {% endblock body_content %}
 
 {% block order %}
