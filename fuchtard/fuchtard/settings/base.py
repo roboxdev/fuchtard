@@ -139,7 +139,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'media', )
 
 
-ADMINS = ('robox', 'roboxv+maxi@gmail.com')
+ADMINS = [
+    ('robox', 'roboxv+maxi@gmail.com')
+]
 # EMAIL
 EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@maxisushi.kz'
