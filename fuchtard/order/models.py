@@ -89,8 +89,8 @@ class Gift(models.Model):
         verbose_name = 'Подарок'
         verbose_name_plural = 'Подарки'
         ordering = ('requirement', )
-    food_item = models.ForeignKey(FoodItem)
-    requirement = models.IntegerField()
+    food_item = models.ForeignKey(FoodItem, verbose_name='Блюдо')
+    requirement = models.PositiveIntegerField('Требование')
 
     def __str__(self):
         return self.food_item.title

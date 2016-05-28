@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_extensions',
+    'adminsortable',
     'debug_toolbar',
     'webpack_loader',
     'widget_tweaks',
