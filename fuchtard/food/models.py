@@ -76,7 +76,7 @@ class FoodItem(SortableMixin):
     enabled = models.BooleanField('Включено', default=True)
     position = models.PositiveIntegerField('Позиция', default=0, editable=False, db_index=True)
     title = models.CharField('Название', max_length=60)
-    photo = models.ImageField('Фотография')
+    photo = models.ImageField('Фотография', upload_to='food_items/')
     description = models.TextField('Описание')
     raw_price = models.IntegerField('Первоначальная цена')
     category = SortableForeignKey(FoodCategory, verbose_name='Категории')
