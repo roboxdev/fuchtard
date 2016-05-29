@@ -21,13 +21,17 @@
 </div>
 
 <div id="cart-overlay" {% if cart %}data-preloaded-cart="{{ cart.json_repr }}"{% endif %} class="hidden">
-  <div class="cart-overlay-inner panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Корзина</h3>
-    </div>
-          <div class="panel-body cart-items-container">
-
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 center-block">
+        <div class="cart-overlay-inner panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Корзина</h3>
           </div>
+          <div class="panel-body cart-items-container"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="fade-overlay"></div>
 </div>
@@ -35,21 +39,22 @@
 
 <div class="sticky_bar hidden">
   <div class="container">
-    <div class="row-fluid">
-      <form id='cart_form' action="{% url 'order:cart-update-view' %}" method="POST">
-        {% csrf_token %}
-        <div class="btn-group btn-group-justified btn-group-raised">
-          <a href="#" onClick="return false;" class="btn btn-primary"
-             id="cart-overlay-button">
-            <span class="cart-progress-container">
-              <span id="cart-progress" data-gift-breakpoints="{{ view.get_gift_breakpoints }}"></span>
-            </span>
-            <span><span id="cart-total-price">0</span> 〒</span>
-          </a>
-          <a href="#" class="btn btn-danger" id="cart_form_submit_button"
-             data-loading-text="Подождите...">Заказать</a>
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 center-block">
+        <div class="sticky_bar_inner">
+          <form id='cart_form' action="{% url 'order:cart-update-view' %}" method="POST">
+            {% csrf_token %}
+            <div class="btn-group btn-group-justified btn-group-raised">
+              <a href="#" onclick="return false;" class="btn btn-primary" id="cart-overlay-button">
+                <i class="mdi mdi-gift" aria-hidden="true"></i>
+                <span><span id="cart-total-price">0</span> 〒</span>
+              </a>
+              <a class="order_button btn btn-danger" id="cart_form_submit_button"
+                 data-loading-text="Подождите..." disabled>Заказать</a>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

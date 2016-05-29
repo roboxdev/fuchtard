@@ -47,27 +47,9 @@ function set_same_height_for_food_Items() {
 }
 
 
-function set_cart_overlay_size_and_position() {
-    var cart_overlay = $('#cart-overlay');
-
-    var new_width = 200;
-    var new_inner_width = 200;
-
-    if (is_breakpoint('xs')) {
-        new_width = $('#cart_form').find('.btn-group').outerWidth();
-        new_inner_width = new_width;
-    } else {
-        new_width = $('#cart-overlay-button').outerWidth();
-        new_inner_width = $('.food-item-container').filter(':first').outerWidth();
-    }
-    cart_overlay.width(new_width);
-    cart_overlay.find('.cart-overlay-inner').width(new_inner_width);
-}
-
 function cart_overlay_show() {
     var button = $('#cart-overlay-button');
     button.addClass('toggled');
-    set_cart_overlay_size_and_position();
     $('#cart-overlay').removeClass('hidden');
 }
 
@@ -79,7 +61,7 @@ function cart_overlay_hide() {
 
 
 function cart_overlay_button() {
-    if ($('#cart-overlay-button').hasClass('toggled')) {
+    if ($(this).hasClass('toggled')) {
         cart_overlay_hide();
     } else {
         cart_overlay_show();
@@ -116,6 +98,17 @@ function update_everything_with_new_price(food_id, quantity) {
     update_quantity_in_menu(food_id, quantity);
     update_cart_total_price();
     update_cart_progress();
+    disable_submit_button_if_cheap_order();
+}
+
+
+function disable_submit_button_if_cheap_order() {
+    var button = $("#cart_form_submit_button");
+    if (cart.get_total_price() < 3000) {
+        button.attr('disabled', 'true')
+    } else {
+        button.removeAttr('disabled')
+    }
 }
 
 
@@ -251,14 +244,22 @@ function collapse_nav_on_click() {
 
 
 function cart_form_submit() {
-    var cart_form = $(this).parents('form');
     var data = JSON.stringify(cart.content);
     var cart_data = $("<input type='hidden' name='cart_data'/>");
-
-    $(this).button('loading');
     cart_data.val(data);
-    cart_form.append(cart_data);
-    cart_form.submit();
+    $(this).append(cart_data);
+}
+
+function cart_form_submit_button() {
+    var button = $(this);
+    if (button.is("[disabled]")) {
+        $.snackbar({
+            "content": "Минимальная сумма заказа — 3000&nbsp;〒"
+        })
+    } else {
+        button.button('loading');
+        $("#cart_form").submit();
+    }
 }
 
 function switch_collapse_arrows() {
@@ -270,37 +271,29 @@ function switch_collapse_arrows() {
 }
 
 function cart_progress_init() {
-    var cart_progress = $('#cart-progress');
+    // var cart_progress = $('#cart-progress');
     var max_range = cart_progress.data('gift-breakpoints').slice(-1)[0];
 
-    cart_progress.radialProgress('init', {
-        'size': 15,
-        'fill': 3,
-        'text-color': "transparent",
-        'color': 'rgba(255,255,255,.84)',
-        'range': [0, max_range]
-    });
 
 }
 
 function update_cart_progress() {
-    var cart_progress = $('#cart-progress');
-    cart_progress.radialProgress('to', {'perc': cart.get_total_price(), 'time': 20})
+    // var cart_progress = $('#cart-progress');
 
 }
 
 $(document).ready(function () {
     if ($('body').hasClass('food-menu-page')) {
-        cart_progress_init();
+        // cart_progress_init();
         load_cart();
         switch_collapse_arrows();
         scrollspy_misc();
         collapse_nav_on_click();
         set_same_height_for_food_Items();
-        $('#cart_form_submit_button').click(cart_form_submit);
+        $('#cart_form').submit(cart_form_submit);
+        $('#cart_form_submit_button').click(cart_form_submit_button);
         $('#cart-overlay-button').click(cart_overlay_button);
         $('.fade-overlay').click(cart_overlay_hide);
-        // $('.quantity-button').click(update_quantity_button);
         $(document).on('click', '.quantity-button', update_quantity_button);
     }
 });

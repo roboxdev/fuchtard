@@ -2,11 +2,6 @@
 {% load static from staticfiles %}
 
 {% block body_class %}{{ block.super }} food-menu-page{% endblock body_class %}
-{##}
-{#{% block js %}#}
-{#  {{ block.super }}#}
-{#  <script src="{% static 'food/js/food-menu-compiled.js' %}"></script>#}
-{#{% endblock js %}#}
 
 {% block body_attributes %}
   data-spy="scroll" data-target="#navbar-container"
@@ -23,9 +18,10 @@
       {% endif %}
     {% endfor %}
   </div>
-
   {% include 'food/_seo_about.html' %}
 
-  {% include 'food/_overlays.html' %}
-
 {% endblock body_content %}
+
+{% block non_container %}
+  {% include 'food/_overlays.html' %}
+{% endblock non_container %}
