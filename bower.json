@@ -14,16 +14,17 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "latest",
     "jquery-ui": "latest",
     "jquery-mobile": "latest",
     "bootstrap-material-design": "0.5.7",
     "mdi": "*",
     "matchHeight": "matchheight#~0.7.0",
-    "radial-progress-bar": "https://github.com/aorcsik/radial-progress-bar.git",
-    "jquery.maskedinput": "^1.4.1"
+    "jquery.maskedinput": "^1.4.1",
+    "snackbarjs": "^1.1.0"
   },
   "resolutions": {
-    "jquery": ">= 1.9.0",
-    "jquery-ui": "1.11.4"
+    "jquery": "2.2.4",
+    "jquery-ui": "c0ab71056b936627e8a7821f03c044aec6280a40"
   }
 }

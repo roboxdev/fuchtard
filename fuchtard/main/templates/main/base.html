@@ -21,6 +21,8 @@
     <link rel="stylesheet"
           href="{% static 'components/mdi/css/materialdesignicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'components/bootstrap-material-design/dist/css/ripples.min.css' %}">
+    <link rel="stylesheet" href="{% static 'components/snackbarjs/dist/snackbar.min.css' %}">
+    <link rel="stylesheet" href="{% static 'components/snackbarjs/themes-css/material.css' %}">
   {% endblock css %}
 
 </head>
@@ -32,10 +34,10 @@
     {% include 'main/_header.html' %}
   {% endblock header %}
   <div class="container">
-    {% block body_content %}
-
-    {% endblock body_content %}
+    {% block body_content %}{% endblock body_content %}
   </div>
+  {% block non_container %}{% endblock non_container %}
+
   {% block footer %}
     {% include 'main/_footer.html' %}
   {% endblock footer %}
@@ -48,16 +50,15 @@
   {% endblock responsive_helper %}
 
   {% block js %}
-    <script src="{% static 'components/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'components/jquery/dist/jquery.min.js' %}"></script>
     {#    <script src="{% static 'components/jquery-ui/jquery-ui.js' %}"></script>#}
     <script src="{% static 'components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'components/bootstrap-material-design/dist/js/material.min.js' %}"></script>
     <script src="{% static 'components/bootstrap-material-design/dist/js/ripples.min.js' %}"></script>
     <script src="{% static 'components/jquery.maskedinput/dist/jquery.maskedinput.min.js' %}"></script>
     <script src="{% static 'components/matchHeight/dist/jquery.matchHeight-min.js' %}"></script>
-    <script src="{% static 'components/radial-progress-bar/radial-progress-bar.js' %}"></script>
+    <script src="{% static 'components/snackbarjs/dist/snackbar.min.js' %}"></script>
     {% render_bundle 'main' %}
-{#    <script src="{% static 'main/js/main-compiled.js' %}"></script>#}
   {% endblock js %}
 
   </body>
