@@ -2,6 +2,7 @@ import json
 
 from django.views.generic import ListView
 
+from main.models import Banner
 from order.models import Cart, Gift
 from .models import FoodCategory
 
@@ -33,3 +34,7 @@ class FoodMenuView(ListView):
         gift_breakpoints = [gift.requirement for gift in gifts]
         gift_breakpoints.insert(0, 3000)
         return json.dumps(gift_breakpoints)
+
+    def get_banners(self):
+        qs = Banner.objects.all()
+        return qs

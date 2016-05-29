@@ -1,3 +1,10 @@
+from adminsortable.admin import SortableAdmin
 from django.contrib import admin
 
-# Register your models here.
+from main.models import Banner
+
+
+@admin.register(Banner)
+class FoodCategoryAdmin(SortableAdmin):
+    list_display = ['heading', ]
+    fields = ['image', 'heading', 'subheading', ]
