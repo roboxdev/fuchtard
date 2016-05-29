@@ -20,6 +20,9 @@ class Discount(models.Model):
     object_id = models.PositiveIntegerField('Идентификатор')
     content_object = GenericForeignKey()
 
+    def __str__(self):
+        return '{:.0f}%'.format(self.amount * 100) if self.amount <= 1 else '{:.0f} 〒'.format(self.amount)
+
 
 class FoodTag(models.Model):
     class Meta:
