@@ -9,9 +9,10 @@ class Discount(models.Model):
     class Meta:
         verbose_name = 'Скидка'
         verbose_name_plural = 'Скидки'
-    _content_type_limit = models.Q(app_label='food', model='foodtag') |\
-            models.Q(app_label='food', model='foodcategory') |\
-            models.Q(app_label='food', model='fooditem')
+
+    _content_type_limit = models.Q(app_label='food', model='foodtag') | \
+                          models.Q(app_label='food', model='foodcategory') | \
+                          models.Q(app_label='food', model='fooditem')
 
     amount = models.DecimalField('Значение', max_digits=7, decimal_places=2,
                                  help_text='Значение <=1 — проценты, значение >1 — абсолютное значение')
@@ -24,7 +25,8 @@ class FoodTag(models.Model):
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
-        ordering = ('position', )
+        ordering = ('position',)
+
     visible = models.BooleanField('Видимый', default=True)
     enabled = models.BooleanField('Включено', default=True)
     position = models.IntegerField('Позиция')
@@ -39,9 +41,9 @@ class FoodTag(models.Model):
 class FoodCategoryManager(models.Manager):
     def get_query_set(self):
         return super(FoodCategoryManager, self).get_query_set().prefetch_related(
-                'fooditem_set__discount',
-                'fooditem_set__category__discount',
-                'fooditem_set__tags__discount',
+            'fooditem_set__discount',
+            'fooditem_set__category__discount',
+            'fooditem_set__tags__discount',
         )
 
 
@@ -49,7 +51,8 @@ class FoodCategory(SortableMixin):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
-        ordering = ('position', )
+        ordering = ('position',)
+
     # objects = FoodCategoryManager()
     visible = models.BooleanField('Видимая', default=True)
     enabled = models.BooleanField('Включено', default=True)
@@ -67,7 +70,8 @@ class FoodItem(SortableMixin):
     class Meta:
         verbose_name = 'Блюдо'
         verbose_name_plural = 'Блюда'
-        ordering = ('position', )
+        ordering = ('position',)
+
     visible = models.BooleanField('Видимое', default=True)
     enabled = models.BooleanField('Включено', default=True)
     position = models.PositiveIntegerField('Позиция', default=0, editable=False, db_index=True)
@@ -89,7 +93,7 @@ class FoodItem(SortableMixin):
         for tag in self.tags.all():
             discounts.extend([i.amount for i in tag.discount.all()])
         if discounts:
-            discounts_amount = [d*self.raw_price if d <= 1 else d for d in discounts]
+            discounts_amount = [d * self.raw_price if d <= 1 else d for d in discounts]
             max_discount = max(discounts_amount)
-            return max(0, self.raw_price-max_discount)
+            return max(0, self.raw_price - max_discount)
         return self.raw_price
