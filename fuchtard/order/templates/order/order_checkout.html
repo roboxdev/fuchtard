@@ -37,27 +37,30 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 gift_selector">
-                  <div class="col-sm-10 col-sm-offset-1">
-                    <h4>Выберите подарок</h4>
-                    {% for radio in form.gift_food_item %}
-                      <div class="radio radio-primary available">
-                        <label for="{{ radio.id_for_label }}">
-                          {{ radio.choice_label }}
-                          {{ radio.tag }}
-                        </label>
-                      </div>
-                    {% endfor %}
-                    {% for gift in view.get_unavailable_gifts_list %}
-                      <div class="radio radio-primary">
-                        <label>
-                          <input type="radio" name="gift_food_item" value="{{ gift.food_item.id }}" disabled="disabled">
-                          {{ gift.food_item.title }} ({{ gift.requirement }}&nbsp;〒)
-                        </label>
-                      </div>
-                    {% endfor %}
+                {% if form.gift_food_item %}
+                  <div class="col-sm-6 gift_selector">
+                    <div class="col-sm-10 col-sm-offset-1">
+                      <h4>Выберите подарок</h4>
+                      {% for radio in form.gift_food_item %}
+                        <div class="radio radio-primary available">
+                          <label for="{{ radio.id_for_label }}">
+                            {{ radio.choice_label }}
+                            {{ radio.tag }}
+                          </label>
+                        </div>
+                      {% endfor %}
+                      {% for gift in view.get_unavailable_gifts_list %}
+                        <div class="radio radio-primary">
+                          <label>
+                            <input type="radio" name="gift_food_item" value="{{ gift.food_item.id }}"
+                                   disabled="disabled">
+                            {{ gift.food_item.title }} ({{ gift.requirement }}&nbsp;〒)
+                          </label>
+                        </div>
+                      {% endfor %}
+                    </div>
                   </div>
-                </div>
+                {% endif %}
               </div>
             </div>
 
