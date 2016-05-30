@@ -109,11 +109,11 @@ function disable_submit_button_if_cheap_order() {
 
 
 function hide_sticky_bar_if_cart_is_empty() {
-    if ($.isEmptyObject(cart.content)) {
-        $('.sticky_bar').addClass('hidden');
-    } else {
-        $('.sticky_bar').removeClass('hidden');
-    }
+    // if ($.isEmptyObject(cart.content)) {
+    //     $('.sticky_bar').addClass('hidden');
+    // } else {
+    //     $('.sticky_bar').removeClass('hidden');
+    // }
 }
 
 
@@ -177,13 +177,11 @@ function update_quantity_in_menu(food_id, quantity) {
     var quantity_counter = menu_item.find('.quantity-counter');
     var quantity_increase_button = menu_item.find('.quantity-increase');
 
+    menu_item.find('.quantity-decrease, .quantity-counter').toggleClass('invisible', quantity == 0);
+
     if (quantity == 0) {
-        quantity_decrease_button.addClass('invisible');
-        quantity_counter.addClass('invisible');
         quantity_increase_button.html('<i class="material-icons">add_shopping_cart</i>');
     } else {
-        quantity_decrease_button.removeClass('invisible');
-        quantity_counter.removeClass('invisible');
         quantity_decrease_button.html('-');
         quantity_increase_button.html('+');
 
@@ -275,29 +273,21 @@ function update_available_gifts() {
     var breakpoints = available_gifts.data('gift-breakpoints');
     var cart_total_price = cart.get_total_price();
     var available_gift_count = 0;
+    var gifts_list = $('#cart-overlay .gifts_list p');
+
+    gifts_list.removeClass('text-success');
     $.each(breakpoints, function (index, value) {
         if (cart_total_price < value) {
             return false; //break
         }
         available_gift_count = ++index;
+        gifts_list.filter(`[data-gift-requirement=${value}]`).addClass('text-success');
     });
 
-
-    if (available_gift_count == 0) {
-        btn_fab.removeClass('btn-success');
-        btn_fab.addClass('btn-primary');
-    } else {
-        btn_fab.removeClass('btn-primary');
-        btn_fab.addClass('btn-success');
-    }
-
-    if (available_gift_count <= 1) {
-        gift_icon.removeClass('hidden');
-        gifts_counter.addClass('hidden');
-    } else {
-        gift_icon.addClass('hidden');
-        gifts_counter.removeClass('hidden');
-    }
+    btn_fab.toggleClass('btn-success', available_gift_count != 0);
+    btn_fab.toggleClass('btn-primary', available_gift_count == 0);
+    gift_icon.toggleClass('hidden', available_gift_count > 1);
+    gifts_counter.toggleClass('hidden', available_gift_count <= 1);
 
     gifts_counter.text(available_gift_count);
 }

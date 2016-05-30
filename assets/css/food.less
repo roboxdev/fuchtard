@@ -115,15 +115,13 @@ body.food-menu-page {
     position: fixed;
     width: 100%;
     z-index: 30;
-    pointer-events: none;
+
   }
 
   .overlay-inner-mixin {
     z-index: 50;
     position: relative;
-    &>* {
-      pointer-events: auto;
-    }
+
   }
 
   .fade-overlay {
@@ -135,12 +133,12 @@ body.food-menu-page {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    pointer-events: auto;
+    pointer-events: all;
   }
 
   #cart-overlay {
     .overlay-mixin;
-    bottom: 60px;
+    bottom: 66px;
     .cart-overlay-inner {
       .overlay-inner-mixin;
       max-height: 80vh;
@@ -155,10 +153,14 @@ body.food-menu-page {
 
   .sticky_bar {
     .overlay-mixin;
-    bottom: 0;
-
+    bottom: 5px;
+    pointer-events: none;
     .container .sticky_bar_inner {
       .overlay-inner-mixin;
+      & > form,
+      & > a {
+        pointer-events: all;
+      }
       #cart-overlay-button {
 
       }
@@ -169,12 +171,17 @@ body.food-menu-page {
         }
       }
       #gift_button {
+        display: table;
         .available-gifts {
+          display: table-cell;
+          vertical-align: middle;
           .gift-icon {
-
+            &::before {
+              top: 0;
+            }
           }
           .gifts-counter {
-
+            top: -2px;
           }
         }
       }

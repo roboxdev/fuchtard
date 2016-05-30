@@ -39,7 +39,7 @@
                   <p>Сделай заказ на указанную сумму и&nbsp;получи подарок</p>
                   <div class="gifts_list">
                     {% for gift in view.get_gifts %}
-                      <p>{{ gift.requirement }} 〒 — {{ gift.food_item.title }}</p>
+                      <p data-gift-requirement="{{ gift.requirement }}">{{ gift.requirement }} 〒 — {{ gift.food_item.title }}</p>
                     {% endfor %}
                   </div>
                 </div>
@@ -53,7 +53,7 @@
 </div>
 
 
-<div class="sticky_bar hidden">
+<div class="sticky_bar">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-lg-4 center-block">
@@ -64,11 +64,11 @@
               <a href="#" onclick="return false;" class="btn btn-primary" id="cart-overlay-button">
                 <span>
                   <span id="cart-total-price">0</span>
-                  <span> 〒</span>
+                  <span>&nbsp;〒&nbsp;&nbsp;&nbsp;</span>
                 </span>
               </a>
               <a class="order_button btn btn-danger" id="cart_form_submit_button"
-                 data-loading-text="Подождите..." disabled>Заказать</a>
+                 data-loading-text="Подождите..." disabled>&nbsp;&nbsp;&nbsp;Заказать</a>
             </div>
           </form>
         </div>
@@ -78,7 +78,7 @@
   </div>
 </div>
 
-<div class="sticky_bar hidden">
+<div class="sticky_bar">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-lg-4 center-block">
