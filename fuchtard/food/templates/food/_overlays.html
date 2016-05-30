@@ -21,6 +21,7 @@
 </div>
 
 <div id="cart-overlay" {% if cart %}data-preloaded-cart="{{ cart.json_repr }}"{% endif %} class="hidden">
+  <div class="fade-overlay"></div>
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-lg-4 center-block">
@@ -28,12 +29,27 @@
           <div class="panel-heading">
             <h3 class="panel-title">Корзина</h3>
           </div>
-          <div class="panel-body cart-items-container"></div>
+          <div class="panel-body">
+            <div class="cart-items-container"></div>
+          </div>
+          {% with view.get_gifts as gifts %}
+            {% if gifts.exists %}
+              <div class="panel-footer">
+                <div class="gifts_info">
+                  <p>Сделай заказ на указанную сумму и&nbsp;получи подарок</p>
+                  <div class="gifts_list">
+                    {% for gift in view.get_gifts %}
+                      <p>{{ gift.requirement }} 〒 — {{ gift.food_item.title }}</p>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endwith %}
         </div>
       </div>
     </div>
   </div>
-  <div class="fade-overlay"></div>
 </div>
 
 
@@ -46,13 +62,33 @@
             {% csrf_token %}
             <div class="btn-group btn-group-justified btn-group-raised">
               <a href="#" onclick="return false;" class="btn btn-primary" id="cart-overlay-button">
-                <i class="mdi mdi-gift" aria-hidden="true"></i>
-                <span><span id="cart-total-price">0</span> 〒</span>
+                <span>
+                  <span id="cart-total-price">0</span>
+                  <span> 〒</span>
+                </span>
               </a>
               <a class="order_button btn btn-danger" id="cart_form_submit_button"
                  data-loading-text="Подождите..." disabled>Заказать</a>
             </div>
           </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sticky_bar hidden">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-lg-4 center-block">
+        <div class="sticky_bar_inner">
+          <a id="gift_button" href="javascript:void(0)" class="center-block btn btn-raised btn-primary btn-fab">
+            <span class="available-gifts" data-gift-breakpoints="{{ view.get_gift_breakpoints|escapejs }}">
+              <i class="mdi mdi-gift gift-icon" aria-hidden="true"></i>
+              <span class="gifts-counter badge hidden"></span>
+            </span>
+          </a>
         </div>
       </div>
     </div>

@@ -29,12 +29,17 @@ class FoodMenuView(ListView):
         )
         return qs
 
-    def get_gift_breakpoints(self):
-        gifts = Gift.objects.order_by('requirement')
+    @staticmethod
+    def get_gift_breakpoints():
+        gifts = Gift.objects.all()
         gift_breakpoints = [gift.requirement for gift in gifts]
-        gift_breakpoints.insert(0, 3000)
         return json.dumps(gift_breakpoints)
 
-    def get_banners(self):
-        qs = Banner.objects.all()
-        return qs
+    @staticmethod
+    def get_gifts():
+        gifts = Gift.objects.select_related('food_item').all()
+        return gifts
+
+    @staticmethod
+    def get_banners():
+        return Banner.objects.all()

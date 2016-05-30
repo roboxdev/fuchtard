@@ -104,50 +104,78 @@ body.food-menu-page {
     }
   }
 
-  #cart-overlay {
-    z-index: 50;
-    position: fixed;
-    bottom: 60px;
-    width: 100%;
+  #cart-overlay,
+  .sticky_bar {
     .center-block {
       float: none;
     }
+  }
+
+  .overlay-mixin {
+    position: fixed;
+    width: 100%;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .overlay-inner-mixin {
+    z-index: 50;
+    position: relative;
+    &>* {
+      pointer-events: auto;
+    }
+  }
+
+  .fade-overlay {
+    cursor: pointer;
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+  }
+
+  #cart-overlay {
+    .overlay-mixin;
+    bottom: 60px;
     .cart-overlay-inner {
+      .overlay-inner-mixin;
       max-height: 80vh;
       overflow: auto;
-      margin: 0 auto;
-      z-index: 200;
+      margin: 0;
       .cart-item.food-item {
         padding: 0.4rem;
       }
     }
 
-    .fade-overlay {
-      cursor: pointer;
-      position: fixed;
-      z-index: -1;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
   }
 
   .sticky_bar {
-    position: fixed;
-    z-index: 50;
+    .overlay-mixin;
     bottom: 0;
-    width: 100%;
-    .center-block {
-      float: none;
-    }
+
     .container .sticky_bar_inner {
+      .overlay-inner-mixin;
+      #cart-overlay-button {
+
+      }
       .order_button {
         &[disabled] {
-          //color: @brand-danger;
-          //background-color: red;
-          opacity: .66;
+          background-color: #eee;
+          opacity: 1;
+        }
+      }
+      #gift_button {
+        .available-gifts {
+          .gift-icon {
+
+          }
+          .gifts-counter {
+
+          }
         }
       }
     }
