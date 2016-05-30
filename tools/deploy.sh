@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APPNAME="fuchtard"
-STOP_AND_START=true
+STOP_AND_START=false
 DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
 
