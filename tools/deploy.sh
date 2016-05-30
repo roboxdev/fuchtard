@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APPNAME="fuchtard"
-STOP_AND_START=true
+STOP_AND_START=false
 DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
 
@@ -18,16 +18,16 @@ cd "$DIR/.."
 . ../../../.venvs/$APPNAME/bin/activate
 # Update repository
 echo " - Getting latest version..."
-git reset --hard
-git pull -q >/dev/null
+#git reset --hard
+#git pull -q >/dev/null
 # Run django scripts
+pip3 install -r requirements.txt
 echo " - Running scripts..."
 echo "   - Migrating database..."
 python $APPNAME/manage.py migrate --noinput >/dev/null
 echo "   - Collecting static files..."
 python $APPNAME/manage.py collectstatic --noinput >/dev/null
 
-pip3 install -r requirements.txt
 
 npm install
 ./node_modules/.bin/webpack --config webpack.config.js
