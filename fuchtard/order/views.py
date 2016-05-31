@@ -103,7 +103,7 @@ class OrderCheckoutView(CreateView):
             'template': 'order/email_new_order',
             'template_params': {
                 'order_url': order_absolute_url,
-                'order_hashed_id': order_hashed_id,
+                'order': self.object,
             },
             'subject': 'Новый заказ №{}'.format(order_hashed_id),
             'from_email': settings.FUCHTARD_NOREPLY_EMAIL,

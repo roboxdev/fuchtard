@@ -16,13 +16,72 @@
           <table>
             <tr>
               <td>
-                <h1>Новый заказ №{{ order_hashed_id }}</h1>
-                <p>Информация о заказе по ссылке ниже</p>
+                <h1>Новый заказ №{{ order.hashed_id }}</h1>
                 <table class="btn-primary" cellpadding="0" cellspacing="0" border="0">
                   <tr>
+                    <td>Ссылка</td>
                     <td>
                       <a href="{{ order_url }}">{{ order_url }}</a>
                     </td>
+                  </tr>
+                  <tr>
+                    <td>Номер заказа</td>
+                    <td>{{ order.hashed_id }}</td>
+                  </tr>
+                  <tr>
+                    <td>Заказ создан</td>
+                    <td>{{ order.order_created_timestamp }}</td>
+                  </tr>
+                  <tr>
+                    <td>Имя заказчика</td>
+                    <td>{{ order.name }}</td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>{{ order.email }}</td>
+                  </tr>
+                  <tr>
+                    <td>Телефон</td>
+                    <td>{{ order.phone }}</td>
+                  </tr>
+                  <tr>
+                    <td>Улица</td>
+                    <td>{{ order.address.street }}</td>
+                  </tr>
+                  <tr>
+                    <td>Дом</td>
+                    <td>{{ order.address.building }}</td>
+                  </tr>
+                  <tr>
+                    <td>Квартира</td>
+                    <td>{{ order.address.apartment }}</td>
+                  </tr>
+                  <tr>
+                    <td>Этаж</td>
+                    <td>{{ order.address.floor }}</td>
+                  </tr>
+                  <tr>
+                    <td>Комментарий</td>
+                    <td>{{ order.comment }}</td>
+                  </tr>
+                  <tr>
+                    <td>Подарок</td>
+                    <td>{{ order.gift_food_item.title }}</td>
+                  </tr>
+                </table>
+                <h2>Заказ</h2>
+                <table class="btn-primary" cellpadding="0" cellspacing="10" border="0">
+                  {% for cart_item in order.cart.cartitem_set.all %}
+                    <tr>
+                      <td>{{ cart_item.product.title }}</td>
+                      <td><span>×</span><span> {{ cart_item.quantity }}</span></td>
+                      <td>  {{ cart_item.history_price }} 〒</td>
+                    </tr>
+                  {% endfor %}
+                  <tr>
+                    <td><b>Итого</b></td>
+                    <td></td>
+                    <td><b>{{ order.cart.total_price }} 〒</b></td>
                   </tr>
                 </table>
               </td>
