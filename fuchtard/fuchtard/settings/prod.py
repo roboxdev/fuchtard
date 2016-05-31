@@ -4,6 +4,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'maxisushi.kz',
+    'www.maxisushi.kz',
     'mechanar.maxisushi.kz',
 ]
 
