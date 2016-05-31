@@ -19,7 +19,7 @@
     <p>
       <span>{{ cart_item.product.title }}</span>
       <span> × </span><span>{{ cart_item.quantity }}</span>
-      <span>{{ cart_item.history_price }} 〒</span>
+      <span>{{ cart_item.total_item_price|floatformat:"0" }} 〒</span>
     </p>
   {% endfor %}
   <p>Итого: {{ object.cart.total_price }} 〒</p>
