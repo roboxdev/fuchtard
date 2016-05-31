@@ -13,7 +13,6 @@
   <p>Квартира: {{ object.address.apartment }}</p>
   <p>Этаж: {{ object.address.floor }}</p>
   <p>Комментарий: {{ object.comment }}</p>
-  <p>Подарок: {{ object.gift_food_item.title }}</p>
   <p></p>
   {% for cart_item in object.cart.cartitem_set.all %}
     <p>
@@ -23,6 +22,7 @@
     </p>
   {% endfor %}
   <p>Итого: {{ object.cart.total_price }} 〒</p>
+  <p>Подарок: {{ object.gift_food_item.title }}</p>
 
 {% endblock body_content %}
 
