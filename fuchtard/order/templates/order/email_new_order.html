@@ -70,7 +70,7 @@
                   {% for cart_item in order.cart.cartitem_set.all %}
                     <tr>
                       <td>{{ cart_item.product.title }}</td>
-                      <td><span>×</span><span> {{ cart_item.quantity }}</span></td>
+                      <td><span>×</span><span> {{ cart_item.quantity }}</span> | </td>
                       <td>  {{ cart_item.total_item_price|floatformat:"0" }} 〒</td>
                     </tr>
                   {% endfor %}
