@@ -30,6 +30,9 @@
 {% block body %}
   <body class="{% block body_class %}{% endblock body_class %}"
       {% block body_attributes %}{% endblock body_attributes %}>
+
+  {% include 'main/_gtm.html' %}
+
   {% block header %}
     {% include 'main/_header.html' %}
   {% endblock header %}
