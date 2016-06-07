@@ -40,6 +40,7 @@ class FoodCategoryAdmin(SortableAdmin):
 class FoodItemAdmin(admin.ModelAdmin):
     list_display = ['title', 'raw_price']
     inlines = [DiscountInline]
+    filter_horizontal = ['tags']
 
 
 @admin.register(Discount)
