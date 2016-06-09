@@ -1,0 +1,5 @@
+/node_modules
+/logs/
+/static_content/
+/webpack_bundles/
+/webpack-stats.json
