@@ -121,7 +121,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'static', )
 STATICFILES_DIRS = [
-    ('components', os.path.join(BASE_DIR, '..', '..', 'bower_components', ), ),
     ('webpack_bundles', os.path.join(BASE_DIR, '..', '..', 'webpack_bundles')),
     # We do this so that django's collectstatic copies or our bundles to the
     # STATIC_ROOT or syncs them to whatever storage we use.
