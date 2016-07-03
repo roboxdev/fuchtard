@@ -148,3 +148,23 @@ DEFAULT_FROM_EMAIL = 'noreply@maxisushi.kz'
 SERVER_EMAIL = 'server@maxisushi.kz'
 
 SITE_DOMAIN = 'maxisushi.kz'
+
+
+# LOGGING
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'mail_admins': {
+            'class': 'main.utils.CustomAdminEmailHandler',
+            'level': 'ERROR',
+            # 'filters': ['special']
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            # 'propagate': True,
+        },
+    },
+}
