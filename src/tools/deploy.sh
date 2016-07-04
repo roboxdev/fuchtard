@@ -14,22 +14,22 @@ if [ "$STOP_AND_START" == true ]; then
 fi
 
 # Log in as application user to run scripts
-cd "$DIR/.."
-. ../../../.venvs/$APPNAME/bin/activate
+cd "$DIR/../.."
+. ../../.venvs/$APPNAME/bin/activate
 # Update repository
 echo " - Getting latest version..."
 #git reset --hard
 #git pull -q >/dev/null
 # Run django scripts
-pip3 install -r requirements.txt
+pip3 install -r src/requirements.txt
 echo " - Running scripts..."
 echo "   - Migrating database..."
-python $APPNAME/manage.py migrate --noinput >/dev/null
+python src/$APPNAME/manage.py migrate --noinput >/dev/null
 
 npm install
-./node_modules/.bin/webpack --config webpack.config.js
+./node_modules/.bin/webpack --config src/webpack.config.js
 echo "   - Collecting static files..."
-python $APPNAME/manage.py collectstatic --noinput >/dev/null
+python src/$APPNAME/manage.py collectstatic --noinput >/dev/null
 
 
 echo " - Restarting application..."

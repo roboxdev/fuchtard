@@ -12,27 +12,67 @@ module.exports = {
     ],
 
     output: {
-        path: path.resolve('../webpack_bundles/'),
+        path: path.resolve('./webpack_bundles/'),
         filename: "[name]-[hash].js",
+        publicPath: '/static/webpack_bundles/'
     },
     plugins: [
-        new BundleTracker({filename: '../webpack-stats.json'}),
+        new BundleTracker({filename: './webpack-stats.json'}),
         new ExtractTextPlugin("[name]-[hash].css", {
             allChunks: true
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
         })
-        // new ExtractTextPlugin("style.css", { allChunks: true })
     ],
 
 
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel-loader', query: {presets: ['es2015']} },
-            { test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader") }
+            {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
+            {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: {presets: ['es2015']}},
+            {
+                test: /.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            },
+            {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            },
+            {
+                test: /\.png$/,
+                loader: "url-loader?limit=100000"
+            },
+            {
+                test: /\.jpg$/,
+                loader: "file-loader"
+            },
+            {
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/font-woff'
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/octet-stream'
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file'
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=image/svg+xml'
+            }
         ]
     },
 
     resolve: {
-        modulesDirectories: ['node_modules', '../bower_components'],
-        extensions: ['', '.js']
+        modulesDirectories: ['node_modules'],
+        extensions: ['', '.js', '.jsx']
     }
 };
