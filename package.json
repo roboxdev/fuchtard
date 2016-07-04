@@ -11,7 +11,7 @@
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
-    "jquery": "latest",
+    "jquery": "2.2.4",
     "jquery-match-height": "latest",
     "jquery-mobile": "latest",
     "jquery-ui": "latest",
