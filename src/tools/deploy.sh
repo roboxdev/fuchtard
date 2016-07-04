@@ -27,7 +27,7 @@ echo "   - Migrating database..."
 python src/$APPNAME/manage.py migrate --noinput >/dev/null
 
 npm install
-./node_modules/.bin/webpack --config src/webpack.config.js
+npm run build
 echo "   - Collecting static files..."
 python src/$APPNAME/manage.py collectstatic --noinput >/dev/null
 
