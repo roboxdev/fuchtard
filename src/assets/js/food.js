@@ -1,5 +1,3 @@
-import {is_breakpoint} from './main';
-
 class Cart {
     constructor() {
         this.content = {};
@@ -299,10 +297,10 @@ $(document).ready(function () {
         scrollspy_misc();
         collapse_nav_on_click();
         set_same_height_for_food_Items();
-        $('#cart_form').submit(cart_form_submit);
-        $('#cart_form_submit_button').click(cart_form_submit_button);
         $('#cart-overlay-button, #gift_button').click(cart_overlay_button);
         $('.fade-overlay').click(cart_overlay_hide);
+        $('#cart_form').submit(cart_form_submit);
+        $('#cart_form_submit_button').click(cart_form_submit_button);
         $(document).on('click', '.quantity-button', update_quantity_button);
     }
 });
