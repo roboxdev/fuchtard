@@ -6,9 +6,9 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import View, TemplateView, CreateView
 
-from order.forms import GiftForm
+from .forms import GiftForm
 from .models import Cart, Order, Gift
-from .helpers import send_templated_email
+from .helpers import send_templated_email, telegram_notify_channel
 
 
 class OrderCheckoutView(CreateView):
@@ -110,6 +110,7 @@ class OrderCheckoutView(CreateView):
             'recipient_list': [settings.FUCHTARD_ORDERS_EMAIL]
         }
         send_templated_email(email_params)
+        telegram_notify_channel('Новый заказ №{}\n{}'.format(order_hashed_id, order_absolute_url))
         return form
 
     def form_invalid(self, form):

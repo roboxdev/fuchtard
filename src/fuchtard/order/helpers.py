@@ -1,3 +1,5 @@
+import requests
+from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
@@ -18,3 +20,12 @@ def send_templated_email(params):
         recipient_list=params.get('recipient_list'),
         html_message=msg_html,
     )
+
+
+def telegram_api(method, **params):
+    url = 'https://api.telegram.org/bot{}/{}'.format(settings.TELEGRAM_BOT_API_TOKEN, method)
+    return requests.get(url, params=params).json()
+
+
+def telegram_notify_channel(text):
+    telegram_api('sendMessage', chat_id=settings.TELEGRAM_BOT_NOTIFICATION_CHANNEL_ID, text=text)
