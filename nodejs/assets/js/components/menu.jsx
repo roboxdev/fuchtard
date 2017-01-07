@@ -10,7 +10,7 @@ class FoodCategory extends React.Component {
         const food = category.get('food');
         return (
             <div>
-                <div>{category.get('title')}</div> →
+                <div>{category.get('title')} →</div>
                 {food.map(
                     (food, index) => <FoodItem key={index} food={food} />
                 )}
@@ -39,9 +39,6 @@ export const ConnectedFoodMenu = connect(
     },
     function mapDispatchToProps(dispatch) {
         return {
-            // selectVideo: videoSlug => dispatch(actions.selectVideo(videoSlug)),
-            // selectLivestream: videoSlug => dispatch(actions.selectLivestream()),
-            // switchToNextInPlaylist: () => dispatch(actions.switchToNextInPlaylist()),
         }
     }
 )(FoodMenu);

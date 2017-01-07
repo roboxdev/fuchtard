@@ -1,15 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+import * as actions from '../actions/app';
+
 class FoodItem extends React.Component {
     render() {
         const food = this.props.food;
+        const foodId = food.get('id');
+        const cartItem = this.props.cart.find(val => val.get('id') === foodId);
+        const quantity = cartItem ? cartItem.get('quantity'): 0;
         return (
             <div>
                 {food.get('title')}
-                <button>+</button>
-                <span>q</span>
-                <button>-</button>
+                <button onClick={() => this.props.plusButton(food, quantity)}>+</button>
+                <span>{quantity}</span>
+                <button onClick={() => this.props.minusButton(food, quantity)}>-</button>
             </div>
         )
     }
@@ -18,14 +23,13 @@ class FoodItem extends React.Component {
 export const ConnectedFoodItem = connect(
     function mapStateToProps(state) {
         return {
-            // foodMenu: state.get('foodMenu'),
+            cart: state.get('cart'),
         }
     },
     function mapDispatchToProps(dispatch) {
         return {
-            // selectVideo: videoSlug => dispatch(actions.selectVideo(videoSlug)),
-            // selectLivestream: videoSlug => dispatch(actions.selectLivestream()),
-            // switchToNextInPlaylist: () => dispatch(actions.switchToNextInPlaylist()),
+            plusButton: (foodItem, quantity) => dispatch(actions.plusButton(foodItem, quantity)),
+            minusButton: (foodItem, quantity) => dispatch(actions.minusButton(foodItem, quantity)),
         }
     }
 )(FoodItem);
