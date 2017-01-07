@@ -38,10 +38,12 @@ function cartItemRemove(foodItemId) {
 export function plusButton(foodItem, quantity=0) {
     const foodItemId = foodItem.get('id');
     return dispatch => {
-        if (quantity == 0) {
-            dispatch(cartItemAdd(foodItemId, foodItem))
-        } else if (quantity > 0 && quantity <= 11) {
-            dispatch(cartItemIncrease(foodItemId))
+        if (quantity <= 10) {
+            if (quantity == 0) {
+                dispatch(cartItemAdd(foodItemId, foodItem))
+            } else {
+                dispatch(cartItemIncrease(foodItemId))
+            }
         }
     }
 }
@@ -49,10 +51,12 @@ export function plusButton(foodItem, quantity=0) {
 export function minusButton(foodItem, quantity=0) {
     const foodItemId = foodItem.get('id');
     return dispatch => {
-        if (quantity == 1) {
-            dispatch(cartItemRemove(foodItemId))
-        } else if (quantity > 1) {
-            dispatch(cartItemDecrease(foodItemId))
+        if (quantity >= 1) {
+            if (quantity == 1) {
+                dispatch(cartItemRemove(foodItemId))
+            } else {
+                dispatch(cartItemDecrease(foodItemId))
+            }
         }
     }
 }
