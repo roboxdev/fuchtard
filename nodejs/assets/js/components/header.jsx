@@ -4,12 +4,11 @@ export class Header extends React.Component {
     render() {
         return (
             <header className="container">
-                //
                 <div id="scroll-to-top"></div>
                 <div className="row">
                     <div className="col-sm-4 col-md-3">
                         <a className="site-logo" href="{% url 'food:food-menu-view' %}">
-                            <img className="img-responsive" src="{% static 'main/img/maxiSushiLogo13.png' %}"/>
+                            <img className="img-responsive" src="/static/main/img/maxiSushiLogo13.png"/>
                         </a>
                     </div>
                     <div className="col-sm-4 col-md-offset-1">

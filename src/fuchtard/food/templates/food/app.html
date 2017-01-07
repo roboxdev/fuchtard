@@ -5,9 +5,11 @@
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
-<body class="test">
-
-<div id="react-test"></div>
-{% render_bundle 'main' %}
+<body>
+<script>
+      var initialData = {{ initial_data|safe }};
+  </script>
+  <div id="js-react-app"></div>
+  {% render_bundle 'app' %}
 </body>
 </html>

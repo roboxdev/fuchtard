@@ -3,20 +3,37 @@ var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+
+var devFlagPlugin = new webpack.DefinePlugin({
+  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+});
+
+
 module.exports = {
     context: __dirname,
 
-    entry: [
-        './assets/js/entrypoint',
-        './assets/css/entrypoint'
-    ],
+    entry: {
+        'main': [
+            // './assets/js/entrypoint',
+            // './assets/css/entrypoint'
+        ],
+        'app': [
+            'webpack-dev-server/client?http://localhost:3000',
+            'webpack/hot/only-dev-server',
+            './assets/js/index',
+        ]
+    },
+    devtool: 'source-map',
 
     output: {
         path: path.resolve('../static_content/webpack_bundles/'),
         filename: "[name]-[hash].js",
-        publicPath: '/static/webpack_bundles/'
+        publicPath: 'http://localhost:3000/static/bundles/', // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
+        // publicPath: '/static/webpack_bundles/'
     },
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
         new BundleTracker({filename: '../static_content/webpack-stats.json'}),
         new ExtractTextPlugin("[name]-[hash].css", {
             allChunks: true
@@ -24,22 +41,24 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
-        })
+        }),
+        devFlagPlugin,
+
     ],
 
 
     module: {
         loaders: [
-            {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
-            {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: {presets: ['es2015']}},
             {
                 test: /.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react']
-                }
+                loaders: [
+                    'react-hot',
+                    'babel'
+                    // 'babel?presets[]=es2015,presets[]=react'
+                ],
             },
+            {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
             {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"

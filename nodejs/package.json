@@ -5,12 +5,15 @@
     "babel": "^6.5.2",
     "babel-cli": "^6.4.0",
     "babel-loader": "^6.2.4",
+    "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "bootstrap-material-design": "0.5.7",
+    "classnames": "^2.2.5",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "immutable": "^3.8.1",
     "jquery": "2.2.4",
     "jquery-match-height": "latest",
     "jquery-mobile": "latest",
@@ -21,6 +24,9 @@
     "mdi": "*",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
     "snackbarjs": "^1.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
@@ -32,12 +38,16 @@
     "babel-preset-es2015": "^6.9.0",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "react-hot-loader": "^1.3.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.16.2"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js --colors --progress",
-    "watch": "webpack --config webpack.config.js --colors --progress --watch"
+    "watch": "webpack --config webpack.config.js --colors --progress --watch",
+    "dev-server": "node server.js",
+    "build-prod": "webpack --config webpack.production.config.js --progress --colors"
   }
 }
