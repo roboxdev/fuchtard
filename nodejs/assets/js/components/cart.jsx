@@ -13,7 +13,6 @@ class CartItem extends React.Component {
                 <button onClick={() => this.props.plusButton(foodItem, cartItem.get('quantity'))}>+</button>
                 <span>{cartItem.get('quantity')}</span>
                 <button onClick={() => this.props.minusButton(foodItem, cartItem.get('quantity'))}>-</button>
-                <button>PROCEED</button>
             </div>
 
         )
@@ -34,6 +33,10 @@ class Cart extends React.Component {
                         minusButton={this.props.minusButton}
                     />
                 )}
+                <div>
+                    <span>TOTAL: {this.props.cartPrice}</span>
+                <button>PROCEED</button>
+                </div>
             </div>
         )
     }
@@ -43,6 +46,7 @@ export const ConnectedCart = connect(
     function mapStateToProps(state) {
         return {
             cart: state.get('cart'),
+            cartPrice: state.get('cartPrice'),
         }
     },
     function mapDispatchToProps(dispatch) {

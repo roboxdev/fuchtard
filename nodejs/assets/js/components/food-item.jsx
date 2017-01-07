@@ -7,7 +7,7 @@ class FoodItem extends React.Component {
     render() {
         const food = this.props.food;
         const foodId = food.get('id');
-        const cartItem = this.props.cart.find(val => val.get('id') === foodId);
+        const cartItem = this.props.cart.get(foodId);
         const quantity = cartItem ? cartItem.get('quantity'): 0;
         return (
             <div>
