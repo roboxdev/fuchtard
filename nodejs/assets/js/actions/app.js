@@ -35,6 +35,13 @@ function cartItemRemove(foodItemId) {
     }
 }
 
+function cartPriceUpdate(by) {
+    return {
+        type: 'CART_PRICE_UPDATE',
+        payload: by
+    }
+}
+
 export function plusButton(foodItem, quantity=0) {
     const foodItemId = foodItem.get('id');
     return dispatch => {
@@ -44,6 +51,7 @@ export function plusButton(foodItem, quantity=0) {
             } else {
                 dispatch(cartItemIncrease(foodItemId))
             }
+            dispatch(cartPriceUpdate(+foodItem.get('price')))
         }
     }
 }
@@ -57,6 +65,7 @@ export function minusButton(foodItem, quantity=0) {
             } else {
                 dispatch(cartItemDecrease(foodItemId))
             }
+            dispatch(cartPriceUpdate(-foodItem.get('price')))
         }
     }
 }
