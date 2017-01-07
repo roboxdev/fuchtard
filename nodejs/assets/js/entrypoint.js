@@ -15,3 +15,4 @@ import './main';
 import './food';
 import './order';
 import './panel';
+import './app';

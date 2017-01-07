@@ -17,13 +17,13 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.conf.urls.static import static
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^panel/', include('panel.urls', namespace='panel')),
+    url(r'^api/', include('api.urls', namespace='api')),
     url(r'^', include('main.urls', namespace='main')),
     url(r'^', include('food.urls', namespace='food')),
     url(r'^', include('order.urls', namespace='order')),

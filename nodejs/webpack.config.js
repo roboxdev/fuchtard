@@ -12,12 +12,12 @@ module.exports = {
     ],
 
     output: {
-        path: path.resolve('./webpack_bundles/'),
+        path: path.resolve('../static_content/webpack_bundles/'),
         filename: "[name]-[hash].js",
         publicPath: '/static/webpack_bundles/'
     },
     plugins: [
-        new BundleTracker({filename: './webpack-stats.json'}),
+        new BundleTracker({filename: '../static_content/webpack-stats.json'}),
         new ExtractTextPlugin("[name]-[hash].css", {
             allChunks: true
         }),

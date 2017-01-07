@@ -1,7 +1,9 @@
 import json
 
 from django.views.generic import ListView
+from rest_framework import viewsets
 
+from .serializers import FoodCategorySerializer
 from main.models import Banner
 from order.models import Cart, Gift
 from .models import FoodCategory
@@ -43,3 +45,8 @@ class FoodMenuView(ListView):
     @staticmethod
     def get_banners():
         return Banner.objects.all()
+
+
+class FoodMenuViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = FoodCategory.objects.all()
+    serializer_class = FoodCategorySerializer

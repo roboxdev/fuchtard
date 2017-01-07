@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django_extensions',
     'adminsortable',
     'debug_toolbar',
+    'rest_framework',
     'webpack_loader',
     'widget_tweaks',
     'main',
     'food',
     'order',
     'panel',
+    'api',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -121,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'static', )
 STATICFILES_DIRS = [
-    ('webpack_bundles', os.path.join(BASE_DIR, '..', '..', 'webpack_bundles')),
+    ('webpack_bundles', os.path.join(BASE_DIR, '..', '..', 'static_content', 'webpack_bundles')),
     # We do this so that django's collectstatic copies or our bundles to the
     # STATIC_ROOT or syncs them to whatever storage we use.
 
@@ -130,7 +132,7 @@ STATICFILES_DIRS = [
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'webpack_bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, '..', '..', 'webpack-stats.json'),
+        'STATS_FILE': os.path.join(BASE_DIR, '..', '..', 'static_content', 'webpack-stats.json'),
     },
 }
 
@@ -149,22 +151,11 @@ SERVER_EMAIL = 'server@maxisushi.kz'
 
 SITE_DOMAIN = 'maxisushi.kz'
 
-
-# LOGGING
-LOGGING = {
-    'version': 1,
-    'handlers': {
-        'mail_admins': {
-            'class': 'main.utils.CustomAdminEmailHandler',
-            'level': 'ERROR',
-            # 'filters': ['special']
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            # 'propagate': True,
-        },
-    },
+# Django REST Framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }
