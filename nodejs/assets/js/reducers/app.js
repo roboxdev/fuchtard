@@ -2,8 +2,10 @@ import {fromJS} from 'immutable';
 
 
 function getInitialState() {
-    const initialData = window.initialData;
-    return fromJS(initialData)
+    const initialData = fromJS(window.initialData);
+    return initialData.merge({
+       cart: []
+    });
 }
 
 

@@ -1,11 +1,10 @@
 import React from 'react';
 
-import {connect} from 'react-redux';
-
 import {Header} from './header';
 import {Footer} from './footer';
-import {Cart} from './cart';
 import {SEOAbout} from './seoabout';
+import {ConnectedCart as Cart} from './cart';
+import {ConnectedFoodMenu as FoodMenu} from './menu';
 
 
 // class NavBar extends React.Component {
@@ -113,22 +112,16 @@ class Carousel extends React.Component {
 }
 
 
-
-
-
-
-class App extends React.Component {
+export class App extends React.Component {
     render() {
         return (
             <div>
                 <Header />
-                {/*<div className='container'>*/}
-                    {/*<Carousel/>*/}
-                    {/*{menu_data}*/}
-                    <SEOAbout/>
-                {/*</div>*/}
+                {/*<Carousel/>*/}
+                <Cart />
+                <FoodMenu />
+                <SEOAbout/>
                 {/*<NavBar />*/}
-                {/*<Cart />*/}
                 {/*<StickyBar />*/}
                 <Footer />
             </div>

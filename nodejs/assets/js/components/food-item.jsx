@@ -1,39 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-class CartItem extends React.Component {
+class FoodItem extends React.Component {
     render() {
-        const cartItem = this.props.cartItem;
+        const food = this.props.food;
         return (
             <div>
-                cI
+                {food.get('title')}
                 <button>+</button>
-                <span>{cartItem.get('quantity')}</span>
+                <span>q</span>
                 <button>-</button>
             </div>
-
         )
     }
 }
 
-class Cart extends React.Component {
-    render() {
-        const cart = this.props.cart;
-        return (
-            <div>
-                CART:
-                {cart.map(
-                    (cartItem, index) => <CartItem key={index} cartItem={cartItem} />
-                )}
-            </div>
-        )
-    }
-}
-
-export const ConnectedCart = connect(
+export const ConnectedFoodItem = connect(
     function mapStateToProps(state) {
         return {
-            cart: state.get('cart'),
+            // foodMenu: state.get('foodMenu'),
         }
     },
     function mapDispatchToProps(dispatch) {
@@ -43,4 +28,4 @@ export const ConnectedCart = connect(
             // switchToNextInPlaylist: () => dispatch(actions.switchToNextInPlaylist()),
         }
     }
-)(Cart);
+)(FoodItem);
