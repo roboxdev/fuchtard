@@ -7,6 +7,8 @@ from main.models import Banner
 from order.models import Cart, Gift
 from .models import FoodCategory
 from .serializers import FoodCategorySerializer
+from order.serializers import GiftSerializer
+from main.serializers import BannerSerializer
 
 
 class FoodMenuView(ListView):
@@ -57,7 +59,9 @@ class AppView(TemplateView):
 
     def get_initial_data(self):
         return json.dumps({
-            'foodMenu': self.get_food_menu()
+            'foodMenu': self.get_food_menu(),
+            'banners': self.get_banners(),
+            'gifts': self.get_gifts(),
         })
 
     def get_food_menu(self):
@@ -67,4 +71,14 @@ class AppView(TemplateView):
         serialized = FoodCategorySerializer(categories,
                                             # context={},
                                             many=True).data
+        return serialized
+
+    def get_banners(self):
+        banners = Banner.objects.all()
+        serialized = BannerSerializer(banners, many=True).data
+        return serialized
+
+    def get_gifts(self):
+        gifts = Gift.objects.all()
+        serialized = GiftSerializer(gifts, many=True).data
         return serialized
