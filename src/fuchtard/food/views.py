@@ -2,13 +2,11 @@ import json
 
 from django.views.generic import ListView
 from django.views.generic import TemplateView
-from rest_framework import viewsets
 
-from .serializers import FoodCategorySerializer
 from main.models import Banner
 from order.models import Cart, Gift
 from .models import FoodCategory
-from . import serializers
+from .serializers import FoodCategorySerializer
 
 
 class FoodMenuView(ListView):
@@ -49,11 +47,6 @@ class FoodMenuView(ListView):
         return Banner.objects.all()
 
 
-class FoodMenuViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = FoodCategory.objects.all()
-    serializer_class = FoodCategorySerializer
-
-
 class AppView(TemplateView):
     template_name = 'food/app.html'
 
@@ -71,7 +64,7 @@ class AppView(TemplateView):
         categories = FoodCategory.objects.prefetch_related('fooditem_set__discount',
                                                            'fooditem_set__category__discount',
                                                            'fooditem_set__tags__discount',)
-        serialized = serializers.FoodCategorySerializer(categories,
-                                                        # context={},
-                                                        many=True).data
+        serialized = FoodCategorySerializer(categories,
+                                            # context={},
+                                            many=True).data
         return serialized

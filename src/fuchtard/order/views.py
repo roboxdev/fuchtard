@@ -3,9 +3,11 @@ import datetime
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import View, TemplateView, CreateView
+from rest_framework import viewsets, mixins
 
 from .forms import GiftForm
 from .models import Cart, Order, Gift
+from .serializers import OrderSerializer
 
 
 class OrderCheckoutView(CreateView):
@@ -78,3 +80,9 @@ class ThankYouView(TemplateView):
         context = super(ThankYouView, self).get_context_data(**kwargs)
         context['order_hashed_id'] = kwargs.get('hashed_id')
         return context
+
+
+class OrdersViewSet(mixins.CreateModelMixin,
+                    viewsets.GenericViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
