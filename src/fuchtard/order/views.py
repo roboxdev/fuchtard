@@ -46,45 +46,6 @@ class OrderCheckoutView(CreateView):
         gifts_qs = Gift.objects.filter(requirement__gt=self.cart_object_total_price).select_related('food_item')
         return gifts_qs
 
-    @staticmethod
-    def get_deferred_delivery_dates():
-        humanized = (
-            'Сегодня',
-            'Завтра',
-            'Послезавтра',
-        )
-        return [(humanized[td], datetime.date.today() + datetime.timedelta(days=td),) for td in range(3)]
-
-    @staticmethod
-    def _next_timestamp(current_timestamp):
-        return (datetime.datetime.combine(datetime.datetime.today(), current_timestamp) +
-                datetime.timedelta(minutes=30)).time()
-
-    def get_deferred_delivery_hours(self):
-        import datetime
-        working_hours_start = datetime.time(hour=11, minute=12)
-        working_hours_end = datetime.time(hour=23, minute=11)
-        if working_hours_start < working_hours_end:
-            result = [datetime.time(hour=working_hours_start.hour)]
-            while True:
-                dt = self._next_timestamp(result[-1])
-                if dt > working_hours_end:
-                    break
-                result.append(dt)
-        else:
-            result = [datetime.time(hour=0)]
-            while True:
-                dt = self._next_timestamp(result[-1])
-                if dt > working_hours_end:
-                    break
-                result.append(dt)
-            result.append(datetime.time(hour=working_hours_start.hour))
-            while True:
-                dt = self._next_timestamp(result[-1])
-                if dt < working_hours_end:
-                    break
-                result.append(dt)
-
     def get_success_url(self):
         return reverse('order:thank-you-view', kwargs={'hashed_id': self.object.hashed_id})
 
