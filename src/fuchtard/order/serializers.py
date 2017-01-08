@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from food.serializers import FoodItemSerializer
 from .models import Cart, Order, Gift
 
 
@@ -26,6 +28,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class GiftSerializer(serializers.ModelSerializer):
+    food_item = FoodItemSerializer()
 
     class Meta:
         model = Gift
