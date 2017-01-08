@@ -5,6 +5,7 @@ import {Footer} from './footer';
 import {SEOAbout} from './seoabout';
 import {ConnectedCart as Cart} from './cart';
 import {ConnectedFoodMenu as FoodMenu} from './menu';
+import {ConnectedOrderForm as OrderForm} from './order';
 
 
 // class NavBar extends React.Component {
@@ -119,6 +120,7 @@ export class App extends React.Component {
                 <Header />
                 {/*<Carousel/>*/}
                 <Cart />
+                <OrderForm />
                 <FoodMenu />
                 <SEOAbout/>
                 {/*<NavBar />*/}

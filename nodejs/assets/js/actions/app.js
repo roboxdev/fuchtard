@@ -1,7 +1,4 @@
 import fetch from 'isomorphic-fetch';
-// import * as Cookies from 'js-cookie';
-
-// const csrftoken = Cookies.get('csrftoken');
 
 function cartItemAdd(foodItemId, foodItem) {
     return {
@@ -67,5 +64,33 @@ export function minusButton(foodItem, quantity=0) {
             }
             dispatch(cartPriceUpdate(-foodItem.get('price')))
         }
+    }
+}
+
+export function updateOrderField(field, value, address=false) {
+    const path = address ? ['order', 'address', field] : ['order', field];
+    return {
+        type: 'UPDATE_ORDER_FIELD',
+        payload: {
+            path: path,
+            value: value,
+        }
+    }
+}
+
+export function placeOrder() {
+    return (dispatch, getState) => {
+        const state = getState();
+        const modifiedCart = state.get('cart').update(cart => cart.map(k => k.update(val => val.get('quantity'))));
+        const order = state.get('order').merge({cart: modifiedCart});
+        fetch('/api/orders/', {
+            method: "POST",
+            credentials: "same-origin",
+            headers: new Headers({
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }),
+            body: JSON.stringify(order),
+        });
     }
 }

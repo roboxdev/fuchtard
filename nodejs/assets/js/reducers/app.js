@@ -6,6 +6,19 @@ function getInitialState() {
     return initialData.merge({
         cart: {},
         cartPrice: 0,
+        order: {
+            name: '',
+            email: '',
+            phone: '',
+            address: {
+                street: '',
+                apartment: '',
+                building: '',
+                floor: null,
+            },
+            comment: '',
+            gift: null,
+        },
     });
 }
 
@@ -25,6 +38,8 @@ export default function (state = getInitialState(), action) {
             return state.deleteIn(['cart', action.payload]);
         case 'CART_PRICE_UPDATE':
             return state.update('cartPrice', val => val + action.payload);
+        case 'UPDATE_ORDER_FIELD':
+            return state.setIn(action.payload.path, action.payload.value);
         default:
             return state;
     }
