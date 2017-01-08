@@ -12,16 +12,15 @@ function getInitialState() {
 
 export default function (state = getInitialState(), action) {
     switch (action.type) {
+        case 'CART_ITEM_ADD':
+            return state.setIn(['cart', action.payload.foodItemId], fromJS({
+                quantity: 1,
+                foodItem: action.payload.foodItem,
+            }));
         case 'CART_ITEM_INCREASE':
             return state.updateIn(['cart', action.payload, 'quantity'], q => q + 1);
         case 'CART_ITEM_DECREASE':
             return state.updateIn(['cart', action.payload, 'quantity'], q => q - 1);
-        case 'CART_ITEM_ADD':
-            return state.setIn(['cart', action.payload.foodItemId], fromJS({
-                id: action.payload.foodItemId,
-                quantity: 1,
-                foodItem: action.payload.foodItem,
-            }));
         case 'CART_ITEM_REMOVE':
             return state.deleteIn(['cart', action.payload]);
         case 'CART_PRICE_UPDATE':

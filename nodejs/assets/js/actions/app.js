@@ -3,6 +3,15 @@ import fetch from 'isomorphic-fetch';
 
 // const csrftoken = Cookies.get('csrftoken');
 
+function cartItemAdd(foodItemId, foodItem) {
+    return {
+        type: 'CART_ITEM_ADD',
+        payload: {
+            foodItemId: foodItemId,
+            foodItem: foodItem,
+        },
+    }
+}
 
 function cartItemIncrease(foodItemId) {
     return {
@@ -18,15 +27,6 @@ function cartItemDecrease(foodItemId) {
     }
 }
 
-function cartItemAdd(foodItemId, foodItem) {
-    return {
-        type: 'CART_ITEM_ADD',
-        payload: {
-            foodItemId: foodItemId,
-            foodItem: foodItem,
-        },
-    }
-}
 
 function cartItemRemove(foodItemId) {
     return {
