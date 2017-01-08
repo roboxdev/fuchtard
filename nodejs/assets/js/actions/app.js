@@ -1,4 +1,7 @@
 import fetch from 'isomorphic-fetch';
+import * as Cookies from 'js-cookie';
+
+const csrftoken = Cookies.get('csrftoken');
 
 function cartItemAdd(foodItemId, foodItem) {
     return {
@@ -88,7 +91,8 @@ export function placeOrder() {
             credentials: "same-origin",
             headers: new Headers({
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
             }),
             body: JSON.stringify(order),
         });
