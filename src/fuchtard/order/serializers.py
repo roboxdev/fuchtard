@@ -22,7 +22,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         cart_data = validated_data.pop('cart')
-        cart = Cart.objects.create_from_json(cart_data=cart_data)
+        cart = Cart.objects.create_from_dict(cart_data=cart_data)
         order = Order.objects.create(cart=cart, **validated_data)
         return order
 

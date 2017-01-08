@@ -13,11 +13,10 @@ from .helpers import shifthash, send_templated_email, telegram_notify_channel
 
 
 class CartManager(models.Manager):
-    def create_from_json(self, cart_data):
-        cart_data_dict = json.loads(cart_data)
+    def create_from_dict(self, cart_data):
         cart = self.create()
         cart_items = []
-        for food_item_id, quantity in cart_data_dict.items():
+        for food_item_id, quantity in cart_data.items():
             try:
                 food_item = FoodItem.objects.get(id=int(food_item_id))
             except FoodItem.DoesNotExist:
