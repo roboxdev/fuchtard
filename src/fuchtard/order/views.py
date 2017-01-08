@@ -1,14 +1,11 @@
 import datetime
-from urllib.parse import urljoin
 
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import View, TemplateView, CreateView
 
 from .forms import GiftForm
 from .models import Cart, Order, Gift
-from .helpers import send_templated_email, telegram_notify_channel
 
 
 class OrderCheckoutView(CreateView):
