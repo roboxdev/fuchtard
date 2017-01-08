@@ -94,23 +94,7 @@ class OrderCheckoutView(CreateView):
     def form_valid(self, form):
         form = super(OrderCheckoutView, self).form_valid(form)
         self.request.session.pop('cart_id')
-        order_hashed_id = self.object.hashed_id
-        order_absolute_url = urljoin(
-            'http://{}'.format(settings.SITE_DOMAIN),
-            reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id}),
-        )
-        email_params = {
-            'template': 'order/email_new_order',
-            'template_params': {
-                'order_url': order_absolute_url,
-                'order': self.object,
-            },
-            'subject': 'Новый заказ №{}'.format(order_hashed_id),
-            'from_email': settings.FUCHTARD_NOREPLY_EMAIL,
-            'recipient_list': [settings.FUCHTARD_ORDERS_EMAIL]
-        }
-        send_templated_email(email_params)
-        telegram_notify_channel('Новый заказ №{}\n{}'.format(order_hashed_id, order_absolute_url))
+        self.object.notify_restaurant()
         return form
 
     def form_invalid(self, form):

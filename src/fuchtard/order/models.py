@@ -1,12 +1,15 @@
 import json
+from urllib.parse import urljoin
 
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.db.models import Sum, F
 
 from food.models import FoodItem
-from order.helpers import shifthash
+from .helpers import shifthash, send_templated_email, telegram_notify_channel
 
 
 class Cart(models.Model):
@@ -82,6 +85,25 @@ class Order(models.Model):
     @property
     def hashed_id(self):
         return shifthash(self.id)
+
+    def notify_restaurant(self):
+        order_hashed_id = self.hashed_id
+        order_absolute_url = urljoin(
+            'http://{}'.format(settings.SITE_DOMAIN),
+            reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id}),
+        )
+        email_params = {
+            'template': 'order/email_new_order',
+            'template_params': {
+                'order_url': order_absolute_url,
+                'order': self,
+            },
+            'subject': 'Новый заказ №{}'.format(order_hashed_id),
+            'from_email': settings.FUCHTARD_NOREPLY_EMAIL,
+            'recipient_list': [settings.FUCHTARD_ORDERS_EMAIL]
+        }
+        send_templated_email(email_params)
+        telegram_notify_channel('Новый заказ №{}\n{}'.format(order_hashed_id, order_absolute_url))
 
 
 class Gift(models.Model):
