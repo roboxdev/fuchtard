@@ -11,7 +11,14 @@ class GiftsForm extends React.Component {
             {this.props.gifts.map((gift, index) => {
                 const foodItem = gift.get('food_item');
                 const disabled = this.props.cartPrice < gift.get('requirement');
-                return <div key={index}><input type="radio" name="gift" value={gift.get('id')} disabled={disabled}/>
+                return <div key={index}>
+                    <input
+                        type="radio"
+                        name="gift"
+                        value={gift.get('id')}
+                        onChange={(e) => this.props.updateOrderField('gift', e.currentTarget.value, false)}
+                        disabled={disabled}
+                    />
                     <span>{foodItem.get('title')}</span>
                     <span>{gift.get('requirement')}</span>
                 </div>
@@ -23,36 +30,36 @@ class GiftsForm extends React.Component {
 
 class OrderForm extends React.Component {
     render() {
-        const orderFields = this.props.order;
-        const updateOrderField = (field, e) => this.props.updateOrderField(field, e.target.value, false);
-        const updateAddressField = (field, e) => this.props.updateOrderField(field, e.target.value, true);
+        const {order, updateOrderField} = this.props;
+        const updateOrder = (field, e) => updateOrderField(field, e.target.value, false);
+        const updateAddress = (field, e) => updateOrderField(field, e.target.value, true);
         return <div>
-            <GiftsForm gifts={this.props.gifts} cartPrice={this.props.cartPrice} />
+            <GiftsForm gifts={this.props.gifts} cartPrice={this.props.cartPrice} updateOrderField={updateOrderField} />
 
             Order Form
             <div>Имя
-                <input onChange={e => updateOrderField('name', e)} value={orderFields.get('name')}/>
+                <input onChange={e => updateOrder('name', e)} value={order.get('name')}/>
             </div>
             <div>email
-                <input onChange={e => updateOrderField('email', e)} value={orderFields.get('email')}/>
+                <input onChange={e => updateOrder('email', e)} value={order.get('email')}/>
             </div>
             <div>телефон
-                <input onChange={e => updateOrderField('phone', e)} value={orderFields.get('phone')}/>
+                <input onChange={e => updateOrder('phone', e)} value={order.get('phone')}/>
             </div>
             <div>Улица
-                <input onChange={e => updateAddressField('street', e)} value={orderFields.get('street')}/>
+                <input onChange={e => updateAddress('street', e)} value={order.get('street')}/>
             </div>
             <div>Номер дома
-                <input onChange={e => updateAddressField('apartment', e)} value={orderFields.get('apartment')}/>
+                <input onChange={e => updateAddress('apartment', e)} value={order.get('apartment')}/>
             </div>
             <div>квартира
-                <input onChange={e => updateAddressField('building', e)} value={orderFields.get('building')}/>
+                <input onChange={e => updateAddress('building', e)} value={order.get('building')}/>
             </div>
             <div>этаж
-                <input onChange={e => updateAddressField('floor', e)} value={orderFields.get('floor')}/>
+                <input onChange={e => updateAddress('floor', e)} value={order.get('floor')}/>
             </div>
             <div>комментарий
-                <input onChange={e => updateOrderField('comment', e)} value={orderFields.get('comment')}/>
+                <input onChange={e => updateOrder('comment', e)} value={order.get('comment')}/>
             </div>
         </div>
     }
