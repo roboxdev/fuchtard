@@ -72,16 +72,6 @@ class CartUpdateView(View):
         return redirect('order:order-checkout-view')
 
 
-# TODO: permission
-class ThankYouView(TemplateView):
-    template_name = 'order/thank_you.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ThankYouView, self).get_context_data(**kwargs)
-        context['order_hashed_id'] = kwargs.get('hashed_id')
-        return context
-
-
 class OrdersViewSet(mixins.CreateModelMixin,
                     viewsets.GenericViewSet):
     queryset = Order.objects.all()
