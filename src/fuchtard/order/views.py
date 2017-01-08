@@ -86,3 +86,8 @@ class OrdersViewSet(mixins.CreateModelMixin,
                     viewsets.GenericViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = []
+
+    def perform_create(self, serializer):
+        super(OrdersViewSet, self).perform_create(serializer)
+        # TODO: fire notifications self.object.notify_restaurant()
