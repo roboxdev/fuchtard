@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'webpack_loader',
-    'widget_tweaks',
     'main',
     'food',
     'order',
