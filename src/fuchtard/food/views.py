@@ -2,13 +2,36 @@ import json
 
 from django.views.generic import ListView
 from django.views.generic import TemplateView
+from rest_framework import mixins, viewsets
 
 from main.models import Banner
 from order.models import Cart, Gift
-from .models import FoodCategory
-from .serializers import FoodCategorySerializer
+from .models import FoodCategory, FoodItem
+from .serializers import FoodCategorySerializer, FoodItemSerializer
 from order.serializers import GiftSerializer
 from main.serializers import BannerSerializer
+
+
+class FoodItemsViewSet(mixins.RetrieveModelMixin,
+                       mixins.ListModelMixin,
+                       viewsets.GenericViewSet):
+    queryset = FoodItem.objects.prefetch_related('discount',
+                                                 'category__discount',
+                                                 'tags__discount', )
+    serializer_class = FoodItemSerializer
+
+    def get_serializer_context(self):
+        return {'request': self.request}
+
+
+class FoodCategoriesViewSet(mixins.RetrieveModelMixin,
+                            mixins.ListModelMixin,
+                            viewsets.GenericViewSet):
+    queryset = FoodCategory.objects.all()
+    serializer_class = FoodCategorySerializer
+
+    def get_serializer_context(self):
+        return {'request': self.request}
 
 
 class FoodMenuView(ListView):
@@ -51,34 +74,3 @@ class FoodMenuView(ListView):
 
 class AppView(TemplateView):
     template_name = 'food/app.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(AppView, self).get_context_data(**kwargs)
-        context['initial_data'] = self.get_initial_data()
-        return context
-
-    def get_initial_data(self):
-        return json.dumps({
-            'foodMenu': self.get_food_menu(),
-            'banners': self.get_banners(),
-            'gifts': self.get_gifts(),
-        })
-
-    def get_food_menu(self):
-        categories = FoodCategory.objects.prefetch_related('fooditem_set__discount',
-                                                           'fooditem_set__category__discount',
-                                                           'fooditem_set__tags__discount',)
-        serialized = FoodCategorySerializer(categories,
-                                            # context={},
-                                            many=True).data
-        return serialized
-
-    def get_banners(self):
-        banners = Banner.objects.all()
-        serialized = BannerSerializer(banners, many=True).data
-        return serialized
-
-    def get_gifts(self):
-        gifts = Gift.objects.all()
-        serialized = GiftSerializer(gifts, many=True).data
-        return serialized

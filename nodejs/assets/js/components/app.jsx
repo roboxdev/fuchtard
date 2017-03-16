@@ -1,12 +1,20 @@
 import React from 'react';
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
 
-import {Header} from './header';
-import {Footer} from './footer';
-import {SEOAbout} from './seoabout';
-import {ConnectedCart as Cart} from './cart';
-import {ConnectedFoodMenu as FoodMenu} from './menu';
-import {ConnectedOrderForm as OrderForm} from './order';
+import {Header} from 'components/header';
+import {Footer} from 'components/footer';
+import {SEOAbout} from 'components/seoabout';
+import {Cart} from 'components/cart';
+import {FoodMenu} from 'components/menu';
+import {OrderForm} from 'components/order';
+import {NavBar} from 'components/navbar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 // class NavBar extends React.Component {
 //     render() {
@@ -116,17 +124,37 @@ class Carousel extends React.Component {
 export class App extends React.Component {
     render() {
         return (
-            <div>
-                <Header />
-                {/*<Carousel/>*/}
-                <Cart />
-                <OrderForm />
-                <FoodMenu />
-                <SEOAbout/>
-                {/*<NavBar />*/}
-                {/*<StickyBar />*/}
-                <Footer />
-            </div>
+            <MuiThemeProvider>
+                <div>
+                    <Header />
+                    {/*<Carousel/>*/}
+                    <div>
+                        {this.props.children}
+                    </div>
+                    {/*<Cart />*/}
+                    {/*<OrderForm />*/}
+                    {/*<FoodMenu />*/}
+                    <SEOAbout/>
+                    <NavBar />
+                    {/*<StickyBar />*/}
+                    <Footer />
+                </div>
+            </MuiThemeProvider>
         );
+    }
+}
+
+
+export class Routs extends React.Component {
+    render() {
+        return (
+            <Router history={browserHistory}>
+                <Route path="/" component={App}>
+                    <IndexRoute component={FoodMenu}/>
+                    <Route path="cart" component={Cart}/>
+                    <Route path="checkout" component={OrderForm}/>
+                </Route>
+            </Router>
+        )
     }
 }

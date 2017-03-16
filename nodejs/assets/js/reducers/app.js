@@ -1,11 +1,15 @@
-import {fromJS} from 'immutable';
+import Immutable from 'seamless-immutable';
 
 
 function getInitialState() {
-    const initialData = fromJS(window.initialData);
-    return initialData.merge({
-        cart: {},
-        cartPrice: 0,
+    return Immutable({
+        foodItems: [],
+        foodCategories: [],
+        cart: {
+            18: 3,
+            93: 1,
+            32: 2,
+        },
         order: {
             name: '',
             email: '',
@@ -19,27 +23,26 @@ function getInitialState() {
             comment: '',
             gift: null,
         },
+        gifts: [],
     });
 }
 
 
 export default function (state = getInitialState(), action) {
     switch (action.type) {
-        case 'CART_ITEM_ADD':
-            return state.setIn(['cart', action.payload.foodItemId], fromJS({
-                quantity: 1,
-                foodItem: action.payload.foodItem,
-            }));
         case 'CART_ITEM_INCREASE':
-            return state.updateIn(['cart', action.payload, 'quantity'], q => q + 1);
+            return Immutable.updateIn(state, ['cart', action.payload], v => v >= 1 ? v + 1 : 1);
         case 'CART_ITEM_DECREASE':
-            return state.updateIn(['cart', action.payload, 'quantity'], q => q - 1);
-        case 'CART_ITEM_REMOVE':
-            return state.deleteIn(['cart', action.payload]);
-        case 'CART_PRICE_UPDATE':
-            return state.update('cartPrice', val => val + action.payload);
+            const quantity = state.cart[action.payload];
+            return quantity > 1
+            ? Immutable.updateIn(state, ['cart', action.payload], v => v - 1)
+            : Immutable.update(state, 'cart', v => Immutable.without(v, action.payload));
         case 'UPDATE_ORDER_FIELD':
             return state.setIn(action.payload.path, action.payload.value);
+        case 'SET_FOOD_CATEGORIES':
+            return Immutable.set(state, 'foodCategories', action.payload);
+        case 'SET_FOOD_ITEMS':
+            return Immutable.set(state, 'foodItems', action.payload);
         default:
             return state;
     }

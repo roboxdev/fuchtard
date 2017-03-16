@@ -1,61 +1,58 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import * as actions from '../actions/app';
+import map from 'lodash/map';
+import * as actions from 'actions/app';
+import {foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
+
+import {QuantityButtons} from 'components/quantity-buttons';
+
 
 class CartItem extends React.Component {
     render() {
-        const cartItem = this.props.cartItem;
-        const foodItem = cartItem.get('foodItem');
+        const {foodItemId, quantity} = this.props;
         return (
             <div>
-                {foodItem.get('title')}
-                <button onClick={() => this.props.plusButton(foodItem, cartItem.get('quantity'))}>+</button>
-                <span>{cartItem.get('quantity')}</span>
-                <button onClick={() => this.props.minusButton(foodItem, cartItem.get('quantity'))}>-</button>
+                {/*{foodItem.title}*/}
+                <QuantityButtons
+                    foodItemId={foodItemId}
+                    quantity={quantity}
+                />
+
             </div>
 
         )
     }
 }
 
-
-class Cart extends React.Component {
+@connect(
+    state => ({
+        cart: state.cart,
+        annotatedCart: foodItemAnnotatedCart(state),
+        cartPrice: subtotalSelector(state),
+    }),
+    dispatch => ({
+        placeOrder: () => dispatch(actions.placeOrder()),
+    })
+)
+export class Cart extends React.Component {
     render() {
-        const cart = this.props.cart;
+        const {cart} = this.props;
         return (
             <div>
                 CART:
-                {cart.map(
-                    (cartItem, index) =>
-                        <CartItem
-                            key={cartItem.get('id')}
-                            cartItem={cartItem}
-                            plusButton={this.props.plusButton}
-                            minusButton={this.props.minusButton}
-                        />
+                {map(cart, (quantity, foodItemId) =>
+                    <CartItem
+                        key={foodItemId}
+                        foodItemId={foodItemId}
+                        quantity={quantity}
+                    />
                 )}
                 <div>
                     <span>TOTAL: {this.props.cartPrice}</span>
-                <button onClick={this.props.placeOrder}>PROCEED</button>
+                    <button onClick={this.props.placeOrder}>PROCEED</button>
                 </div>
             </div>
         )
     }
 }
-
-export const ConnectedCart = connect(
-    function mapStateToProps(state) {
-        return {
-            cart: state.get('cart'),
-            cartPrice: state.get('cartPrice'),
-        }
-    },
-    function mapDispatchToProps(dispatch) {
-        return {
-            plusButton: (foodItemId, quantity) => dispatch(actions.plusButton(foodItemId, quantity)),
-            minusButton: (foodItemId, quantity) => dispatch(actions.minusButton(foodItemId, quantity)),
-            placeOrder: () => dispatch(actions.placeOrder()),
-        }
-    }
-)(Cart);

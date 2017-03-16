@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import reducer from '../reducers/app';
+import reducer from 'reducers/app';
 
 
 export const store = createStore(
@@ -10,3 +10,5 @@ export const store = createStore(
         window.devToolsExtension ? window.devToolsExtension() : f => f
     )
 );
+
+window.store = store;

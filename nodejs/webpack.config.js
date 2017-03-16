@@ -92,6 +92,9 @@ module.exports = {
 
     resolve: {
         modulesDirectories: ['node_modules'],
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        root: [
+            path.resolve('./assets/js'),
+        ]
     }
 };
