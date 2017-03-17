@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import {Header} from 'components/header';
 import {Footer} from 'components/footer';
@@ -125,36 +125,18 @@ export class App extends React.Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div>
-                    <Header />
-                    {/*<Carousel/>*/}
+                <Router>
                     <div>
-                        {this.props.children}
+                        <Header />
+                        <Route exact path="/" component={FoodMenu}/>
+                        <Route path="/cart" component={Cart}/>
+                        <Route path="/checkout" component={OrderForm}/>
+                        <SEOAbout/>
+                        <NavBar />
+                        <Footer />
                     </div>
-                    {/*<Cart />*/}
-                    {/*<OrderForm />*/}
-                    {/*<FoodMenu />*/}
-                    <SEOAbout/>
-                    <NavBar />
-                    {/*<StickyBar />*/}
-                    <Footer />
-                </div>
+                </Router>
             </MuiThemeProvider>
         );
-    }
-}
-
-
-export class Routs extends React.Component {
-    render() {
-        return (
-            <Router history={browserHistory}>
-                <Route path="/" component={App}>
-                    <IndexRoute component={FoodMenu}/>
-                    <Route path="cart" component={Cart}/>
-                    <Route path="checkout" component={OrderForm}/>
-                </Route>
-            </Router>
-        )
     }
 }
