@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import * as actions from 'actions/app';
 
+import '../styles/order.styl';
+
 
 class GiftsForm extends React.Component {
     render() {
@@ -45,7 +47,7 @@ export class OrderForm extends React.Component {
             <GiftsForm gifts={this.props.gifts} cartPrice={this.props.cartPrice} updateOrderField={updateOrderField}/>
 
             Order Form
-            <div>Имя
+            <div styleName="test">Имя
                 <input onChange={e => updateOrder('name', e)} value={order.name}/>
             </div>
             <div>email

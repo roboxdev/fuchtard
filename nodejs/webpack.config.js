@@ -1,7 +1,6 @@
 var path = require("path");
 var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 var devFlagPlugin = new webpack.DefinePlugin({
@@ -13,14 +12,10 @@ module.exports = {
     context: __dirname,
 
     entry: {
-        'main': [
-            // './assets/js/entrypoint',
-            // './assets/css/entrypoint'
-        ],
         'app': [
-            'webpack-dev-server/client?http://localhost:3000',
-            'webpack/hot/only-dev-server',
-            './assets/js/index',
+            // 'webpack-dev-server/client?http://localhost:3000',
+            // 'webpack/hot/only-dev-server',
+            './src/index',
         ]
     },
     devtool: 'source-map',
@@ -33,90 +28,61 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
         new BundleTracker({filename: '../static_content/webpack-stats.json'}),
-        new ExtractTextPlugin("[name]-[hash].css", {
-            allChunks: true
-        }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        }),
+        // new ExtractTextPlugin("[name]-[hash].css", {
+        //     allChunks: true
+        // }),
         devFlagPlugin,
 
     ],
-
-
     module: {
-        loaders: [
+        rules: [
             {
                 test: /.jsx?$/,
                 exclude: /node_modules/,
-                // loaders: [
-                //     'react-hot',
-                //     'babel'
-                // ],
-                loader: 'babel',
-                query: {
-                    plugins: [
-                        [
-                            'react-css-modules',
-                            {
-                                context: __dirname,
-                                generateScopedName: '[name]__[local]___[hash:base64:5]',
-                                filetypes: {
-                                     ".styl": "sugarss"
-                                }
-                            }
-                        ]
-                    ]
-                },
+                use: [
+                    {
+                        loader: 'react-hot-loader',
+                    },
+                    {
+
+                        loader: 'babel-loader',
+                        options: {
+                            plugins: [
+                                [
+                                    'react-css-modules',
+                                    {
+                                        context: __dirname,
+                                        generateScopedName: '[name]__[local]___[hash:base64:5]',
+                                        filetypes: {
+                                            ".styl": "sugarss"
+                                        }
+                                    }
+                                ]
+                            ]
+                        },
+                    }
+                ],
             },
             {
                 test: /\.styl/,
-                loaders: [
-                    'style-loader',
-                    'css-loader?importLoader=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
-                    'postcss-loader?parser=sugarss'
+                use: [
+                    {loader: 'style-loader'},
+                    {
+                        loader: 'css-loader',
+                        options: {importLoader: 1, modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}
+                    },
+                    {loader: 'postcss-loader', options: {parser: 'sugarss'}}
                 ],
             },
-            {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
-            {
-                test: /\.css$/,
-                loader: "style-loader!css-loader"
-            },
-            {
-                test: /\.png$/,
-                loader: "url-loader?limit=100000"
-            },
-            {
-                test: /\.jpg$/,
-                loader: "file-loader"
-            },
-            {
-                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff'
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream'
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file'
-            },
-            {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml'
-            }
         ]
     },
 
     resolve: {
-        modulesDirectories: ['node_modules'],
-        extensions: ['', '.js', '.jsx'],
-        root: [
-            path.resolve('./assets/js'),
-        ]
+        modules: [
+            'node_modules',
+            path.resolve('./src'),
+        ],
+        extensions: ['.js', '.jsx']
     }
 };
