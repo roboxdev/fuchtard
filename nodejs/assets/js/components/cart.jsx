@@ -10,24 +10,22 @@ import {QuantityButtons} from 'components/quantity-buttons';
 
 class CartItem extends React.Component {
     render() {
-        const {foodItemId, quantity} = this.props;
-        return (
-            <div>
-                {/*{foodItem.title}*/}
-                <QuantityButtons
-                    foodItemId={foodItemId}
-                    quantity={quantity}
-                />
-
-            </div>
-
+        const {foodItemId, foodItem, quantity} = this.props;
+        return (foodItem
+                ? <div>
+                    {foodItem.title}
+                    <QuantityButtons
+                        foodItemId={foodItemId}
+                        quantity={quantity}
+                    />
+                </div>
+                : null
         )
     }
 }
 
 @connect(
     state => ({
-        cart: state.cart,
         annotatedCart: foodItemAnnotatedCart(state),
         cartPrice: subtotalSelector(state),
     }),
@@ -37,14 +35,15 @@ class CartItem extends React.Component {
 )
 export class Cart extends React.Component {
     render() {
-        const {cart} = this.props;
+        const {annotatedCart} = this.props;
         return (
             <div>
                 CART:
-                {map(cart, (quantity, foodItemId) =>
+                {map(annotatedCart, ({quantity, foodItem}, foodItemId) =>
                     <CartItem
                         key={foodItemId}
                         foodItemId={foodItemId}
+                        foodItem={foodItem}
                         quantity={quantity}
                     />
                 )}
