@@ -52,10 +52,32 @@ module.exports = {
             {
                 test: /.jsx?$/,
                 exclude: /node_modules/,
+                // loaders: [
+                //     'react-hot',
+                //     'babel'
+                // ],
+                loader: 'babel',
+                query: {
+                    plugins: [
+                        [
+                            'react-css-modules',
+                            {
+                                context: __dirname,
+                                generateScopedName: '[name]__[local]___[hash:base64:5]',
+                                filetypes: {
+                                     ".styl": "sugarss"
+                                }
+                            }
+                        ]
+                    ]
+                },
+            },
+            {
+                test: /\.styl/,
                 loaders: [
-                    'react-hot',
-                    'babel'
-                    // 'babel?presets[]=es2015,presets[]=react'
+                    'style-loader',
+                    'css-loader?importLoader=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
+                    'postcss-loader?parser=sugarss'
                 ],
             },
             {test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
