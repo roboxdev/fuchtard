@@ -15,7 +15,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
-    "seamless-immutable": "^7.0.1",
+    "seamless-immutable": "^7.0.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",
