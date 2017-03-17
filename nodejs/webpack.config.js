@@ -4,7 +4,7 @@ var BundleTracker = require('webpack-bundle-tracker');
 
 
 var devFlagPlugin = new webpack.DefinePlugin({
-  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 });
 
 
@@ -70,9 +70,18 @@ module.exports = {
                     {loader: 'style-loader'},
                     {
                         loader: 'css-loader',
-                        options: {importLoader: 1, modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
                     },
-                    {loader: 'postcss-loader', options: {parser: 'sugarss'}}
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            parser: 'sugarss'
+                        }
+                    }
                 ],
             },
         ]
