@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch';
-import * as Cookies from 'js-cookie';
 
-const csrftoken = Cookies.get('csrftoken');
+const csrftoken = window.config.csrfToken;
 
 
 function cartItemIncrease(foodItemId) {
