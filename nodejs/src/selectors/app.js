@@ -7,7 +7,9 @@ import values from 'lodash/values';
 export const getQuantityByFoodId = (state, props) => state.cart[props.foodItemId];
 
 const foodItemsSelector = state => state.foodItems;
+const giftsSelector = state => state.gifts;
 const cartSelector = state => state.cart;
+const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id == id);
 
 export const foodItemAnnotatedCart = createSelector(
     cartSelector,
@@ -16,7 +18,7 @@ export const foodItemAnnotatedCart = createSelector(
         cart,
         (quantity, foodItemId) => ({
             quantity,
-            foodItem: find(foodItems, v => v.id == foodItemId),
+            foodItem: getFoodItemById(foodItems, foodItemId),
         })
     )
 );
@@ -27,3 +29,13 @@ export const subtotalSelector = createSelector(
         ({quantity, foodItem}) => foodItem && foodItem.price * quantity)
 );
 
+
+export const foodItemAnnotatedGifts = createSelector(
+    giftsSelector,
+    foodItemsSelector,
+    (gifts, foodItems) => gifts.map(
+        ({food_item, ...rest}) => ({
+            foodItem: getFoodItemById(foodItems, food_item),
+            ...rest,
+        }))
+);

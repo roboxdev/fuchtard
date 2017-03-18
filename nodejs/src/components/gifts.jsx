@@ -2,36 +2,53 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import * as actions from 'actions/app';
+import {foodItemAnnotatedGifts} from 'selectors/app';
 
 
 @connect(
-    state => ({
-        gifts: state.gifts,
-
-    }),
-    dispatch => ({
-        selectGift: val => dispatch(actions.updateOrderField('gift', val)),
+    null,
+    (dispatch, props) => ({
+        selectGift: () => dispatch(actions.updateOrderField('gift', props.id)),
     })
 )
-export class GiftsForm extends React.Component {
-    render() {
-        const {gifts, cartPrice, selectGift} = this.props;
-        return <div>
-            GIFTS:
-            {gifts.map((gift) => {
-                const foodItem = gift.food_item;
-                const disabled = cartPrice < gift.requirement;
-                return <div key={foodItem.id}>
+class Gift extends React.Component {
+    render () {
+        const disabled = cartPrice < requirement;
+        const {id, cartPrice, foodItem, requirement, selectGift} = this.props;
+        return (foodItem
+                ? <div key={id}>
                     <input
                         type="radio"
                         name="gift"
-                        value={gift.id}
-                        onChange={(e) => selectGift(e.currentTarget.value)}
+                        value={id}
+                        onChange={selectGift}
                         disabled={disabled}
                     />
                     <span>{foodItem.title}</span>
-                    <span>{gift.requirement}</span>
+                    <span>{requirement}</span>
                 </div>
+                : null
+        )
+    }
+}
+
+@connect(
+    state => ({
+        gifts: foodItemAnnotatedGifts(state),
+    }),
+)
+export class GiftsForm extends React.Component {
+    render() {
+        const {gifts, cartPrice} = this.props;
+        return <div>
+            GIFTS:
+            {gifts.map(({id, ...rest}) => {
+                return <Gift
+                    key={id}
+                    id={id}
+                    cartPrice={cartPrice}
+                    {...rest}
+                />
             })}
         </div>
     }

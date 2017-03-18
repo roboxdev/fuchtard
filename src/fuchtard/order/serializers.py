@@ -28,11 +28,10 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class GiftSerializer(serializers.ModelSerializer):
-    food_item = FoodItemSerializer()
-
     class Meta:
         model = Gift
         fields = (
+            'id',
             'food_item',
             'requirement',
         )
