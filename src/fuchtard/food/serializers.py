@@ -38,5 +38,4 @@ class FoodCategorySerializer(serializers.HyperlinkedModelSerializer):
             'expanded',
             'title',
             'slug',
-            # 'discount',
         )
