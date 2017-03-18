@@ -22,3 +22,4 @@ class OrdersViewSet(mixins.CreateModelMixin,
     def perform_create(self, serializer):
         super(OrdersViewSet, self).perform_create(serializer)
         # TODO: fire notifications self.object.notify_restaurant()
+        # TODO: check gift
