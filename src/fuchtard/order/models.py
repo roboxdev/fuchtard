@@ -1,4 +1,3 @@
-import json
 from urllib.parse import urljoin
 
 from django.conf import settings
@@ -41,25 +40,6 @@ class Cart(models.Model):
         total = self.cartitem_set.aggregate(cart_total_price=Sum(F('history_price') * F('quantity'))) \
             .get('cart_total_price', 0)
         return total
-
-    def json_repr(self):
-        serialized = json.dumps({cart_item.product.id: cart_item.quantity for cart_item in self.cartitem_set.all()})
-        return serialized
-
-    def json_update(self, json_cart):
-        dicted_cart = json.loads(json_cart)
-        cart_items = []
-        self.cartitem_set.all().delete()
-        for food_item_id, quantity in dicted_cart.items():
-            try:
-                food_item = FoodItem.objects.get(id=int(food_item_id))
-            except FoodItem.DoesNotExist:
-                continue
-            cart_items.append(CartItem(cart=self,
-                                       product=food_item,
-                                       quantity=quantity,
-                                       history_price=food_item.price, ))
-        CartItem.objects.bulk_create(cart_items)
 
 
 class CartItem(models.Model):
@@ -135,9 +115,3 @@ class Gift(models.Model):
 
     def __str__(self):
         return self.food_item.title
-
-    def json_repr(self):
-        return json.dumps({
-            'food_item__title': self.food_item.title,
-            'requirement': self.requirement
-        })
