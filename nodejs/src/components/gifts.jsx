@@ -13,8 +13,8 @@ import {foodItemAnnotatedGifts} from 'selectors/app';
 )
 class Gift extends React.Component {
     render () {
-        const disabled = cartPrice < requirement;
         const {id, cartPrice, foodItem, requirement, selectGift} = this.props;
+        const disabled = cartPrice < requirement;
         return (foodItem
                 ? <div key={id}>
                     <input
