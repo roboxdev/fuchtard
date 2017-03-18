@@ -1,13 +1,6 @@
 import React from 'react';
-import FontIcon from 'material-ui/FontIcon';
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import Paper from 'material-ui/Paper';
-import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import {Link} from 'react-router-dom';
 
-const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
-const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
-const nearbyIcon = <IconLocationOn />;
 
 export class NavBar extends React.Component {
     state = {
@@ -18,24 +11,11 @@ export class NavBar extends React.Component {
 
     render() {
         return (
-            <Paper zDepth={1}>
-                <BottomNavigation selectedIndex={this.state.selectedIndex}>
-                    <BottomNavigationItem
-                        label={<Link to="/">home</Link>}
-                        icon={recentsIcon}
-                        onTouchTap={() => this.select(0)}
-                    />
-                    <BottomNavigationItem
-                        label={<Link to="/cart">cart</Link>}
-                        icon={favoritesIcon}
-                        onTouchTap={() => this.select(1)}
-                    />
-                    <BottomNavigationItem
-                        label={<Link to="/checkout">checkout</Link>}
-                        icon={nearbyIcon}
-                        onTouchTap={() => this.select(2)}
-                    />
-                </BottomNavigation>
-            </Paper>)
+            <div>
+                <Link to="/">home</Link>
+                <Link to="/cart">cart</Link>
+                <Link to="/checkout">checkout</Link>
+            </div>
+        )
     }
 }

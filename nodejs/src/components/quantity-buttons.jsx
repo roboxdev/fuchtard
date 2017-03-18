@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
+import {Button} from 'react-toolbox/lib/button';
 
 import * as actions from 'actions/app';
 import {getQuantityByFoodId} from 'selectors/app'
@@ -19,10 +19,10 @@ export class QuantityButtons extends React.Component {
         const {quantity, plusButton, minusButton} = this.props;
         return (
             <div>
-                <RaisedButton label="+" onClick={plusButton}/>
+                <Button raised disabled={quantity >= 9} onClick={plusButton}>+</Button>
                 <span>{quantity}</span>
                 {quantity >= 1 &&
-                <RaisedButton label="-" onClick={minusButton}/>
+                <Button raised onClick={minusButton}>-</Button>
                 }
             </div>
         )

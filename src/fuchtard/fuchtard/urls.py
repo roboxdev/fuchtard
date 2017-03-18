@@ -26,8 +26,6 @@ urlpatterns = [
     url(r'^api/', include('api.urls', namespace='api')),
     url(r'^', include('main.urls', namespace='main')),
     url(r'^', include('food.urls', namespace='food')),
-    url(r'^', include('order.urls', namespace='order')),
-
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

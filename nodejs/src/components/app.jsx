@@ -8,7 +8,6 @@ import {Cart} from 'components/cart';
 import {FoodMenu} from 'components/menu';
 import {OrderForm} from 'components/order';
 import {NavBar} from 'components/navbar';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -124,19 +123,17 @@ class Carousel extends React.Component {
 export class App extends React.Component {
     render() {
         return (
-            <MuiThemeProvider>
-                <Router>
-                    <div>
-                        <Header />
-                        <Route exact path="/" component={FoodMenu}/>
-                        <Route path="/cart" component={Cart}/>
-                        <Route path="/checkout" component={OrderForm}/>
-                        <SEOAbout/>
-                        <NavBar />
-                        <Footer />
-                    </div>
-                </Router>
-            </MuiThemeProvider>
+            <Router>
+                <div>
+                    <Header />
+                    <Route exact path="/" component={FoodMenu}/>
+                    <Route path="/cart" component={Cart}/>
+                    <Route path="/checkout" component={OrderForm}/>
+                    <SEOAbout/>
+                    <NavBar />
+                    <Footer />
+                </div>
+            </Router>
         );
     }
 }

@@ -5,6 +5,8 @@ import map from 'lodash/map';
 import * as actions from 'actions/app';
 import {foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
 
+import {GiftsForm} from 'components/gifts';
+
 import {QuantityButtons} from 'components/quantity-buttons';
 
 
@@ -35,7 +37,7 @@ class CartItem extends React.Component {
 )
 export class Cart extends React.Component {
     render() {
-        const {annotatedCart} = this.props;
+        const {annotatedCart, cartPrice} = this.props;
         return (
             <div>
                 CART:
@@ -48,9 +50,9 @@ export class Cart extends React.Component {
                     />
                 )}
                 <div>
-                    <span>TOTAL: {this.props.cartPrice}</span>
-                    <button onClick={this.props.placeOrder}>PROCEED</button>
+                    <span>TOTAL: {cartPrice}</span>
                 </div>
+                <GiftsForm cartPrice={cartPrice}/>
             </div>
         )
     }

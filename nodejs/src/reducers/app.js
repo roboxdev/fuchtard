@@ -43,6 +43,8 @@ export default function (state = getInitialState(), action) {
             return Immutable.set(state, 'foodCategories', action.payload);
         case 'SET_FOOD_ITEMS':
             return Immutable.set(state, 'foodItems', action.payload);
+        case 'SET_GIFTS':
+            return Immutable.set(state, 'gifts', action.payload);
         default:
             return state;
     }

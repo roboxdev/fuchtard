@@ -32,3 +32,7 @@ class GiftSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Gift
+        fields = (
+            'food_item',
+            'requirement',
+        )

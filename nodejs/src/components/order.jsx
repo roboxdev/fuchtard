@@ -6,36 +6,13 @@ import * as actions from 'actions/app';
 import '../styles/order.styl';
 
 
-class GiftsForm extends React.Component {
-    render() {
-        return <div>
-            GIFTS:
-            {this.props.gifts.map((gift, index) => {
-                const foodItem = gift.food_item;
-                const disabled = this.props.cartPrice < gift.requirement;
-                return <div key={index}>
-                    <input
-                        type="radio"
-                        name="gift"
-                        value={gift.id}
-                        onChange={(e) => this.props.updateOrderField('gift', e.currentTarget.value, false)}
-                        disabled={disabled}
-                    />
-                    <span>{foodItem.title}</span>
-                    <span>{gift.requirement}</span>
-                </div>
-            })}
-        </div>
-    }
-}
-
 @connect(
     state => ({
-        gifts: state.gifts,
         order: state.order,
     }),
     dispatch => ({
         updateOrderField: (field, value, address) => dispatch(actions.updateOrderField(field, value, address)),
+        placeOrder: () => dispatch(actions.placeOrder()),
     })
 )
 export class OrderForm extends React.Component {
@@ -44,8 +21,6 @@ export class OrderForm extends React.Component {
         const updateOrder = (field, e) => updateOrderField(field, e.target.value, false);
         const updateAddress = (field, e) => updateOrderField(field, e.target.value, true);
         return <div>
-            <GiftsForm gifts={this.props.gifts} cartPrice={this.props.cartPrice} updateOrderField={updateOrderField}/>
-
             Order Form
             <div styleName="test">Имя
                 <input onChange={e => updateOrder('name', e)} value={order.name}/>
@@ -71,6 +46,7 @@ export class OrderForm extends React.Component {
             <div>комментарий
                 <input onChange={e => updateOrder('comment', e)} value={order.comment}/>
             </div>
+            <button onClick={this.props.placeOrder}>PROCEED</button>
         </div>
     }
 }

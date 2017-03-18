@@ -8,8 +8,6 @@ from main.models import Banner
 from order.models import Cart, Gift
 from .models import FoodCategory, FoodItem
 from .serializers import FoodCategorySerializer, FoodItemSerializer
-from order.serializers import GiftSerializer
-from main.serializers import BannerSerializer
 
 
 class FoodItemsViewSet(mixins.RetrieveModelMixin,

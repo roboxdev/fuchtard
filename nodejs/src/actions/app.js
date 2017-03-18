@@ -44,8 +44,7 @@ export function updateOrderField(field, value, address = false) {
 export function placeOrder() {
     return (dispatch, getState) => {
         const state = getState();
-        const modifiedCart = state.cart.update(cart => cart.map(k => k.update(val => val.quantity)));
-        const order = state.order.merge({cart: modifiedCart});
+        const order = state.order.merge({cart: state.cart});
         fetch('/api/orders/', {
             method: "POST",
             credentials: "same-origin",
@@ -61,30 +60,21 @@ export function placeOrder() {
 
 
 export function fetchData() {
-    return (dispatch, getState) => {
-        fetch('/api/food_items/', {
-            credentials: "same-origin",
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-            })
-        }).then(
+    return (dispatch) => {
+        fetch('/api/food_items/').then(
             response => response.json()
         ).then(
             json => dispatch({type: 'SET_FOOD_ITEMS', payload: json})
-        )
-        fetch('/api/food_categories/', {
-            credentials: "same-origin",
-            headers: new Headers({
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
-            })
-        }).then(
+        );
+        fetch('/api/food_categories/').then(
             response => response.json()
         ).then(
             json => dispatch({type: 'SET_FOOD_CATEGORIES', payload: json})
-        )
+        );
+        fetch('/api/gifts/').then(
+            response => response.json()
+        ).then(
+            json => dispatch({type: 'SET_GIFTS', payload: json})
+        );
     }
 }

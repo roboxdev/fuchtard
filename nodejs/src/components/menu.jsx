@@ -11,7 +11,7 @@ class FoodCategory extends React.Component {
             <div>
                 <div>{category.title} →</div>
                 {foodItems.map(
-                    food => <FoodItem key={food.url} food={food} />
+                    food => <FoodItem key={food.url} food={food}/>
                 )}
             </div>
         )
