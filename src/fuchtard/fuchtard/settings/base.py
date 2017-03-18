@@ -24,6 +24,10 @@ SECRET_KEY = '9t!sc1+#0zh@%c+xyiq&dlg_ri-_*7jfl!tg!lt#c0+1s9e6%p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -48,7 +52,7 @@ INSTALLED_APPS = [
     'api',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
