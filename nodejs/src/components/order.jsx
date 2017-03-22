@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 
 import * as actions from 'actions/app';
 
-import '../styles/order.styl';
-
 
 @connect(
     state => ({
@@ -22,7 +20,7 @@ export class OrderForm extends React.Component {
         const updateAddress = (field, e) => updateOrderField(field, e.target.value, true);
         return <div>
             Order Form
-            <div styleName="test">Имя
+            <div>Имя
                 <input onChange={e => updateOrder('name', e)} value={order.name}/>
             </div>
             <div>email
