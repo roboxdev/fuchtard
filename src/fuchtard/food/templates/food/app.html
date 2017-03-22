@@ -1,18 +1,23 @@
 {% load webpack_loader %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name=viewport" content="width=device-width, initial-scale=1">
-  <title>Title</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Title</title> {# TODO #}
+{#  <meta name="description" content=""> TODO#}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{#  <link rel="apple-touch-icon" href="apple-touch-icon.png">#}
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    body { margin: 0 }
+    body {
+      margin: 0
+    }
   </style>
   <script>
-    var config = {};
-    config.csrfToken = '{{ csrf_token }}';
+      var config = {};
+      config.csrfToken = '{{ csrf_token }}';
   </script>
 </head>
 <body>
