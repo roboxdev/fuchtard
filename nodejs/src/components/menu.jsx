@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { getFoodItemsOfCategory } from 'selectors/app'
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import {FoodItem} from 'components/food-item';
 
 
@@ -16,18 +15,12 @@ class FoodCategory extends React.Component {
         return (
             <div>
                 <div>{category.title} →</div>
-                <Row>
+                <div>
                     {foodItems.map(
                         food =>
-                            <Col xs={12}
-                                 md={4}
-                                 lg={3}
-                                 key={food.url}
-                            >
-                                <FoodItem food={food}/>
-                            </Col>
+                            <FoodItem food={food} key={food.url}/>
                     )}
-                </Row>
+                </div>
             </div>
         )
     }
@@ -43,15 +36,13 @@ export class FoodMenu extends React.Component {
     render() {
         return (
             <div>
-                <Grid fluid>
-                    {this.props.foodCategories.map(
-                        (category) =>
-                            <FoodCategory
-                                key={category.url}
-                                category={category}
-                            />
-                    )}
-                </Grid>
+                {this.props.foodCategories.map(
+                    (category) =>
+                        <FoodCategory
+                            key={category.url}
+                            category={category}
+                        />
+                )}
             </div>
         )
     }
