@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import styles from '../styles/navbar.styl';
 
 
 export class NavBar extends React.Component {
@@ -11,10 +12,10 @@ export class NavBar extends React.Component {
 
     render() {
         return (
-            <div>
-                <Link to="/">home</Link>
-                <Link to="/cart">cart</Link>
-                <Link to="/checkout">checkout</Link>
+            <div styleName="sticky">
+                <Link to="/"><i className="material-icons">build</i></Link>
+                <Link to="/cart">Корзина</Link>
+                <Link to="/checkout">Оформить</Link>
             </div>
         )
     }
