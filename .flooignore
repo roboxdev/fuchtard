@@ -1,0 +1,10 @@
+extern
+node_modules
+tmp
+vendor
+*.pyc
+/.idea/
+/logs/
+/static_content/
+/webpack_bundles/
+/webpack-stats.json
