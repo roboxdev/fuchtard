@@ -9,11 +9,8 @@ import {FoodMenu} from 'components/menu';
 import {OrderForm} from 'components/order';
 import {NavBar} from 'components/navbar';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import styles from '../styles/app.styl';
 
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 // class NavBar extends React.Component {
 //     render() {
@@ -124,7 +121,7 @@ export class App extends React.Component {
     render() {
         return (
             <Router>
-                <div>
+                <div styleName="app">
                     <Header />
                     <Route exact path="/" component={FoodMenu}/>
                     <Route path="/cart" component={Cart}/>
