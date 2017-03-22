@@ -5,6 +5,7 @@ import mapValues from 'lodash/mapValues';
 import values from 'lodash/values';
 
 export const getQuantityByFoodId = (state, props) => state.cart[props.foodItemId];
+export const getFoodItemsOfCategory = (state, props) => state.foodItems.filter(v => v.category === props.category.url);
 
 const foodItemsSelector = state => state.foodItems;
 const giftsSelector = state => state.gifts;

@@ -1,18 +1,33 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import { getFoodItemsOfCategory } from 'selectors/app'
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import {FoodItem} from 'components/food-item';
 
 
+@connect(
+    (state, props) => ({
+        foodItems: getFoodItemsOfCategory(state, props),
+    })
+)
 class FoodCategory extends React.Component {
     render() {
         const {category, foodItems} = this.props;
         return (
             <div>
                 <div>{category.title} →</div>
-                {foodItems.map(
-                    food => <FoodItem key={food.url} food={food}/>
-                )}
+                <Row>
+                    {foodItems.map(
+                        food =>
+                            <Col xs={12}
+                                 md={4}
+                                 lg={3}
+                                 key={food.url}
+                            >
+                                <FoodItem food={food}/>
+                            </Col>
+                    )}
+                </Row>
             </div>
         )
     }
@@ -22,25 +37,21 @@ class FoodCategory extends React.Component {
 @connect(
     state => ({
         foodCategories: state.foodCategories,
-        foodItems: state.foodItems,
     })
 )
 export class FoodMenu extends React.Component {
-    getFoodItemsOfCategory = (categoryURL) => {
-        const {foodItems} = this.props;
-        return foodItems.filter(v => v.category === categoryURL);
-    };
-
     render() {
         return (
             <div>
-                {this.props.foodCategories.map(
-                    (category) => <FoodCategory
-                        key={category.url}
-                        category={category}
-                        foodItems={this.getFoodItemsOfCategory(category.url)}
-                    />
-                )}
+                <Grid fluid>
+                    {this.props.foodCategories.map(
+                        (category) =>
+                            <FoodCategory
+                                key={category.url}
+                                category={category}
+                            />
+                    )}
+                </Grid>
             </div>
         )
     }
