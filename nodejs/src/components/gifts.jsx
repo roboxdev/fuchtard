@@ -42,14 +42,14 @@ export class GiftsForm extends React.Component {
         const {gifts, cartPrice} = this.props;
         return <div>
             GIFTS:
-            {gifts.map(({id, ...rest}) => {
-                return <Gift
+            {gifts.map(({id, ...rest}) =>
+                <Gift
                     key={id}
                     id={id}
                     cartPrice={cartPrice}
                     {...rest}
                 />
-            })}
+            )}
         </div>
     }
 }
