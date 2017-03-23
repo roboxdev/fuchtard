@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import * as actions from 'actions/app';
 
+import Input from 'react-toolbox/lib/input';
+
 
 @connect(
     state => ({
@@ -16,34 +18,60 @@ import * as actions from 'actions/app';
 export class OrderForm extends React.Component {
     render() {
         const {order, updateOrderField} = this.props;
-        const updateOrder = (field, e) => updateOrderField(field, e.target.value, false);
-        const updateAddress = (field, e) => updateOrderField(field, e.target.value, true);
+        const updateOrder = (field, value) => updateOrderField(field, value, false);
+        const updateAddress = (field, value) => updateOrderField(field, value, true);
         return <div>
             Order Form
-            <div>Имя
-                <input onChange={e => updateOrder('name', e)} value={order.name}/>
-            </div>
-            <div>email
-                <input onChange={e => updateOrder('email', e)} value={order.email}/>
-            </div>
-            <div>телефон
-                <input onChange={e => updateOrder('phone', e)} value={order.phone}/>
-            </div>
-            <div>Улица
-                <input onChange={e => updateAddress('street', e)} value={order.street}/>
-            </div>
-            <div>Номер дома
-                <input onChange={e => updateAddress('apartment', e)} value={order.apartment}/>
-            </div>
-            <div>квартира
-                <input onChange={e => updateAddress('building', e)} value={order.building}/>
-            </div>
-            <div>этаж
-                <input onChange={e => updateAddress('floor', e)} value={order.floor}/>
-            </div>
-            <div>комментарий
-                <input onChange={e => updateOrder('comment', e)} value={order.comment}/>
-            </div>
+            <Input value={order.name}
+                   onChange={value => updateOrder('name', value)}
+                   type='text'
+                   name='name'
+                   label='Имя'
+                   maxLength={16}
+            />
+            <Input value={order.email}
+                   onChange={value => updateOrder('email', value)}
+                   type='email'
+                   label='Email'
+                   icon='email'
+            />
+            <Input value={order.phone}
+                   onChange={value => updateOrder('phone', value)}
+                   type='tel'
+                   name='phone'
+                   label='Телефон'
+                   icon='phone'
+            />
+            <Input value={order.street}
+                   onChange={value => updateAddress('street', value)}
+                   type='text'
+                   name='street'
+                   label='Улица'
+            />
+            <Input value={order.building}
+                   onChange={value => updateAddress('building', value)}
+                   type='text'
+                   name='building'
+                   label='Номер дома'
+            />
+            <Input value={order.apartment}
+                   onChange={value => updateAddress('apartment', value)}
+                   type='text'
+                   name='apartment'
+                   label='Квартира'
+            />
+            <Input value={order.floor}
+                   onChange={value => updateAddress('floor', value)}
+                   type='text'
+                   name='floor'
+                   label='Этаж'
+            />
+            <Input value={order.comment}
+                   onChange={value => updateOrder('comment', value)}
+                   type='text'
+                   label='Комментарий'
+                   multiline={true}
+            />
             <button onClick={this.props.placeOrder}>PROCEED</button>
         </div>
     }
