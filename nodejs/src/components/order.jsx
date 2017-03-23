@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 import * as actions from 'actions/app';
 
 import Input from 'react-toolbox/lib/input';
+import {Button} from 'react-toolbox/lib/button';
 import styles from '../styles/order.styl';
+import buttonStyles from '../styles/order-button.styl';
 
 
 @connect(
@@ -73,7 +75,7 @@ export class OrderForm extends React.Component {
                    multiline={true}
                    rows={2}
             />
-            <button onClick={this.props.placeOrder}>PROCEED</button>
+            <Button theme={buttonStyles} onClick={this.props.placeOrder} raised primary>Заказать</Button>
         </div>
     }
 }
