@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
+import styles from '../styles/gift-progress-bar.styl';
 
 import {subtotalSelector} from 'selectors/app';
 
@@ -26,6 +27,7 @@ export class GiftProgressBar extends React.Component {
                            value={cartPrice}
                            buffer={this.getBuffer()}
                            max={this.getMaxProgress()}
+                           theme={styles}
             />
             : null)
 
