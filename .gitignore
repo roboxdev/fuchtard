@@ -5,3 +5,4 @@ node_modules/
 /webpack_bundles/
 /webpack-stats.json
 .floo
+local_settings.py

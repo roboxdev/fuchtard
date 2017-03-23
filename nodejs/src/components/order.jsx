@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as actions from 'actions/app';
 
 import Input from 'react-toolbox/lib/input';
+import styles from '../styles/order.styl';
 
 
 @connect(
@@ -18,9 +19,10 @@ import Input from 'react-toolbox/lib/input';
 export class OrderForm extends React.Component {
     render() {
         const {order, updateOrderField} = this.props;
+        const {address} = order;
         const updateOrder = (field, value) => updateOrderField(field, value, false);
         const updateAddress = (field, value) => updateOrderField(field, value, true);
-        return <div>
+        return <div styleName="styles.wrapper">
             Order Form
             <Input value={order.name}
                    onChange={value => updateOrder('name', value)}
@@ -33,34 +35,32 @@ export class OrderForm extends React.Component {
                    onChange={value => updateOrder('email', value)}
                    type='email'
                    label='Email'
-                   icon='email'
             />
             <Input value={order.phone}
                    onChange={value => updateOrder('phone', value)}
                    type='tel'
                    name='phone'
                    label='Телефон'
-                   icon='phone'
             />
-            <Input value={order.street}
+            <Input value={address.street}
                    onChange={value => updateAddress('street', value)}
                    type='text'
                    name='street'
                    label='Улица'
             />
-            <Input value={order.building}
+            <Input value={address.building}
                    onChange={value => updateAddress('building', value)}
                    type='text'
                    name='building'
                    label='Номер дома'
             />
-            <Input value={order.apartment}
+            <Input value={address.apartment}
                    onChange={value => updateAddress('apartment', value)}
                    type='text'
                    name='apartment'
                    label='Квартира'
             />
-            <Input value={order.floor}
+            <Input value={address.floor}
                    onChange={value => updateAddress('floor', value)}
                    type='text'
                    name='floor'
@@ -71,6 +71,7 @@ export class OrderForm extends React.Component {
                    type='text'
                    label='Комментарий'
                    multiline={true}
+                   rows={2}
             />
             <button onClick={this.props.placeOrder}>PROCEED</button>
         </div>
