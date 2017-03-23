@@ -16,14 +16,16 @@ export class App extends React.Component {
     render() {
         return (
             <Router>
-                <div styleName="app">
-                    <Header />
-                    <Route exact path="/" component={FoodMenu}/>
-                    <Route path="/cart" component={Cart}/>
-                    <Route path="/checkout" component={OrderForm}/>
-                    <SEOAbout/>
+                <div styleName="styles.app">
+                    <div styleName="styles.content">
+                        <Header />
+                        <Route exact path="/" component={FoodMenu}/>
+                        <Route path="/cart" component={Cart}/>
+                        <Route path="/checkout" component={OrderForm}/>
+                        <SEOAbout/>
+                        <Footer />
+                    </div>
                     <NavBar />
-                    <Footer />
                 </div>
             </Router>
         );
