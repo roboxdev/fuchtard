@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from '../styles/footer.styl';
 
 export class Footer extends React.Component {
     render() {
         return (
-            <footer>
+            <footer styleName="styles.footer">
                 <div>
                     <div>
                         <div>

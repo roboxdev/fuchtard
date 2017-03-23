@@ -4,3 +4,4 @@ node_modules/
 /static_content/
 /webpack_bundles/
 /webpack-stats.json
+.floo
