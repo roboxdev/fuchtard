@@ -4,31 +4,25 @@ export class Footer extends React.Component {
     render() {
         return (
             <footer>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-4">
+                <div>
+                    <div>
+                        <div>
                             <p>
-                                <a className="{% if url_name == 'contacts-view' %}active{% endif %}"
-                                   href="{% url 'main:contacts-view' %}">
-                                    О компании и контакты</a>
+                                <a href="{% url 'main:contacts-view' %}">О компании и контакты</a>
                             </p>
                             <p>
-                                <a className="{% if url_name == 'faq-view' %}active{% endif %}"
-                                   href="{% url 'main:faq-view' %}">Вопросы и
-                                    ответы</a>
+                                <a href="{% url 'main:faq-view' %}">Вопросы и ответы</a>
                             </p>
                             <p>
-                                <a className="{% if url_name == 'eula-view' %}active{% endif %}"
-                                   href="{% url 'main:eula-view' %}">
-                                    Пользовательское соглашение</a>
+                                <a href="{% url 'main:eula-view' %}">Пользовательское соглашение</a>
                             </p>
                         </div>
-                        <div className="col-sm-4">
+                        <div>
                             <p>TОО «Макси суши»</p>
                             <p>Телефон: <a href="tel:+77273573030">+7 (727) 357 30 30</a></p>
                             <p>Наша почта: <a href="mailto:ok@maxisushi.kz">ok@maxisushi.kz</a></p>
                         </div>
-                        <div className="col-sm-4">
+                        <div>
                             <p><a href="{% url 'panel:dashboard-view' %}">Войти</a></p>
                             <p>Разработка: <a href="https://roboxv.pro">robox</a></p>
                         </div>
