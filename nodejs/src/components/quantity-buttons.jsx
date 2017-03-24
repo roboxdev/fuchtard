@@ -27,7 +27,7 @@ export class QuantityButtons extends React.Component {
                         : <span>−</span>}
                 </Button>
                 }
-                {quantity => 1 &&
+                {quantity >= 1 &&
                 <span>{quantity}</span>
                 }
                 <Button raised disabled={quantity >= 9} onClick={plusButton}>
