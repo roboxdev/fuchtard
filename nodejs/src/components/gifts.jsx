@@ -25,7 +25,7 @@ export class GiftsForm extends React.Component {
             GIFTS:
             <RadioGroup name='gift' value={`${selectedGift}`} onChange={this.handleChange}>
                 {gifts.map(({id, foodItem, requirement}) => {
-                        const disabled = cartPrice < requirement;
+                        const disabled = !cartPrice || cartPrice < requirement;
                         const label = disabled
                             ? (foodItem && `${foodItem.title} (${requirement})`)
                             : (foodItem && foodItem.title);
