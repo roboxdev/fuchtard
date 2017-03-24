@@ -1,4 +1,5 @@
 import {createStore, applyMiddleware, compose} from 'redux';
+// import { combineReducers } from 'redux-seamless-immutable';
 import thunk from 'redux-thunk';
 import reducer from 'reducers/app';
 

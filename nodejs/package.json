@@ -33,6 +33,7 @@
     "react-router-dom": "^4.0.0",
     "react-toolbox": "^2.0.0-beta.7",
     "redux": "^3.6.0",
+    "redux-seamless-immutable": "^0.3.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
     "seamless-immutable": "^7.1.1",
