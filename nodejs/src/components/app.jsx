@@ -7,7 +7,7 @@ import {Checkout} from 'components/checkout';
 import {NavBar} from 'components/navbar';
 import {FoodCategory} from 'components/food-category';
 
-import styles from '../styles/app.styl';
+import styles from '../styles/app.pcss';
 
 
 export class App extends React.Component {

@@ -9,8 +9,8 @@ import {GiftsForm} from 'components/gifts';
 
 import {QuantityButtons} from 'components/quantity-buttons';
 
-import styles from '../styles/checkout.styl';
-import cardStyles from '../styles/cart-card.styl';
+import styles from '../styles/checkout.pcss';
+import cardStyles from '../styles/cart-card.pcss';
 import {Card, CardTitle} from 'react-toolbox/lib/card';
 
 

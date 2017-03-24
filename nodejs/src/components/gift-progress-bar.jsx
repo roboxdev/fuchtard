@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import ProgressBar from 'react-toolbox/lib/progress_bar';
-import styles from '../styles/gift-progress-bar.styl';
+import styles from '../styles/gift-progress-bar.pcss';
 
 import {subtotalSelector} from 'selectors/app';
 
