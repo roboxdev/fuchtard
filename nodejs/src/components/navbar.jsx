@@ -22,12 +22,6 @@ class NavigationButtons extends React.Component {
                     <span styleName="styles.button-text">Корзина</span>
                 </Button>
             </Link>
-            <Link to="/checkout" styleName="styles.link">
-                <Button neutral={false} theme={buttonStyles}>
-                    <FontIcon styleName="styles.button-icon" value="credit_card"/>
-                    <span styleName="styles.button-text">Оформить</span>
-                </Button>
-            </Link>
         </div>
 
     }

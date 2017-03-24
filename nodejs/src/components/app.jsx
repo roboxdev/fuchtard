@@ -1,12 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import {Header} from 'components/header';
-import {Footer} from 'components/footer';
-import {SEOAbout} from 'components/seoabout';
-import {Cart} from 'components/cart';
-import {FoodMenu} from 'components/menu';
-import {OrderForm} from 'components/order';
+
+import {IndexPage} from 'components/index-page';
+import {Checkout} from 'components/checkout';
 import {NavBar} from 'components/navbar';
 
 import styles from '../styles/app.styl';
@@ -18,12 +15,8 @@ export class App extends React.Component {
             <Router>
                 <div styleName="styles.app">
                     <div styleName="styles.content">
-                        <Header />
-                        <Route exact path="/" component={FoodMenu}/>
-                        <Route path="/cart" component={Cart}/>
-                        <Route path="/checkout" component={OrderForm}/>
-                        <SEOAbout/>
-                        <Footer />
+                        <Route exact path="/" component={IndexPage}/>
+                        <Route path="/cart" component={Checkout}/>
                     </div>
                     <NavBar />
                 </div>
