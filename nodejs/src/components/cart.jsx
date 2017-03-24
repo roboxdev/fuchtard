@@ -10,19 +10,24 @@ import {GiftsForm} from 'components/gifts';
 import {QuantityButtons} from 'components/quantity-buttons';
 
 import styles from '../styles/checkout.styl';
+import cardStyles from '../styles/cart-card.styl';
+import {Card, CardTitle} from 'react-toolbox/lib/card';
 
 
 class CartItem extends React.Component {
     render() {
         const {foodItemId, foodItem, quantity} = this.props;
         return (foodItem
-                ? <div>
-                    {foodItem.title}
-                    <QuantityButtons
+                ? <Card theme={cardStyles}>
+                    <div styleName="styles.column-1">
+                        <img src={foodItem.photo}/>
+                    </div>
+                    <span styleName="styles.column-2">{foodItem.title}</span>
+                    <div styleName="styles.column-3"><QuantityButtons
                         foodItemId={foodItemId}
                         quantity={quantity}
-                    />
-                </div>
+                    /></div>
+                </Card >
                 : null
         )
     }
@@ -52,7 +57,7 @@ export class Cart extends React.Component {
                     />
                 )}
                 <div>
-                    <span>TOTAL: {cartPrice}</span>
+                    <span>TOTAL: {cartPrice}₸</span>
                 </div>
                 <GiftsForm/>
             </div>
