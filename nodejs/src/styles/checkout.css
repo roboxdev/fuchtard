@@ -1,12 +1,15 @@
+@import "_constants.css";
+
 .wrapper {
   padding: 0 15px;
-  max-width: 480px;
+  max-width: calc(var(--webSiteMaxWidth) / 2);
   margin: 0 auto;
   text-align: center;
 }
 
 .food-image {
   flex: 1;
+  background-size: cover;
 }
 
 .food-title {
@@ -15,4 +18,8 @@
 
 .quantity-container {
   flex: 3;
+}
+
+.quantity-button {
+  min-width: 48px;
 }

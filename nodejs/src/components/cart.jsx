@@ -28,13 +28,13 @@ class CartQuantityButtons extends React.Component {
         return (
             <div>
                 {quantity >= 1 &&
-                <Button className="quantity-button" raised onClick={minusButton}>
+                <Button styleName="styles.quantity-button" raised onClick={minusButton}>
                     {quantity <= 1
                         ? <FontIcon value="remove_shopping_cart"/>
                         : <span className="plusminus">−</span>}
                 </Button>
                 }
-                <Button className="quantity-button" raised disabled={quantity >= 9} onClick={plusButton}>
+                <Button styleName="styles.quantity-button" raised disabled={quantity >= 9} onClick={plusButton}>
                     <span className="plusminus">+</span>
                 </Button>
             </div>
