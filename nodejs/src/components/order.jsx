@@ -5,8 +5,8 @@ import * as actions from 'actions/app';
 
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
-import styles from '../styles/checkout.pcss';
-import buttonStyles from '../styles/order-button.pcss';
+import styles from '../styles/checkout.css';
+import buttonStyles from '../styles/order-button.css';
 
 
 @connect(

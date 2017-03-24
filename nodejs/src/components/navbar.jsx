@@ -2,8 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
-import styles from '../styles/navbar.pcss';
-import buttonStyles from '../styles/navbar-button.pcss';
+import styles from '../styles/navbar.css';
+import buttonStyles from '../styles/navbar-button.css';
 
 import {GiftProgressBar} from 'components/gift-progress-bar';
 
