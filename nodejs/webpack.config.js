@@ -54,9 +54,6 @@ module.exports = {
                                     {
                                         context: __dirname,
                                         generateScopedName: '[name]__[local]___[hash:base64:5]',
-                                        filetypes: {
-                                            ".styl": "sugarss"
-                                        }
                                     }
                                 ]
                             ]
@@ -65,40 +62,26 @@ module.exports = {
                 ],
             },
             {
-                test: /\.styl/,
+                test: /\.css/,
                 use: [
                     'style-loader',
                     {
                         loader: 'css-loader',
                         options: {
                             importLoaders: 1,
+                            localIdentName: '[name]__[local]___[hash:base64:5]',
                             modules: true,
-                            localIdentName: '[name]__[local]___[hash:base64:5]'
+                            sourceMap: true,
                         }
                     },
                     {
                         loader: 'postcss-loader',
-                        options: {
-                            parser: 'sugarss'
-                        }
+                        // has separate config, see postcss.config.js nearby
+                        // options: {
+                        //     parser: ''
+                        // }
                     }
                 ],
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    "style-loader",
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                            sourceMap: true,
-                            importLoaders: 1,
-                            localIdentName: "[name]--[local]--[hash:base64:5]"
-                        }
-                    },
-                    "postcss-loader" // has separate config, see postcss.config.js nearby
-                ]
             },
         ]
     },
