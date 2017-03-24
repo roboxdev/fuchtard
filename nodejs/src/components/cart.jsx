@@ -52,7 +52,7 @@ export class Cart extends React.Component {
                 <div>
                     <span>TOTAL: {cartPrice}</span>
                 </div>
-                <GiftsForm cartPrice={cartPrice}/>
+                <GiftsForm/>
             </div>
         )
     }

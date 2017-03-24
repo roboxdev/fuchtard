@@ -1,55 +1,38 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {RadioGroup, RadioButton} from 'react-toolbox/lib/radio';
 
 import * as actions from 'actions/app';
-import {foodItemAnnotatedGifts} from 'selectors/app';
+import {foodItemAnnotatedGifts, subtotalSelector} from 'selectors/app';
 
-
-@connect(
-    null,
-    (dispatch, props) => ({
-        selectGift: () => dispatch(actions.updateOrderField('gift', props.id)),
-    })
-)
-class Gift extends React.Component {
-    render () {
-        const {id, cartPrice, foodItem, requirement, selectGift} = this.props;
-        const disabled = cartPrice < requirement;
-        return (foodItem
-                ? <div key={id}>
-                    <input
-                        type="radio"
-                        name="gift"
-                        value={id}
-                        onChange={selectGift}
-                        disabled={disabled}
-                    />
-                    <span>{foodItem.title}</span>
-                    <span>{requirement}</span>
-                </div>
-                : null
-        )
-    }
-}
 
 @connect(
     state => ({
+        cartPrice: subtotalSelector(state),
         gifts: foodItemAnnotatedGifts(state),
+        selectedGift: state.order.gift,
     }),
+    dispatch => ({
+        selectGift: (id) => dispatch(actions.updateOrderField('gift', id))
+    })
 )
 export class GiftsForm extends React.Component {
+    handleChange = (value) => {this.props.selectGift(+value)};
+
     render() {
-        const {gifts, cartPrice} = this.props;
+        const {gifts, cartPrice, selectedGift} = this.props;
         return <div>
             GIFTS:
-            {gifts.map(({id, ...rest}) =>
-                <Gift
-                    key={id}
-                    id={id}
-                    cartPrice={cartPrice}
-                    {...rest}
-                />
-            )}
+            <RadioGroup name='gift' value={`${selectedGift}`} onChange={this.handleChange}>
+                {gifts.map(({id, foodItem, requirement}) => {
+                        const disabled = cartPrice < requirement;
+                        const label = disabled
+                            ? (foodItem && `${foodItem.title} (${requirement})`)
+                            : (foodItem && foodItem.title);
+                        return <RadioButton key={id} label={label} value={`${id}`} disabled={disabled}/>
+                    }
+                )}
+            </RadioGroup>
         </div>
     }
 }
