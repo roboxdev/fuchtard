@@ -19,14 +19,16 @@ class CartItem extends React.Component {
         const {foodItemId, foodItem, quantity} = this.props;
         return (foodItem
                 ? <Card theme={cardStyles}>
-                    <div styleName="styles.column-1">
+                    <div styleName="styles.food-image">
                         <img src={foodItem.photo}/>
                     </div>
-                    <span styleName="styles.column-2">{foodItem.title}</span>
-                    <div styleName="styles.column-3"><QuantityButtons
-                        foodItemId={foodItemId}
-                        quantity={quantity}
-                    /></div>
+                    <span styleName="styles.food-title">{foodItem.title}</span>
+                    <div styleName="styles.quantity-container">
+                        <QuantityButtons
+                            foodItemId={foodItemId}
+                            quantity={quantity}
+                        />
+                    </div>
                 </Card >
                 : null
         )

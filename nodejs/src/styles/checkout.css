@@ -5,14 +5,14 @@
   text-align: center;
 }
 
-.column-1 {
+.food-image {
   flex: 1;
 }
 
-.column-2 {
+.food-title {
   flex: 2;
 }
 
-.column-3 {
+.quantity-container {
   flex: 3;
 }
