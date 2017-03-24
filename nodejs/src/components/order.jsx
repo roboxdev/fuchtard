@@ -5,7 +5,7 @@ import * as actions from 'actions/app';
 
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
-import styles from '../styles/order.styl';
+import styles from '../styles/checkout.styl';
 import buttonStyles from '../styles/order-button.styl';
 
 

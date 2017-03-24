@@ -9,6 +9,8 @@ import {GiftsForm} from 'components/gifts';
 
 import {QuantityButtons} from 'components/quantity-buttons';
 
+import styles from '../styles/checkout.styl';
+
 
 class CartItem extends React.Component {
     render() {
@@ -39,7 +41,7 @@ export class Cart extends React.Component {
     render() {
         const {annotatedCart, cartPrice} = this.props;
         return (
-            <div>
+            <div styleName="styles.wrapper">
                 CART:
                 {map(annotatedCart, ({quantity, foodItem}, foodItemId) =>
                     <CartItem
