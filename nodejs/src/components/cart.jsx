@@ -3,15 +3,44 @@ import {connect} from 'react-redux';
 
 import map from 'lodash/map';
 import * as actions from 'actions/app';
-import {foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
+import {getQuantityByFoodId, foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
+
+import {Card, CardTitle} from 'react-toolbox/lib/card';
+import {Button} from 'react-toolbox/lib/button';
+import FontIcon from 'react-toolbox/lib/font_icon';
 
 import {GiftsForm} from 'components/gifts';
 
-import {QuantityButtons} from 'components/quantity-buttons';
-
 import styles from '../styles/checkout.css';
 import cardStyles from '../styles/cart-card.css';
-import {Card, CardTitle} from 'react-toolbox/lib/card';
+
+
+@connect(
+    null,
+    (dispatch, props) => ({
+        plusButton: () => dispatch(actions.plusButton(props.foodItemId)),
+        minusButton: () => dispatch(actions.minusButton(props.foodItemId)),
+    })
+)
+class CartQuantityButtons extends React.Component {
+    render() {
+        const {quantity, plusButton, minusButton} = this.props;
+        return (
+            <div>
+                {quantity >= 1 &&
+                <Button className="quantity-button" raised onClick={minusButton}>
+                    {quantity <= 1
+                        ? <FontIcon value="remove_shopping_cart"/>
+                        : <span className="plusminus">−</span>}
+                </Button>
+                }
+                <Button className="quantity-button" raised disabled={quantity >= 9} onClick={plusButton}>
+                    <span className="plusminus">+</span>
+                </Button>
+            </div>
+        )
+    }
+}
 
 
 class CartItem extends React.Component {
@@ -19,12 +48,13 @@ class CartItem extends React.Component {
         const {foodItemId, foodItem, quantity} = this.props;
         return (foodItem
                 ? <Card theme={cardStyles}>
-                    <div styleName="styles.food-image">
-                        <img src={foodItem.photo}/>
+                    <div styleName="styles.food-image" style={{backgroundImage: `url(${foodItem.photo})`}}>
+                        <span>{quantity}</span>
+                        {/*<img src={foodItem.photo}/>*/}
                     </div>
                     <span styleName="styles.food-title">{foodItem.title}</span>
                     <div styleName="styles.quantity-container">
-                        <QuantityButtons
+                        <CartQuantityButtons
                             foodItemId={foodItemId}
                             quantity={quantity}
                         />
@@ -34,6 +64,7 @@ class CartItem extends React.Component {
         )
     }
 }
+
 
 @connect(
     state => ({
