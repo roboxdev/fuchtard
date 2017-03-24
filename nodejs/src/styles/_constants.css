@@ -1,3 +1,6 @@
 :root {
   --webSiteMaxWidth: 960px;
 }
+
+@custom-media --desktop (width >= 960px);
+@custom-media --notdesktop (width < 960px);

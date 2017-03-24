@@ -1,3 +1,5 @@
+@import '_constants.css';
+
 .sticky {
   background-color: white;
   position: fixed;
@@ -8,6 +10,9 @@
 }
 
 .navigation-buttons {
+  @media (--desktop) {
+    display: none;
+  }
   height: 56px;
   display: flex;
   justify-content: center;

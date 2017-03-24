@@ -1,3 +1,5 @@
+@import '_constants.css';
+
 .app {
   & img {
     max-width: 100%;
@@ -8,4 +10,16 @@
   max-width: 960px;
   margin: 0 auto;
   padding-bottom: 72px;
+}
+
+.food-menu-container {
+  @media (--notdesktop) {
+    display: none;
+  }
+}
+
+.checkout-container {
+  @media (--notdesktop) {
+    display: none;
+  }
 }
