@@ -64,7 +64,7 @@ export class OrderForm extends React.Component {
             />
             <Input value={address.floor}
                    onChange={value => updateAddress('floor', value)}
-                   type='text'
+                   type='number'
                    name='floor'
                    label='Этаж'
             />

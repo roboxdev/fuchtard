@@ -18,7 +18,7 @@ function getInitialState() {
                 street: '',
                 apartment: '',
                 building: '',
-                floor: null,
+                floor: '',
             },
             comment: '',
             gift: null,

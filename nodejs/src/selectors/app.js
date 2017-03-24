@@ -8,9 +8,11 @@ export const getQuantityByFoodId = (state, props) => state.cart[props.foodItemId
 export const getCategoryBySlug = (state, props) => (
     state.foodCategories.find(cat => cat.slug === props.match.params.slug)
 );
-export const getFoodItemsOfCategory = (state, props) => (
-    state.foodItems.filter(v => v.category === getCategoryBySlug(state, props).url)
-);
+
+export const getFoodItemsOfCategory = (state, props) => {
+    const category = getCategoryBySlug(state, props);
+    return category ? state.foodItems.filter(v => v.category === category.url) : []
+};
 
 const foodItemsSelector = state => state.foodItems;
 const giftsSelector = state => state.gifts;

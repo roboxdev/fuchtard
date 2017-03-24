@@ -17,8 +17,8 @@ export class App extends React.Component {
                 <div styleName="styles.app">
                     <div styleName="styles.content">
                         <Route exact path="/" component={IndexPage}/>
-                        <Route path="/cart" component={Checkout}/>
-                        <Route path="/:slug" component={FoodCategory}/>
+                        <Route path="/cart/" component={Checkout}/>
+                        <Route path="/:slug/" component={FoodCategory}/>
                     </div>
                     <NavBar />
                 </div>
