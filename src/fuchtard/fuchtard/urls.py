@@ -18,14 +18,13 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^panel/', include('panel.urls', namespace='panel')),
     url(r'^api/', include('api.urls', namespace='api')),
-    url(r'^', include('main.urls', namespace='main')),
-    url(r'^', include('food.urls', namespace='food')),
 ]
 
 if settings.DEBUG:
@@ -37,3 +36,6 @@ if settings.DEBUG:
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # urlpatterns += staticfiles_urlpatterns()
+
+# MUST be last pattern. React app.
+urlpatterns.append(url(r'^.*$', TemplateView.as_view(template_name='main/app.html'), name='app-view'))

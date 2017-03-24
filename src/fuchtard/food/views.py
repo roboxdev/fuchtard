@@ -1,4 +1,3 @@
-from django.views.generic import TemplateView
 from rest_framework import mixins, viewsets
 
 from .models import FoodCategory, FoodItem
@@ -25,7 +24,3 @@ class FoodCategoriesViewSet(mixins.RetrieveModelMixin,
 
     def get_serializer_context(self):
         return {'request': self.request}
-
-
-class AppView(TemplateView):
-    template_name = 'food/app.html'
