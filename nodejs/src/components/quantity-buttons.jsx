@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Button} from 'react-toolbox/lib/button';
+import FontIcon from 'react-toolbox/lib/font_icon';
 
 import * as actions from 'actions/app';
 import {getQuantityByFoodId} from 'selectors/app'
@@ -19,11 +20,21 @@ export class QuantityButtons extends React.Component {
         const {quantity, plusButton, minusButton} = this.props;
         return (
             <div>
-                <Button raised disabled={quantity >= 9} onClick={plusButton}>+</Button>
-                <span>{quantity}</span>
                 {quantity >= 1 &&
-                <Button raised onClick={minusButton}>-</Button>
+                <Button raised onClick={minusButton}>
+                    {quantity <= 1
+                        ? <FontIcon value="remove_shopping_cart"/>
+                        : <span>−</span>}
+                </Button>
                 }
+                {quantity => 1 &&
+                <span>{quantity}</span>
+                }
+                <Button raised disabled={quantity >= 9} onClick={plusButton}>
+                    {quantity < 1
+                        ? <FontIcon value="add_shopping_cart"/>
+                        : <span>+</span>}
+                </Button>
             </div>
         )
     }
