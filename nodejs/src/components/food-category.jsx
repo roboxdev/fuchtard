@@ -13,16 +13,17 @@ import {FoodItem} from 'components/food-item';
 export class FoodCategory extends React.Component {
     render() {
         const {category, foodItems} = this.props;
-        return (
-            <div>
-                <div>{category.title} →</div>
-                <div>
-                    {foodItems.map(
-                        food =>
-                            <FoodItem food={food} key={food.url}/>
-                    )}
+        return (category
+                ? <div>
+                    <div>{category.title} →</div>
+                    <div>
+                        {foodItems.map(
+                            food =>
+                                <FoodItem food={food} key={food.url}/>
+                        )}
+                    </div>
                 </div>
-            </div>
+                : null
         )
     }
 }
