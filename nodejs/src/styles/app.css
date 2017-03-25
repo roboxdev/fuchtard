@@ -7,19 +7,17 @@
 }
 
 .content {
-  max-width: 960px;
+  display: flex;
+  max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 72px;
 }
 
 .food-menu-container {
-  @media (--notdesktop) {
-    display: none;
-  }
+  min-width: 20%;
 }
 
 .checkout-container {
-  @media (--notdesktop) {
-    display: none;
-  }
+  min-width: 25%;
 }
+

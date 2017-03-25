@@ -13,7 +13,7 @@ export class FoodMenu extends React.Component {
         return (
             <div>
                 {this.props.foodCategories.map(
-                    (category) => <Link to={`/${category.slug}/`} key={category.url}>{category.title}</Link>
+                    (category) => <p><Link to={`/${category.slug}/`} key={category.url}>{category.title}</Link></p>
                 )}
             </div>
         )

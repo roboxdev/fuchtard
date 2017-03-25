@@ -17,11 +17,19 @@ export class App extends React.Component {
             <Router>
                 <div styleName="styles.app">
                     <div styleName="styles.content">
-                        <MediaQuery minWidth={960}><FoodMenu/></MediaQuery>
+                        <MediaQuery minWidth={960}>
+                            <div styleName="styles.food-menu-container">
+                                <FoodMenu/>
+                            </div>
+                        </MediaQuery>
                         <Route exact path="/" component={IndexPage}/>
                         <Route path="/cart/" component={Checkout}/>
                         <Route path="/:slug/" component={FoodCategory}/>
-                        <MediaQuery minWidth={960}><Checkout/></MediaQuery>
+                        <MediaQuery minWidth={960}>
+                            <div styleName="styles.checkout-container">
+                                <Checkout/>
+                            </div>
+                        </MediaQuery>
                     </div>
                     <NavBar />
                 </div>
