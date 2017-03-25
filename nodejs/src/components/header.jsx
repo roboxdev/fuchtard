@@ -29,9 +29,15 @@ export class Header extends React.Component {
                         </p>
                         <p>
                             <span>Мы в сети:</span>
-                            <a target="_blank" href="https://www.facebook.com/Доставка-суши-MaxiSushi-568292479939728/">fb</a>
-                            <a target="_blank" href="https://instagram.com/maxi.sushi/">ig</a>
-                            <a target="_blank" href="https://vk.com/club79840974">vk</a>
+                            <a target="_blank" href="https://www.facebook.com/Доставка-суши-MaxiSushi-568292479939728/">
+                                <img src="/static/main/img/facebook-box.svg"/>
+                            </a>
+                            <a target="_blank" href="https://instagram.com/maxi.sushi/">
+                                <img src="/static/main/img/instagram.svg"/>
+                            </a>
+                            <a target="_blank" href="https://vk.com/club79840974">
+                                <img src="/static/main/img/vk-box.svg"/>
+                            </a>
                         </p>
                     </div>
                 </div>
