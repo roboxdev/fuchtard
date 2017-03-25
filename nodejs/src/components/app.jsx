@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import MediaQuery from 'react-responsive';
 
 import {FoodMenu} from 'components/menu';
 import {IndexPage} from 'components/index-page';
@@ -16,11 +17,11 @@ export class App extends React.Component {
             <Router>
                 <div styleName="styles.app">
                     <div styleName="styles.content">
-                        <div styleName="styles.food-menu-container"><FoodMenu/></div>
+                        <MediaQuery minWidth={960}><FoodMenu/></MediaQuery>
                         <Route exact path="/" component={IndexPage}/>
                         <Route path="/cart/" component={Checkout}/>
                         <Route path="/:slug/" component={FoodCategory}/>
-                        <div styleName="styles.checkout-container"><Checkout/></div>
+                        <MediaQuery minWidth={960}><Checkout/></MediaQuery>
                     </div>
                     <NavBar />
                 </div>
