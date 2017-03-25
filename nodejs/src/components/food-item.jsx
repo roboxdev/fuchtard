@@ -24,16 +24,14 @@ class FoodQuantityButtons extends React.Component {
             <div>
                 {quantity >= 1 &&
                 <Button className="quantity-button" raised onClick={minusButton}>
-                    {quantity <= 1
-                        ? <FontIcon value="remove_shopping_cart"/>
-                        : <span className="plusminus">−</span>}
+                    <span className="plusminus">−</span>
                 </Button>
                 }
                 {quantity >= 1 &&
                 <span>{quantity}</span>
                 }
                 <Button className="quantity-button" raised disabled={quantity >= 9} onClick={plusButton}>
-                    {quantity < 1
+                    {!quantity || quantity < 1
                         ? <FontIcon value="add_shopping_cart"/>
                         : <span className="plusminus">+</span>}
                 </Button>

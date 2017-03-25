@@ -4,20 +4,12 @@
   padding: 0 15px;
   max-width: calc(var(--webSiteMaxWidth) / 2);
   margin: 0 auto;
-  text-align: center;
-}
-
-.food-image {
-  flex: 1;
-  background-size: cover;
 }
 
 .food-title {
-  flex: 2;
 }
 
 .quantity-container {
-  flex: 3;
 }
 
 .quantity-button {

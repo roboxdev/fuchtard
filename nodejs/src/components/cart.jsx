@@ -27,14 +27,10 @@ class CartQuantityButtons extends React.Component {
         const {quantity, plusButton, minusButton} = this.props;
         return (
             <div>
-                {quantity >= 1 &&
-                <Button styleName="styles.quantity-button" raised onClick={minusButton}>
-                    {quantity <= 1
-                        ? <FontIcon value="remove_shopping_cart"/>
-                        : <span className="plusminus">−</span>}
+                <Button styleName="styles.quantity-button" onClick={minusButton}>
+                        <span className="plusminus">−</span>
                 </Button>
-                }
-                <Button styleName="styles.quantity-button" raised disabled={quantity >= 9} onClick={plusButton}>
+                <Button styleName="styles.quantity-button" disabled={quantity >= 9} onClick={plusButton}>
                     <span className="plusminus">+</span>
                 </Button>
             </div>
@@ -46,18 +42,18 @@ class CartQuantityButtons extends React.Component {
 class CartItem extends React.Component {
     render() {
         const {foodItemId, foodItem, quantity} = this.props;
+        // const {price} = foodItem;
         return (foodItem
                 ? <Card theme={cardStyles}>
-                    <div styleName="styles.food-image" style={{backgroundImage: `url(${foodItem.photo})`}}>
-                        <span>{quantity}</span>
-                        {/*<img src={foodItem.photo}/>*/}
-                    </div>
-                    <span styleName="styles.food-title">{foodItem.title}</span>
                     <div styleName="styles.quantity-container">
                         <CartQuantityButtons
                             foodItemId={foodItemId}
                             quantity={quantity}
                         />
+                    </div>
+                    <div styleName="styles.food-title">
+                        <p>{quantity} × {foodItem.title}:</p>
+                        <p>{foodItem.price * quantity}₸</p>
                     </div>
                 </Card >
                 : null
