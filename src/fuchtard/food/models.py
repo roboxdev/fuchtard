@@ -75,6 +75,7 @@ class FoodItem(SortableMixin):
         verbose_name_plural = 'Блюда'
         ordering = ('position',)
 
+    slug = models.SlugField(unique=True, null=True)
     visible = models.BooleanField('Видимое', default=True)
     enabled = models.BooleanField('Включено', default=True)
     position = models.PositiveIntegerField('Позиция', default=0, editable=False, db_index=True)

@@ -32,13 +32,14 @@ class FoodTagAdmin(admin.ModelAdmin):
 @admin.register(FoodCategory)
 class FoodCategoryAdmin(SortableAdmin):
     prepopulated_fields = {'slug': ('title', ), }
-    list_display = ['title', ]
+    list_display = ['title', 'slug', ]
     inlines = [DiscountInline, FoodItemInline]
 
 
 @admin.register(FoodItem)
 class FoodItemAdmin(admin.ModelAdmin):
-    list_display = ['title', 'raw_price']
+    prepopulated_fields = {'slug': ('title', ), }
+    list_display = ['title', 'slug', 'raw_price', ]
     inlines = [DiscountInline]
     filter_horizontal = ['tags']
 

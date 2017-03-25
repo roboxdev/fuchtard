@@ -10,6 +10,7 @@ class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'id',
             'url',
+            'slug',
             'visible',
             'enabled',
             'position',
@@ -32,10 +33,10 @@ class FoodCategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'id',
             'url',
+            'slug',
             'visible',
             'enabled',
             'position',
             'expanded',
             'title',
-            'slug',
         )
