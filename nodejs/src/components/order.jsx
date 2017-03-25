@@ -60,6 +60,12 @@ export class OrderForm extends React.Component {
                 <Collapse isOpened={this.state.optionalFieldsVisible}>
                     <div>
                         <p>Следующие поля необязательны. Мы уточним детали по телефону.</p>
+                        <Input value={order.email}
+                               onChange={value => updateOrder('email', value)}
+                               type='email'
+                               label='Email'
+                        />
+
                         <Input theme={inputStyles}
                                value={address.street}
                                onChange={value => updateAddress('street', value)}
@@ -81,12 +87,19 @@ export class OrderForm extends React.Component {
                                name='apartment'
                                label='Квартира'
                         />
+                        <Input value={address.floor}
+                               onChange={value => updateAddress('floor', value)}
+                               type='number'
+                               name='floor'
+                               label='Этаж'
+                        />
                         <Input theme={inputStyles}
                                value={order.comment}
                                onChange={value => updateOrder('comment', value)}
                                type='text'
                                label='Комментарий'
                         />
+
                     </div>
                 </Collapse>
                 <Button theme={buttonStyles} type="submit" raised primary>Заказать</Button>
