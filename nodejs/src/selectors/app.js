@@ -14,6 +14,11 @@ export const getFoodItemsOfCategory = (state, props) => {
     return category ? state.foodItems.filter(v => v.category === category.url) : []
 };
 
+export const getFoodItemsBySlugOrID = (state, props) => {
+    const foodItems = getFoodItemsOfCategory(state, props);
+    return foodItems.find(food => food.slug === props.match.params.foodSlug || food.id == props.match.params.foodSlug)
+};
+
 const foodItemsSelector = state => state.foodItems;
 const giftsSelector = state => state.gifts;
 const cartSelector = state => state.cart;
