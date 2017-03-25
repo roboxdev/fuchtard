@@ -10,9 +10,6 @@
 }
 
 .navigation-buttons {
-  @media (--desktop) {
-    display: none;
-  }
   height: 56px;
   display: flex;
   justify-content: center;

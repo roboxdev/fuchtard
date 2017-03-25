@@ -23,7 +23,9 @@ export class App extends React.Component {
                             </div>
                         </MediaQuery>
                         <Route exact path="/" component={IndexPage}/>
-                        <Route path="/cart/" component={Checkout}/>
+                        <MediaQuery maxWidth={960}>
+                            <Route path="/cart/" component={Checkout}/>
+                        </MediaQuery>
                         <Route path="/:slug/" component={FoodCategory}/>
                         <MediaQuery minWidth={960}>
                             <div styleName="styles.checkout-container">
