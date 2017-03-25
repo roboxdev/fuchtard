@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import map from 'lodash/map';
 import * as actions from 'actions/app';
-import {getQuantityByFoodId, foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
+import {foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
 
 import {Card, CardTitle} from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
