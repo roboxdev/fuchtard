@@ -8,7 +8,6 @@ import {FoodItem, FoodItemDetails} from 'components/food-item';
 @connect(
     (state, props) => ({
         category: getCategoryBySlug(state, props),
-        categoryURL: props.match.url,
         foodItems: getFoodItemsOfCategory(state, props),
     })
 )
@@ -27,6 +26,7 @@ export class FoodCategory extends React.Component {
                                         <FoodItem
                                             food={food}
                                             key={food.url}
+                                            category={category}
                                             {...rest}
                                         />
                                 )}

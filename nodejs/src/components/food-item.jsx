@@ -45,12 +45,12 @@ class FoodQuantityButtons extends React.Component {
 
 export class FoodItem extends React.Component {
     render() {
-        const {food, categoryURL} = this.props;
+        const {food, category} = this.props;
         return (food
             ? <div>
                 <img src={food.photo}/>
                 <p>
-                    <Link to={`${categoryURL}${food.slug || food.id}/`}>
+                    <Link to={`/${category.slug}/${food.slug || food.id}/`}>
                         {food.title}
                     </Link>
                 </p>
@@ -73,7 +73,7 @@ export class FoodItemDetails extends React.Component {
         const {food, category} = this.props;
         return <div>
             <Link to={`/${category.slug}/`}>← {category.title}</Link>
-            <FoodItem food={food}/>
+            <FoodItem food={food} category={category}/>
         </div>
     }
 }
