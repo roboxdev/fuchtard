@@ -45,15 +45,17 @@ class CartItem extends React.Component {
         // const {price} = foodItem;
         return (foodItem
                 ? <Card theme={cardStyles}>
-                    <div styleName="styles.quantity-container">
-                        <CartQuantityButtons
-                            foodItemId={foodItemId}
-                            quantity={quantity}
-                        />
-                    </div>
-                    <div styleName="styles.food-title">
-                        <p>{quantity} × {foodItem.title}:</p>
-                        <p>{foodItem.price * quantity}₸</p>
+                    <div>
+                        <div styleName="styles.quantity-container">
+                            <CartQuantityButtons
+                                foodItemId={foodItemId}
+                                quantity={quantity}
+                            />
+                        </div>
+                        <div styleName="styles.food-title">
+                            <p>{quantity} × {foodItem.title}:</p>
+                            <p>{foodItem.price * quantity}₸</p>
+                        </div>
                     </div>
                 </Card >
                 : null

@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
+import styles from '../styles/food-item.css';
 
 import * as actions from 'actions/app';
 import {getCategoryBySlug, getQuantityByFoodId, getFoodItemsBySlugOrID} from 'selectors/app';
@@ -46,14 +48,33 @@ export class FoodItem extends React.Component {
         const {food, category} = this.props;
         return (food
             ? <div>
-                <img src={food.photo}/>
-                <p>
-                    <Link to={`/${category.slug}/${food.slug || food.id}/`}>
-                        {food.title}
-                    </Link>
-                </p>
-                <p>{food.description}</p>
-                <FoodQuantityButtons foodItemId={food.id}/>
+                    <Card style={{width: '350px'}}>
+                        <CardMedia
+                            aspectRatio="wide"
+                            image={food.photo}
+                        />
+                        <CardTitle
+                            title={
+                                <Link to={`/${category.slug}/${food.slug || food.id}/`}>
+                                    {food.title}
+                                </Link>
+                            }
+                            subtitle={food.description}
+                        />
+                        <div>
+                            <span styleName="styles.pricing">
+                                <CardText>
+                                    <p>{food.raw_price}₸</p>
+                                    <p>{food.price}₸</p>
+                                </CardText>
+                            </span>
+                            <span styleName="styles.quantity-buttons">
+                                <CardActions>
+                                    <FoodQuantityButtons foodItemId={food.id}/>
+                                </CardActions>
+                            </span>
+                        </div>
+                    </Card>
             </div>
             : null
         )
