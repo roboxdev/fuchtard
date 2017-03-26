@@ -1,4 +1,5 @@
 import React from 'react';
+import MediaQuery from 'react-responsive';
 
 import {Header} from 'components/header';
 import {FoodMenu} from 'components/menu';
@@ -10,7 +11,11 @@ export class IndexPage extends React.Component {
         return (
             <div>
                 <Header />
-                <FoodMenu/>
+
+                <MediaQuery maxWidth={960}>
+                    <FoodMenu/>
+                </MediaQuery>
+
                 <SEOAbout/>
                 <Footer />
             </div>
