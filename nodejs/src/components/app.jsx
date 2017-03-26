@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import MediaQuery from 'react-responsive';
+import Sticky from 'react-stickynode';
 
 import {FoodMenu} from 'components/menu';
 import {IndexPage} from 'components/index-page';
@@ -19,7 +20,9 @@ export class App extends React.Component {
                     <div styleName="styles.content">
                         <MediaQuery minWidth={960}>
                             <div styleName="styles.food-menu-container">
-                                <FoodMenu/>
+                                <Sticky>
+                                    <FoodMenu/>
+                                </Sticky>
                             </div>
                         </MediaQuery>
                         <Route exact path="/" component={IndexPage}/>
@@ -29,7 +32,11 @@ export class App extends React.Component {
                         <Route path="/:slug/" component={FoodCategory}/>
                         <MediaQuery minWidth={960}>
                             <div styleName="styles.checkout-container">
-                                <Checkout/>
+                                <Sticky>
+                                    <div>
+                                        <Checkout/>
+                                    </div>
+                                </Sticky>
                             </div>
                         </MediaQuery>
                     </div>
