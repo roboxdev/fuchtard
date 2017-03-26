@@ -7,11 +7,13 @@
 }
 
 .food-title {
-  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .quantity-container {
-  display: inline-block;
+  //display: inline-block;
 }
 
 .quantity-button {

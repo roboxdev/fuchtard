@@ -28,7 +28,7 @@ class CartQuantityButtons extends React.Component {
         return (
             <div>
                 <Button styleName="styles.quantity-button" onClick={minusButton}>
-                        <span className="plusminus">−</span>
+                    <span className="plusminus">−</span>
                 </Button>
                 <Button styleName="styles.quantity-button" disabled={quantity >= 9} onClick={plusButton}>
                     <span className="plusminus">+</span>
@@ -45,18 +45,14 @@ class CartItem extends React.Component {
         // const {price} = foodItem;
         return (foodItem
                 ? <Card theme={cardStyles}>
-                    <div>
-                        <div styleName="styles.quantity-container">
-                            <CartQuantityButtons
-                                foodItemId={foodItemId}
-                                quantity={quantity}
-                            />
-                        </div>
-                        <div styleName="styles.food-title">
-                            <p>{quantity} × {foodItem.title}:</p>
-                            <p>{foodItem.price * quantity}₸</p>
-                        </div>
+                    <CartQuantityButtons
+                        foodItemId={foodItemId}
+                        quantity={quantity}
+                    />
+                    <div styleName="styles.food-title">
+                        {quantity} × {foodItem.title}:
                     </div>
+                    <p>{foodItem.price * quantity}₸</p>
                 </Card >
                 : null
         )
