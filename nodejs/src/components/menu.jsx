@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {List, ListItem} from 'react-toolbox/lib/list';
 
+import styles from '../styles/menu.css';
 
 @connect(
     state => ({
@@ -17,7 +18,7 @@ export class FoodMenu extends React.Component {
                     <List>
                         {this.props.foodCategories.map(
                             (category) =>
-                            <Link key={category.url} to={`/${category.slug}/`}>
+                            <Link styleName="styles.link-decoration" key={category.url} to={`/${category.slug}/`}>
                                     <ListItem
                                         key={category.url}
                                         caption={category.title}
