@@ -1,4 +1,5 @@
 django-admin-sortable==2.0.22
+django-cors-headers==2.0.2
 django-debug-toolbar==1.7
 django-extensions==1.7.7
 Django==1.10.6

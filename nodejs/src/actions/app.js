@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {ordersEndpoint, foodItemsEndpoint, foodCategoriesEndpoint, giftsEndpoint} from 'config';
 
 const csrftoken = window.config.csrfToken;
 
@@ -45,7 +46,7 @@ export function placeOrder() {
     return (dispatch, getState) => {
         const state = getState();
         const order = state.order.merge({cart: state.cart});
-        fetch('/api/orders/', {
+        fetch(ordersEndpoint, {
             method: "POST",
             credentials: "same-origin",
             headers: new Headers({
@@ -61,17 +62,17 @@ export function placeOrder() {
 
 export function fetchData() {
     return (dispatch) => {
-        fetch('/api/food_items/').then(
+        fetch(foodItemsEndpoint).then(
             response => response.json()
         ).then(
             json => dispatch({type: 'SET_FOOD_ITEMS', payload: json})
         );
-        fetch('/api/food_categories/').then(
+        fetch(foodCategoriesEndpoint).then(
             response => response.json()
         ).then(
             json => dispatch({type: 'SET_FOOD_CATEGORIES', payload: json})
         );
-        fetch('/api/gifts/').then(
+        fetch(giftsEndpoint).then(
             response => response.json()
         ).then(
             json => dispatch({type: 'SET_GIFTS', payload: json})
