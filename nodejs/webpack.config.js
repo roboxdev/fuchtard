@@ -19,7 +19,7 @@ module.exports = {
     },
     devtool: 'cheap-eval-source-map',
     devServer: {
-        contentBase: "./public",
+        contentBase: "./dist",
         publicPath: "/",
         hot: true,
         compress: true,
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, "public"),
+        path: path.resolve(__dirname, "dist"),
         filename: "bundle.js",
         // publicPath: "/",
         // publicPath: "http://localhost:3000",

@@ -50,7 +50,6 @@ export function placeOrder() {
             headers: new Headers({
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken,
             }),
             body: JSON.stringify(order),
         });

@@ -8,7 +8,7 @@ export class Header extends React.Component {
                 <div>
                     <div>
                         <Link to="/">
-                            <img src="/static/main/img/maxiSushiLogo13.png"/>
+                            <img src="/public/maxiSushiLogo.png"/>
                         </Link>
                     </div>
                     <div>
@@ -30,13 +30,13 @@ export class Header extends React.Component {
                         <p>
                             <span>Мы в сети:</span>
                             <a target="_blank" href="https://www.facebook.com/Доставка-суши-MaxiSushi-568292479939728/">
-                                <img src="/static/main/img/facebook-box.svg"/>
+                                <img src="/public/facebook-box.svg"/>
                             </a>
                             <a target="_blank" href="https://instagram.com/maxi.sushi/">
-                                <img src="/static/main/img/instagram.svg"/>
+                                <img src="/public/instagram.svg"/>
                             </a>
                             <a target="_blank" href="https://vk.com/club79840974">
-                                <img src="/static/main/img/vk-box.svg"/>
+                                <img src="/public/vk-box.svg"/>
                             </a>
                         </p>
                     </div>
