@@ -16,7 +16,7 @@ import Collapse from 'react-collapse';
         order: state.order,
     }),
     dispatch => ({
-        updateOrderField: (field, value, address) => dispatch(actions.updateOrderField(field, value, address)),
+        updateOrderField: (field, value) => dispatch(actions.updateOrderField(field, value)),
         placeOrder: () => dispatch(actions.placeOrder()),
     })
 )
@@ -34,9 +34,7 @@ export class OrderForm extends React.Component {
 
     render() {
         const {order, updateOrderField} = this.props;
-        const {address} = order;
-        const updateOrder = (field, value) => updateOrderField(field, value, false);
-        const updateAddress = (field, value) => updateOrderField(field, value, true);
+        const updateOrder = (field, value) => updateOrderField(field, value);
         return <div styleName="styles.wrapper">
             <form onSubmit={this.submit}>
                 <Input theme={inputStyles}
@@ -67,28 +65,28 @@ export class OrderForm extends React.Component {
                         />
 
                         <Input theme={inputStyles}
-                               value={address.street}
-                               onChange={value => updateAddress('street', value)}
+                               value={order.street}
+                               onChange={value => updateOrder('street', value)}
                                type='text'
                                name='street'
                                label='Улица'
                         />
                         <Input theme={inputStyles}
-                               value={address.building}
-                               onChange={value => updateAddress('building', value)}
+                               value={order.building}
+                               onChange={value => updateOrder('building', value)}
                                type='text'
                                name='building'
                                label='Номер дома'
                         />
                         <Input theme={inputStyles}
-                               value={address.apartment}
-                               onChange={value => updateAddress('apartment', value)}
+                               value={order.apartment}
+                               onChange={value => updateOrder('apartment', value)}
                                type='text'
                                name='apartment'
                                label='Квартира'
                         />
-                        <Input value={address.floor}
-                               onChange={value => updateAddress('floor', value)}
+                        <Input value={order.floor}
+                               onChange={value => updateOrder('floor', value)}
                                type='number'
                                name='floor'
                                label='Этаж'

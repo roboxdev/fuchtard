@@ -35,6 +35,10 @@ class Cart(models.Model):
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'
 
+    def __str__(self):
+        cart_items = ', '.join(map(lambda x: str(x), self.cartitem_set.all()))
+        return '{}₸: [{}]'.format(self.total_price, cart_items)
+
     @property
     def total_price(self):
         total = self.cartitem_set.aggregate(cart_total_price=Sum(F('history_price') * F('quantity'))) \
@@ -51,6 +55,9 @@ class CartItem(models.Model):
     product = models.ForeignKey(FoodItem)
     quantity = models.IntegerField()
     history_price = models.IntegerField(null=True)
+
+    def __str__(self):
+        return '{cart_item.quantity} × {cart_item.product.title}'.format(cart_item=self)
 
     @property
     def price(self):
@@ -74,12 +81,18 @@ class Order(models.Model):
     email = models.CharField(verbose_name='Email', max_length=60, null=True, blank=True)
     name = models.CharField(verbose_name='Имя', max_length=60, null=True, blank=True)
     phone = models.CharField(verbose_name='Телефон', max_length=20)
-    address = JSONField(verbose_name='Адрес')
+    street = models.CharField(verbose_name='Улица', max_length=60, null=True, blank=True)
+    building = models.CharField(verbose_name='Дом', max_length=20, null=True, blank=True)
+    apartment = models.CharField(verbose_name='Квартира', max_length=60, null=True, blank=True)
+    floor = models.CharField(verbose_name='Этаж', max_length=20, null=True, blank=True)
     cart = models.OneToOneField(Cart)
     deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', blank=True)
-    gift_food_item = models.ForeignKey(FoodItem, null=True, blank=True)
+    gift_food_item = models.ForeignKey(FoodItem, verbose_name='Подарок', null=True, blank=True)
     order_created_timestamp = models.DateTimeField('Заказ создан', auto_now_add=True)
+
+    def __str__(self):
+        return '{order.name}, {order.phone} ({order.street}, {order.building}, {order.apartment})'.format(order=self)
 
     @property
     def hashed_id(self):

@@ -29,14 +29,11 @@ export function minusButton(foodItemId) {
     }
 }
 
-export function updateOrderField(field, value, address = false) {
-    const path = address ? ['order', 'address', field] : ['order', field];
+export function updateOrderField(field, value) {
     return {
         type: 'UPDATE_ORDER_FIELD',
-        payload: {
-            path: path,
-            value: value,
-        }
+        field: field,
+        value: value,
     }
 }
 

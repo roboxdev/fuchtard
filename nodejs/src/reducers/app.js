@@ -14,12 +14,10 @@ function getInitialState() {
             name: '',
             email: '',
             phone: '',
-            address: {
-                street: '',
-                apartment: '',
-                building: '',
-                floor: '',
-            },
+            street: '',
+            apartment: '',
+            building: '',
+            floor: '',
             comment: '',
             gift: null,
         },
@@ -38,7 +36,7 @@ export default function (state = getInitialState(), action) {
             ? Immutable.updateIn(state, ['cart', action.payload], v => v - 1)
             : Immutable.update(state, 'cart', v => Immutable.without(v, action.payload));
         case 'UPDATE_ORDER_FIELD':
-            return state.setIn(action.payload.path, action.payload.value);
+            return Immutable.setIn(state, ['order', action.field], action.value);
         case 'SET_FOOD_CATEGORIES':
             return Immutable.set(state, 'foodCategories', action.payload);
         case 'SET_FOOD_ITEMS':
