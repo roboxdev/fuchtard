@@ -24,18 +24,26 @@ function getInitialState() {
     });
 }
 
+const backedUpCartState = (state) => Immutable.set(state, 'prevCart', state.cart);
+
 
 export default function (state = getInitialState(), action) {
     switch (action.type) {
         case 'CLEAR_CART':
-            return Immutable.set(state, 'cart', {});
+            return Immutable.set(backedUpCartState(state), 'cart', {});
         case 'CART_ITEM_INCREASE':
-            return Immutable.updateIn(state, ['cart', action.payload], v => v >= 1 ? v + 1 : 1);
+            return Immutable.updateIn(
+                backedUpCartState(state),
+                ['cart', action.payload],
+                v => v >= 1 ? v + 1 : 1
+            );
         case 'CART_ITEM_DECREASE':
             const quantity = state.cart[action.payload];
             return quantity > 1
-            ? Immutable.updateIn(state, ['cart', action.payload], v => v - 1)
-            : Immutable.update(state, 'cart', v => Immutable.without(v, action.payload));
+            ? Immutable.updateIn(backedUpCartState(state), ['cart', action.payload], v => v - 1)
+            : Immutable.update(backedUpCartState(state), 'cart', v => Immutable.without(v, action.payload));
+        case 'REVERT_CART':
+            return Immutable.set(state, 'cart', state.prevCart);
         case 'UPDATE_ORDER_FIELD':
             return Immutable.setIn(state, ['order', action.field], action.value);
         case 'SET_FOOD_CATEGORIES':
