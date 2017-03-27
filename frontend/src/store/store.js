@@ -12,4 +12,12 @@ export const store = createStore(
     )
 );
 
+const placeCartIntoLocalStorage = () => {
+    const state = store.getState();
+    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+    window.localStorage.setItem('order', JSON.stringify(state.order));
+};
+
+store.subscribe(placeCartIntoLocalStorage);
+
 window.store = store;

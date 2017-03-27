@@ -2,22 +2,20 @@ import Immutable from 'seamless-immutable';
 
 
 function getInitialState() {
+    const cart = window.localStorage.getItem('cart') ? JSON.parse(window.localStorage.getItem('cart')) : {};
+    const order = window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')) : {};
     return Immutable({
         foodItems: [],
         foodCategories: [],
-        cart: {
-            18: 3,
-            93: 1,
-            32: 2,
-        },
+        cart: cart,
         order: {
-            name: '',
-            email: '',
+            name: order.name,
+            email: order.email,
             phone: '',
-            street: '',
-            apartment: '',
-            building: '',
-            floor: '',
+            street: order.street,
+            apartment: order.apartment,
+            building: order.building,
+            floor: order.floor,
             comment: '',
             gift: null,
         },
