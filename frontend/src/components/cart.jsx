@@ -17,7 +17,7 @@ import cardStyles from '../styles/cart-card.css';
     null,
     (dispatch, props) => ({
         plusButton: () => dispatch(actions.plusButton(props.foodItemId)),
-        minusButton: () => dispatch(actions.minusButton(props.foodItemId)),
+        minusButton: () => dispatch(actions.minusButton(props.foodItemId, props.quantity, props.foodItemTitle)),
     })
 )
 class CartQuantityButtons extends React.Component {
@@ -46,6 +46,7 @@ class CartItem extends React.Component {
                     <CartQuantityButtons
                         foodItemId={foodItemId}
                         quantity={quantity}
+                        foodItemTitle={foodItem.title}
                     />
                     <div styleName="styles.food-title">
                         {quantity} × {foodItem.title}:
@@ -56,6 +57,7 @@ class CartItem extends React.Component {
         )
     }
 }
+
 
 @connect(
     state => ({

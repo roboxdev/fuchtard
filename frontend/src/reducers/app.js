@@ -5,10 +5,11 @@ function getInitialState() {
     const cart = window.localStorage.getItem('cart') ? JSON.parse(window.localStorage.getItem('cart')) : {};
     const order = window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')) : {};
     return Immutable({
+        cart: cart,
         foodItems: [],
         foodCategories: [],
-        cart: cart,
-        prevCart: {},
+        gifts: [],
+        notification: '',
         order: {
             name: order.name || '',
             email: order.email || '',
@@ -19,8 +20,8 @@ function getInitialState() {
             floor: order.floor || '',
             comment: '',
             gift: null,
+        prevCart: {},
         },
-        gifts: [],
     });
 }
 
@@ -44,6 +45,10 @@ export default function (state = getInitialState(), action) {
             : Immutable.update(backedUpCartState(state), 'cart', v => Immutable.without(v, action.payload));
         case 'REVERT_CART':
             return Immutable.set(state, 'cart', state.prevCart);
+        case 'NOTIFY':
+            return Immutable.set(state, 'notification', action.label);
+        case 'RESET_NOTIFICATION':
+            return Immutable.set(state, 'notification', '');
         case 'UPDATE_ORDER_FIELD':
             return Immutable.setIn(state, ['order', action.field], action.value);
         case 'SET_FOOD_CATEGORIES':
