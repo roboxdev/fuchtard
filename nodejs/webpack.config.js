@@ -12,22 +12,35 @@ module.exports = {
 
     entry: {
         'app': [
-            // 'webpack-dev-server/client?http://localhost:3000',
-            // 'webpack/hot/only-dev-server',
+            'webpack-dev-server/client?http://localhost:3000',
+            'webpack/hot/only-dev-server',
             './src/index',
         ]
     },
-    devtool: 'source-map',
+    devtool: 'cheap-eval-source-map',
+    devServer: {
+        contentBase: "./public",
+        publicPath: "/",
+        hot: true,
+        compress: true,
+        port: 3000,
+        historyApiFallback: true,
+    },
 
     output: {
-        path: path.resolve('../static_content/webpack_bundles/'),
-        filename: "[name]-[hash].js",
-        publicPath: 'http://localhost:3000/static/bundles/', // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
+        path: path.resolve(__dirname, "public"),
+        filename: "bundle.js",
+        // publicPath: "/",
+        // publicPath: "http://localhost:3000",
+
+        // path: path.resolve('../static_content/webpack_bundles/'),
+        // filename: "[name]-[hash].js",
+        // publicPath: 'http://localhost:3000/static/bundles/',
+        // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
         // publicPath: '/static/webpack_bundles/'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new BundleTracker({filename: '../static_content/webpack-stats.json'}),
         // new ExtractTextPlugin("[name]-[hash].css", {
         //     allChunks: true
         // }),

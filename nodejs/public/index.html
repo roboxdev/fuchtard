@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Title</title> {# TODO #}
-  {#  <meta name="description" content=""> TODO#}
+  <title>Title</title><!-- TODO -->
+  <!--<meta name="description" content="">-->
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  {#  <meta name="viewport" content="width=device-width, initial-scale=1">#}
-  {#  <link rel="apple-touch-icon" href="apple-touch-icon.png">#}
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
@@ -22,7 +22,15 @@
 </head>
 <body>
 <div id="js-react-app"></div>
-{% render_bundle 'app' %}
-{#{% include 'main/_gtm.html' %}#}
+<script src="/bundle.js"></script>
+<!-- Google Tag Manager -->
+<!--<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-T3HKMV"-->
+<!--height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>-->
+<!--<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':-->
+<!--new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],-->
+<!--j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=-->
+<!--'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);-->
+<!--})(window,document,'script','dataLayer','GTM-T3HKMV');</script>-->
+<!-- End Google Tag Manager -->
 </body>
 </html>

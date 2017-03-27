@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import {ordersEndpoint, foodItemsEndpoint, foodCategoriesEndpoint, giftsEndpoint} from 'config';
 
-const csrftoken = window.config.csrfToken;
-
 
 function cartItemIncrease(foodItemId) {
     return {

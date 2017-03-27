@@ -50,7 +50,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js --colors --progress",
     "watch": "webpack --config webpack.config.js --colors --progress --watch",
-    "dev-server": "node server.js",
+    "webpack-dev-server": "webpack-dev-server",
     "build-prod": "webpack --config webpack.production.config.js --progress --colors"
   }
 }
