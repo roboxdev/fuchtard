@@ -8,14 +8,15 @@ function getInitialState() {
         foodItems: [],
         foodCategories: [],
         cart: cart,
+        prevCart: {},
         order: {
-            name: order.name,
-            email: order.email,
+            name: order.name || '',
+            email: order.email || '',
             phone: '',
-            street: order.street,
-            apartment: order.apartment,
-            building: order.building,
-            floor: order.floor,
+            street: order.street || '',
+            apartment: order.apartment || '',
+            building: order.building || '',
+            floor: order.floor || '',
             comment: '',
             gift: null,
         },
@@ -26,6 +27,8 @@ function getInitialState() {
 
 export default function (state = getInitialState(), action) {
     switch (action.type) {
+        case 'CLEAR_CART':
+            return Immutable.set(state, 'cart', {});
         case 'CART_ITEM_INCREASE':
             return Immutable.updateIn(state, ['cart', action.payload], v => v >= 1 ? v + 1 : 1);
         case 'CART_ITEM_DECREASE':

@@ -17,6 +17,11 @@ function cartItemDecrease(foodItemId) {
 }
 
 
+export function clearCart() {
+    return {type: 'CLEAR_CART'}
+}
+
+
 export function plusButton(foodItemId) {
     return dispatch => {
         dispatch(cartItemIncrease(foodItemId))

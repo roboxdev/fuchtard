@@ -9,8 +9,6 @@ import {Card, CardTitle} from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
-import {GiftsForm} from 'components/gifts';
-
 import styles from '../styles/checkout.css';
 import cardStyles from '../styles/cart-card.css';
 
@@ -59,15 +57,32 @@ class CartItem extends React.Component {
     }
 }
 
+@connect(
+    state => ({
+        cartPrice: subtotalSelector(state),
+    }),
+    dispatch => ({
+        clearCart: () => dispatch(actions.clearCart()),
+    })
+)
+class CartTotal extends React.Component {
+    render() {
+        const {cartPrice, clearCart} = this.props;
+        return <Card theme={cardStyles}>
+            <Button icon="remove_shopping_cart" onClick={clearCart}/>
+            <div styleName="styles.food-title">
+                Итого
+            </div>
+            <p>{cartPrice}₸</p>
+        </Card >
+    }
+}
+
 
 @connect(
     state => ({
         annotatedCart: foodItemAnnotatedCart(state),
-        cartPrice: subtotalSelector(state),
     }),
-    dispatch => ({
-        placeOrder: () => dispatch(actions.placeOrder()),
-    })
 )
 export class Cart extends React.Component {
     render() {
@@ -83,10 +98,7 @@ export class Cart extends React.Component {
                         quantity={quantity}
                     />
                 )}
-                <div>
-                    <span>TOTAL: {cartPrice}₸</span>
-                </div>
-                <GiftsForm/>
+                <CartTotal/>
             </div>
         )
     }
