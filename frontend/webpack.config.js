@@ -12,8 +12,6 @@ module.exports = {
 
     entry: {
         'app': [
-            'webpack-dev-server/client?http://localhost:3000',
-            'webpack/hot/only-dev-server',
             './src/index',
         ]
     },
@@ -30,17 +28,11 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js",
-        // publicPath: "/",
-        // publicPath: "http://localhost:3000",
-
-        // path: path.resolve('../static_content/webpack_bundles/'),
-        // filename: "[name]-[hash].js",
-        // publicPath: 'http://localhost:3000/static/bundles/',
-        // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
-        // publicPath: '/static/webpack_bundles/'
+        publicPath: "/",
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
         // new ExtractTextPlugin("[name]-[hash].css", {
         //     allChunks: true
         // }),
