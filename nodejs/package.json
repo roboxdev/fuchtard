@@ -45,7 +45,6 @@
     "style-loader": "^0.14.1",
     "sugarss": "^0.2.0",
     "webpack": "^2.2.1",
-    "webpack-bundle-tracker": "^0.2.0",
     "webpack-dev-server": "^2.4.2"
   },
   "scripts": {

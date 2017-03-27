@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'adminsortable',
     'debug_toolbar',
     'rest_framework',
-    'webpack_loader',
     'main',
     'food',
     'order',
@@ -126,20 +125,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'static', )
-STATICFILES_DIRS = [
-    ('webpack_bundles', os.path.join(BASE_DIR, '..', '..', 'static_content', 'webpack_bundles')),
-    # We do this so that django's collectstatic copies or our bundles to the
-    # STATIC_ROOT or syncs them to whatever storage we use.
-
-]
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'webpack_bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, '..', '..', 'static_content', 'webpack-stats.json'),
-    },
-}
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'media', )

@@ -1,6 +1,5 @@
 var path = require("path");
 var webpack = require('webpack');
-var BundleTracker = require('webpack-bundle-tracker');
 
 
 var devFlagPlugin = new webpack.DefinePlugin({
@@ -77,9 +76,6 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         // has separate config, see postcss.config.js nearby
-                        // options: {
-                        //     parser: ''
-                        // }
                     }
                 ],
             },
