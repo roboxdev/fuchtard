@@ -5,6 +5,7 @@ import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox
 import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 import styles from '../styles/food-item.css';
+import cardStyles from '../styles/food-item-card.css';
 
 import * as actions from 'actions/app';
 import {getCategoryBySlug, getQuantityByFoodId, getFoodItemsBySlugOrID} from 'selectors/app';
@@ -47,8 +48,8 @@ export class FoodItem extends React.Component {
     render() {
         const {food, category} = this.props;
         return (food
-            ? <div>
-                    <Card style={{width: '350px'}}>
+            ? <div  styleName="styles.item-wrapper">
+                    <Card theme={cardStyles}>
                         <CardMedia
                             aspectRatio="wide"
                             image={food.photo}

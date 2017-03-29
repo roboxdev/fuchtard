@@ -17,8 +17,15 @@
   padding-bottom: 72px;
 }
 
+.food-container {
+  width: 100%;
+  @media (--desktop) {
+    width: 55%;
+  }
+}
+
 .food-menu-container {
-  min-width: 20%;
+  width: 20%;
 }
 
 .checkout-container {

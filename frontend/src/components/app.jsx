@@ -30,7 +30,9 @@ export class App extends React.Component {
                         <MediaQuery maxWidth={960}>
                             <Route path="/cart/" component={Checkout}/>
                         </MediaQuery>
-                        <Route path="/:slug/" component={FoodCategory}/>
+                        <div styleName="styles.food-container">
+                            <Route path="/:slug/" component={FoodCategory}/>
+                        </div>
                         <MediaQuery minWidth={960}>
                             <div styleName="styles.checkout-container">
                                 <Sticky>

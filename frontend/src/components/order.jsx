@@ -35,7 +35,7 @@ export class OrderForm extends React.Component {
     render() {
         const {order, updateOrderField} = this.props;
         const updateOrder = (field, value) => updateOrderField(field, value);
-        return <div styleName="styles.wrapper">
+        return <div>
             <form onSubmit={this.submit}>
                 <Input theme={inputStyles}
                        value={order.name}

@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
 import {getFoodItemsOfCategory, getCategoryBySlug} from 'selectors/app'
 import {FoodItem, FoodItemDetails} from 'components/food-item';
+import {Card, CardTitle} from 'react-toolbox/lib/card';
+
+import styles from '../styles/food-category.css'
 
 
 @connect(
@@ -19,8 +22,14 @@ export class FoodCategory extends React.Component {
                     <Route path={`/:slug/:foodSlug/`} component={FoodItemDetails}/>
                     <Route exact path={match.url} render={() => (
                         <div>
-                            <div>{category.title} →</div>
                             <div>
+                                <Card>
+                                    <CardTitle
+                                        title={category.title}
+                                    />
+                                </Card>
+                            </div>
+                            <div styleName="styles.food-item-category">
                                 {foodItems.map(
                                     food =>
                                         <FoodItem
