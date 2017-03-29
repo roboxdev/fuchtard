@@ -12,10 +12,16 @@
   margin-top: 8px;
 }
 
-.quantity-buttons {
-  display: inline-block;
+.pricing {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 16px;
 }
 
-.pricing {
-  display: inline-block;
+.old-price {
+  text-decoration: line-through;
+}
+
+.price-spacer {
+  justify-content: space-between;
 }
