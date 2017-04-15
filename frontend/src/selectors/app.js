@@ -16,13 +16,13 @@ export const getFoodItemsOfCategory = (state, props) => {
 
 export const getFoodItemsBySlugOrID = (state, props) => {
     const foodItems = getFoodItemsOfCategory(state, props);
-    return foodItems.find(food => food.slug === props.match.params.foodSlug || food.id == props.match.params.foodSlug)
+    return foodItems.find(food => food.slug === props.match.params.foodSlug || food.id === +props.match.params.foodSlug)
 };
 
 const foodItemsSelector = state => state.entities.foodItems;
 const giftsSelector = state => state.entities.gifts;
 const cartSelector = state => state.cart.present;
-const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id == id);
+const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id === +id);
 
 export const foodItemAnnotatedCart = createSelector(
     cartSelector,
