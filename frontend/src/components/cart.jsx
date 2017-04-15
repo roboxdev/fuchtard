@@ -1,8 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import map from 'lodash/map';
-import * as actions from 'actions/app';
+import { actions as cartActions } from 'reducers/cart';
 import {foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
 
 import {Card, CardTitle} from 'react-toolbox/lib/card';
@@ -16,8 +17,8 @@ import cardStyles from '../styles/cart-card.css';
 @connect(
     null,
     (dispatch, props) => ({
-        plusButton: () => dispatch(actions.plusButton(props.foodItemId)),
-        minusButton: () => dispatch(actions.minusButton(props.foodItemId, props.quantity, props.foodItemTitle)),
+        plusButton: () => dispatch(cartActions.plusButton(props.foodItemId)),
+        minusButton: () => dispatch(cartActions.minusButton(props.foodItemId)),
     })
 )
 class CartQuantityButtons extends React.Component {
@@ -64,7 +65,7 @@ class CartItem extends React.Component {
         cartPrice: subtotalSelector(state),
     }),
     dispatch => ({
-        clearCart: () => dispatch(actions.clearCart()),
+        ...bindActionCreators(cartActions, dispatch),
     })
 )
 class CartTotal extends React.Component {
@@ -88,7 +89,7 @@ class CartTotal extends React.Component {
 )
 export class Cart extends React.Component {
     render() {
-        const {annotatedCart, cartPrice} = this.props;
+        const {annotatedCart} = this.props;
         return (
             <div styleName="styles.wrapper">
                 CART:

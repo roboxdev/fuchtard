@@ -9,7 +9,7 @@ import {subtotalSelector} from 'selectors/app';
 @connect(
     state => ({
         cartPrice: subtotalSelector(state),
-        gifts: state.gifts,
+        gifts: state.entities.gifts,
     })
 )
 export class GiftProgressBar extends React.Component {

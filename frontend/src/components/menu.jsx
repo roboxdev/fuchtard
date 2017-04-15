@@ -6,7 +6,7 @@ import {List, ListItem} from 'react-toolbox/lib/list';
 
 @connect(
     state => ({
-        foodCategories: state.foodCategories,
+        foodCategories: state.entities.foodCategories,
     })
 )
 export class FoodMenu extends React.Component {

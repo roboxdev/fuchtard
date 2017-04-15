@@ -1,7 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import * as actions from 'actions/app';
+import { actions as orderActions } from 'reducers/order';
 
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
@@ -16,8 +17,7 @@ import Collapse from 'react-collapse';
         order: state.order,
     }),
     dispatch => ({
-        updateOrderField: (field, value) => dispatch(actions.updateOrderField(field, value)),
-        placeOrder: () => dispatch(actions.placeOrder()),
+        ...bindActionCreators(orderActions, dispatch),
     })
 )
 export class OrderForm extends React.Component {
@@ -30,7 +30,7 @@ export class OrderForm extends React.Component {
     submit = (e) => {
         e.preventDefault();
         this.props.placeOrder();
-    }
+    };
 
     render() {
         const {order, updateOrderField} = this.props;

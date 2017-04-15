@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import Snackbar from 'react-toolbox/lib/snackbar';
-import * as actions from 'actions/app';
+import { actions as notificationActions } from 'reducers/notifications';
+import { actions as cartActions } from 'reducers/cart';
 
 @connect(
     state => ({
-        notification: state.notification,
+        notification: state.notifications.label,
     }),
     dispatch => ({
-        revertCart: () => dispatch(actions.revertCart()),
-        resetNotification: () => dispatch(actions.resetNotification())
+        ...bindActionCreators(notificationActions, dispatch),
+        ...bindActionCreators(cartActions, dispatch),
     })
 )
 export class Notification extends React.Component {

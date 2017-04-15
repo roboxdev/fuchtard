@@ -4,14 +4,14 @@ import find from 'lodash/find';
 import mapValues from 'lodash/mapValues';
 import values from 'lodash/values';
 
-export const getQuantityByFoodId = (state, props) => state.cart[props.foodItemId];
+export const getQuantityByFoodId = (state, props) => state.cart.present[props.foodItemId];
 export const getCategoryBySlug = (state, props) => (
-    state.foodCategories.find(cat => cat.slug === props.match.params.slug)
+    state.entities.foodCategories.find(cat => cat.slug === props.match.params.slug)
 );
 
 export const getFoodItemsOfCategory = (state, props) => {
     const category = getCategoryBySlug(state, props);
-    return category ? state.foodItems.filter(v => v.category === category.url) : []
+    return category ? state.entities.foodItems.filter(v => v.category === category.url) : []
 };
 
 export const getFoodItemsBySlugOrID = (state, props) => {
@@ -19,9 +19,9 @@ export const getFoodItemsBySlugOrID = (state, props) => {
     return foodItems.find(food => food.slug === props.match.params.foodSlug || food.id == props.match.params.foodSlug)
 };
 
-const foodItemsSelector = state => state.foodItems;
-const giftsSelector = state => state.gifts;
-const cartSelector = state => state.cart;
+const foodItemsSelector = state => state.entities.foodItems;
+const giftsSelector = state => state.entities.gifts;
+const cartSelector = state => state.cart.present;
 const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id == id);
 
 export const foodItemAnnotatedCart = createSelector(

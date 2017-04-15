@@ -1,8 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {RadioGroup, RadioButton} from 'react-toolbox/lib/radio';
 
-import * as actions from 'actions/app';
+import { actions as orderActions } from 'reducers/order';
 import {foodItemAnnotatedGifts, subtotalSelector} from 'selectors/app';
 
 
@@ -13,11 +14,11 @@ import {foodItemAnnotatedGifts, subtotalSelector} from 'selectors/app';
         selectedGift: state.order.gift,
     }),
     dispatch => ({
-        selectGift: (id) => dispatch(actions.updateOrderField('gift', id))
+        ...bindActionCreators(orderActions, dispatch),
     })
 )
 export class GiftsForm extends React.Component {
-    handleChange = (value) => {this.props.selectGift(+value)};
+    handleChange = (value) => {this.props.updateOrderField('gift', +value)};
 
     render() {
         const {gifts, cartPrice, selectedGift} = this.props;

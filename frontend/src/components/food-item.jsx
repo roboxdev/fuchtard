@@ -1,13 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { Link } from 'react-router-dom';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import {Button} from 'react-toolbox/lib/button';
+import { Button } from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 import styles from '../styles/food-item.css';
 
-import * as actions from 'actions/app';
-import {getCategoryBySlug, getQuantityByFoodId, getFoodItemsBySlugOrID} from 'selectors/app';
+import { actions as cartActions } from 'reducers/cart';
+import { getCategoryBySlug, getQuantityByFoodId, getFoodItemsBySlugOrID } from 'selectors/app';
 
 
 @connect(
@@ -15,8 +16,8 @@ import {getCategoryBySlug, getQuantityByFoodId, getFoodItemsBySlugOrID} from 'se
         quantity: getQuantityByFoodId(state, props),
     }),
     (dispatch, props) => ({
-        plusButton: () => dispatch(actions.plusButton(props.foodItemId)),
-        minusButton: () => dispatch(actions.minusButton(props.foodItemId)),
+        plusButton: () => dispatch(cartActions.plusButton(props.foodItemId)),
+        minusButton: () => dispatch(cartActions.minusButton(props.foodItemId)),
     })
 )
 class FoodQuantityButtons extends React.Component {

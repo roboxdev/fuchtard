@@ -1,9 +1,9 @@
 import {createStore, applyMiddleware, compose} from 'redux';
-// import { combineReducers } from 'redux-seamless-immutable';
 import thunk from 'redux-thunk';
+
 import reducer from 'reducers/app';
 
-import {fetchData} from 'actions/app';
+import {actions} from 'reducers/entities';
 
 
 export const store = createStore(
@@ -16,12 +16,12 @@ export const store = createStore(
 
 const placeCartIntoLocalStorage = () => {
     const state = store.getState();
-    window.localStorage.setItem('cart', JSON.stringify(state.cart));
+    window.localStorage.setItem('cart', JSON.stringify(state.cart.present));
     window.localStorage.setItem('order', JSON.stringify(state.order));
 };
 
 store.subscribe(placeCartIntoLocalStorage);
 
-store.dispatch(fetchData());
+store.dispatch(actions.fetchData());
 
 window.store = store;
