@@ -1,7 +1,7 @@
 from adminsortable.admin import SortableAdmin
 from django.contrib import admin
 
-from main.models import Banner
+from .models import Banner
 
 
 @admin.register(Banner)
