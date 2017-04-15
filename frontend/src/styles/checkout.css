@@ -1,7 +1,7 @@
 @import "_constants.css";
 
 .wrapper {
-  padding: 0 15px;
+  padding: 8px 15px;
   max-width: calc(var(--webSiteMaxWidth) / 2);
   margin: 0 auto;
 }
@@ -13,7 +13,6 @@
 }
 
 .quantity-container {
-  //display: inline-block;
 }
 
 .quantity-button {

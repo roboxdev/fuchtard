@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import {Card, CardMedia, CardTitle, CardText, CardActions} from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 import styles from '../styles/food-item.css';
+import cardStyles from '../styles/food-item-card.css';
 
 import { actions as cartActions } from 'reducers/cart';
 import { getCategoryBySlug, getQuantityByFoodId, getFoodItemsBySlugOrID } from 'selectors/app';
@@ -48,36 +49,34 @@ export class FoodItem extends React.Component {
     render() {
         const {food, category} = this.props;
         return (food
-            ? <div>
-                    <Card style={{width: '350px'}}>
-                        <CardMedia
-                            aspectRatio="wide"
-                            image={food.photo}
-                        />
-                        <CardTitle
-                            title={
-                                <Link to={`/${category.slug}/${food.slug || food.id}/`}>
-                                    {food.title}
-                                </Link>
-                            }
-                            subtitle={food.description}
-                        />
+                ? <div styleName="styles.item-wrapper">
+                    <Card theme={cardStyles}>
                         <div>
-                            <span styleName="styles.pricing">
-                                <CardText>
-                                    <p>{food.raw_price}₸</p>
-                                    <p>{food.price}₸</p>
-                                </CardText>
-                            </span>
-                            <span styleName="styles.quantity-buttons">
-                                <CardActions>
-                                    <FoodQuantityButtons foodItemId={food.id}/>
-                                </CardActions>
-                            </span>
+                            <CardMedia
+                                aspectRatio="wide"
+                                image={food.photo}
+                            />
+                            <CardTitle
+                                title={
+                                    <Link to={`/${category.slug}/${food.slug || food.id}/`}>
+                                        {food.title}
+                                    </Link>
+                                }
+                                subtitle={food.description}
+                            />
+                        </div>
+                        <div styleName="styles.pricing">
+                            <div>
+                                {food.raw_price > food.price && <p styleName="styles.old-price">{food.raw_price}₸</p>}
+                                <p>{food.price}₸</p>
+                            </div>
+                            <div>
+                                <FoodQuantityButtons foodItemId={food.id}/>
+                            </div>
                         </div>
                     </Card>
-            </div>
-            : null
+                </div>
+                : null
         )
     }
 }

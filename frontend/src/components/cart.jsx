@@ -91,7 +91,7 @@ export class Cart extends React.Component {
     render() {
         const {annotatedCart} = this.props;
         return (
-            <div styleName="styles.wrapper">
+            <div>
                 CART:
                 {map(annotatedCart, ({quantity, foodItem}, foodItemId) =>
                     <CartItem
