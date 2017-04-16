@@ -6,15 +6,15 @@
   margin: 0 auto;
 }
 
-.food-title {
+.foodTitle {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.quantity-container {
+.quantityContainer {
 }
 
-.quantity-button {
+.quantityButton {
   min-width: 48px;
 }

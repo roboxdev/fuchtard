@@ -17,18 +17,18 @@
   padding-bottom: 72px;
 }
 
-.food-container {
+.foodContainer {
   width: 100%;
   @media (--desktop) {
     width: 55%;
   }
 }
 
-.food-menu-container {
+.foodMenuContainer {
   width: 20%;
 }
 
-.checkout-container {
+.checkoutContainer {
   width: 25%;
 }
 

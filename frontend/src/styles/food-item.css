@@ -1,4 +1,4 @@
-.item-wrapper {
+.itemWrapper {
   width: 100%;
   @media (width >= 600px) {
     width: calc(50% - 4px);
@@ -18,10 +18,10 @@
   padding: 0 16px 16px;
 }
 
-.old-price {
+.oldPrice {
   text-decoration: line-through;
 }
 
-.price-spacer {
+.priceSpacer {
   justify-content: space-between;
 }
