@@ -4,11 +4,6 @@ import {Link} from 'react-router-dom';
 import {List, ListItem} from 'react-toolbox/lib/list';
 
 
-@connect(
-    state => ({
-        foodCategories: state.entities.foodCategories,
-    })
-)
 export class FoodMenu extends React.Component {
     render() {
         return (
@@ -30,3 +25,10 @@ export class FoodMenu extends React.Component {
         )
     }
 }
+
+
+export default connect(
+    state => ({
+        foodCategories: state.entities.foodCategories,
+    })
+)(FoodMenu)

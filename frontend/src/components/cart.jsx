@@ -1,41 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import map from 'lodash/map';
-import { actions as cartActions } from 'reducers/cart';
-import {foodItemAnnotatedCart, subtotalSelector} from 'selectors/app';
+import { foodItemAnnotatedCart } from 'selectors/app';
 
-import {Card, CardTitle} from 'react-toolbox/lib/card';
-import {Button} from 'react-toolbox/lib/button';
-import FontIcon from 'react-toolbox/lib/font_icon';
+import { Card } from 'react-toolbox/lib/card';
+
+import CartTotal from 'components/CartTotal';
+import CartQuantityButtons from 'components/CartQuantityButtons';
 
 import styles from '../styles/checkout.css';
 import cardStyles from '../styles/cart-card.css';
-
-
-@connect(
-    null,
-    (dispatch, props) => ({
-        plusButton: () => dispatch(cartActions.plusButton(props.foodItemId)),
-        minusButton: () => dispatch(cartActions.minusButton(props.foodItemId)),
-    })
-)
-class CartQuantityButtons extends React.Component {
-    render() {
-        const {quantity, plusButton, minusButton} = this.props;
-        return (
-            <div>
-                <Button styleName="styles.quantity-button" onClick={minusButton}>
-                    <span className="plusminus">−</span>
-                </Button>
-                <Button styleName="styles.quantity-button" disabled={quantity >= 9} onClick={plusButton}>
-                    <span className="plusminus">+</span>
-                </Button>
-            </div>
-        )
-    }
-}
 
 
 class CartItem extends React.Component {
@@ -60,33 +35,6 @@ class CartItem extends React.Component {
 }
 
 
-@connect(
-    state => ({
-        cartPrice: subtotalSelector(state),
-    }),
-    dispatch => ({
-        ...bindActionCreators(cartActions, dispatch),
-    })
-)
-class CartTotal extends React.Component {
-    render() {
-        const {cartPrice, clearCart} = this.props;
-        return <Card theme={cardStyles}>
-            <Button icon="remove_shopping_cart" onClick={clearCart}/>
-            <div styleName="styles.food-title">
-                Итого
-            </div>
-            <p>{cartPrice}₸</p>
-        </Card >
-    }
-}
-
-
-@connect(
-    state => ({
-        annotatedCart: foodItemAnnotatedCart(state),
-    }),
-)
 export class Cart extends React.Component {
     render() {
         const {annotatedCart} = this.props;
@@ -106,3 +54,9 @@ export class Cart extends React.Component {
         )
     }
 }
+
+export default connect(
+    state => ({
+        annotatedCart: foodItemAnnotatedCart(state),
+    }),
+)(Cart)

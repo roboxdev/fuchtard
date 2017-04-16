@@ -6,15 +6,7 @@ import Snackbar from 'react-toolbox/lib/snackbar';
 import { actions as notificationActions } from 'reducers/notifications';
 import { actions as cartActions } from 'reducers/cart';
 
-@connect(
-    state => ({
-        notification: state.notifications.label,
-    }),
-    dispatch => ({
-        ...bindActionCreators(notificationActions, dispatch),
-        ...bindActionCreators(cartActions, dispatch),
-    })
-)
+
 export class Notification extends React.Component {
     state = {
         active: false,
@@ -51,3 +43,14 @@ export class Notification extends React.Component {
         );
     }
 }
+
+
+export default connect(
+    state => ({
+        notification: state.notifications.label,
+    }),
+    dispatch => ({
+        ...bindActionCreators(notificationActions, dispatch),
+        ...bindActionCreators(cartActions, dispatch),
+    })
+)(Notification)

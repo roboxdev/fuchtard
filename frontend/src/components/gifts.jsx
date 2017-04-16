@@ -7,16 +7,6 @@ import { actions as orderActions } from 'reducers/order';
 import {foodItemAnnotatedGifts, subtotalSelector} from 'selectors/app';
 
 
-@connect(
-    state => ({
-        cartPrice: subtotalSelector(state),
-        gifts: foodItemAnnotatedGifts(state),
-        selectedGift: state.order.gift,
-    }),
-    dispatch => ({
-        ...bindActionCreators(orderActions, dispatch),
-    })
-)
 export class GiftsForm extends React.Component {
     handleChange = (value) => {this.props.updateOrderField('gift', +value)};
 
@@ -37,3 +27,15 @@ export class GiftsForm extends React.Component {
         </div>
     }
 }
+
+
+export default connect(
+    state => ({
+        cartPrice: subtotalSelector(state),
+        gifts: foodItemAnnotatedGifts(state),
+        selectedGift: state.order.gift,
+    }),
+    dispatch => ({
+        ...bindActionCreators(orderActions, dispatch),
+    })
+)(GiftsForm)

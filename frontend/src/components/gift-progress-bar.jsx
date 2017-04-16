@@ -6,12 +6,6 @@ import styles from '../styles/gift-progress-bar.css';
 import {subtotalSelector} from 'selectors/app';
 
 
-@connect(
-    state => ({
-        cartPrice: subtotalSelector(state),
-        gifts: state.entities.gifts,
-    })
-)
 export class GiftProgressBar extends React.Component {
     getMaxProgress = () => [...this.props.gifts].pop().requirement;
 
@@ -33,3 +27,10 @@ export class GiftProgressBar extends React.Component {
 
     }
 }
+
+export default connect(
+    state => ({
+        cartPrice: subtotalSelector(state),
+        gifts: state.entities.gifts,
+    })
+)(GiftProgressBar)

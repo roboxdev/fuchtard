@@ -12,14 +12,6 @@ import inputStyles from '../styles/order-input.css';
 import Collapse from 'react-collapse';
 
 
-@connect(
-    state => ({
-        order: state.order,
-    }),
-    dispatch => ({
-        ...bindActionCreators(orderActions, dispatch),
-    })
-)
 export class OrderForm extends React.Component {
     state = {
         optionalFieldsVisible: false,
@@ -105,3 +97,13 @@ export class OrderForm extends React.Component {
         </div>
     }
 }
+
+
+export default connect(
+    state => ({
+        order: state.order,
+    }),
+    dispatch => ({
+        ...bindActionCreators(orderActions, dispatch),
+    })
+)(OrderForm)
