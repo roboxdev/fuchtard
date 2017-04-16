@@ -5,15 +5,15 @@ import Sticky from 'react-stickynode';
 
 import FoodMenu from 'components/menu';
 import FoodCategory from 'components/food-category';
-import {IndexPage} from 'components/index-page';
-import {Checkout} from 'components/checkout';
-import {NavBar} from 'components/navbar';
+import IndexPage from 'components/index-page';
+import Checkout from 'components/checkout';
+import NavBar from 'components/navbar';
 import Notification from 'components/notification';
 
 import styles from '../styles/app.css';
 
 
-export class App extends React.Component {
+class App extends React.Component {
     render() {
         return (
             <Router>
@@ -50,3 +50,5 @@ export class App extends React.Component {
         );
     }
 }
+
+export default App

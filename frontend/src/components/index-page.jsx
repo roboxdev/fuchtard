@@ -1,12 +1,12 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
 
-import {Header} from 'components/header';
+import Header from 'components/header';
 import FoodMenu from 'components/menu';
-import {SEOAbout} from 'components/seoabout';
-import {Footer} from 'components/footer';
+import SEOAbout from 'components/seoabout';
+import Footer from 'components/footer';
 
-export class IndexPage extends React.Component {
+class IndexPage extends React.Component {
     render() {
         return (
             <div>
@@ -22,3 +22,6 @@ export class IndexPage extends React.Component {
         )
     }
 }
+
+
+export default IndexPage;

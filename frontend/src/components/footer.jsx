@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/footer.css';
 
-export class Footer extends React.Component {
+class Footer extends React.Component {
     render() {
         return (
             <footer styleName="styles.footer">
@@ -12,3 +12,6 @@ export class Footer extends React.Component {
         )
     }
 }
+
+
+export default Footer;
