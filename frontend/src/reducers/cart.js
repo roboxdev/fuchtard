@@ -58,7 +58,7 @@ function cartItemDecrease(foodItemId) {
 
 function clearCart() {
     return dispatch => {
-        dispatch(notify('Корзина очищена'));
+        dispatch(notificationActions.notify('Корзина очищена'));
         dispatch({type: types.CLEAR_CART});
     }
 }
