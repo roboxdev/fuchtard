@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Card, CardMedia, CardTitle } from 'react-toolbox/lib/card';
-import styles from 'styles/food-item.css';
-import cardStyles from 'styles/food-item-card.css';
+import styles from 'styles/FoodItem';
+import cardStyles from 'styles/food-item-card';
 
 import FoodQuantityButtons from 'components/FoodQuantityButtons';
 

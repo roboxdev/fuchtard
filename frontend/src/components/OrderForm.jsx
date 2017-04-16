@@ -6,9 +6,8 @@ import { actions as orderActions } from 'reducers/order';
 
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
-import styles from 'styles/checkout.css';
-import buttonStyles from 'styles/order-button.css';
-import inputStyles from 'styles/order-input.css';
+import buttonStyles from 'styles/order-button';
+import inputStyles from 'styles/order-input';
 import Collapse from 'react-collapse';
 
 

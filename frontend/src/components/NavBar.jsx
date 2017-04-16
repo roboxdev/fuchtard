@@ -5,8 +5,8 @@ import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
 import GiftProgressBar from 'components/GiftProgressBar';
-import styles from 'styles/navbar.css';
-import buttonStyles from 'styles/navbar-button.css';
+import styles from 'styles/NavBar';
+import buttonStyles from 'styles/navbar-button';
 
 class NavigationButtons extends React.Component {
     render() {
