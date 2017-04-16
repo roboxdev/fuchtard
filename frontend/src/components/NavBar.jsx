@@ -4,7 +4,7 @@ import MediaQuery from "react-responsive";
 import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
-import GiftProgressBar from 'components/gift-progress-bar';
+import GiftProgressBar from 'components/GiftProgressBar';
 import styles from '../styles/navbar.css';
 import buttonStyles from '../styles/navbar-button.css';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
 
-import Header from 'components/header';
-import FoodMenu from 'components/menu';
-import SEOAbout from 'components/seoabout';
-import Footer from 'components/footer';
+import Header from 'components/Header';
+import FoodMenu from 'components/FoodMenu';
+import SEOAbout from 'components/SEOAbout';
+import Footer from 'components/Footer';
 
 class IndexPage extends React.Component {
     render() {

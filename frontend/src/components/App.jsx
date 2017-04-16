@@ -3,12 +3,12 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import MediaQuery from 'react-responsive';
 import Sticky from 'react-stickynode';
 
-import FoodMenu from 'components/menu';
-import FoodCategory from 'components/food-category';
-import IndexPage from 'components/index-page';
-import Checkout from 'components/checkout';
-import NavBar from 'components/navbar';
-import Notification from 'components/notification';
+import FoodMenu from 'components/FoodMenu';
+import FoodCategory from 'components/FoodCategory';
+import IndexPage from 'components/IndexPage';
+import Checkout from 'components/Checkout';
+import NavBar from 'components/NavBar';
+import Notification from 'components/Notification';
 
 import styles from '../styles/app.css';
 

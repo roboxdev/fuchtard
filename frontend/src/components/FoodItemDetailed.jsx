@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { getCategoryBySlug, getFoodItemsBySlugOrID } from 'selectors/app';
 
-import FoodItem from 'components/food-item';
+import FoodItem from 'components/FoodItem';
 
 
 export class FoodItemDetailed extends React.Component {

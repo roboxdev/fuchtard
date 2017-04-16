@@ -4,10 +4,10 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
 import {Card, CardTitle} from 'react-toolbox/lib/card';
 import {getFoodItemsOfCategory, getCategoryBySlug} from 'selectors/app'
-import FoodItem from 'components/food-item';
+import FoodItem from 'components/FoodItem';
 import FoodItemDetailed from 'components/FoodItemDetailed';
-import Footer from 'components/footer';
-import Header from 'components/header';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
 
 import styles from '../styles/food-category.css'
 
