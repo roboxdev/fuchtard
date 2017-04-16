@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardMedia, CardTitle } from 'react-toolbox/lib/card';
 import styles from 'styles/FoodItem.css';
-import cardTheme from 'styles/themes/food-item-card.css';
 
 import FoodQuantityButtons from 'components/FoodQuantityButtons';
 
@@ -13,7 +12,7 @@ export class FoodItem extends React.Component {
         const {food, category} = this.props;
         return (food
                 ? <div className={styles.itemWrapper}>
-                    <Card theme={cardTheme}>
+                    <Card theme={{card: styles.card}}>
                         <div>
                             <CardMedia
                                 aspectRatio="wide"

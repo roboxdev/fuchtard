@@ -6,19 +6,18 @@ import FontIcon from 'react-toolbox/lib/font_icon';
 
 import GiftProgressBar from 'components/GiftProgressBar';
 import styles from 'styles/NavBar.css';
-import buttonTheme from 'styles/themes/navbar-button.css';
 
 class NavigationButtons extends React.Component {
     render() {
         return <div className={styles.navigationButtons}>
             <Link to="/" className={styles.link}>
-                <Button neutral={false} theme={buttonTheme}>
+                <Button neutral={false} theme={{button: styles.button}}>
                     <FontIcon className={styles.buttonIcon} value="home"/>
                     <span className={styles.buttonText}>Домой</span>
                 </Button>
             </Link>
             <Link to="/cart/" className={styles.link}>
-                <Button neutral={false} theme={buttonTheme}>
+                <Button neutral={false} theme={{button: styles.button}}>
                     <FontIcon className={styles.buttonIcon} value="shopping_cart"/>
                     <span className={styles.buttonText}>Корзина</span>
                 </Button>

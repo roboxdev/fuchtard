@@ -6,8 +6,7 @@ import { actions as orderActions } from 'reducers/order';
 
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
-import buttonTheme from 'styles/themes/order-button.css';
-import inputTheme from 'styles/themes/order-input.css';
+import styles from 'styles/OrderForm.css';
 import Collapse from 'react-collapse';
 
 
@@ -28,7 +27,7 @@ export class OrderForm extends React.Component {
         const updateOrder = (field, value) => updateOrderField(field, value);
         return <div>
             <form onSubmit={this.submit}>
-                <Input theme={inputTheme}
+                <Input theme={{input: styles.input}}
                        value={order.name}
                        onChange={value => updateOrder('name', value)}
                        type='text'
@@ -37,7 +36,7 @@ export class OrderForm extends React.Component {
                        maxLength={16}
                        required
                 />
-                <Input theme={inputTheme}
+                <Input theme={{input: styles.input}}
                        value={order.phone}
                        onChange={value => updateOrder('phone', value)}
                        onFocus={this.showOptionalFields}
@@ -55,21 +54,21 @@ export class OrderForm extends React.Component {
                                label='Email'
                         />
 
-                        <Input theme={inputTheme}
+                        <Input theme={{input: styles.input}}
                                value={order.street}
                                onChange={value => updateOrder('street', value)}
                                type='text'
                                name='street'
                                label='Улица'
                         />
-                        <Input theme={inputTheme}
+                        <Input theme={{input: styles.input}}
                                value={order.building}
                                onChange={value => updateOrder('building', value)}
                                type='text'
                                name='building'
                                label='Номер дома'
                         />
-                        <Input theme={inputTheme}
+                        <Input theme={{input: styles.input}}
                                value={order.apartment}
                                onChange={value => updateOrder('apartment', value)}
                                type='text'
@@ -82,7 +81,7 @@ export class OrderForm extends React.Component {
                                name='floor'
                                label='Этаж'
                         />
-                        <Input theme={inputTheme}
+                        <Input theme={{input: styles.input}}
                                value={order.comment}
                                onChange={value => updateOrder('comment', value)}
                                type='text'
@@ -91,7 +90,7 @@ export class OrderForm extends React.Component {
 
                     </div>
                 </Collapse>
-                <Button theme={buttonTheme} type="submit" raised primary>Заказать</Button>
+                <Button theme={{button: styles.button}} type="submit" raised primary>Заказать</Button>
             </form>
         </div>
     }

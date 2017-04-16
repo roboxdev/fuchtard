@@ -10,13 +10,12 @@ import { Button } from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
 import styles from 'styles/Checkout.css';
-import cardTheme from 'styles/themes/cart-card.css';
 
 
 export class CartTotal extends React.Component {
     render() {
         const {cartPrice, clearCart} = this.props;
-        return <Card theme={cardTheme}>
+        return <Card theme={{card: styles.cartCard}}>
             <Button icon="remove_shopping_cart" onClick={clearCart}/>
             <div className={styles.foodTitle}>
                 Итого
