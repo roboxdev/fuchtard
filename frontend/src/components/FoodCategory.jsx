@@ -9,7 +9,7 @@ import FoodItemDetailed from 'components/FoodItemDetailed';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
-import styles from 'styles/FoodCategory';
+import styles from 'styles/FoodCategory.css';
 
 
 export class FoodCategory extends React.Component {

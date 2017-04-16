@@ -81,6 +81,6 @@ module.exports = {
             'node_modules',
             path.resolve('./src'),
         ],
-        extensions: ['.js', '.jsx', '.css']
+        extensions: ['.js', '.jsx']
     }
 };

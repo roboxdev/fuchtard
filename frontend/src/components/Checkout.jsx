@@ -3,7 +3,7 @@ import GiftsForm from 'components/GiftsForm';
 import Cart from 'components/Cart';
 import OrderForm from 'components/OrderForm';
 
-import styles from 'styles/Checkout';
+import styles from 'styles/Checkout.css';
 
 export class Checkout extends React.Component {
     render() {

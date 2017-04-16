@@ -10,7 +10,7 @@ import Checkout from 'components/Checkout';
 import NavBar from 'components/NavBar';
 import Notification from 'components/Notification';
 
-import styles from 'styles/App';
+import styles from 'styles/App.css';
 
 
 export class App extends React.Component {

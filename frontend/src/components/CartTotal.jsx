@@ -9,8 +9,8 @@ import { Card } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
-import styles from 'styles/Checkout';
-import cardStyles from 'styles/cart-card';
+import styles from 'styles/Checkout.css';
+import cardStyles from 'styles/cart-card.css';
 
 
 export class CartTotal extends React.Component {

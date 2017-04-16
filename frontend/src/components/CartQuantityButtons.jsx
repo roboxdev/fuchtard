@@ -6,7 +6,7 @@ import { actions as cartActions } from 'reducers/cart';
 import { Button } from 'react-toolbox/lib/button';
 
 
-import styles from 'styles/Checkout';
+import styles from 'styles/Checkout.css';
 
 
 export class CartQuantityButtons extends React.Component {
