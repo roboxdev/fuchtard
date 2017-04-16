@@ -6,7 +6,7 @@ import { actions as cartActions } from 'reducers/cart';
 import { Button } from 'react-toolbox/lib/button';
 
 
-import styles from '../styles/checkout.css';
+import styles from 'styles/checkout.css';
 
 
 export class CartQuantityButtons extends React.Component {
@@ -14,10 +14,10 @@ export class CartQuantityButtons extends React.Component {
         const {quantity, plusButton, minusButton} = this.props;
         return (
             <div>
-                <Button styleName="styles.quantity-button" onClick={minusButton}>
+                <Button className={styles.quantityButton} onClick={minusButton}>
                     <span className="plusminus">−</span>
                 </Button>
-                <Button styleName="styles.quantity-button" disabled={quantity >= 9} onClick={plusButton}>
+                <Button className={styles.quantityButton} disabled={quantity >= 9} onClick={plusButton}>
                     <span className="plusminus">+</span>
                 </Button>
             </div>

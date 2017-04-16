@@ -5,22 +5,22 @@ import {Button} from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
 import GiftProgressBar from 'components/GiftProgressBar';
-import styles from '../styles/navbar.css';
-import buttonStyles from '../styles/navbar-button.css';
+import styles from 'styles/navbar.css';
+import buttonStyles from 'styles/navbar-button.css';
 
 class NavigationButtons extends React.Component {
     render() {
-        return <div styleName="styles.navigation-buttons">
-            <Link to="/" styleName="styles.link">
+        return <div className={styles.navigationButtons}>
+            <Link to="/" className={styles.link}>
                 <Button neutral={false} theme={buttonStyles}>
-                    <FontIcon styleName="styles.button-icon" value="home"/>
-                    <span styleName="styles.button-text">Домой</span>
+                    <FontIcon className={styles.buttonIcon} value="home"/>
+                    <span className={styles.buttonText}>Домой</span>
                 </Button>
             </Link>
-            <Link to="/cart/" styleName="styles.link">
+            <Link to="/cart/" className={styles.link}>
                 <Button neutral={false} theme={buttonStyles}>
-                    <FontIcon styleName="styles.button-icon" value="shopping_cart"/>
-                    <span styleName="styles.button-text">Корзина</span>
+                    <FontIcon className={styles.buttonIcon} value="shopping_cart"/>
+                    <span className={styles.buttonText}>Корзина</span>
                 </Button>
             </Link>
         </div>
@@ -31,7 +31,7 @@ class NavigationButtons extends React.Component {
 export class NavBar extends React.Component {
     render() {
         return <MediaQuery maxWidth={960}>
-            <div styleName="styles.sticky">
+            <div className={styles.sticky}>
                 <GiftProgressBar />
                 <NavigationButtons />
             </div>

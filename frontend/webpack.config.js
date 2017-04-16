@@ -51,17 +51,6 @@ module.exports = {
                     {
 
                         loader: 'babel-loader',
-                        options: {
-                            plugins: [
-                                [
-                                    'react-css-modules',
-                                    {
-                                        context: __dirname,
-                                        generateScopedName: '[name]__[local]___[hash:base64:5]',
-                                    }
-                                ]
-                            ]
-                        },
                     }
                 ],
             },

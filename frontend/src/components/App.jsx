@@ -10,17 +10,17 @@ import Checkout from 'components/Checkout';
 import NavBar from 'components/NavBar';
 import Notification from 'components/Notification';
 
-import styles from '../styles/app.css';
+import styles from 'styles/app.css';
 
 
 export class App extends React.Component {
     render() {
         return (
             <Router>
-                <div styleName="styles.app">
-                    <div styleName="styles.content">
+                <div className={styles.app}>
+                    <div className={styles.content}>
                         <MediaQuery minWidth={960}>
-                            <div styleName="styles.food-menu-container">
+                            <div className={styles.foodMenuContainer}>
                                 <Sticky>
                                     <FoodMenu/>
                                 </Sticky>
@@ -30,11 +30,11 @@ export class App extends React.Component {
                         <MediaQuery maxWidth={960}>
                             <Route path="/cart/" component={Checkout}/>
                         </MediaQuery>
-                        <div styleName="styles.food-container">
+                        <div className={styles.foodContainer}>
                             <Route path="/:slug/" component={FoodCategory}/>
                         </div>
                         <MediaQuery minWidth={960}>
-                            <div styleName="styles.checkout-container">
+                            <div className={styles.checkoutContainer}>
                                 <Sticky>
                                     <div>
                                         <Checkout/>

@@ -9,8 +9,8 @@ import { Card } from 'react-toolbox/lib/card';
 import CartTotal from 'components/CartTotal';
 import CartQuantityButtons from 'components/CartQuantityButtons';
 
-import styles from '../styles/checkout.css';
-import cardStyles from '../styles/cart-card.css';
+import styles from 'styles/checkout.css';
+import cardStyles from 'styles/cart-card.css';
 
 
 class CartItem extends React.Component {
@@ -24,7 +24,7 @@ class CartItem extends React.Component {
                         quantity={quantity}
                         foodItemTitle={foodItem.title}
                     />
-                    <div styleName="styles.food-title">
+                    <div className={styles.foodTitle}>
                         {quantity} × {foodItem.title}:
                     </div>
                     <p>{foodItem.price * quantity}₸</p>

@@ -9,7 +9,7 @@ import FoodItemDetailed from 'components/FoodItemDetailed';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
-import styles from '../styles/food-category.css'
+import styles from 'styles/food-category.css'
 
 
 export class FoodCategory extends React.Component {
@@ -38,7 +38,7 @@ export class FoodCategory extends React.Component {
                             />
                         </Card>
                     </div>
-                    <div styleName="styles.food-item-category">
+                    <div className={styles.foodItemCategory}>
                         {foodItems.map(
                             food =>
                                 <FoodItem
