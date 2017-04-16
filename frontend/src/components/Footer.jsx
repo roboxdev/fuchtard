@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/footer.css';
 
-class Footer extends React.Component {
+export class Footer extends React.Component {
     render() {
         return (
             <footer styleName="styles.footer">

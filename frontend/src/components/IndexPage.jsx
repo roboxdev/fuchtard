@@ -6,7 +6,7 @@ import FoodMenu from 'components/FoodMenu';
 import SEOAbout from 'components/SEOAbout';
 import Footer from 'components/Footer';
 
-class IndexPage extends React.Component {
+export class IndexPage extends React.Component {
     render() {
         return (
             <div>

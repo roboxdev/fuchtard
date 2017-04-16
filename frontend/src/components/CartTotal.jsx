@@ -13,7 +13,7 @@ import styles from '../styles/checkout.css';
 import cardStyles from '../styles/cart-card.css';
 
 
-class CartTotal extends React.Component {
+export class CartTotal extends React.Component {
     render() {
         const {cartPrice, clearCart} = this.props;
         return <Card theme={cardStyles}>

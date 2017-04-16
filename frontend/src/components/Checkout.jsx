@@ -5,7 +5,7 @@ import OrderForm from 'components/OrderForm';
 
 import styles from '../styles/checkout.css';
 
-class Checkout extends React.Component {
+export class Checkout extends React.Component {
     render() {
         return (
             <div  styleName="styles.wrapper">

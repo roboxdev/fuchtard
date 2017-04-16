@@ -8,7 +8,7 @@ import { actions as cartActions } from 'reducers/cart';
 import { getQuantityByFoodId } from 'selectors/app';
 
 
-class FoodQuantityButtons extends React.Component {
+export class FoodQuantityButtons extends React.Component {
     render() {
         const {quantity, plusButton, minusButton} = this.props;
         return (

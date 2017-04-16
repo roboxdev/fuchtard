@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SEOAbout extends React.Component {
+export class SEOAbout extends React.Component {
     render() {
         return(
             <div className="about_this">

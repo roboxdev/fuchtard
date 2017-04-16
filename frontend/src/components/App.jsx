@@ -13,7 +13,7 @@ import Notification from 'components/Notification';
 import styles from '../styles/app.css';
 
 
-class App extends React.Component {
+export class App extends React.Component {
     render() {
         return (
             <Router>

@@ -9,7 +9,7 @@ import { Button } from 'react-toolbox/lib/button';
 import styles from '../styles/checkout.css';
 
 
-class CartQuantityButtons extends React.Component {
+export class CartQuantityButtons extends React.Component {
     render() {
         const {quantity, plusButton, minusButton} = this.props;
         return (

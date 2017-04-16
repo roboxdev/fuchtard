@@ -28,7 +28,7 @@ class NavigationButtons extends React.Component {
     }
 }
 
-class NavBar extends React.Component {
+export class NavBar extends React.Component {
     render() {
         return <MediaQuery maxWidth={960}>
             <div styleName="styles.sticky">
