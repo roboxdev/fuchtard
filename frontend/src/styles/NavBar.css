@@ -29,13 +29,17 @@
   text-align: center;
 }
 
-.buttonIcon.buttonIcon.buttonIcon {
-  line-height: normal;
+.buttonIcon {
+  &&& {
+    line-height: normal;
+  }
 }
 
-.buttonText.buttonText.buttonText {
-  line-height: normal;
-  text-transform: none;
+.buttonText {
+  &&& {
+    line-height: normal;
+    text-transform: none;
+  }
 }
 
 .button {
