@@ -17,35 +17,33 @@ export class App extends React.Component {
     render() {
         return (
             <Router>
-                <div className={styles.app}>
-                    <div className={styles.content}>
-                        <MediaQuery minWidth={960}>
-                            <div className={styles.foodMenuContainer}>
-                                <Sticky>
-                                    <FoodMenu/>
-                                </Sticky>
-                            </div>
-                        </MediaQuery>
-                        <Route exact path="/" component={IndexPage}/>
-                        <MediaQuery maxWidth={960}>
-                            <Route path="/cart/" component={Checkout}/>
-                        </MediaQuery>
-                        <div className={styles.foodContainer}>
-                            <Route path="/:slug/" component={FoodCategory}/>
+                <div className={styles.content}>
+                    <MediaQuery minWidth={960}>
+                        <div className={styles.foodMenuContainer}>
+                            <Sticky>
+                                <FoodMenu/>
+                            </Sticky>
                         </div>
-                        <MediaQuery minWidth={960}>
-                            <div className={styles.checkoutContainer}>
-                                <Sticky>
-                                    <div>
-                                        <Checkout/>
-                                    </div>
-                                </Sticky>
-                            </div>
-                        </MediaQuery>
+                    </MediaQuery>
+                    <Route exact path="/" component={IndexPage}/>
+                    <MediaQuery maxWidth={960}>
+                        <Route path="/cart/" component={Checkout}/>
+                    </MediaQuery>
+                    <div className={styles.foodContainer}>
+                        <Route path="/:slug/" component={FoodCategory}/>
                     </div>
-                    <NavBar />
-                    <Notification />
+                    <MediaQuery minWidth={960}>
+                        <div className={styles.checkoutContainer}>
+                            <Sticky>
+                                <div>
+                                    <Checkout/>
+                                </div>
+                            </Sticky>
+                        </div>
+                    </MediaQuery>
                 </div>
+                <NavBar />
+                <Notification />
             </Router>
         );
     }
