@@ -1,0 +1,15 @@
+.foodTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quantityButton {
+  min-width: 48px;
+}
+
+.сard {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

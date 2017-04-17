@@ -5,22 +5,3 @@
   max-width: calc(var(--webSiteMaxWidth) / 2);
   margin: 0 auto;
 }
-
-.foodTitle {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.quantityContainer {
-}
-
-.quantityButton {
-  min-width: 48px;
-}
-
-.cartCard {
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}

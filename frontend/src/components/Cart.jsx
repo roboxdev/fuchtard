@@ -9,7 +9,7 @@ import { Card } from 'react-toolbox/lib/card';
 import CartTotal from 'components/CartTotal';
 import CartQuantityButtons from 'components/CartQuantityButtons';
 
-import styles from 'styles/Checkout.css';
+import styles from 'styles/Cart.css';
 
 
 class CartItem extends React.Component {
@@ -17,7 +17,7 @@ class CartItem extends React.Component {
         const {foodItemId, foodItem, quantity} = this.props;
         // const {price} = foodItem;
         return (foodItem
-                ? <Card theme={{card: styles.cartCard}}>
+                ? <Card theme={{card: styles.card}}>
                     <CartQuantityButtons
                         foodItemId={foodItemId}
                         quantity={quantity}
