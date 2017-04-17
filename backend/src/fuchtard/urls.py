@@ -18,11 +18,10 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    url(r'^suramar/panel/', include('panel.urls', namespace='panel')),
+    url(r'^', include('order.urls', namespace='order')),
     url(r'^suramar/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api')),
 ]

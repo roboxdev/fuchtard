@@ -1,3 +1,4 @@
+from django.views.generic import RedirectView
 from rest_framework import viewsets, mixins
 
 from .models import Order, Gift
@@ -23,3 +24,10 @@ class OrdersViewSet(mixins.CreateModelMixin,
         super(OrdersViewSet, self).perform_create(serializer)
         # TODO: fire notifications self.object.notify_restaurant()
         # TODO: check gift
+
+
+class OrderDetailRedirectView(RedirectView):
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        return Order.objects.get_by_hash(self.kwargs.get('hashed_id')).get_absolute_url()

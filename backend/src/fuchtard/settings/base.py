@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'main',
     'food',
     'order',
-    'panel',
     'api',
 ]
 

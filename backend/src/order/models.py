@@ -36,8 +36,11 @@ class Cart(models.Model):
         verbose_name_plural = 'Корзины'
 
     def __str__(self):
-        cart_items = ', '.join(map(lambda x: str(x), self.cartitem_set.all()))
-        return '{}₸: [{}]'.format(self.total_price, cart_items)
+        return '{}₸:\n{}'.format(self.total_price, self.cart_items)
+
+    @property
+    def cart_items(self):
+        return '\n'.join(map(lambda x: x.repr_with_price, self.cartitem_set.all()))
 
     @property
     def total_price(self):
@@ -58,6 +61,10 @@ class CartItem(models.Model):
 
     def __str__(self):
         return '{cart_item.quantity} × {cart_item.product.title}'.format(cart_item=self)
+
+    @property
+    def repr_with_price(self):
+        return '{cart_item} = {cart_item.total_item_price}₸'.format(cart_item=self)
 
     @property
     def price(self):
@@ -92,10 +99,14 @@ class Order(models.Model):
     order_created_timestamp = models.DateTimeField('Заказ создан', auto_now_add=True)
 
     def __str__(self):
-        return '{order.name}, {order.phone} ({order.street}, {order.building}, {order.apartment})'.format(order=self)
+        return '[{order.hashed_id}] {order.name}, {order.phone}'.format(order=self)
 
     def get_absolute_url(self):
-        return reverse('panel:order-detail-view', kwargs={'hashed_id': self.hashed_id})
+        return reverse('admin:order_orderdetails_change', args=[self.id])
+
+    @property
+    def edit_url(self):
+        return reverse('admin:order_order_change', args=[self.id])
 
     @property
     def hashed_id(self):
@@ -103,10 +114,7 @@ class Order(models.Model):
 
     def notify_restaurant(self):
         order_hashed_id = self.hashed_id
-        order_absolute_url = urljoin(
-            'http://{}'.format(settings.SITE_DOMAIN),
-            reverse('panel:order-detail-view', kwargs={'hashed_id': order_hashed_id}),
-        )
+        order_absolute_url = urljoin('http://{}'.format(settings.SITE_DOMAIN), self.get_absolute_url())
         email_params = {
             'template': 'order/email_new_order',
             'template_params': {
@@ -119,6 +127,13 @@ class Order(models.Model):
         }
         send_templated_email(email_params)
         telegram_notify_channel('Новый заказ №{}\n{}'.format(order_hashed_id, order_absolute_url))
+
+
+class OrderDetails(Order):
+    class Meta:
+        proxy = True
+        verbose_name = 'Детали заказа'
+        verbose_name_plural = 'Детали заказов'
 
 
 class Gift(models.Model):
