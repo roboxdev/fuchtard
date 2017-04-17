@@ -1,33 +1,17 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.core.urlresolvers import reverse
-from django.views.generic import TemplateView, ListView, DetailView
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.urls.base import reverse_lazy
+from django.views.generic import DetailView
 
 from order.models import Order
-from order.helpers import shifthash
 
 
-class CanEditOrderPermissionRequiredMixin(PermissionRequiredMixin):
-    permission_required = 'order.can_edit'
-
-    def get_login_url(self):
-        return reverse('admin:login')
-
-
-class DashboardView(CanEditOrderPermissionRequiredMixin, TemplateView):
-    template_name = 'panel/dashboard.html'
-
-
-class OrdersView(CanEditOrderPermissionRequiredMixin, ListView):
-    template_name = 'panel/orders.html'
-    model = Order
-    queryset = Order.objects.order_by('-order_created_timestamp')[:100]
-
-
-class OrderDetailView(CanEditOrderPermissionRequiredMixin, DetailView):
+class OrderDetailView(UserPassesTestMixin, DetailView):
     template_name = 'panel/order_detail.html'
     model = Order
+    login_url = reverse_lazy('admin:login')
+
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get_object(self, queryset=None):
-        pk = shifthash(self.kwargs.get('hashed_id'))
-        self.kwargs['pk'] = pk
-        return super(OrderDetailView, self).get_object(queryset)
+        return Order.objects.get_by_hash(self.kwargs.get('hashed_id'))

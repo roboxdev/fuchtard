@@ -22,8 +22,8 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^panel/', include('panel.urls', namespace='panel')),
+    url(r'^suramar/panel/', include('panel.urls', namespace='panel')),
+    url(r'^suramar/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api')),
 ]
 

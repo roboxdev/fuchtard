@@ -1,17 +1,17 @@
-{% extends 'panel/base.html' %}
+{% extends 'admin/base.html' %}
 
 {% block body_class %}{{ block.super }} order_detail{% endblock body_class %}
 
-{% block body_content %}
+{% block content %}
   <p>Номер заказа: {{ object.hashed_id }}</p>
   <p>Заказ создан: {{ object.order_created_timestamp }}</p>
   <p>Имя заказчика: {{ object.name }}</p>
   <p>Email: {{ object.email }}</p>
   <p>Телефон: {{ object.phone }}</p>
-  <p>Улица: {{ object.address.street }}</p>
-  <p>Дом: {{ object.address.building }}</p>
-  <p>Квартира: {{ object.address.apartment }}</p>
-  <p>Этаж: {{ object.address.floor }}</p>
+  <p>Улица: {{ object.street }}</p>
+  <p>Дом: {{ object.building }}</p>
+  <p>Квартира: {{ object.apartment }}</p>
+  <p>Этаж: {{ object.floor }}</p>
   <p>Комментарий: {{ object.comment }}</p>
   <p></p>
   {% for cart_item in object.cart.cartitem_set.all %}
@@ -24,7 +24,7 @@
   <p>Итого: {{ object.cart.total_price }} 〒</p>
   <p>Подарок: {{ object.gift_food_item.title }}</p>
 
-{% endblock body_content %}
+{% endblock content %}
 
 {% block order %}
   <li class="active"><a href="">&nbsp;&nbsp;&nbsp;Заказ {{ object.hashed_id }}</a></li>

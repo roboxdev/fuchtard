@@ -94,6 +94,9 @@ class Order(models.Model):
     def __str__(self):
         return '{order.name}, {order.phone} ({order.street}, {order.building}, {order.apartment})'.format(order=self)
 
+    def get_absolute_url(self):
+        return reverse('panel:order-detail-view', kwargs={'hashed_id': self.hashed_id})
+
     @property
     def hashed_id(self):
         return shifthash(self.id)
