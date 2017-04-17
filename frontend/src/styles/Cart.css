@@ -8,7 +8,7 @@
   min-width: 48px;
 }
 
-.сard {
+.card {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
