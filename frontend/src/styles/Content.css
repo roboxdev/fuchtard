@@ -1,0 +1,8 @@
+@import '_constants.css';
+
+.content {
+  width: 100%;
+  @media (--desktop) {
+    width: 55%;
+  }
+}
