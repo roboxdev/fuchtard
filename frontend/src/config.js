@@ -1,7 +1,11 @@
 const apiHost = 'http://localhost:8000';
 
 
-export const ordersEndpoint = `${apiHost}/api/orders/`;
-export const foodItemsEndpoint = `${apiHost}/api/food_items/`;
-export const foodCategoriesEndpoint = `${apiHost}/api/food_categories/`;
-export const giftsEndpoint = `${apiHost}/api/gifts/`;
+export const endpoints = {
+    orders: `${apiHost}/api/orders/`,
+    foodItems: `${apiHost}/api/food_items/`,
+    foodCategories: `${apiHost}/api/food_categories/`,
+    gifts: `${apiHost}/api/gifts/`,
+
+};
+

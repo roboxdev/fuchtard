@@ -1,6 +1,6 @@
 import Immutable from 'seamless-immutable';
 
-import { foodItemsEndpoint, foodCategoriesEndpoint, giftsEndpoint } from 'config';
+import { endpoints } from 'config';
 
 
 const types = {
@@ -31,17 +31,17 @@ export default function (state=initialState, action) {
 
 function fetchData() {
     return (dispatch) => {
-        fetch(foodItemsEndpoint).then(
+        fetch(endpoints.foodItems).then(
             response => response.json()
         ).then(
             json => dispatch({type: types.SET_FOOD_ITEMS, payload: json})
         );
-        fetch(foodCategoriesEndpoint).then(
+        fetch(endpoints.foodCategories).then(
             response => response.json()
         ).then(
             json => dispatch({type: types.SET_FOOD_CATEGORIES, payload: json})
         );
-        fetch(giftsEndpoint).then(
+        fetch(endpoints.gifts).then(
             response => response.json()
         ).then(
             json => dispatch({type: types.SET_GIFTS, payload: json})

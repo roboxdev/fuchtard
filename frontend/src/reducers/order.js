@@ -1,6 +1,6 @@
 import Immutable from 'seamless-immutable';
 
-import { ordersEndpoint } from 'config';
+import { endpoints } from 'config';
 
 
 const types = {
@@ -43,7 +43,7 @@ function placeOrder() {
     return (dispatch, getState) => {
         const state = getState();
         const order = state.order.merge({cart: state.cart.present});
-        fetch(ordersEndpoint, {
+        fetch(endpoints.orders, {
             method: "POST",
             credentials: "same-origin",
             headers: new Headers({
