@@ -3,6 +3,7 @@ import cart from 'reducers/cart';
 import entities from 'reducers/entities';
 import notifications from 'reducers/notifications';
 import order from 'reducers/order';
+import ui from 'reducers/ui';
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     entities,
     notifications,
     order,
+    ui,
 });
 
 export default rootReducer;
