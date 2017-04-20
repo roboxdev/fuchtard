@@ -18,7 +18,7 @@ export class GiftsForm extends React.Component {
                 {gifts.map(({id, foodItem, requirement}) => {
                         const disabled = !cartPrice || cartPrice < requirement;
                         const label = disabled
-                            ? (foodItem && `${foodItem.title} (${requirement})`)
+                            ? (foodItem && `${foodItem.title} (${requirement} ₸)`)
                             : (foodItem && foodItem.title);
                         return <RadioButton key={id} label={label} value={`${id}`} disabled={disabled}/>
                     }
