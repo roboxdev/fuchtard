@@ -86,6 +86,7 @@ class FoodItem(SortableMixin):
     category = SortableForeignKey(FoodCategory, verbose_name='Категории')
     tags = models.ManyToManyField(FoodTag, blank=True, related_name='fooditems', verbose_name='Теги')
     discount = GenericRelation(Discount)
+    amount = models.CharField('Количество', max_length=20, blank=True)
 
     def __str__(self):
         return self.title
