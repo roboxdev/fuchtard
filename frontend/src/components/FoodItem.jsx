@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-import { Card, CardMedia, CardTitle } from 'react-toolbox/lib/card';
+import { Card, CardMedia, CardTitle, CardActions, CardText } from 'react-toolbox/lib/card';
 import styles from 'styles/FoodItem.css';
 
 import FoodQuantityButtons from 'components/FoodQuantityButtons';
@@ -9,37 +8,33 @@ import FoodQuantityButtons from 'components/FoodQuantityButtons';
 
 export class FoodItem extends React.Component {
     render() {
-        const {food, category} = this.props;
-        return (food
-                ? <div className={styles.itemWrapper}>
-                    <Card theme={{card: styles.card}}>
-                        <div>
-                            <CardMedia
-                                aspectRatio="wide"
-                                image={food.photo}
-                            />
-                            <CardTitle
-                                title={
-                                    <Link to={`/${category.slug}/${food.slug || food.id}/`}>
-                                        {food.title}
-                                    </Link>
-                                }
-                                subtitle={food.description}
-                            />
-                        </div>
-                        <div className={styles.pricing}>
-                            <div>
-                                {food.raw_price > food.price && <p className={styles.oldPrice}>{food.raw_price}₸</p>}
-                                <p>{food.price}₸</p>
-                            </div>
-                            <div>
-                                <FoodQuantityButtons foodItemId={food.id}/>
-                            </div>
-                        </div>
-                    </Card>
+        const {food} = this.props;
+        return <div className={styles.itemWrapper}>
+            <Card theme={{card: styles.card}}>
+                <div>
+                    <CardMedia
+                        aspectRatio="wide"
+                        image={food.photo}
+                    />
+                    <CardTitle title={food.title}/>
+                    <CardText>
+                        {
+                            food.raw_price > food.price &&
+                            <span className={styles.oldPrice}>{food.raw_price}&nbsp;₸</span>
+                        }
+                        <span> · </span>
+                        <span>{food.price}&nbsp;₸</span>
+                        <span> · </span>
+                        <span>{food.amount}</span>
+                    </CardText>
+                    <CardTitle subtitle={food.description}/>
+                    {/*<CardText>{food.description}</CardText>*/}
                 </div>
-                : null
-        )
+                <CardActions theme={{cardActions: styles.cardActions}}>
+                    <FoodQuantityButtons foodItemId={food.id}/>
+                </CardActions>
+            </Card>
+        </div>
     }
 }
 

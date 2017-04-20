@@ -90,7 +90,9 @@ export class OrderForm extends React.Component {
 
                     </div>
                 </Collapse>
-                <Button theme={{button: styles.button}} type="submit" raised primary>Заказать</Button>
+                <div className={styles.submitButtonContainer}>
+                    <Button theme={{button: styles.button}} type="submit" raised primary>Заказать</Button>
+                </div>
             </form>
         </div>
     }

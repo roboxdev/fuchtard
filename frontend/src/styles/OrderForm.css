@@ -2,7 +2,11 @@
   padding: 16px 0;
 }
 
+.submitButtonContainer {
+  text-align: center;
+}
+
 .button {
-  width: 50%;
-  margin: 0 auto;
+  display: inline-block;
+  min-width: 50%;
 }

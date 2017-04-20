@@ -4,11 +4,22 @@
   text-overflow: ellipsis;
 }
 
+.quantityButtons {
+  //display: flex;
+}
+
 .quantityButton {
   min-width: 48px;
 }
 
-.card {
+.plusminus {
+  font-size: 1.6rem;
+  width: 24px;
+}
+
+.cardText {
+  display: flex;
+  flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

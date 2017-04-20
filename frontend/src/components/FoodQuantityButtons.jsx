@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { actions as cartActions } from 'reducers/cart';
+import { getQuantityByFoodId } from 'selectors/app';
+
 import { Button } from 'react-toolbox/lib/button';
 import FontIcon from 'react-toolbox/lib/font_icon';
 
-import { actions as cartActions } from 'reducers/cart';
-import { getQuantityByFoodId } from 'selectors/app';
+import styles from 'styles/FoodItem.css';
 
 
 export class FoodQuantityButtons extends React.Component {
@@ -14,17 +16,28 @@ export class FoodQuantityButtons extends React.Component {
         return (
             <div>
                 {quantity >= 1 &&
-                <Button className="quantity-button" raised onClick={minusButton}>
-                    <span className="plusminus">−</span>
+                <Button
+                    className="quantity-button"
+                    // raised={true}
+                    primary={true}
+                    onClick={minusButton}
+                >
+                    <span className={styles.plusminus}>−</span>
                 </Button>
                 }
                 {quantity >= 1 &&
                 <span>{quantity}</span>
                 }
-                <Button className="quantity-button" raised disabled={quantity >= 9} onClick={plusButton}>
+                <Button
+                    className="quantity-button"
+                    // raised={true}
+                    primary={true}
+                    disabled={quantity >= 9}
+                    onClick={plusButton}
+                >
                     {!quantity || quantity < 1
                         ? <FontIcon value="add_shopping_cart"/>
-                        : <span className="plusminus">+</span>}
+                        : <span className={styles.plusminus}>+</span>}
                 </Button>
             </div>
         )

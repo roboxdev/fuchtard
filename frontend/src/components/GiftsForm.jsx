@@ -13,7 +13,6 @@ export class GiftsForm extends React.Component {
     render() {
         const {gifts, cartPrice, selectedGift} = this.props;
         return <div>
-            GIFTS:
             <RadioGroup name='gift' value={`${selectedGift}`} onChange={this.handleChange}>
                 {gifts.map(({id, foodItem, requirement}) => {
                         const disabled = !cartPrice || cartPrice < requirement;

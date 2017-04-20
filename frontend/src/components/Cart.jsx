@@ -1,61 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import map from 'lodash/map';
-import { foodItemAnnotatedCart } from 'selectors/app';
-
-import { Card } from 'react-toolbox/lib/card';
-
+import CartItem from 'components/CartItem';
 import CartTotal from 'components/CartTotal';
-import CartQuantityButtons from 'components/CartQuantityButtons';
-
-import styles from 'styles/Cart.css';
-
-
-class CartItem extends React.Component {
-    render() {
-        const {foodItemId, foodItem, quantity} = this.props;
-        // const {price} = foodItem;
-        return (foodItem
-                ? <Card theme={{card: styles.card}}>
-                    <CartQuantityButtons
-                        foodItemId={foodItemId}
-                        quantity={quantity}
-                        foodItemTitle={foodItem.title}
-                    />
-                    <div className={styles.foodTitle}>
-                        {quantity} × {foodItem.title}:
-                    </div>
-                    <p>{foodItem.price * quantity}&nbsp;₸</p>
-                </Card >
-                : null
-        )
-    }
-}
 
 
 export class Cart extends React.Component {
     render() {
-        const {annotatedCart} = this.props;
-        return (
-            <div>
-                CART:
-                {map(annotatedCart, ({quantity, foodItem}, foodItemId) =>
-                    <CartItem
-                        key={foodItemId}
-                        foodItemId={foodItemId}
-                        foodItem={foodItem}
-                        quantity={quantity}
-                    />
-                )}
-                <CartTotal/>
-            </div>
-        )
+        const {cart} = this.props;
+        return <div>
+            {Object.keys(cart).map((foodItemId) =>
+                <CartItem
+                    key={foodItemId}
+                    foodItemId={foodItemId}
+                />
+            )}
+            <CartTotal/>
+        </div>
+
     }
 }
 
 export default connect(
     state => ({
-        annotatedCart: foodItemAnnotatedCart(state),
+        cart: state.cart.present,
     }),
 )(Cart)

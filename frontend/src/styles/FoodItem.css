@@ -18,6 +18,11 @@
   padding: 0 16px 16px;
 }
 
+.plusminus {
+  font-size: 1.6rem;
+  width: 24px;
+}
+
 .oldPrice {
   text-decoration: line-through;
 }
@@ -29,4 +34,8 @@
 .card {
   height: 100%;
   justify-content: space-between;
+}
+
+.cardActions {
+  flex-direction: row-reverse;
 }
