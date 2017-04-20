@@ -71,13 +71,13 @@
                     <tr>
                       <td>{{ cart_item.product.title }}</td>
                       <td><span>×</span><span> {{ cart_item.quantity }}</span> | </td>
-                      <td>  {{ cart_item.total_item_price|floatformat:"0" }} 〒</td>
+                      <td>{{ cart_item.total_item_price|floatformat:"0" }}&nbsp;₸</td>
                     </tr>
                   {% endfor %}
                   <tr>
                     <td><b>Итого</b></td>
                     <td></td>
-                    <td><b>{{ order.cart.total_price }} 〒</b></td>
+                    <td><b>{{ order.cart.total_price }}&nbsp;₸</b></td>
                   </tr>
                   <tr>
                     <td>Подарок</td>

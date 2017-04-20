@@ -20,7 +20,7 @@ export class CartTotal extends React.Component {
             <div className={styles.foodTitle}>
                 Итого
             </div>
-            <p>{cartPrice}₸</p>
+            <p>{cartPrice}&nbsp;₸</p>
         </Card >
     }
 }

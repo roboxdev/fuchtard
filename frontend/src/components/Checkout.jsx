@@ -9,6 +9,12 @@ export class Checkout extends React.Component {
     render() {
         return (
             <div className={styles.wrapper}>
+                <div>
+                    <p>
+                        <span>Принимаем заказы с&nbsp;10:00&nbsp;до&nbsp;22:45</span>
+                    </p>
+                    <p>Минимальный заказ от&nbsp;3000&nbsp;₸</p>
+                </div>
                 <Cart/>
                 <GiftsForm/>
                 <OrderForm/>

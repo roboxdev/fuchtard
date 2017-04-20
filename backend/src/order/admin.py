@@ -66,7 +66,7 @@ class OrderDetailsAdmin(admin.ModelAdmin):
     order_number.short_description = 'Номер заказа'
 
     def total(self, obj):
-        return '{}₸'.format(obj.cart.total_price)
+        return '{} ₸'.format(obj.cart.total_price)
     total.short_description = 'Итого'
 
     def cart_items(self, obj):

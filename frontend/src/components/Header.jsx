@@ -13,13 +13,6 @@ export class Header extends React.Component {
                     </div>
                     <div>
                         <p>
-                            <span>Принимаем заказы</span>
-                            <span>с 10:00 до 22:45</span>
-                        </p>
-                        <p>Минимальный заказ от&nbsp;3000&nbsp;〒</p>
-                    </div>
-                    <div>
-                        <p>
                             <span>Телефон для заказов:</span>
                             <span><a href="tel:+77273573030">+7 (727) 357 30 30</a></span>
                         </p>

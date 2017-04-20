@@ -26,7 +26,7 @@ class CartItem extends React.Component {
                     <div className={styles.foodTitle}>
                         {quantity} × {foodItem.title}:
                     </div>
-                    <p>{foodItem.price * quantity}₸</p>
+                    <p>{foodItem.price * quantity}&nbsp;₸</p>
                 </Card >
                 : null
         )

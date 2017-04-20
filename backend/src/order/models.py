@@ -36,7 +36,7 @@ class Cart(models.Model):
         verbose_name_plural = 'Корзины'
 
     def __str__(self):
-        return '{}₸:\n{}'.format(self.total_price, self.cart_items)
+        return '{} ₸:\n{}'.format(self.total_price, self.cart_items)
 
     @property
     def cart_items(self):
@@ -64,7 +64,7 @@ class CartItem(models.Model):
 
     @property
     def repr_with_price(self):
-        return '{cart_item} = {cart_item.total_item_price}₸'.format(cart_item=self)
+        return '{cart_item} = {cart_item.total_item_price} ₸'.format(cart_item=self)
 
     @property
     def price(self):
