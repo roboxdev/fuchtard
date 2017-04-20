@@ -60,7 +60,7 @@ class CartItem(models.Model):
     history_price = models.IntegerField(null=True)
 
     def __str__(self):
-        return '{cart_item.quantity} × {cart_item.product.title}'.format(cart_item=self)
+        return '{cart_item.quantity} × {cart_item.product.title} {cart_item.product.amount}'.format(cart_item=self)
 
     @property
     def repr_with_price(self):

@@ -21,6 +21,7 @@ class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
             'category',
             # 'tags',
             'price',
+            'amount',
         )
 
     def get_price(self, obj):

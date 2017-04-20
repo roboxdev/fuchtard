@@ -69,7 +69,7 @@
                 <table class="btn-primary" cellpadding="0" cellspacing="10" border="0">
                   {% for cart_item in order.cart.cartitem_set.all %}
                     <tr>
-                      <td>{{ cart_item.product.title }}</td>
+                      <td>{{ cart_item.product.title }} {{ cart_item.product.amount }}</td>
                       <td><span>×</span><span> {{ cart_item.quantity }}</span> | </td>
                       <td>{{ cart_item.total_item_price|floatformat:"0" }}&nbsp;₸</td>
                     </tr>
