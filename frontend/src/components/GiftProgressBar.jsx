@@ -7,7 +7,7 @@ import {subtotalSelector} from 'selectors/app';
 
 
 export class GiftProgressBar extends React.Component {
-    getMaxProgress = () => [...this.props.gifts].pop().requirement;
+    getMaxProgress = () => this.props.gifts.length && [...this.props.gifts].pop().requirement;
 
     getBuffer = () => {
         const buffer = this.props.gifts.filter(v => v.requirement > this.props.cartPrice)[0];
@@ -15,16 +15,13 @@ export class GiftProgressBar extends React.Component {
     };
 
     render() {
-        const {cartPrice, gifts} = this.props;
-        return (cartPrice && gifts
-            ? <ProgressBar mode='determinate'
-                           value={cartPrice}
-                           buffer={this.getBuffer()}
-                           max={this.getMaxProgress()}
-                           theme={styles}
-            />
-            : null)
-
+        const {cartPrice} = this.props;
+        return <ProgressBar mode='determinate'
+                            value={cartPrice}
+                            buffer={this.getBuffer()}
+                            max={this.getMaxProgress()}
+                            theme={styles}
+        />
     }
 }
 
