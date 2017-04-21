@@ -1,5 +1,16 @@
 @import '_constants.css';
 
+.page {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 72px;
+}
+
+.leftSidebar {
+  width: 20%;
+}
+
 .mainBlock {
   width: 100%;
   @media (--desktop) {
@@ -7,9 +18,6 @@
   }
 }
 
-.page {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-bottom: 72px;
+.rightSidebar {
+  width: 25%;
 }

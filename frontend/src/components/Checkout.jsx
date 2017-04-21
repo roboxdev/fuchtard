@@ -1,5 +1,7 @@
 import React from 'react';
 
+import MediaQuery from 'react-responsive';
+
 import CheckoutHowto from 'components/CheckoutHowto';
 import Cart from 'components/Cart';
 import GiftsForm from 'components/GiftsForm';
@@ -19,5 +21,15 @@ export class Checkout extends React.Component {
         )
     }
 }
+
+
+export class CheckoutPage extends React.Component {
+    render() {
+        return <MediaQuery maxWidth={960}>
+            <Checkout/>
+        </MediaQuery>
+    }
+}
+
 
 export default Checkout;
