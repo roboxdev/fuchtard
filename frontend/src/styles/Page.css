@@ -1,3 +1,12 @@
+@import '_constants.css';
+
+.mainBlock {
+  width: 100%;
+  @media (--desktop) {
+    width: 55%;
+  }
+}
+
 .page {
   display: flex;
   max-width: 1200px;

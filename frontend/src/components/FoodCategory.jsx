@@ -6,8 +6,6 @@ import {Card, CardTitle} from 'react-toolbox/lib/card';
 import {getFoodItemsOfCategory, getCategoryBySlug} from 'selectors/app'
 import FoodItem from 'components/FoodItem';
 import FoodItemDetailed from 'components/FoodItemDetailed';
-import Footer from 'components/Footer';
-import Header from 'components/Header';
 
 import styles from 'styles/FoodCategory.css';
 
@@ -27,7 +25,6 @@ export class FoodCategory extends React.Component {
     render() {
         const {category, foodItems, match, ...rest} = this.props;
         return <div>
-            <Header />
             <Route path={`/:slug/:foodSlug/`} component={FoodItemDetailed}/>
             <Route exact path={match.url} render={() => (
                 <div>
@@ -51,7 +48,6 @@ export class FoodCategory extends React.Component {
                     </div>
                 </div>
             )}/>
-            <Footer/>
         </div>
     }
 }
