@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { minimalOrderRequirementSatisfiedSelector } from 'selectors/app';
+import { minimalOrderRequirementSatisfiedSelector, subtotalSelector } from 'selectors/app';
 
+import { Card, CardText } from 'react-toolbox/lib/card';
 import Collapse from 'react-collapse';
 import MediaQuery from 'react-responsive';
 
@@ -10,14 +11,22 @@ import Cart from 'components/Cart';
 import GiftsForm from 'components/GiftsForm';
 import OrderForm from 'components/OrderForm';
 
+
 import styles from 'styles/Checkout.css';
 
 export class Checkout extends React.Component {
     render() {
-        const {minimalOrderRequirementSatisfied} = this.props;
+        const {minimalOrderRequirementSatisfied, cartSubtotal} = this.props;
+        const cartIsEmpty = !(cartSubtotal > 0);
         return (
             <div className={styles.wrapper}>
-                <CheckoutHowto />
+                <Card>
+                    <Collapse isOpened={cartIsEmpty}>
+                        <CardText>
+                            <CheckoutHowto />
+                        </CardText>
+                    </Collapse>
+                </Card>
                 <Cart/>
                 <Collapse isOpened={minimalOrderRequirementSatisfied}>
                     <GiftsForm/>
@@ -28,17 +37,22 @@ export class Checkout extends React.Component {
     }
 }
 
+
+const CheckoutConnected = connect(
+    state => ({
+        minimalOrderRequirementSatisfied: minimalOrderRequirementSatisfiedSelector(state),
+        cartSubtotal: subtotalSelector(state),
+    })
+)(Checkout);
+
+
 export class CheckoutPage extends React.Component {
     render() {
         return <MediaQuery maxWidth={960}>
-            <Checkout/>
+            <CheckoutConnected/>
         </MediaQuery>
     }
 }
 
 
-export default connect(
-    state => ({
-        minimalOrderRequirementSatisfied: minimalOrderRequirementSatisfiedSelector(state),
-    })
-)(Checkout);
+export default CheckoutConnected;

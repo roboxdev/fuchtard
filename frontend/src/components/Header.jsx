@@ -1,7 +1,18 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import {IconButton} from 'react-toolbox/lib/button';
+import {Dialog} from 'react-toolbox/lib/dialog';
+
+import CheckoutHowto from 'components/CheckoutHowto';
+
 export class Header extends React.Component {
+    state = {
+        howtoVisible: false,
+    };
+
+    howtoToggle = () => {this.setState(state => ({howtoVisible: !state.howtoVisible}))};
+
     render() {
         return (
             <header>
@@ -33,6 +44,21 @@ export class Header extends React.Component {
                             </a>
                         </p>
                     </div>
+                    <IconButton
+                        primary={true}
+                        icon={'help'}
+                        onClick={this.howtoToggle}
+                    />
+                    <Dialog
+                        actions={[{ label: "Закрыть", onClick: this.howtoToggle }]}
+                        active={this.state.howtoVisible}
+                        onEscKeyDown={this.howtoToggle}
+                        onOverlayClick={this.howtoToggle}
+                        title='Справка'
+                    >
+                        <CheckoutHowto/>
+                    </Dialog>
+
                 </div>
             </header>
         )
