@@ -21,14 +21,14 @@ export class CheckoutHowto extends React.Component {
     toggleForcedVisibility = () => this.setState((state) => ({forceVisibility: !state.forceVisibility}));
 
     componentWillReceiveProps(nextProps){
-        if (nextProps.cartPrice === 0 && this.state.forceVisibility === true) {
+        if (nextProps.cartSubtotal === 0 && this.state.forceVisibility === true) {
             this.setState({forceVisibility: false})
         }
     };
 
     render() {
-        const {cartPrice, cheapestGift} = this.props;
-        const cartIsEmpty = !(cartPrice > 0);
+        const {cartSubtotal, cheapestGift} = this.props;
+        const cartIsEmpty = !(cartSubtotal > 0);
         const howtoVisible = cartIsEmpty || this.state.forceVisibility;
         return <Card>
             <CardText
@@ -57,7 +57,7 @@ export class CheckoutHowto extends React.Component {
 
 export default connect(
     state => ({
-        cartPrice: subtotalSelector(state),
+        cartSubtotal: subtotalSelector(state),
         cheapestGift: state.entities.gifts.length && state.entities.gifts[0].requirement,
     }),
 )(CheckoutHowto);

@@ -11,10 +11,10 @@ export class GiftsForm extends React.Component {
     handleChange = (value) => {this.props.updateOrderField('gift', +value)};
 
     componentDidUpdate() {
-        const {gifts, selectedGiftId, cartPrice} = this.props;
+        const {gifts, selectedGiftId, cartSubtotal} = this.props;
         const selectedGift = gifts.find(v => v.id === selectedGiftId);
-        if (selectedGift && cartPrice < selectedGift.requirement) {
-            const availableGift = [...gifts].reverse().find(v => cartPrice >= v.requirement);
+        if (selectedGift && cartSubtotal < selectedGift.requirement) {
+            const availableGift = [...gifts].reverse().find(v => cartSubtotal >= v.requirement);
             if (availableGift) {
                 this.handleChange(availableGift.id)
             } else {
@@ -24,11 +24,11 @@ export class GiftsForm extends React.Component {
     }
 
     render() {
-        const {gifts, cartPrice, selectedGiftId} = this.props;
+        const {gifts, cartSubtotal, selectedGiftId} = this.props;
         return <div>
             <RadioGroup name='gift' value={`${selectedGiftId}`} onChange={this.handleChange}>
                 {gifts.map(({id, foodItem, requirement}) => {
-                        const disabled = !cartPrice || cartPrice < requirement;
+                        const disabled = !cartSubtotal || cartSubtotal < requirement;
                         const label = disabled
                             ? (foodItem && `${foodItem.title} (${requirement} ₸)`)
                             : (foodItem && foodItem.title);
@@ -43,7 +43,7 @@ export class GiftsForm extends React.Component {
 
 export default connect(
     state => ({
-        cartPrice: subtotalSelector(state),
+        cartSubtotal: subtotalSelector(state),
         gifts: foodItemAnnotatedGifts(state),
         selectedGiftId: state.order.gift,
     }),

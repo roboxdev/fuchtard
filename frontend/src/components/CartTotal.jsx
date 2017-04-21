@@ -20,14 +20,14 @@ const {minimalOrderRequirement} = restaurantSettings;
 
 export class CartTotal extends React.Component {
     render() {
-        const {cartPrice, clearCart, isExpanded, expandedCartItemToggle} = this.props;
-        return (cartPrice > 0) && <Card theme={{card: styles.card}}>
+        const {cartSubtotal, clearCart, isExpanded, expandedCartItemToggle} = this.props;
+        return (cartSubtotal > 0) && <Card theme={{card: styles.card}}>
             <div onClick={expandedCartItemToggle}>
             <CardText theme={{cardText: styles.totalCardText}}>
                 <span className={styles.foodTitle}>
                     <span>Итого</span>
                 </span>
-                <span className={cartPrice < minimalOrderRequirement && styles.lessThanMinimalOrder}>{cartPrice}&nbsp;₸</span>
+                <span className={cartSubtotal < minimalOrderRequirement && styles.lessThanMinimalOrder}>{cartSubtotal}&nbsp;₸</span>
             </CardText>
 
             </div>
@@ -42,7 +42,7 @@ export class CartTotal extends React.Component {
 
 export default connect(
     (state, props) => ({
-        cartPrice: subtotalSelector(state),
+        cartSubtotal: subtotalSelector(state),
         isExpanded: state.ui.expandedCartItem === 'total',
     }),
     (dispatch, props) => ({

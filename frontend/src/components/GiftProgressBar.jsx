@@ -10,14 +10,14 @@ export class GiftProgressBar extends React.Component {
     getMaxProgress = () => this.props.gifts.length && [...this.props.gifts].pop().requirement;
 
     getBuffer = () => {
-        const buffer = this.props.gifts.filter(v => v.requirement > this.props.cartPrice)[0];
+        const buffer = this.props.gifts.filter(v => v.requirement > this.props.cartSubtotal)[0];
         return buffer ? buffer.requirement : this.getMaxProgress();
     };
 
     render() {
-        const {cartPrice} = this.props;
+        const {cartSubtotal} = this.props;
         return <ProgressBar mode='determinate'
-                            value={cartPrice}
+                            value={cartSubtotal}
                             buffer={this.getBuffer()}
                             max={this.getMaxProgress()}
                             theme={styles}
@@ -27,7 +27,7 @@ export class GiftProgressBar extends React.Component {
 
 export default connect(
     state => ({
-        cartPrice: subtotalSelector(state),
+        cartSubtotal: subtotalSelector(state),
         gifts: state.entities.gifts,
     })
 )(GiftProgressBar)
