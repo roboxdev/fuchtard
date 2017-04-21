@@ -7,16 +7,9 @@ import { actions as orderActions } from 'reducers/order';
 import Input from 'react-toolbox/lib/input';
 import {Button} from 'react-toolbox/lib/button';
 import styles from 'styles/OrderForm.css';
-import Collapse from 'react-collapse';
 
 
 export class OrderForm extends React.Component {
-    state = {
-        optionalFieldsVisible: false,
-    };
-
-    showOptionalFields = () => this.setState({optionalFieldsVisible: true});
-
     submit = (e) => {
         e.preventDefault();
         this.props.placeOrder();
@@ -45,53 +38,53 @@ export class OrderForm extends React.Component {
                        label='Телефон'
                        required
                 />
-                <Collapse isOpened={this.state.optionalFieldsVisible}>
-                    <div>
-                        <p>Следующие поля необязательны. Мы уточним детали по телефону.</p>
-                        <Input value={order.email}
-                               onChange={value => updateOrder('email', value)}
-                               type='email'
-                               label='Email'
-                        />
+                <p>Следующие поля необязательны. Мы уточним детали по телефону.</p>
+                <Input value={order.email}
+                       onChange={value => updateOrder('email', value)}
+                       type='email'
+                       label='Email'
+                />
 
-                        <Input theme={{input: styles.input}}
-                               value={order.street}
-                               onChange={value => updateOrder('street', value)}
-                               type='text'
-                               name='street'
-                               label='Улица'
-                        />
-                        <Input theme={{input: styles.input}}
-                               value={order.building}
-                               onChange={value => updateOrder('building', value)}
-                               type='text'
-                               name='building'
-                               label='Номер дома'
-                        />
-                        <Input theme={{input: styles.input}}
-                               value={order.apartment}
-                               onChange={value => updateOrder('apartment', value)}
-                               type='text'
-                               name='apartment'
-                               label='Квартира'
-                        />
-                        <Input value={order.floor}
-                               onChange={value => updateOrder('floor', value)}
-                               type='number'
-                               name='floor'
-                               label='Этаж'
-                        />
-                        <Input theme={{input: styles.input}}
-                               value={order.comment}
-                               onChange={value => updateOrder('comment', value)}
-                               type='text'
-                               label='Комментарий'
-                        />
-
-                    </div>
-                </Collapse>
+                <Input theme={{input: styles.input}}
+                       value={order.street}
+                       onChange={value => updateOrder('street', value)}
+                       type='text'
+                       name='street'
+                       label='Улица'
+                />
+                <Input theme={{input: styles.input}}
+                       value={order.building}
+                       onChange={value => updateOrder('building', value)}
+                       type='text'
+                       name='building'
+                       label='Номер дома'
+                />
+                <Input theme={{input: styles.input}}
+                       value={order.apartment}
+                       onChange={value => updateOrder('apartment', value)}
+                       type='text'
+                       name='apartment'
+                       label='Квартира'
+                />
+                <Input value={order.floor}
+                       onChange={value => updateOrder('floor', value)}
+                       type='number'
+                       name='floor'
+                       label='Этаж'
+                />
+                <Input theme={{input: styles.input}}
+                       value={order.comment}
+                       onChange={value => updateOrder('comment', value)}
+                       type='text'
+                       label='Комментарий'
+                />
                 <div className={styles.submitButtonContainer}>
-                    <Button theme={{button: styles.button}} type="submit" raised primary>Заказать</Button>
+                    <Button
+                        theme={{button: styles.button}}
+                        type="submit"
+                        raised={true}
+                        primary={true}
+                    >Заказать</Button>
                 </div>
             </form>
         </div>
