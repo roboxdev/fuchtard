@@ -10,6 +10,7 @@ const types = {
 const order = window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')) : {};
 
 const initialState = Immutable({
+    gift: null,
     name: order.name || '',
     email: order.email || '',
     phone: '',
@@ -18,7 +19,6 @@ const initialState = Immutable({
     building: order.building || '',
     floor: order.floor || '',
     comment: '',
-    gift: null,
 });
 
 export default function (state=initialState, action) {
