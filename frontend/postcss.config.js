@@ -5,6 +5,12 @@ module.exports = {
         },
         'postcss-mixins': {},
         'postcss-each': {},
-        'postcss-cssnext': {}
-    },
+        'postcss-cssnext': {
+            features: {
+                customProperties: {
+                    variables: require('./reacttoolbox.config').variables,
+                },
+            },
+        },
+    }
 };
