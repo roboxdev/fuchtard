@@ -6,7 +6,10 @@ import { subtotalSelector } from 'selectors/app';
 import { restaurantSettings } from 'config';
 
 import { Card, CardText } from 'react-toolbox/lib/card';
+import { IconButton } from 'react-toolbox/lib/button';
 import Collapse from 'react-collapse';
+
+import styles from 'styles/CheckoutHowto.css';
 
 const {workdayStart, workdayEnd, minimalOrderRequirement} = restaurantSettings;
 
@@ -28,10 +31,17 @@ export class CheckoutHowto extends React.Component {
         const cartIsEmpty = !(cartPrice > 0);
         const howtoVisible = cartIsEmpty || this.state.forceVisibility;
         return <Card>
-            {
-                !cartIsEmpty &&
-                <button onClick={this.toggleForcedVisibility}>{howtoVisible ? 'Скрыть' : 'Справка'}</button>
-            }
+            <CardText
+                theme={{cardText: styles.cardText}}
+            >
+                <span>Справка</span>
+                <span className={cartIsEmpty && styles.hidden}>
+                    <IconButton
+                        icon={howtoVisible ? 'expand_less' : 'expand_more'}
+                        onClick={this.toggleForcedVisibility}
+                    />
+                </span>
+            </CardText>
             <Collapse isOpened={howtoVisible}>
                 <CardText>
                     <div>

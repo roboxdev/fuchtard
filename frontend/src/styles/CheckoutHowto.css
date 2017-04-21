@@ -1,0 +1,11 @@
+.hidden {
+  visibility: hidden;
+}
+
+.cardText {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
