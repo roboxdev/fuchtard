@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { minimalOrderRequirementSatisfiedSelector } from 'selectors/app';
 
+import Collapse from 'react-collapse';
 import MediaQuery from 'react-responsive';
 
 import CheckoutHowto from 'components/CheckoutHowto';
@@ -11,17 +14,19 @@ import styles from 'styles/Checkout.css';
 
 export class Checkout extends React.Component {
     render() {
+        const {minimalOrderRequirementSatisfied} = this.props;
         return (
             <div className={styles.wrapper}>
                 <CheckoutHowto />
                 <Cart/>
-                <GiftsForm/>
-                <OrderForm/>
+                <Collapse isOpened={minimalOrderRequirementSatisfied}>
+                    <GiftsForm/>
+                    <OrderForm/>
+                </Collapse>
             </div>
         )
     }
 }
-
 
 export class CheckoutPage extends React.Component {
     render() {
@@ -32,4 +37,8 @@ export class CheckoutPage extends React.Component {
 }
 
 
-export default Checkout;
+export default connect(
+    state => ({
+        minimalOrderRequirementSatisfied: minimalOrderRequirementSatisfiedSelector(state),
+    })
+)(Checkout);
