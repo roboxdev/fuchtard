@@ -17,7 +17,6 @@ export class FoodQuantityButtons extends React.Component {
             <div>
                 {quantity >= 1 &&
                 <Button
-                    className="quantity-button"
                     // raised={true}
                     primary={true}
                     onClick={minusButton}
@@ -29,7 +28,6 @@ export class FoodQuantityButtons extends React.Component {
                 <span>{quantity}</span>
                 }
                 <Button
-                    className="quantity-button"
                     // raised={true}
                     primary={true}
                     disabled={quantity >= 9}

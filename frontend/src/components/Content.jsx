@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 
 import FoodCategory from 'components/FoodCategory';
 import IndexPage from 'components/IndexPage';
-import CheckoutPage from 'components/Checkout';
+import {CheckoutPage} from 'components/Checkout';
 
 export class Content extends React.Component {
     render() {
