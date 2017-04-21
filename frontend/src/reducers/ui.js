@@ -3,6 +3,7 @@ import Immutable from 'seamless-immutable';
 
 const types = {
     EXPANDED_CART_ITEM_TOGGLE: 'EXPANDED_CART_ITEM_TOGGLE',
+    EXPANDED_CART_ITEM_SET: 'EXPANDED_CART_ITEM_SET',
 };
 
 const order = window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')) : {};
@@ -17,6 +18,8 @@ export default function (state=initialState, action) {
             return state.expandedCartItem === action.foodItemId
                 ? Immutable.set(state, 'expandedCartItem', 0)
                 : Immutable.set(state, 'expandedCartItem', action.foodItemId);
+        case types.EXPANDED_CART_ITEM_SET:
+            return Immutable.set(state, 'expandedCartItem', action.foodItemId);
         default:
             return state;
     }
@@ -26,11 +29,20 @@ export default function (state=initialState, action) {
 function expandedCartItemToggle(foodItemId) {
     return {
         type: types.EXPANDED_CART_ITEM_TOGGLE,
-        foodItemId: foodItemId,
+        foodItemId,
     }
+}
+
+function expandedCartItemSet(foodItemId) {
+    return {
+        type: types.EXPANDED_CART_ITEM_SET,
+        foodItemId,
+    }
+
 }
 
 
 export const actions = {
     expandedCartItemToggle,
+    expandedCartItemSet,
 };

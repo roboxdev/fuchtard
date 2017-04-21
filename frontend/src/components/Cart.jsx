@@ -12,7 +12,7 @@ export class Cart extends React.Component {
             {Object.keys(cart).map((foodItemId) =>
                 <CartItem
                     key={foodItemId}
-                    foodItemId={foodItemId}
+                    foodItemId={+foodItemId}
                 />
             )}
             <CartTotal/>

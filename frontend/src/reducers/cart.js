@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 import { actions as notificationActions } from 'reducers/notifications';
+import { actions as uiActions } from 'reducers/ui';
 import { foodItemAnnotatedCart } from 'selectors/app';
 
 
@@ -66,7 +67,8 @@ function clearCart() {
 
 function plusButton(foodItemId) {
     return dispatch => {
-        dispatch(cartItemIncrease(foodItemId))
+        dispatch(cartItemIncrease(foodItemId));
+        dispatch(uiActions.expandedCartItemSet(foodItemId));
     }
 }
 
