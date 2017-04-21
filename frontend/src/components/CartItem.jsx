@@ -19,7 +19,7 @@ export class CartItem extends React.Component {
 
     render() {
         const {foodItemId, foodItem, quantity, isExpanded, expandedCartItemToggle} = this.props;
-        return <Card theme={{card: styles.card}}>
+        return <Card>
             <div onClick={expandedCartItemToggle}>
 
             <CardText theme={{cardText: styles.cardText}}>
