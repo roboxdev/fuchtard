@@ -1,0 +1,19 @@
+.headerWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.logo {
+
+}
+
+.aboutUs {
+  position: relative;
+}
+
+.howtoButtonWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
