@@ -4,6 +4,10 @@ import find from 'lodash/find';
 import mapValues from 'lodash/mapValues';
 import values from 'lodash/values';
 
+import { restaurantSettings } from 'config';
+
+const {minimalOrderRequirement} = restaurantSettings;
+
 export const getQuantityByFoodId = (state, props) => state.cart.present[props.foodItemId];
 export const getCategoryBySlug = (state, props) => (
     state.entities.foodCategories.find(cat => cat.slug === props.match.params.slug)
@@ -40,6 +44,12 @@ export const subtotalSelector = createSelector(
     foodItemAnnotatedCart,
     (cart) => sumBy(values(cart),
         ({quantity, foodItem}) => foodItem && foodItem.price * quantity)
+);
+
+
+export const minimalOrderRequirementSatisfiedSelector = createSelector(
+    subtotalSelector,
+    subtotal => minimalOrderRequirement < subtotal,
 );
 
 
