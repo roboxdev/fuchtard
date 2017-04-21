@@ -21,19 +21,14 @@ const {minimalOrderRequirement} = restaurantSettings;
 export class CartTotal extends React.Component {
     render() {
         const {cartPrice, clearCart, isExpanded, expandedCartItemToggle} = this.props;
-        return <Card theme={{card: styles.card}}>
+        return (cartPrice > 0) && <Card theme={{card: styles.card}}>
             <div onClick={expandedCartItemToggle}>
-            <CardText theme={{cardText: styles.cardText}}>
+            <CardText theme={{cardText: styles.totalCardText}}>
                 <span className={styles.foodTitle}>
                     <span>Итого</span>
                 </span>
-                <span>{cartPrice}&nbsp;₸</span>
+                <span className={cartPrice < minimalOrderRequirement && styles.lessThanMinimalOrder}>{cartPrice}&nbsp;₸</span>
             </CardText>
-            <Collapse isOpened={cartPrice < minimalOrderRequirement}>
-                <CardText>
-                    Минимальный заказ от&nbsp;{minimalOrderRequirement}&nbsp;₸
-                </CardText>
-            </Collapse>
 
             </div>
             <Collapse isOpened={isExpanded}>

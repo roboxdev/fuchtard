@@ -4,6 +4,7 @@
   text-overflow: ellipsis;
 }
 
+
 .quantityButtons {
   //display: flex;
 }
@@ -23,4 +24,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+
+.totalCardText {
+  composes: cardText;
+  font-weight: bold;
+}
+
+.lessThanMinimalOrder {
+  color: red;
 }
