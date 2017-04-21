@@ -49,7 +49,7 @@ export const subtotalSelector = createSelector(
 
 export const minimalOrderRequirementSatisfiedSelector = createSelector(
     subtotalSelector,
-    subtotal => minimalOrderRequirement < subtotal,
+    subtotal => subtotal >= minimalOrderRequirement,
 );
 
 
