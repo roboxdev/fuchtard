@@ -1,7 +1,10 @@
+@import '_constants.css';
+
 .headerWrapper {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  background-color: var(--color-primary);
 }
 
 .logo {
@@ -14,6 +17,6 @@
 
 .howtoButtonWrapper {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
 }

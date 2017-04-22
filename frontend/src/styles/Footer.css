@@ -1,3 +1,20 @@
+@import '_constants.css';
+
 .footer {
+  margin-top: 16px;
+  margin-bottom: 60px;
+  background-color: var(--color-primary);
+  @media (--desktop) {
+    margin-bottom: 0;
+  }
+}
+
+.footerMain {
+}
+
+.copyright {
+  background-color: var(--color-primary-dark);
+  padding-top: 10px;
+  padding-bottom: 10px;
 
 }

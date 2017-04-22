@@ -17,7 +17,7 @@ class LeftSidebar extends React.Component {
         return (
             <MediaQuery minWidth={960}>
                 <div className={styles.leftSidebar}>
-                    <Sticky>
+                    <Sticky bottomBoundary={'main'}>
                         <FoodMenu/>
                     </Sticky>
                 </div>
@@ -27,23 +27,12 @@ class LeftSidebar extends React.Component {
 }
 
 
-class MainBlock extends React.Component {
-    render() {
-        return <div className={styles.mainBlock}>
-            <Header/>
-            <Content/>
-            <Footer/>
-        </div>
-    }
-}
-
-
 class RightSidebar extends React.Component {
     render() {
         return (
             <MediaQuery minWidth={960}>
                 <div className={styles.rightSidebar}>
-                    <Sticky>
+                    <Sticky bottomBoundary={'main'}>
                         <div>
                             <Checkout/>
                         </div>
@@ -55,13 +44,26 @@ class RightSidebar extends React.Component {
 }
 
 
+class MainBlock extends React.Component {
+    render() {
+        return <div className={styles.mainBlock}>
+            <LeftSidebar/>
+            <main className={styles.content}>
+                <Content/>
+            </main>
+            <RightSidebar/>
+        </div>
+    }
+}
+
+
 export class Page extends React.Component {
     render() {
         return (
             <div className={styles.page}>
-                <LeftSidebar/>
+                <Header/>
                 <MainBlock/>
-                <RightSidebar/>
+                <Footer/>
             </div>
         );
     }

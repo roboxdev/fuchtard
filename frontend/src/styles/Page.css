@@ -4,20 +4,20 @@
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 72px;
-}
-
-.leftSidebar {
-  width: 20%;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .mainBlock {
-  width: 100%;
-  @media (--desktop) {
-    width: 55%;
-  }
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.leftSidebar {
+  min-width: 20%;
 }
 
 .rightSidebar {
-  width: 25%;
+  min-width: 25%;
 }
