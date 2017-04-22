@@ -1,20 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import {IconButton} from 'react-toolbox/lib/button';
-import {Dialog} from 'react-toolbox/lib/dialog';
-
-import CheckoutHowto from 'components/CheckoutHowto';
-
 import styles from 'styles/Header.css';
 
 export class Header extends React.Component {
-    state = {
-        howtoVisible: false,
-    };
-
-    howtoToggle = () => {this.setState(state => ({howtoVisible: !state.howtoVisible}))};
-
     render() {
         return (
             <div>
@@ -48,26 +37,10 @@ export class Header extends React.Component {
                                         <img src="/public/vk-box.svg"/>
                                     </a>
                                 </p>
-                                <div className={styles.howtoButtonWrapper}>
-                                    <IconButton
-                                        primary={true}
-                                        icon={'help'}
-                                        onClick={this.howtoToggle}
-                                    />
-                                </div>
                             </div>
                         </div>
                     </header>
                 </div>
-                <Dialog
-                    actions={[{label: "Закрыть", onClick: this.howtoToggle}]}
-                    active={this.state.howtoVisible}
-                    onEscKeyDown={this.howtoToggle}
-                    onOverlayClick={this.howtoToggle}
-                    title='Справка'
-                >
-                    <CheckoutHowto/>
-                </Dialog>
             </div>
         )
     }

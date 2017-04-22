@@ -1,0 +1,12 @@
+@import '_constants.css';
+
+.howtoButtonWrapper {
+  position: relative;
+}
+
+.howtoButton {
+  z-index: 150;
+  position: absolute;
+  top: -20px;
+  right: 10%;
+}
