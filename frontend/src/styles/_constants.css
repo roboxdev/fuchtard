@@ -1,3 +1,6 @@
+@import 'react-toolbox/lib/colors';
+@import 'react-toolbox/lib/variables';
+
 :root {
   --webSiteMaxWidth: 960px;
 }
