@@ -20,6 +20,7 @@ export class Checkout extends React.Component {
         const cartIsEmpty = !(cartSubtotal > 0);
         return (
             <div className={styles.wrapper}>
+                <div>Корзина</div>
                 <Card>
                     <Collapse isOpened={cartIsEmpty}>
                         <CardText>
