@@ -1,10 +1,14 @@
 @import '_constants.css';
 
 .headerWrapper {
+  background-color: var(--color-primary);
+}
+
+.header {
+  @apply --limitToWebSiteMaxWidth;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  background-color: var(--color-primary);
 }
 
 .logo {

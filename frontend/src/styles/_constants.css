@@ -2,7 +2,13 @@
 @import 'react-toolbox/lib/variables';
 
 :root {
-  --webSiteMaxWidth: 960px;
+  --webSiteMaxWidth: 1200px;
+
+  --limitToWebSiteMaxWidth: {
+    max-width: var(--webSiteMaxWidth);
+    margin-left: auto;
+    margin-right: auto
+  }
 }
 
 @custom-media --desktop (width >= 960px);

@@ -10,10 +10,15 @@
 }
 
 .footerMain {
+  @apply --limitToWebSiteMaxWidth;
+}
+
+.copyrightWrapper {
+  background-color: var(--color-primary-dark);
 }
 
 .copyright {
-  background-color: var(--color-primary-dark);
+  composes: footerMain;
   padding-top: 10px;
   padding-bottom: 10px;
 

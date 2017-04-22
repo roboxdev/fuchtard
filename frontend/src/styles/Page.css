@@ -2,13 +2,18 @@
 
 .page {
   display: flex;
-  max-width: 1200px;
   margin: 0 auto;
   min-height: 100vh;
   flex-direction: column;
+  align-items: stretch;
+}
+
+.test {
+  max-width: var(--webSiteMaxWidth);
 }
 
 .mainBlock {
+  @apply --limitToWebSiteMaxWidth;
   flex: 1;
   display: flex;
   flex-direction: row;
