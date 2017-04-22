@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import HowtoButton from 'components/HowtoButton';
+
 import styles from 'styles/Header.css';
 
 export class Header extends React.Component {
@@ -40,6 +42,7 @@ export class Header extends React.Component {
                             </div>
                         </div>
                     </header>
+                    <HowtoButton/>
                 </div>
             </div>
         )
