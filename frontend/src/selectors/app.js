@@ -8,7 +8,7 @@ import { restaurantSettings } from 'config';
 
 const {minimalOrderRequirement} = restaurantSettings;
 
-export const getQuantityByFoodId = (state, props) => state.cart.present[props.foodItemId];
+export const getQuantityByFoodId = (state, props) => cartSelector(state)[props.foodItemId];
 export const getCategoryBySlug = (state, props) => (
     state.entities.foodCategories.find(cat => cat.slug === props.match.params.slug)
 );
@@ -25,7 +25,7 @@ export const getFoodItemsBySlugOrID = (state, props) => {
 
 const foodItemsSelector = state => state.entities.foodItems;
 const giftsSelector = state => state.entities.gifts;
-const cartSelector = state => state.cart.present;
+export const cartSelector = state => state.cart.present;
 const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id === +id);
 
 export const foodItemAnnotatedCart = createSelector(

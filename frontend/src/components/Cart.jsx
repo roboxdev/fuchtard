@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { cartSelector } from 'selectors/app';
+
 import CartItem from 'components/CartItem';
 import CartTotal from 'components/CartTotal';
 
@@ -23,6 +25,6 @@ export class Cart extends React.Component {
 
 export default connect(
     state => ({
-        cart: state.cart.present,
+        cart: cartSelector(state),
     }),
 )(Cart)
