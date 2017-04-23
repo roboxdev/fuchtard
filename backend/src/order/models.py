@@ -15,15 +15,18 @@ class CartManager(models.Manager):
     def create_from_dict(self, cart_data):
         cart = self.create()
         cart_items = []
-        for food_item_id, quantity in cart_data.items():
+        for i, (food_item_id, quantity) in enumerate(cart_data):
             try:
                 food_item = FoodItem.objects.get(id=int(food_item_id))
             except FoodItem.DoesNotExist:
                 continue
-            cart_items.append(CartItem(cart=cart,
-                                       product=food_item,
-                                       quantity=quantity,
-                                       history_price=food_item.price, ))
+            cart_items.append(CartItem(
+                position=i,
+                cart=cart,
+                product=food_item,
+                quantity=quantity,
+                history_price=food_item.price,
+            ))
         CartItem.objects.bulk_create(cart_items)
         return cart
 
@@ -53,7 +56,9 @@ class CartItem(models.Model):
     class Meta:
         verbose_name = 'Содержимое корзины'
         verbose_name_plural = 'Содержимое корзины'
+        ordering = ('position', )
 
+    position = models.PositiveIntegerField(default=0, editable=False, db_index=True)
     cart = models.ForeignKey(Cart)
     product = models.ForeignKey(FoodItem)
     quantity = models.IntegerField()
