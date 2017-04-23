@@ -1,13 +1,15 @@
 import Immutable from 'seamless-immutable';
 import { actions as notificationActions } from 'reducers/notifications';
 import { actions as uiActions } from 'reducers/ui';
-import { foodItemAnnotatedCart } from 'selectors/app';
+import { foodItemAnnotatedCart, cartSelector } from 'selectors/app';
 
 
 const types = {
     CLEAR_CART: 'CLEAR_CART',
+    CART_ITEM_ADD: 'CART_ITEM_ADD',
     CART_ITEM_INCREASE: 'CART_ITEM_INCREASE',
     CART_ITEM_DECREASE: 'CART_ITEM_DECREASE',
+    CART_ITEM_REMOVE: 'CART_ITEM_REMOVE',
     REVERT_CART: 'REVERT_CART',
 };
 
@@ -24,23 +26,27 @@ export default function (state=initialState, action) {
     switch (action.type) {
         case types.CLEAR_CART:
             return Immutable.set(backedUpCartState(state), 'present', {});
+        case types.CART_ITEM_ADD:
+            return Immutable.setIn(backedUpCartState(state), ['present', action.payload], 1);
         case types.CART_ITEM_INCREASE:
-            return Immutable.updateIn(
-                backedUpCartState(state),
-                ['present', action.payload],
-                v => v >= 1 ? v + 1 : 1
-            );
+            return Immutable.updateIn(backedUpCartState(state), ['present', action.payload], v => v + 1);
         case types.CART_ITEM_DECREASE:
-            const quantity = state.present[action.payload];
-            return quantity > 1
-            ? Immutable.updateIn(backedUpCartState(state), ['present', action.payload], v => v - 1)
-            : Immutable.update(backedUpCartState(state), 'present', v => Immutable.without(v, action.payload));
+            return Immutable.updateIn(backedUpCartState(state), ['present', action.payload], v => v - 1);
+        case types.CART_ITEM_REMOVE:
+            return Immutable.update(backedUpCartState(state), 'present', v => Immutable.without(v, action.payload));
         case types.REVERT_CART:
             return Immutable.set(state, 'present', state.previous);
         default:
             return state;
     }
 };
+
+function cartItemAdd(foodItemId) {
+    return {
+        type: types.CART_ITEM_ADD,
+        payload: foodItemId,
+    }
+}
 
 function cartItemIncrease(foodItemId) {
     return {
@@ -56,6 +62,13 @@ function cartItemDecrease(foodItemId) {
     }
 }
 
+function cartItemRemove(foodItemId) {
+    return {
+        type: types.CART_ITEM_REMOVE,
+        payload: foodItemId,
+    }
+}
+
 
 function clearCart() {
     return dispatch => {
@@ -66,9 +79,15 @@ function clearCart() {
 
 
 function plusButton(foodItemId) {
-    return dispatch => {
-        dispatch(cartItemIncrease(foodItemId));
-        dispatch(uiActions.expandedCartItemSet(foodItemId));
+    return (dispatch, getState) => {
+        const state = getState();
+        const quantity = cartSelector(state)[foodItemId];
+        if (quantity >= 1) {
+            dispatch(cartItemIncrease(foodItemId));
+        } else {
+            dispatch(cartItemAdd(foodItemId));
+            dispatch(uiActions.expandedCartItemSet(foodItemId));
+        }
     }
 }
 
@@ -78,8 +97,10 @@ function minusButton(foodItemId) {
         const {quantity, foodItem: {title}} = foodItemAnnotatedCart(state)[foodItemId];
         if (quantity === 1) {
             dispatch(notificationActions.notify(`Блюдо ${title} удалено из корзины`));
+            dispatch(cartItemRemove(foodItemId));
+        } else {
+            dispatch(cartItemDecrease(foodItemId));
         }
-        dispatch(cartItemDecrease(foodItemId));
     }
 }
 
@@ -89,8 +110,6 @@ function revertCart() {
 
 
 export const actions = {
-    cartItemIncrease,
-    cartItemDecrease,
     clearCart,
     plusButton,
     minusButton,
