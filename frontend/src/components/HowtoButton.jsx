@@ -24,7 +24,7 @@ export class HowtoButton extends React.Component {
                             theme={{button: styles.howtoButton}}
                             floating
                             accent
-                            icon={'help'}
+                            label={'?'}
                             onClick={this.howtoToggle}
                         />
                     </div>
