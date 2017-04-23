@@ -13,8 +13,22 @@ const types = {
     REVERT_CART: 'REVERT_CART',
 };
 
+function getCartFromLocalStorage() {
+    const cart = window.localStorage.getItem('cart');
+    try {
+        return JSON.parse(window.localStorage.getItem('cart'));
+    }
+    catch (e) {
+        console.log(e)
+    }
+    return {
+        foodItems: {},
+        ordering: [],
+    }
+}
+
 const initialState = Immutable({
-    present: window.localStorage.getItem('cart') ? JSON.parse(window.localStorage.getItem('cart')) : {},
+    present: getCartFromLocalStorage(),
     previous: {},
 });
 
@@ -27,13 +41,21 @@ export default function (state=initialState, action) {
         case types.CLEAR_CART:
             return Immutable.set(backedUpCartState(state), 'present', {});
         case types.CART_ITEM_ADD:
-            return Immutable.setIn(backedUpCartState(state), ['present', action.payload], 1);
+            const addedToOrdering = Immutable.updateIn(
+                backedUpCartState(state), ['present', 'ordering'], v => [...v, action.payload]
+            );
+            return Immutable.setIn(addedToOrdering, ['present', 'foodItems', action.payload], 1);
         case types.CART_ITEM_INCREASE:
-            return Immutable.updateIn(backedUpCartState(state), ['present', action.payload], v => v + 1);
+            return Immutable.updateIn(backedUpCartState(state), ['present', 'foodItems', action.payload], v => v + 1);
         case types.CART_ITEM_DECREASE:
-            return Immutable.updateIn(backedUpCartState(state), ['present', action.payload], v => v - 1);
+            return Immutable.updateIn(backedUpCartState(state), ['present', 'foodItems', action.payload], v => v - 1);
         case types.CART_ITEM_REMOVE:
-            return Immutable.update(backedUpCartState(state), 'present', v => Immutable.without(v, action.payload));
+            const removedFromOrdering = Immutable.updateIn(
+                backedUpCartState(state),
+                ['present', 'ordering'],
+                ordering => ordering.filter(v => v !== action.payload)
+            );
+            return Immutable.updateIn(removedFromOrdering, ['present', 'foodItems'], v => Immutable.without(v, action.payload));
         case types.REVERT_CART:
             return Immutable.set(state, 'present', state.previous);
         default:

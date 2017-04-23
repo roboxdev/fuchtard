@@ -2,7 +2,7 @@ import Immutable from 'seamless-immutable';
 
 import { endpoints } from 'config';
 
-import { cartSelector } from 'selectors/app';
+import { cartAsOrderedMap } from 'selectors/app';
 
 
 const types = {
@@ -44,7 +44,8 @@ function updateOrderField(field, value) {
 function placeOrder() {
     return (dispatch, getState) => {
         const state = getState();
-        const order = state.order.merge({cart: cartSelector(state)});
+        const cart = [...cartAsOrderedMap(state)];
+        const order = {...state.order, cart};
         fetch(endpoints.orders, {
             method: "POST",
             credentials: "same-origin",

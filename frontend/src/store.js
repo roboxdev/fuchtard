@@ -17,7 +17,7 @@ export const store = createStore(
 
 const placeCartIntoLocalStorage = () => {
     const state = store.getState();
-    window.localStorage.setItem('cart', JSON.stringify(cartSelector(state)));
+    window.localStorage.setItem('cart', JSON.stringify(state.cart.present));
     window.localStorage.setItem('order', JSON.stringify(state.order));
 };
 

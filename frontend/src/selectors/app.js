@@ -25,7 +25,9 @@ export const getFoodItemsBySlugOrID = (state, props) => {
 
 const foodItemsSelector = state => state.entities.foodItems;
 const giftsSelector = state => state.entities.gifts;
-export const cartSelector = state => state.cart.present;
+export const cartSelector = state => state.cart.present.foodItems;
+export const cartOrderingSelector = state => state.cart.present.ordering;
+export const cartAsOrderedMap = state => new Map(cartOrderingSelector(state).map(v => [v, cartSelector(state)[v]]));
 const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id === +id);
 
 export const foodItemAnnotatedCart = createSelector(
