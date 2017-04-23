@@ -14,15 +14,18 @@
 
 .mainBlock {
   @apply --limitToWebSiteMaxWidth;
-  flex: 1;
   display: flex;
   flex-direction: row;
 }
 
 .leftSidebar {
-  min-width: 20%;
+  flex-basis: 20%;
+}
+
+.content {
+  flex: 1;
 }
 
 .rightSidebar {
-  min-width: 25%;
+  flex-basis: 25%;
 }

@@ -33,9 +33,7 @@ class RightSidebar extends React.Component {
             <MediaQuery minWidth={960}>
                 <div className={styles.rightSidebar}>
                     <Sticky bottomBoundary={'main'}>
-                        <div>
-                            <Checkout/>
-                        </div>
+                        <Checkout/>
                     </Sticky>
                 </div>
             </MediaQuery>
@@ -46,12 +44,14 @@ class RightSidebar extends React.Component {
 
 class MainBlock extends React.Component {
     render() {
-        return <div className={styles.mainBlock}>
-            <LeftSidebar/>
-            <main className={styles.content}>
-                <Content/>
-            </main>
-            <RightSidebar/>
+        return <div>
+            <div className={styles.mainBlock}>
+                <LeftSidebar/>
+                <main className={styles.content}>
+                    <Content/>
+                </main>
+                <RightSidebar/>
+            </div>
         </div>
     }
 }
