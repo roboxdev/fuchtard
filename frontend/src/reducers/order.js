@@ -1,5 +1,7 @@
 import Immutable from 'seamless-immutable';
 
+import { actions as orderHistoryActions } from 'reducers/orderHistory';
+
 import { endpoints } from 'config';
 
 import { cartAsOrderedMap } from 'selectors/app';
@@ -46,7 +48,7 @@ function placeOrder() {
         const state = getState();
         const cart = [...cartAsOrderedMap(state)];
         const order = {...state.order, cart};
-        fetch(endpoints.orders, {
+        fetch(endpoints.checkout, {
             method: "POST",
             credentials: "same-origin",
             headers: new Headers({
@@ -54,7 +56,17 @@ function placeOrder() {
                 'Content-Type': 'application/json',
             }),
             body: JSON.stringify(order),
-        });
+        }).then(
+            response => response.json()
+        ).then(
+            json => {
+                if (json.id) {
+                    dispatch(orderHistoryActions.addHistoryEntry(json));
+                } else {
+                    console.log(json)
+                }
+            }
+        );
     }
 }
 

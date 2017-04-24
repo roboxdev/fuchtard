@@ -3,6 +3,7 @@ const apiHost = 'http://localhost:8000';
 
 export const endpoints = {
     orders: `${apiHost}/api/orders/`,
+    checkout: `${apiHost}/api/checkout/`,
     foodItems: `${apiHost}/api/food_items/`,
     foodCategories: `${apiHost}/api/food_categories/`,
     gifts: `${apiHost}/api/gifts/`,
