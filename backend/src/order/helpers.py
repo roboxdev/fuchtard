@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 
 def shifthash(n):
     n = int(n)
-    return ((0x000FFF & n) << 12) + ((0xFFF000 & n) >> 12)
+    return int(((0x000FFF & n) << 12) + ((0xFFF000 & n) >> 12))
 
 
 def send_templated_email(params):

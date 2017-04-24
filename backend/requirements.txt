@@ -2,6 +2,7 @@ django-admin-sortable==2.1
 django-cors-headers==2.0.2
 django-debug-toolbar==1.7
 django-extensions==1.7.8
+django-hashid-field==1.2.1
 Django==1.11
 djangorestframework==3.6.2
 envparse==0.2.0

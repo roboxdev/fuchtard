@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from envparse import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -19,7 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9t!sc1+#0zh@%c+xyiq&dlg_ri-_*7jfl!tg!lt#c0+1s9e6%p'
+SECRET_KEY = env('SECRET_KEY', default='9t!sc1+#0zh@%c+xyiq&dlg_ri-_*7jfl!tg!lt#c0+1s9e6%p')
+HASHID_FIELD_SALT = env('HASHID_FIELD_SALT', default='6^y3*fv!fq4z@n2-i!hy-hgi0x*+3qmf@ylqtkv&x932(-8wi+')
+
+HASHID_FIELD_ALLOW_INT = False
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

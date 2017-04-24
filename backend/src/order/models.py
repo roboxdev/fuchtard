@@ -3,9 +3,10 @@ from urllib.parse import urljoin
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.db.models import Sum, F
+
+from hashid_field import HashidAutoField
 
 from food.models import FoodItem
 from .helpers import shifthash, send_templated_email, telegram_notify_channel
@@ -90,6 +91,7 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
     objects = OrderManager()
+    id = HashidAutoField(primary_key=True, min_length=15)
     email = models.CharField(verbose_name='Email', max_length=60, null=True, blank=True)
     name = models.CharField(verbose_name='Имя', max_length=60, null=True, blank=True)
     phone = models.CharField(verbose_name='Телефон', max_length=20)
@@ -115,7 +117,7 @@ class Order(models.Model):
 
     @property
     def hashed_id(self):
-        return shifthash(self.id)
+        return shifthash(self.id.id)
 
     def notify_restaurant(self):
         order_hashed_id = self.hashed_id

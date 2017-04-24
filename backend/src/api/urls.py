@@ -2,11 +2,12 @@
 from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
-from order.views import OrdersViewSet, GiftsViewSet
+from order.views import CheckoutViewset, GiftsViewSet, OrdersViewSet
 from food.views import FoodCategoriesViewSet, FoodItemsViewSet
 
 router = DefaultRouter()
 router.register(r'orders', OrdersViewSet)
+router.register(r'checkout', CheckoutViewset, base_name='checkout')
 router.register(r'gifts', GiftsViewSet)
 router.register(r'food_categories', FoodCategoriesViewSet)
 router.register(r'food_items', FoodItemsViewSet)
