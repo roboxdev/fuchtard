@@ -35,7 +35,9 @@ export class CartTotal extends React.Component {
             </div>
             <Collapse isOpened={isExpanded}>
                 <CardActions>
-                    <Button primary={true} icon="remove_shopping_cart" onClick={clearCart}/>
+                    <div className={styles.quantityButtons}>
+                        <Button primary={true} icon="remove_shopping_cart" onClick={clearCart}/>
+                    </div>
                 </CardActions>
             </Collapse>
         </Card >

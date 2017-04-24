@@ -126,6 +126,7 @@ function minusButton(foodItemId) {
         if (quantity === 1) {
             dispatch(notificationActions.notify(`Блюдо ${title} удалено из корзины`));
             dispatch(cartItemRemove(foodItemId));
+            dispatch(uiActions.expandedCartItemSet('total'));
         } else {
             dispatch(cartItemDecrease(foodItemId));
         }
