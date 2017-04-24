@@ -14,29 +14,33 @@ export class FoodQuantityButtons extends React.Component {
     render() {
         const {quantity, plusButton, minusButton} = this.props;
         return (
-            <div>
-                {quantity >= 1 &&
-                <Button
-                    // raised={true}
-                    primary={true}
-                    onClick={minusButton}
-                >
-                    <span className={styles.plusminus}>−</span>
-                </Button>
-                }
-                {quantity >= 1 &&
-                <span>{quantity}</span>
-                }
-                <Button
-                    // raised={true}
-                    primary={true}
-                    disabled={quantity >= 9}
-                    onClick={plusButton}
-                >
-                    {!quantity || quantity < 1
-                        ? <FontIcon value="add_shopping_cart"/>
-                        : <span className={styles.plusminus}>+</span>}
-                </Button>
+            <div className={styles.foodQuantityButtons}>
+                <div>
+                    {quantity >= 1 &&
+                        <Button icon='shopping_cart' label={`${quantity}`} flat disabled />
+                    }
+                </div>
+                <div>
+                    {quantity >= 1 &&
+                    <Button
+                        // raised={true}
+                        primary={true}
+                        onClick={minusButton}
+                    >
+                        <span className={styles.plusminus}>−</span>
+                    </Button>
+                    }
+                    <Button
+                        // raised={true}
+                        primary={true}
+                        disabled={quantity >= 9}
+                        onClick={plusButton}
+                    >
+                        {!quantity || quantity < 1
+                            ? <FontIcon value="add_shopping_cart"/>
+                            : <span className={styles.plusminus}>+</span>}
+                    </Button>
+                </div>
             </div>
         )
     }

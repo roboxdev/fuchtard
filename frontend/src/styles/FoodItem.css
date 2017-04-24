@@ -39,3 +39,9 @@
 .cardActions {
   flex-direction: row-reverse;
 }
+
+.foodQuantityButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
