@@ -14,24 +14,15 @@ class CartItemSerializer(serializers.ModelSerializer):
         )
 
 
-class CartSerializer(serializers.ModelSerializer):
-    items = CartItemSerializer(source='cartitem_set', many=True)
-
-    class Meta:
-        model = Cart
-        fields = (
-            'items',
-        )
-
-
 class OrderSerializer(serializers.ModelSerializer):
     id = HashidSerializerCharField(source_field='order.Order.id')
-    cart = CartSerializer()
+    cart = CartItemSerializer(source='cart.cartitem_set', many=True)
 
     class Meta:
         model = Order
         fields = (
             'id',
+            'hashed_id',
             'order_created_timestamp',
             'cart',
             'gift_food_item',
@@ -46,6 +37,7 @@ class CheckoutSerializer(serializers.ModelSerializer):
         model = Order
         fields = (
             'id',
+            'hashed_id',
             'order_created_timestamp',
             'email',
             'name',
@@ -55,12 +47,12 @@ class CheckoutSerializer(serializers.ModelSerializer):
             'apartment',
             'floor',
             'cart',
-            'deliver_at',
             'comment',
             'gift_food_item',
         )
         extra_kwargs = {
             'order_created_timestamp': {'read_only': True},
+            'hashed_id': {'read_only': True},
         }
 
     def create(self, validated_data):

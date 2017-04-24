@@ -9,6 +9,11 @@ import FoodItem from 'components/FoodItem';
 
 
 export class FoodItemDetailed extends React.Component {
+    static defaultProps = {
+        food: {},
+        category: {},
+    };
+
     render() {
         const {food, category} = this.props;
         return <div>

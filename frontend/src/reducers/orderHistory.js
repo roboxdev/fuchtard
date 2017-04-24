@@ -1,21 +1,37 @@
 import Immutable from 'seamless-immutable';
 
+import { endpoints } from 'config';
 
 const types = {
     ADD_HISTORY_ENTRY: 'ADD_HISTORY_ENTRY',
 };
 
-const orders = window.localStorage.getItem('orders') ? JSON.parse(window.localStorage.getItem('orders')) : [];
+function getOrdersHistoryFromLocalStorage() {
+    const orders = window.localStorage.getItem('orderHistory');
+    try {
+        const parsed = JSON.parse(orders);
+        if (parsed instanceof Array) {
+            return parsed;
+        }
+    }
+    catch (e) {
+        console.log(e)
+    }
+    return []
+}
 
 const initialState = Immutable({
-    orders: orders,
+    orders: getOrdersHistoryFromLocalStorage(),
 });
 
-export default function (state=initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case types.ADD_HISTORY_ENTRY:
             return Immutable.update(state, 'orders',
-                v => [...v, [action.payload.id, action.payload.order_created_timestamp]]
+                order => [
+                    ...order.filter(v => v.id !== action.payload.id),
+                    action.payload,
+                ]
             );
         default:
             return state;
@@ -31,6 +47,24 @@ function addHistoryEntry(json) {
 }
 
 
+function fetchOrderByHashid(hashid) {
+    return dispatch => {
+        fetch(`${endpoints.orders}${hashid}`).then(
+            response => response.json()
+        ).then(
+            json => {
+                if (json.id) {
+                    dispatch(addHistoryEntry(json));
+                } else {
+                    console.log(json)
+                }
+            }
+        );
+    }
+}
+
+
 export const actions = {
     addHistoryEntry,
+    fetchOrderByHashid,
 };

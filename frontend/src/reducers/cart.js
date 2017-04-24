@@ -13,18 +13,24 @@ const types = {
     REVERT_CART: 'REVERT_CART',
 };
 
+const defaultPresentCart = {
+    foodItems: {},
+    ordering: [],
+};
+
+
 function getCartFromLocalStorage() {
     const cart = window.localStorage.getItem('cart');
     try {
-        return JSON.parse(window.localStorage.getItem('cart'));
+        const parsed = JSON.parse(cart);
+        if (parsed && parsed === Object(parsed) && Object.keys(parsed).length !== 0) {
+            return parsed;
+        }
     }
     catch (e) {
         console.log(e)
     }
-    return {
-        foodItems: {},
-        ordering: [],
-    }
+    return defaultPresentCart
 }
 
 const initialState = Immutable({
@@ -39,7 +45,7 @@ const backedUpCartState = (state) => Immutable.set(state, 'previous', state.pres
 export default function (state=initialState, action) {
     switch (action.type) {
         case types.CLEAR_CART:
-            return Immutable.set(backedUpCartState(state), 'present', {});
+            return Immutable.set(backedUpCartState(state), 'present', defaultPresentCart);
         case types.CART_ITEM_ADD:
             const addedToOrdering = Immutable.updateIn(
                 backedUpCartState(state), ['present', 'ordering'], v => [...v, action.payload]

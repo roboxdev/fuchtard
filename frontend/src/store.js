@@ -18,6 +18,7 @@ const placeCartIntoLocalStorage = () => {
     const state = store.getState();
     window.localStorage.setItem('cart', JSON.stringify(state.cart.present));
     window.localStorage.setItem('order', JSON.stringify(state.order));
+    window.localStorage.setItem('orderHistory', JSON.stringify(state.orderHistory.orders));
 };
 
 store.subscribe(placeCartIntoLocalStorage);

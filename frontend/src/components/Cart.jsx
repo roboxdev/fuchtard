@@ -8,6 +8,10 @@ import CartTotal from 'components/CartTotal';
 
 
 export class Cart extends React.Component {
+    static defaultProps = {
+        cart: [],
+    };
+
     render() {
         const {cart} = this.props;
         return <div>
