@@ -1,5 +1,7 @@
 import Immutable from 'seamless-immutable';
 
+import history from 'browserHistory';
+
 import { actions as orderHistoryActions } from 'reducers/orderHistory';
 
 import { endpoints } from 'config';
@@ -62,6 +64,7 @@ function placeOrder() {
             json => {
                 if (json.id) {
                     dispatch(orderHistoryActions.addHistoryEntry(json));
+                    history.push(`/orders/${json.id}/`)
                 } else {
                     console.log(json)
                 }
