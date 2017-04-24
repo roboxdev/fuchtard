@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { minimalOrderRequirementSatisfiedSelector, subtotalSelector } from 'selectors/app';
 
+import { Redirect } from 'react-router';
+
 import { Card, CardText } from 'react-toolbox/lib/card';
 import Collapse from 'react-collapse';
 import MediaQuery from 'react-responsive';
@@ -50,7 +52,10 @@ const CheckoutConnected = connect(
 export class CheckoutPage extends React.Component {
     render() {
         return <MediaQuery maxWidth={960}>
-            <CheckoutConnected/>
+            {matches => matches
+                ? <CheckoutConnected/>
+                : <Redirect to={'/'}/>
+            }
         </MediaQuery>
     }
 }
