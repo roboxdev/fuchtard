@@ -12,7 +12,7 @@ class Banner(SortableMixin):
     image = models.ImageField('Изображение', upload_to='promo_images/')
     heading = models.CharField('Заголовок', max_length=60)
     subheading = models.CharField('Подзаголовок', max_length=255)
-    url = models.CharField('Подзаголовок', max_length=255, null=True, blank=True)
+    url = models.CharField('Ссылка', max_length=255, blank=True)
 
     def __str__(self):
         return self.heading
