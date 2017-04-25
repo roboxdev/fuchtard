@@ -1,3 +1,5 @@
+@import '_constants.css';
+
 .foodTitle {
   white-space: nowrap;
   overflow: hidden;
@@ -33,4 +35,8 @@
 
 .lessThanMinimalOrder {
   color: red;
+}
+
+.cartItemAnimationWrapper {
+  @apply --slideAnimation;
 }

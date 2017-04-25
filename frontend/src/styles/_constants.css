@@ -8,7 +8,35 @@
     max-width: var(--webSiteMaxWidth);
     margin-left: auto;
     margin-right: auto
-  }
+  };
+
+  --slideAnimation: {
+    &.slideAnimationEnter {
+      position: relative;
+      left: 300px;
+      height: 0;
+
+      &.slideAnimationEnterActive {
+        left: 0;
+        height: 103px;
+        transition: height 100ms ease-in-out,
+        left 250ms ease-in-out 100ms;
+      }
+    }
+
+    &.slideAnimationLeave {
+      position: relative;
+      left: 0;
+      height: 50px;
+
+      &.slideAnimationLeaveActive {
+        left: 300px;
+        height: 0;
+        transition: left 250ms ease-in-out 200ms,
+        height 100ms ease-in-out 450ms;
+      }
+    }
+  };
 }
 
 @custom-media --desktop (width >= 960px);
