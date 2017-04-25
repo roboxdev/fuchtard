@@ -38,7 +38,6 @@ export class OrderForm extends React.Component {
                        label='Телефон'
                        required
                 />
-                <p>Следующие поля необязательны. Мы уточним детали по телефону.</p>
                 <Input value={order.email}
                        onChange={value => updateOrder('email', value)}
                        type='email'
