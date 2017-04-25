@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import {List, ListItem} from 'react-toolbox/lib/list';
+
+import styles from 'styles/FoodMenu.css';
 
 
 export class FoodMenu extends React.Component {
@@ -12,12 +14,15 @@ export class FoodMenu extends React.Component {
                     <List>
                         {this.props.foodCategories.map(
                             (category) =>
-                            <Link key={category.url} to={`/${category.slug}/`}>
+                                <NavLink key={category.url}
+                                         to={`/${category.slug}/`}
+                                         activeClassName={styles.activeLink}
+                                >
                                     <ListItem
                                         key={category.url}
                                         caption={category.title}
-                                        />
-                            </Link>
+                                    />
+                                </NavLink>
                         )}
                     </List>
                 </nav>
@@ -27,8 +32,8 @@ export class FoodMenu extends React.Component {
 }
 
 
-export default connect(
+export default withRouter(connect(
     state => ({
         foodCategories: state.entities.foodCategories,
     })
-)(FoodMenu)
+)(FoodMenu))
