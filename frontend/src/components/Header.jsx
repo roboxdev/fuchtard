@@ -14,7 +14,7 @@ export class Header extends React.Component {
                         <header className={styles.header}>
                             <div className={styles.logo}>
                                 <Link to="/">
-                                    <img src="/public/maxiSushiLogo.png"/>
+                                    <img src="/public/maxiSushiLogo.svg"/>
                                 </Link>
                             </div>
                             <div className={styles.aboutUsWrapper}>
