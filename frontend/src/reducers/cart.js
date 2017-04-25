@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable';
 import { actions as notificationActions } from 'reducers/notifications';
 import { actions as uiActions } from 'reducers/ui';
-import { foodItemAnnotatedCart, cartSelector } from 'selectors/app';
+import { foodItemAnnotatedCartSelector, cartSelector } from 'selectors/app';
 
 
 const types = {
@@ -122,7 +122,7 @@ function plusButton(foodItemId) {
 function minusButton(foodItemId) {
     return (dispatch, getState) => {
         const state = getState();
-        const {quantity, foodItem: {title}} = foodItemAnnotatedCart(state)[foodItemId];
+        const {quantity, foodItem: {title}} = foodItemAnnotatedCartSelector(state)[foodItemId];
         if (quantity === 1) {
             dispatch(notificationActions.notify(`Блюдо ${title} удалено из корзины`));
             dispatch(cartItemRemove(foodItemId));

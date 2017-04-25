@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { cartOrderingSelector } from 'selectors/app';
+import { cartAsAnnotatedMapSelector } from 'selectors/app';
 
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
@@ -13,7 +13,7 @@ import styles from 'styles/Cart.css';
 
 export class Cart extends React.Component {
     static defaultProps = {
-        cart: [],
+        cart: new Map(),
     };
 
     render() {
@@ -28,7 +28,7 @@ export class Cart extends React.Component {
                 }}
                 transitionEnterTimeout={1000}
                 transitionLeaveTimeout={1000}>
-                {cart.map((foodItemId) =>
+                {[...cart.entries()].map(([foodItemId, rest]) =>
                     <div
                         className={styles.cartItemAnimationWrapper}
                         key={foodItemId}
@@ -36,6 +36,7 @@ export class Cart extends React.Component {
 
                         <CartItem
                             foodItemId={+foodItemId}
+                            {...rest}
                         />
                     </div>
                 )}
@@ -48,6 +49,6 @@ export class Cart extends React.Component {
 
 export default connect(
     state => ({
-        cart: cartOrderingSelector(state),
+        cart: cartAsAnnotatedMapSelector(state),
     }),
 )(Cart)

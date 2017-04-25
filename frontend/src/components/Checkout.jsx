@@ -4,7 +4,7 @@ import { minimalOrderRequirementSatisfiedSelector, subtotalSelector } from 'sele
 
 import { Redirect } from 'react-router';
 
-import { Card, CardText } from 'react-toolbox/lib/card';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import Collapse from 'react-collapse';
 import MediaQuery from 'react-responsive';
 
@@ -23,14 +23,25 @@ export class Checkout extends React.Component {
         return (
             <div className={styles.wrapper}>
                 <div>Корзина</div>
-                <Card>
-                    <Collapse isOpened={cartIsEmpty}>
-                        <CardText>
-                            <CheckoutHowto />
-                        </CardText>
-                    </Collapse>
-                </Card>
-                <Cart/>
+                <div>
+                    <CSSTransitionGroup
+                        transitionName={{
+                            enter: styles.animationEnter,
+                            enterActive: styles.animationEnterActive,
+                            leave: styles.animationLeave,
+                            leaveActive: styles.animationLeaveActive,
+                        }}
+                        transitionEnterTimeout={1000}
+                        transitionLeaveTimeout={1000}>
+                        {cartIsEmpty
+                            ? <div className={styles.animationWrapper}>
+                                <CheckoutHowto key={cartIsEmpty}/>
+                            </div>
+                            : []
+                        }
+                    </CSSTransitionGroup>
+                    <Cart/>
+                </div>
                 <Collapse isOpened={minimalOrderRequirementSatisfied}>
                     <GiftsForm/>
                     <OrderForm/>

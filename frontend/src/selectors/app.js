@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 import sumBy from 'lodash/sumBy';
 import find from 'lodash/find';
 import mapValues from 'lodash/mapValues';
@@ -30,37 +30,41 @@ export const cartOrderingSelector = state => state.cart.present.ordering;
 export const cartAsOrderedMap = state => new Map(cartOrderingSelector(state).map(v => [v, cartSelector(state)[v]]));
 const getFoodItemById = (foodItems, id) => find(foodItems, v => v.id === +id);
 
-export const foodItemAnnotatedCart = createSelector(
-    cartSelector,
-    foodItemsSelector,
-    (cart, foodItems) => mapValues(
-        cart,
-        (quantity, foodItemId) => ({
-            quantity,
-            foodItem: getFoodItemById(foodItems, foodItemId),
-        })
-    )
+export const getFoodItemAnnotatedCart = (cart, foodItems) => mapValues(
+    cart,
+    (quantity, foodItemId) => ({
+        quantity,
+        foodItem: getFoodItemById(foodItems, foodItemId),
+    })
 );
 
-export const subtotalSelector = createSelector(
-    foodItemAnnotatedCart,
-    (cart) => sumBy(values(cart),
-        ({quantity, foodItem}) => foodItem && foodItem.price * quantity)
+export const foodItemAnnotatedCartSelector = createSelector(cartSelector, foodItemsSelector, getFoodItemAnnotatedCart);
+
+const getAnnotatedCartMap = (ordering, foodItems) => new Map(
+    ordering.map(foodItemId => [foodItemId, foodItems[foodItemId]])
 );
 
+export const cartAsAnnotatedMapSelector = createSelector(cartOrderingSelector, foodItemAnnotatedCartSelector, getAnnotatedCartMap);
+
+
+const getSubtotal = (cart) => sumBy(
+    values(cart),
+    ({quantity, foodItem}) => foodItem && foodItem.price * quantity
+);
+
+
+export const subtotalSelector = createSelector(foodItemAnnotatedCartSelector, getSubtotal);
 
 export const minimalOrderRequirementSatisfiedSelector = createSelector(
     subtotalSelector,
     subtotal => subtotal >= minimalOrderRequirement,
 );
 
-
-export const foodItemAnnotatedGifts = createSelector(
-    giftsSelector,
-    foodItemsSelector,
-    (gifts, foodItems) => gifts.map(
-        ({food_item, ...rest}) => ({
-            foodItem: getFoodItemById(foodItems, food_item),
-            ...rest,
-        }))
+const getFoodItemAnnotatedGifts = (gifts, foodItems) => gifts.map(
+    ({food_item, ...rest}) => ({
+        foodItem: getFoodItemById(foodItems, food_item),
+        ...rest,
+    })
 );
+
+export const foodItemAnnotatedGifts = createSelector(giftsSelector, foodItemsSelector, getFoodItemAnnotatedGifts);

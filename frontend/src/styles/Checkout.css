@@ -5,3 +5,25 @@
   max-width: calc(var(--webSiteMaxWidth) / 2);
   margin: 0 auto;
 }
+
+.animationWrapper {
+  &.animationEnter {
+    opacity: 0.01;
+
+    &.animationEnterActive {
+      position: absolute;
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+    }
+  }
+
+  &.animationLeave {
+    opacity: 1;
+
+    &.animationLeaveActive {
+      position: absolute;
+      opacity: 0.01;
+      transition: opacity 300ms ease-in;
+    }
+  }
+}

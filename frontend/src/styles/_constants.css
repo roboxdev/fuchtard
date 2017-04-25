@@ -30,7 +30,7 @@
       height: 50px;
 
       &.slideAnimationLeaveActive {
-        left: 300px;
+        left: 500px;
         height: 0;
         transition: left 250ms ease-in-out 200ms,
         height 100ms ease-in-out 450ms;

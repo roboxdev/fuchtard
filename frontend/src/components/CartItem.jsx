@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { actions as uiActions } from 'reducers/ui';
-import { foodItemAnnotatedCart } from 'selectors/app';
 
 import Collapse from 'react-collapse';
 import { Card, CardActions, CardText } from 'react-toolbox/lib/card';
@@ -49,7 +48,6 @@ export class CartItem extends React.Component {
 export default connect(
     (state, props) => ({
         isExpanded: state.ui.expandedCartItem === props.foodItemId,
-        ...foodItemAnnotatedCart(state)[props.foodItemId],
     }),
     (dispatch, props) => ({
         expandedCartItemToggle: () => dispatch(uiActions.expandedCartItemToggle(props.foodItemId))
