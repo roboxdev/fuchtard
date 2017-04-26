@@ -53,6 +53,6 @@ export default connect(
     }),
     (dispatch, props) => ({
         plusButton: () => dispatch(cartActions.plusButton(props.foodItemId)),
-        minusButton: () => dispatch(cartActions.minusButton(props.foodItemId)),
+        minusButton: () => dispatch(cartActions.minusButton(props.foodItemId, false)),
     })
 )(FoodQuantityButtons);
