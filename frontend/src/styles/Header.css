@@ -85,7 +85,6 @@
   @media (--bp2) {
     flex-basis: auto;
     order: 1;
-    margin-bottom: 0;
   }
   @media (--desktop) {
     font-size: 3rem;

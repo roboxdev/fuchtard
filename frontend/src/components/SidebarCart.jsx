@@ -6,7 +6,6 @@ import { minimalOrderRequirementSatisfiedSelector, cartIsEmptySelector } from 's
 import { Link, Route, withRouter } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 
-import CheckoutHowto from 'components/CheckoutHowto';
 import Cart from 'components/Cart';
 import GiftsForm from 'components/GiftsForm';
 
@@ -20,28 +19,30 @@ export class SidebarCart extends React.Component {
             <Route path="/checkout/" children={
                 ({match, ...rest}) =>
                     match
-                        ? <CheckoutHowto />
+                        ? null
                         : <div>
-                        {cartIsEmpty
-                            ? <CheckoutHowto/>
-                            : <div>
-                                <Cart/>
-                                <GiftsForm/>
-                                <Link to={minimalOrderRequirementSatisfied
-                                    ? "/checkout/"
-                                    : "."}>
-                                    <Button
-                                        primary={true}
-                                        disabled={!minimalOrderRequirementSatisfied}
-                                    >
-                                        Перейти к оформлению
-                                    </Button>
-                                </Link>
-                            </div>
+                        <Cart/>
+                        <GiftsForm/>
+                        {minimalOrderRequirementSatisfied
+                            ? <Link to="/checkout/">
+                                <Button
+                                    primary={true}
+                                >
+                                    Перейти к оформлению
+                                </Button>
+                            </Link>
+                            : <Button
+                                primary={true}
+                                disabled={true}
+                            >
+                                Перейти к оформлению
+                            </Button>
                         }
                     </div>
-            }/>
-        </div>    }
+            }
+            />
+        </div>
+    }
 }
 
 export default withRouter(connect(

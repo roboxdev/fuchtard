@@ -14,10 +14,10 @@ export class CheckoutPage extends React.Component {
     render() {
         const {minimalOrderRequirementSatisfied, cartIsEmpty} = this.props;
         return <div className={styles.wrapper}>
-                <Cart/>
-                <GiftsForm/>
-                <OrderForm/>
-            </div>
+            <Cart/>
+            <GiftsForm/>
+            <OrderForm/>
+        </div>
     }
 }
 

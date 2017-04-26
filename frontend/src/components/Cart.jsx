@@ -4,11 +4,23 @@ import { connect } from 'react-redux';
 import { cartAsAnnotatedMapSelector } from 'selectors/app';
 
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import { Card, CardTitle } from 'react-toolbox/lib/card';
 
 import CartItem from 'components/CartItem';
 import CartTotal from 'components/CartTotal';
 
 import styles from 'styles/Cart.css';
+import { MinimalOrderInfo, AddToCardButtonHowto } from 'components/CheckoutHowto';
+
+const EmptyCart = () => <Card>
+        <CardTitle subtitle={
+            <span>
+                <AddToCardButtonHowto/>
+                <br/>
+                <MinimalOrderInfo/>
+            </span>
+        }/>
+</Card>;
 
 export class Cart extends React.Component {
     static defaultProps = {
@@ -19,13 +31,7 @@ export class Cart extends React.Component {
         const {cart} = this.props;
         const cartEntries = [...cart.entries()];
         return <div>
-            {cartEntries.length > 0 &&
-            <div
-                className={styles.cartItemAnimationWrapper}
-            >
-                <p>Корзина</p>
-            </div>
-            }
+            <p className={styles.subheader}>Корзина</p>
             <CSSTransitionGroup
                 transitionName={{
                     enter: styles.animationEnter,
@@ -47,7 +53,12 @@ export class Cart extends React.Component {
                         />
                     </div>
                 )}
-                <CartTotal/>
+                { cartEntries.length > 0
+                    ? <CartTotal/>
+                    : <div className={styles.cartItemAnimationWrapper}>
+                        <EmptyCart/>
+                    </div>
+                }
             </CSSTransitionGroup>
         </div>
 

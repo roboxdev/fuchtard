@@ -21,7 +21,7 @@ export class CartTotal extends React.Component {
             isExpanded,
             expandedCartItemToggle,
             minimalOrderRequirementSatisfied } = this.props;
-        return (cartSubtotal > 0) && <Card theme={{card: styles.card}}>
+        return <Card>
             <div onClick={expandedCartItemToggle}>
             <CardText theme={{cardText: styles.totalCardText}}>
                 <span className={styles.foodTitle}>
@@ -33,6 +33,7 @@ export class CartTotal extends React.Component {
             </CardText>
 
             </div>
+            {cartSubtotal > 0 &&
             <Collapse isOpened={isExpanded}>
                 <CardActions>
                     <div className={styles.quantityButtons}>
@@ -40,6 +41,7 @@ export class CartTotal extends React.Component {
                     </div>
                 </CardActions>
             </Collapse>
+            }
         </Card >
     }
 }

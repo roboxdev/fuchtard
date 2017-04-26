@@ -1,5 +1,11 @@
 @import '_constants.css';
 
+.subheader {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  height: 20px;
+}
+
 .foodTitle {
   white-space: nowrap;
   overflow: hidden;

@@ -6,6 +6,8 @@ import {RadioGroup, RadioButton} from 'react-toolbox/lib/radio';
 import { actions as orderActions } from 'reducers/order';
 import {foodItemAnnotatedGifts, subtotalSelector} from 'selectors/app';
 
+import styles from 'styles/Cart.css';
+
 
 export class GiftsForm extends React.Component {
     handleChange = (value) => {this.props.updateOrderField('gift', +value)};
@@ -26,7 +28,7 @@ export class GiftsForm extends React.Component {
     render() {
         const {gifts, cartSubtotal, selectedGiftId} = this.props;
         return <div>
-            <p>Подарок</p>
+            <p className={styles.subheader}>Подарок</p>
             <RadioGroup name='gift' value={`${selectedGiftId}`} onChange={this.handleChange}>
                 {gifts.map(({id, foodItem, requirement}) => {
                         const disabled = !cartSubtotal || cartSubtotal < requirement;
