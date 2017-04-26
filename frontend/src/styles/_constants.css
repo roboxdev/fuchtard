@@ -10,30 +10,28 @@
     margin-right: auto
   };
 
-  --slideAnimation: {
-    &.slideAnimationEnter {
-      position: relative;
-      left: 300px;
+  --listOpacityAnimation: {
+    &.animationEnter {
+      opacity: 0.01;
       height: 0;
 
-      &.slideAnimationEnterActive {
-        left: 0;
+      &.animationEnterActive {
         height: 103px;
-        transition: height 100ms ease-in-out,
-        left 250ms ease-in-out 100ms;
+        opacity: 1;
+        transition: height 100ms ease-in,
+        opacity 250ms ease-in-out 150ms;
       }
     }
 
-    &.slideAnimationLeave {
-      position: relative;
-      left: 0;
-      height: 50px;
+    &.animationLeave {
+      opacity: 1;
+      height: 51px;
 
-      &.slideAnimationLeaveActive {
-        left: 500px;
+      &.animationLeaveActive {
         height: 0;
-        transition: left 250ms ease-in-out 200ms,
-        height 100ms ease-in-out 450ms;
+        opacity: 0.01;
+        transition: opacity 250ms ease-in,
+        height 100ms ease-in-out 300ms;
       }
     }
   };

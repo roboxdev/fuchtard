@@ -12,6 +12,7 @@ import Footer from 'components/Footer';
 import Checkout from 'components/Checkout';
 
 import styles from 'styles/Page.css';
+import CheckoutHowto from 'components/CheckoutHowto';
 
 
 class LeftSidebar extends React.Component {
@@ -36,17 +37,18 @@ class RightSidebar extends React.Component {
                 <Sticky bottomBoundary={'main'}>
                     <Route path="/checkout/" children={
                         ({match, ...rest}) =>
-                        !match &&
-                        <div>
-                            <Checkout/>
-                            <Link to="/checkout/">
-                                <Button
-                                    primary={true}
-                                >
-                                    Перейти к оформлению
-                                </Button>
-                            </Link>
-                        </div>
+                            match
+                                ? <CheckoutHowto />
+                                : <div>
+                                <Checkout/>
+                                <Link to="/checkout/">
+                                    <Button
+                                        primary={true}
+                                    >
+                                        Перейти к оформлению
+                                    </Button>
+                                </Link>
+                            </div>
                     }/>
                 </Sticky>
             </div>

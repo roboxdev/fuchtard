@@ -4,11 +4,6 @@ import { minimalOrderRequirementSatisfiedSelector, subtotalSelector } from 'sele
 
 import { Redirect } from 'react-router';
 
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
-import Collapse from 'react-collapse';
-import MediaQuery from 'react-responsive';
-
-import CheckoutHowto from 'components/CheckoutHowto';
 import Cart from 'components/Cart';
 import GiftsForm from 'components/GiftsForm';
 import OrderForm from 'components/OrderForm';
@@ -20,32 +15,11 @@ export class Checkout extends React.Component {
     render() {
         const {minimalOrderRequirementSatisfied, cartSubtotal} = this.props;
         const cartIsEmpty = !(cartSubtotal > 0);
-        return (
-            <div className={styles.wrapper}>
-                <div>
-                    <CSSTransitionGroup
-                        transitionName={{
-                            enter: styles.animationEnter,
-                            enterActive: styles.animationEnterActive,
-                            leave: styles.animationLeave,
-                            leaveActive: styles.animationLeaveActive,
-                        }}
-                        transitionEnterTimeout={1000}
-                        transitionLeaveTimeout={1000}>
-                        {cartIsEmpty
-                            ? <div className={styles.animationWrapper}>
-                                <CheckoutHowto key={cartIsEmpty}/>
-                            </div>
-                            : []
-                        }
-                    </CSSTransitionGroup>
-                    <Cart/>
-                </div>
-                <Collapse isOpened={minimalOrderRequirementSatisfied}>
-                    <GiftsForm/>
-                </Collapse>
-            </div>
-        )
+        return <div>
+            <Cart/>
+            {minimalOrderRequirementSatisfied && <GiftsForm/>}
+        </div>
+
     }
 }
 
@@ -60,7 +34,7 @@ const CheckoutConnected = connect(
 
 export class CheckoutPage extends React.Component {
     render() {
-        return <div>
+        return <div className={styles.wrapper}>
                 <CheckoutConnected/>
                 <OrderForm/>
             </div>

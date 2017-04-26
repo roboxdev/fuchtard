@@ -17,17 +17,25 @@ export class Cart extends React.Component {
 
     render() {
         const {cart} = this.props;
+        const cartEntries = [...cart.entries()];
         return <div>
+            {cartEntries.length > 0 &&
+            <div
+                className={styles.cartItemAnimationWrapper}
+            >
+                <p>Корзина</p>
+            </div>
+            }
             <CSSTransitionGroup
                 transitionName={{
-                    enter: styles.slideAnimationEnter,
-                    enterActive: styles.slideAnimationEnterActive,
-                    leave: styles.slideAnimationLeave,
-                    leaveActive: styles.slideAnimationLeaveActive,
+                    enter: styles.animationEnter,
+                    enterActive: styles.animationEnterActive,
+                    leave: styles.animationLeave,
+                    leaveActive: styles.animationLeaveActive,
                 }}
-                transitionEnterTimeout={1000}
-                transitionLeaveTimeout={1000}>
-                {[...cart.entries()].map(([foodItemId, rest]) =>
+                transitionEnterTimeout={400}
+                transitionLeaveTimeout={400}>
+                {cartEntries.map(([foodItemId, rest]) =>
                     <div
                         className={styles.cartItemAnimationWrapper}
                         key={foodItemId}

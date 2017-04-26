@@ -76,6 +76,8 @@ export class OrderForm extends React.Component {
                        onChange={value => updateOrder('comment', value)}
                        type='text'
                        label='Комментарий'
+                       multiline={true}
+                       rows={2}
                 />
                 <div className={styles.submitButtonContainer}>
                     <Button

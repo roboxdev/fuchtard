@@ -26,6 +26,7 @@ export class GiftsForm extends React.Component {
     render() {
         const {gifts, cartSubtotal, selectedGiftId} = this.props;
         return <div>
+            <p>Подарок</p>
             <RadioGroup name='gift' value={`${selectedGiftId}`} onChange={this.handleChange}>
                 {gifts.map(({id, foodItem, requirement}) => {
                         const disabled = !cartSubtotal || cartSubtotal < requirement;
