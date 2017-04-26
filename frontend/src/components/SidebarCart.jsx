@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { minimalOrderRequirementSatisfiedSelector, cartIsEmptySelector } from 'selectors/app';
 
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 
 import CheckoutHowto from 'components/CheckoutHowto';
@@ -22,23 +22,31 @@ export class SidebarCart extends React.Component {
                     match
                         ? <CheckoutHowto />
                         : <div>
-                        <Cart/>
-                        <GiftsForm/>
-                        <Link to="/checkout/">
-                            <Button
-                                primary={true}
-                            >
-                                Перейти к оформлению
-                            </Button>
-                        </Link>
+                        {cartIsEmpty
+                            ? <CheckoutHowto/>
+                            : <div>
+                                <Cart/>
+                                <GiftsForm/>
+                                <Link to={minimalOrderRequirementSatisfied
+                                    ? "/checkout/"
+                                    : "."}>
+                                    <Button
+                                        primary={true}
+                                        disabled={!minimalOrderRequirementSatisfied}
+                                    >
+                                        Перейти к оформлению
+                                    </Button>
+                                </Link>
+                            </div>
+                        }
                     </div>
             }/>
         </div>    }
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({
         minimalOrderRequirementSatisfied: minimalOrderRequirementSatisfiedSelector(state),
         cartIsEmpty: cartIsEmptySelector(state),
     })
-)(SidebarCart);
+)(SidebarCart));
