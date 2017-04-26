@@ -2,6 +2,7 @@
 
 .coloredBg {
   background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
 }
 
 .headerWrapper {
@@ -15,7 +16,13 @@
 }
 
 .logo {
+
 }
 
 .aboutUs {
+  order: 2;
+}
+
+.titleWrapper {
+  order: 1;
 }

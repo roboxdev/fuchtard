@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+
 import {getFoodItemsOfCategory, getCategoryBySlug} from 'selectors/app';
 import FoodItem from 'components/FoodItem';
+import { PageTitleUpdater } from 'components/PageTitle';
 
 import styles from 'styles/FoodCategory.css';
 
@@ -14,8 +16,9 @@ export class FoodCategory extends React.Component {
     };
 
     render() {
-        const {category, foodItems, ...rest} = this.props;
+        const {category, foodItems, category: {title}, ...rest} = this.props;
         return <div className={styles.foodItemCategory}>
+            <PageTitleUpdater title={title} />
             {foodItems.map(
                 food =>
                     <FoodItem

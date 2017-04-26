@@ -4,8 +4,13 @@
   margin-top: 16px;
   margin-bottom: 60px;
   background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
   @media (--desktop) {
     margin-bottom: 0;
+  }
+
+  & a {
+    white-space: nowrap;
   }
 }
 
