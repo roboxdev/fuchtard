@@ -11,18 +11,47 @@
 
 .header {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction: row;
+  @media (--bp2) {
+    flex-wrap: nowrap;
+  }
 }
 
 .logo {
-
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 100%;
+  @media (--bp1) {
+    flex-basis: auto;
+  }
 }
 
+
 .aboutUs {
-  order: 2;
+  flex-basis: 100%;
+  @media (--bp1) {
+    flex-basis: auto;
+  }
+  @media (--bp2) {
+    order: 2;
+  }
+  @media (--desktop) {
+    flex-basis: 25%;
+  }
 }
 
 .titleWrapper {
-  order: 1;
+  flex: 1;
+  flex-basis: 100%;
+  @media (--bp2) {
+    flex-basis: auto;
+    order: 1;
+  }
+  @media (--desktop) {
+    flex-basis: 25%;
+  }
 }

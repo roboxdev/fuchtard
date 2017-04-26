@@ -3,12 +3,6 @@
   @media (width >= 600px) {
     width: calc(50% - 4px);
   }
-  @media (width >= 900px) {
-    width: calc(50% - 4px);
-  }
-  @media (width >= 960px) {
-    width: calc(50% - 4px);
-  }
   margin-top: 8px;
 }
 

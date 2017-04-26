@@ -8,10 +8,6 @@
   align-items: stretch;
 }
 
-.test {
-  max-width: var(--webSiteMaxWidth);
-}
-
 .mainBlock {
   @apply --limitToWebSiteMaxWidth;
   display: flex;
