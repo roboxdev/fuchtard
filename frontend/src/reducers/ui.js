@@ -45,7 +45,7 @@ function expandedCartItemSet(foodItemId) {
 
 }
 
-function setPageTitle(title) {
+function setPageTitle(title = '') {
     return {
         type: types.SET_PAGE_TITLE,
         title,

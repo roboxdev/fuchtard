@@ -30,6 +30,10 @@ export const PageTitleUpdater = connect()(
         render() {
             return null;
         }
+
+        componentWillUnmount() {
+            this.props.dispatch(uiActions.setPageTitle());
+        }
     }
 );
 
