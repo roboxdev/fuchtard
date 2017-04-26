@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { minimalOrderRequirementSatisfiedSelector } from 'selectors/app';
 import { actions as orderActions } from 'reducers/order';
 
 import Input from 'react-toolbox/lib/input';
@@ -16,7 +17,7 @@ export class OrderForm extends React.Component {
     };
 
     render() {
-        const {order, updateOrderField} = this.props;
+        const {order, updateOrderField, minimalOrderRequirementSatisfied} = this.props;
         const updateOrder = (field, value) => updateOrderField(field, value);
         return <div>
             <form onSubmit={this.submit}>
@@ -85,6 +86,7 @@ export class OrderForm extends React.Component {
                         type="submit"
                         raised={true}
                         primary={true}
+                        disabled={!minimalOrderRequirementSatisfied}
                     >Заказать</Button>
                 </div>
             </form>
@@ -96,6 +98,8 @@ export class OrderForm extends React.Component {
 export default connect(
     state => ({
         order: state.order,
+        minimalOrderRequirementSatisfied: minimalOrderRequirementSatisfiedSelector(state),
+
     }),
     dispatch => ({
         ...bindActionCreators(orderActions, dispatch),
