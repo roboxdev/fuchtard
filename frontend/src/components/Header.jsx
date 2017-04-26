@@ -14,18 +14,24 @@ export class Header extends React.Component {
                     <div className={styles.headerWrapper}>
                         <header className={styles.header}>
                             <div className={styles.logo}>
-                                <Link to="/">
-                                    <img src="/public/maxiSushiLogo.svg"/>
-                                </Link>
+                                <div className={styles.logoBlock}>
+                                    <Link to="/">
+                                        <img src="/public/maxiSushiLogo.svg"/>
+                                    </Link>
+                                </div>
                             </div>
                             <div className={styles.aboutUs}>
                                 <p>
-                                    <span>Телефон для заказов:</span>
-                                    <span><a href="tel:+77273573030">+7 (727) 357 30 30</a></span>
+                                    <span>
+                                        <span>Телефон для заказов: </span>
+                                        <span><a href="tel:+77273573030">+7 (727) 357 30 30</a></span>
+                                    </span>
                                 </p>
                                 <p>
-                                    <span>Мобильный:</span>
-                                    <span><a href="tel:+77757210135">+7 (775) 721 01 35</a></span>
+                                    <span>
+                                        <span>Мобильный: </span>
+                                        <span><a href="tel:+77757210135">+7 (775) 721 01 35</a></span>
+                                    </span>
                                 </p>
                                 <p>
                                     <span>Мы в сети:</span>

@@ -1,5 +1,8 @@
+@import "_constants.css";
+
 body {
   margin: 0;
+  font-family: var(--preferred-font);
 }
 
 img {

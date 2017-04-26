@@ -20,13 +20,19 @@
 }
 
 .logo {
-  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 100%;
   @media (--bp1) {
     flex-basis: auto;
+  }
+  @media (--desktop) {
+    flex-basis: 20%
+  }
+  & .logoBlock {
+
+    padding: 20px;
   }
 }
 
@@ -42,6 +48,10 @@
   @media (--desktop) {
     flex-basis: 25%;
   }
+
+  & a {
+    white-space: nowrap;
+  }
 }
 
 .titleWrapper {
@@ -52,6 +62,6 @@
     order: 1;
   }
   @media (--desktop) {
-    flex-basis: 25%;
+    flex-basis: 55%;
   }
 }
