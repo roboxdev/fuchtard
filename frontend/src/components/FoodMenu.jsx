@@ -34,6 +34,6 @@ export class FoodMenu extends React.Component {
 
 export default withRouter(connect(
     state => ({
-        foodCategories: state.entities.foodCategories,
+        foodCategories: state.entities.foodCategories.filter(v => v.visible),
     })
 )(FoodMenu))
