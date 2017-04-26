@@ -55,6 +55,11 @@ const getSubtotal = (cart) => sumBy(
 
 export const subtotalSelector = createSelector(foodItemAnnotatedCartSelector, getSubtotal);
 
+export const cartIsEmptySelector = createSelector(
+    subtotalSelector,
+    subtotal => subtotal > 0
+);
+
 export const minimalOrderRequirementSatisfiedSelector = createSelector(
     subtotalSelector,
     subtotal => subtotal >= minimalOrderRequirement,

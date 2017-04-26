@@ -1,0 +1,7 @@
+@import "_constants.css";
+
+.wrapper {
+  padding: 8px 15px;
+  max-width: calc(var(--webSiteMaxWidth) / 3);
+  margin: 0 auto;
+}

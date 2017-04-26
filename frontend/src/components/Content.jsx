@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
 import IndexPage from 'components/IndexPage';
-import {CheckoutPage} from 'components/Checkout';
+import CheckoutPage from 'components/CheckoutPage';
 import ThankyouPage from 'components/ThankyouPage';
 import FoodCategory from 'components/FoodCategory';
 import FoodItemDetailed from 'components/FoodItemDetailed';

@@ -24,7 +24,5 @@
 
 .rightSidebar {
   flex-basis: 25%;
-  //flex-grow: 0;
   max-width: 25%;
-
 }
