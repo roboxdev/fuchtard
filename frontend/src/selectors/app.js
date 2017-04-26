@@ -57,7 +57,7 @@ export const subtotalSelector = createSelector(foodItemAnnotatedCartSelector, ge
 
 export const cartIsEmptySelector = createSelector(
     subtotalSelector,
-    subtotal => subtotal > 0
+    subtotal => subtotal <= 0
 );
 
 export const minimalOrderRequirementSatisfiedSelector = createSelector(
