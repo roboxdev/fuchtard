@@ -13,7 +13,7 @@ export class Content extends React.Component {
         return (
             <Switch>
                 <Route exact path="/" component={IndexPage}/>
-                <Route path="/cart/" component={CheckoutPage}/>
+                <Route path="/checkout/" component={CheckoutPage}/>
                 <Route path="/orders/:hashid/" component={ThankyouPage}/>
                 <Route path="/:slug/:foodSlug/" component={FoodItemDetailed}/>
                 <Route path="/:slug/" component={FoodCategory}/>

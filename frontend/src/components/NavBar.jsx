@@ -16,7 +16,7 @@ class NavigationButtons extends React.Component {
                     <span className={styles.buttonText}>Домой</span>
                 </Button>
             </Link>
-            <Link to="/cart/" className={styles.link}>
+            <Link to="/checkout/" className={styles.link}>
                 <Button neutral={false} theme={{button: styles.button}}>
                     <FontIcon className={styles.buttonIcon} value="shopping_cart"/>
                     <span className={styles.buttonText}>Корзина</span>

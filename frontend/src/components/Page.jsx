@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 
 import MediaQuery from 'react-responsive';
 import Sticky from 'react-stickynode';
+import { Button } from 'react-toolbox/lib/button';
 
 import FoodMenu from 'components/FoodMenu';
 import Header from 'components/Header';
@@ -29,15 +31,26 @@ class LeftSidebar extends React.Component {
 
 class RightSidebar extends React.Component {
     render() {
-        return (
-            <MediaQuery minWidth={960}>
-                <div className={styles.rightSidebar}>
-                    <Sticky bottomBoundary={'main'}>
-                        <Checkout/>
-                    </Sticky>
-                </div>
-            </MediaQuery>
-        );
+        return <MediaQuery minWidth={960}>
+            <div className={styles.rightSidebar}>
+                <Sticky bottomBoundary={'main'}>
+                    <Route path="/checkout/" children={
+                        ({match, ...rest}) =>
+                        !match &&
+                        <div>
+                            <Checkout/>
+                            <Link to="/checkout/">
+                                <Button
+                                    primary={true}
+                                >
+                                    Перейти к оформлению
+                                </Button>
+                            </Link>
+                        </div>
+                    }/>
+                </Sticky>
+            </div>
+        </MediaQuery>
     }
 }
 

@@ -22,7 +22,6 @@ export class Checkout extends React.Component {
         const cartIsEmpty = !(cartSubtotal > 0);
         return (
             <div className={styles.wrapper}>
-                <div>Корзина</div>
                 <div>
                     <CSSTransitionGroup
                         transitionName={{
@@ -44,7 +43,6 @@ export class Checkout extends React.Component {
                 </div>
                 <Collapse isOpened={minimalOrderRequirementSatisfied}>
                     <GiftsForm/>
-                    <OrderForm/>
                 </Collapse>
             </div>
         )
@@ -62,12 +60,10 @@ const CheckoutConnected = connect(
 
 export class CheckoutPage extends React.Component {
     render() {
-        return <MediaQuery maxWidth={960}>
-            {matches => matches
-                ? <CheckoutConnected/>
-                : <Redirect to={'/'}/>
-            }
-        </MediaQuery>
+        return <div>
+                <CheckoutConnected/>
+                <OrderForm/>
+            </div>
     }
 }
 
