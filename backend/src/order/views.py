@@ -26,11 +26,6 @@ class CheckoutViewset(mixins.CreateModelMixin,
     serializer_class = CheckoutSerializer
     permission_classes = []
 
-    def perform_create(self, serializer):
-        super(CheckoutViewset, self).perform_create(serializer)
-        # TODO: fire notifications self.object.notify_restaurant()
-        # TODO: check gift
-
 
 class OrderDetailRedirectView(RedirectView):
     permanent = True
