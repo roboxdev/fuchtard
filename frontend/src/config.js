@@ -1,4 +1,4 @@
-const apiHost = 'http://localhost:8000';
+const apiHost = process.env.NODE_ENV !== 'production' ? 'http://localhost:8000' : '';
 
 
 export const endpoints = {

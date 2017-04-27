@@ -16,14 +16,17 @@ server {
     client_max_body_size 10M;
     keepalive_timeout 5;
 
-    root /home/fuchtard/web/fuchtard/static_content;
+    gzip_static  on;
+    gzip_proxied expired no-cache no-store private auth;
+
+    root /usr/src/app/dist;
 
     location /media  {
-        alias /path/to/your/mysite/media;
+        alias /usr/src/app/media;
     }
 
     location /static {
-        alias /path/to/your/mysite/static;
+        alias /usr/src/app/static;
     }
 
     location ~ ^/(api|suramar|o)/ {

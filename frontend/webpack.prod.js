@@ -1,5 +1,6 @@
 var path = require("path");
 var webpack = require('webpack');
+var CompressionPlugin = require("compression-webpack-plugin");
 
 
 module.exports = {
@@ -10,15 +11,6 @@ module.exports = {
             './src/index',
         ]
     },
-    devtool: 'eval',
-    devServer: {
-        contentBase: "./dist",
-        publicPath: "/",
-        hot: true,
-        compress: true,
-        port: 3000,
-        historyApiFallback: true,
-    },
 
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -26,10 +18,28 @@ module.exports = {
         publicPath: "/",
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+        // new webpack.optimize.UglifyJsPlugin({
+        //     beautify: false,
+        //     mangle: {
+        //         screw_ie8: true,
+        //         keep_fnames: true
+        //     },
+        //     compress: {
+        //         screw_ie8: true
+        //     },
+        //     comments: false
+        // }),
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8,
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
         }),
     ],
     module: {
