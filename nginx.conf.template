@@ -1,0 +1,33 @@
+upstream uwsgi {
+    server backend:8000;
+}
+
+server {
+    listen 80;
+    server_name  www.uwsgi;
+    rewrite ^/(.*) http://uwsgi/$1 permanent;
+}
+
+server {
+    listen 80 default_server;
+    server_name uwsgi;
+
+    charset     utf-8;
+    client_max_body_size 10M;
+    keepalive_timeout 5;
+
+    root /home/fuchtard/web/fuchtard/static_content;
+
+    location /media  {
+        alias /path/to/your/mysite/media;
+    }
+
+    location /static {
+        alias /path/to/your/mysite/static;
+    }
+
+    location ~ ^/(api|suramar|o)/ {
+        uwsgi_pass  uwsgi;
+        include     /etc/nginx/uwsgi_params;
+    }
+}
