@@ -21,7 +21,7 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
-DATABASES['default']['host'] = 'localhost'
+DATABASES['default']['HOST'] = 'localhost'
 
 FUCHTARD_ORDERS_EMAIL = 'roboxv+fuchtardorder@gmail.com'
 
