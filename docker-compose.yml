@@ -12,8 +12,6 @@ services:
   backend:
     build: ./backend
     env_file: .env
-    environment:
-      DATABASE_HOST: db
     ports:
       - 8000:8000
     links:

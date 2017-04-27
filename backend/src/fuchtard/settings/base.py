@@ -26,14 +26,19 @@ HASHID_FIELD_SALT = env('HASHID_FIELD_SALT', default='6^y3*fv!fq4z@n2-i!hy-hgi0x
 HASHID_FIELD_ALLOW_INT = False
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'maxisushi.kz',
+    'www.maxisushi.kz',
+    'mechanar.maxisushi.kz',
+]
+
 
 # Application definition
 
@@ -76,7 +81,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
-        # 'APP_DIRS': False,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -86,12 +90,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
             ],
-            # 'loaders': [
-            #     ('django.template.loaders.cached.Loader', [
-            #         'django.template.loaders.filesystem.Loader',
-            #         'django.template.loaders.app_directories.Loader',
-            #     ]),
-            # ],
         },
     },
 ]
@@ -107,7 +105,7 @@ DATABASES = {
         'NAME': 'fuchtard',
         'USER': 'fuchtard',
         'PASSWORD': 'fuchtard',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '',
     }
 }
@@ -139,10 +137,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '..', '..', 'static_content', 'media', )
 ADMINS = [
     ('robox', 'roboxv+maxi@gmail.com')
 ]
+
+# TELEGRAM BOT
+TELEGRAM_BOT_API_TOKEN = env('TELEGRAM_BOT_API_TOKEN', default='248042210:AAF7O2ryYuhxIvqegx3U0pEPrPTUrgPmvFA')
+TELEGRAM_BOT_NOTIFICATION_CHANNEL_ID = '-1001067984566'
+
 # EMAIL
 EMAIL_BACKEND = 'sparkpost.django.email_backend.SparkPostEmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@maxisushi.kz'
 SERVER_EMAIL = 'server@maxisushi.kz'
+
+SPARKPOST_API_KEY = env('SPARKPOST_API_KEY', default='fc52712a253df3d28d69fdb10fd521271c36eb09')
+FUCHTARD_ORDERS_EMAIL = 'order@maxisushi.kz'
+FUCHTARD_NOREPLY_EMAIL = 'Maxi Sushi <noreply@maxisushi.kz>'
 
 SITE_DOMAIN = 'maxisushi.kz'
 
@@ -156,7 +163,19 @@ REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-    '127.0.0.1:3000',
-)
+# LOGGING
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'mail_admins': {
+            'class': 'main.utils.CustomAdminEmailHandler',
+            'level': 'ERROR',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+        },
+    },
+}
