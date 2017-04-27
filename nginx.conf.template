@@ -21,6 +21,10 @@ server {
 
     root /usr/src/app/dist;
 
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
     location /media  {
         alias /usr/src/app/media;
     }
