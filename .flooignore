@@ -8,3 +8,4 @@ vendor
 /static_content/
 /webpack_bundles/
 /webpack-stats.json
+.env

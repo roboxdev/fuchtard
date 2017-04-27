@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: fuchtard
+      POSTGRES_USER: fuchtard
+      POSTGRES_DB: fuchtard
+    ports:
+      - 5432:5432
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_HOST: db
+    ports:
+      - 8000:8000
+    links:
+      - db
+  frontend:
+    build: ./frontend
+    environment:
+      BACKEND_HOST: backend:8000
+    ports:
+      - 3000:3000
+    command: npm run start
