@@ -22,19 +22,17 @@ services:
       - ./static_content/media/.:/usr/src/app/media
       - ./static_content/static/.:/usr/src/app/static
     command: >
-      /bin/bash -c "envsubst '$$NGINX_HOST'
+      /bin/bash -c "envsubst '$$FOO'
       < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
       && nginx -g 'daemon off;'"
   backend:
     restart: always
     build: ./backend
     env_file: .env
-    ports:
-      - 8000:8000
+    expose:
+      - "8000"
     volumes:
       - ./static_content/media/.:/usr/src/static_content/media
-    links:
-      - db
     entrypoint: uwsgi --socket :8000 --module fuchtard.wsgi
   collectstatic:
     build: ./backend
@@ -47,6 +45,4 @@ services:
     working_dir: /usr/src/app
     volumes:
       - ./frontend/.:/usr/src/app
-    ports:
-      - 3000:3000
     command: npm run build

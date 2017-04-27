@@ -18,17 +18,6 @@ module.exports = {
         publicPath: "/",
     },
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     beautify: false,
-        //     mangle: {
-        //         screw_ie8: true,
-        //         keep_fnames: true
-        //     },
-        //     compress: {
-        //         screw_ie8: true
-        //     },
-        //     comments: false
-        // }),
         new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
             asset: "[path].gz[query]",
