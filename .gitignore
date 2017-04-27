@@ -9,3 +9,4 @@ node_modules/
 local_settings.py
 .env
 /frontend/dist/bundle.js*
+/postgres-data/
