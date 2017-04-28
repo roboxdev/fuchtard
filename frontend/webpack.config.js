@@ -12,19 +12,14 @@ module.exports = {
     },
     devtool: 'eval',
     devServer: {
-        contentBase: "./dist",
-        publicPath: "/",
+        contentBase: "./public",
+        publicPath: "/assets/",
         hot: true,
         compress: true,
         port: 3000,
         historyApiFallback: true,
     },
 
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "bundle.js",
-        publicPath: "/",
-    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),

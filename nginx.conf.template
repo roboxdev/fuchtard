@@ -25,10 +25,14 @@ server {
     gzip_disable     "msie6";
     gzip_static  on;
 
-    root /usr/src/app/dist;
+    root /usr/src/app/public;
 
     location / {
         try_files $uri $uri/ /index.html;
+    }
+
+    location /assets {
+        alias /usr/src/app/dist/assets;
     }
 
     location /media  {

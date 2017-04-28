@@ -8,4 +8,4 @@ node_modules/
 .floo
 local_settings.py
 .env
-/frontend/dist/bundle.js*
+/frontend/dist/

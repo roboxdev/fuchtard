@@ -13,9 +13,9 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "dist", "assets"),
         filename: "bundle.js",
-        publicPath: "/",
+        publicPath: "/assets/",
     },
     plugins: [
         new webpack.optimize.AggressiveMergingPlugin(),

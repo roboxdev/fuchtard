@@ -16,7 +16,7 @@ export class Header extends React.Component {
                             <div className={styles.logo}>
                                 <div className={styles.logoBlock}>
                                     <Link to="/">
-                                        <img src="/public/maxiSushiLogo.svg"/>
+                                        <img src="/maxiSushiLogo.svg"/>
                                     </Link>
                                 </div>
                             </div>
@@ -31,15 +31,15 @@ export class Header extends React.Component {
                                     <p>
                                         <a target="_blank" rel="noopener"
                                            href="https://www.facebook.com/Доставка-суши-MaxiSushi-568292479939728/">
-                                            <img className={styles.icon} src="/public/facebook-box.svg"/>
+                                            <img className={styles.icon} src="/facebook-box.svg"/>
                                         </a>
                                         <a target="_blank" rel="noopener"
                                            href="https://www.instagram.com/sushi.maxi/">
-                                            <img className={styles.icon} src="/public/instagram.svg"/>
+                                            <img className={styles.icon} src="/instagram.svg"/>
                                         </a>
                                         <a target="_blank" rel="noopener"
                                            href="https://vk.com/club79840974">
-                                            <img className={styles.icon} src="/public/vk-box.svg"/>
+                                            <img className={styles.icon} src="/vk-box.svg"/>
                                         </a>
                                     </p>
                                 </div>
