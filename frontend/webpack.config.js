@@ -5,11 +5,7 @@ var webpack = require('webpack');
 module.exports = {
     context: __dirname,
 
-    entry: {
-        'app': [
-            './src/index',
-        ]
-    },
+    entry: './src/index',
     devtool: 'eval',
     devServer: {
         contentBase: "./public",

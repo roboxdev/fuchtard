@@ -1,22 +1,11 @@
 var path = require("path");
 var webpack = require('webpack');
+var nodeExternals = require('webpack-node-externals');
 var CompressionPlugin = require("compression-webpack-plugin");
+// var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
-module.exports = {
-    context: __dirname,
-
-    entry: {
-        'app': [
-            './src/index',
-        ]
-    },
-
-    output: {
-        path: path.resolve(__dirname, "dist", "assets"),
-        filename: "bundle.js",
-        publicPath: "/assets/",
-    },
+var baseConfig = {
     plugins: [
         new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
@@ -63,7 +52,6 @@ module.exports = {
             },
         ]
     },
-
     resolve: {
         modules: [
             'node_modules',
@@ -72,3 +60,49 @@ module.exports = {
         extensions: ['.js', '.jsx']
     }
 };
+
+
+var serverConfig = {
+    context: __dirname,
+    target: 'node',
+    entry: './src/server.js',
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: 'server.js',
+        libraryTarget: 'commonjs2',
+        publicPath: '/'
+    },
+    node: {
+        console: false,
+        global: false,
+        process: false,
+        Buffer: false,
+        __filename: false,
+        __dirname: false
+    },
+    externals: nodeExternals(),
+    module: baseConfig.module,
+    resolve: baseConfig.resolve,
+};
+
+var clientConfig = {
+    context: __dirname,
+    target: 'web',
+    entry: './src/index',
+    output: {
+        path: path.resolve(__dirname, "dist", "assets"),
+        publicPath: "/assets/",
+        filename: "bundle.js",
+    },
+    plugins: baseConfig.plugins,
+    // plugins: baseConfig.plugins.concat([
+    //     new ExtractTextPlugin({
+    //         filename: 'index.css',
+    //         allChunks: true,
+    //     })
+    // ]),
+    module: baseConfig.module,
+    resolve: baseConfig.resolve,
+};
+
+module.exports = [serverConfig, clientConfig];
