@@ -34,7 +34,7 @@ export class Header extends React.Component {
                                             <img className={styles.icon} src="/public/facebook-box.svg"/>
                                         </a>
                                         <a target="_blank" rel="noopener"
-                                           href="https://instagram.com/maxi.sushi/">
+                                           href="https://www.instagram.com/sushi.maxi/">
                                             <img className={styles.icon} src="/public/instagram.svg"/>
                                         </a>
                                         <a target="_blank" rel="noopener"
