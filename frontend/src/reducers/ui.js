@@ -7,8 +7,6 @@ const types = {
     SET_PAGE_TITLE: 'SET_PAGE_TITLE',
 };
 
-const order = window.localStorage.getItem('order') ? JSON.parse(window.localStorage.getItem('order')) : {};
-
 const initialState = Immutable({
     expandedCartItem: 0,
     pageTitle: '',
