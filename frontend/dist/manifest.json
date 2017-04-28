@@ -1,5 +1,6 @@
 {
-    "name": "",
+    "name": "Maxi Sushi",
+    "short_name": "maxisushi",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -12,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
+    "theme_color": "#ff5722",
     "background_color": "#ffffff",
     "display": "standalone"
 }
