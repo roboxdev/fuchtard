@@ -4,17 +4,18 @@ import { renderToString } from 'react-dom/server';
 import App from 'components/app';
 import template from './template';
 
-const server = express();
+const app = express();
 
-server.use('../dist/assets', express.static('assets'));
+app.use('/assets', express.static('dist/assets'));
+app.use(express.static('public'));
 
-server.get('/', (req, res) => {
-  const appString = renderToString(<App />);
+app.get('/', (req, res) => {
+    const appString = renderToString(<App />);
 
-  res.send(template({
-    body: appString,
-    title: 'Hello World from the server'
-  }));
+    res.send(template({
+        body: appString,
+        title: 'Hello World from the server'
+    }));
 });
 
-server.listen(8080);
+app.listen(8080);
