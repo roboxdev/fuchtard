@@ -1,4 +1,5 @@
 import Immutable from 'seamless-immutable';
+import fetch from 'isomorphic-fetch';
 
 import history from 'browserHistory';
 

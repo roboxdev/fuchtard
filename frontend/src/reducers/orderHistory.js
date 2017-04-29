@@ -1,4 +1,6 @@
 import Immutable from 'seamless-immutable';
+import fetch from 'isomorphic-fetch';
+
 
 import { endpoints } from 'config';
 
