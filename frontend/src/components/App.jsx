@@ -1,7 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {store} from 'store';
-import { BrowserRouter as Router } from 'browserHistory';
 
 import Page from 'components/Page';
 import NavBar from 'components/NavBar';
@@ -14,13 +13,11 @@ export class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <Router>
-                    <div>
-                        <Page />
-                        <NavBar />
-                        <Notification />
-                    </div>
-                </Router>
+                <div>
+                    <Page />
+                    <NavBar />
+                    <Notification />
+                </div>
             </Provider>
         );
     }
