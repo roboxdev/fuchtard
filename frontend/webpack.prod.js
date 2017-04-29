@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var CompressionPlugin = require("compression-webpack-plugin");
-// var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 var baseConfig = {
@@ -19,6 +19,11 @@ var baseConfig = {
             minimize: true,
             debug: false
         }),
+        new ExtractTextPlugin({
+            filename: 'index.css',
+            allChunks: true,
+            ignoreOrder: true,
+        }),
     ],
     module: {
         rules: [
@@ -33,23 +38,24 @@ var baseConfig = {
             },
             {
                 test: /\.css/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]___[hash:base64:5]',
-                            modules: true,
-                            sourceMap: true,
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        // has separate config, see postcss.config.js nearby
-                    }
-                ],
-            },
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                localIdentName: '[name]__[local]___[hash:base64:5]',
+                                modules: true,
+                                sourceMap: true,
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader'
+                        },
+                    ],
+                })
+            }
         ]
     },
     resolve: {
@@ -73,14 +79,15 @@ var serverConfig = {
         publicPath: '/'
     },
     node: {
-        console: false,
-        global: false,
+        console: true,
+        global: true,
         process: false,
         Buffer: false,
         __filename: false,
         __dirname: false
     },
     externals: nodeExternals(),
+    plugins: baseConfig.plugins,
     module: baseConfig.module,
     resolve: baseConfig.resolve,
 };
@@ -95,14 +102,11 @@ var clientConfig = {
         filename: "bundle.js",
     },
     plugins: baseConfig.plugins,
-    // plugins: baseConfig.plugins.concat([
-    //     new ExtractTextPlugin({
-    //         filename: 'index.css',
-    //         allChunks: true,
-    //     })
-    // ]),
     module: baseConfig.module,
     resolve: baseConfig.resolve,
 };
 
-module.exports = [serverConfig, clientConfig];
+module.exports = [
+    serverConfig,
+    clientConfig,
+];
