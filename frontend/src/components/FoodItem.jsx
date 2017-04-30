@@ -30,7 +30,7 @@ export class FoodItem extends React.Component {
                     <CardTitle subtitle={food.description}/>
                     {/*<CardText>{food.description}</CardText>*/}
                 </div>
-                <CardActions theme={{cardActions: styles.cardActions}}>
+                <CardActions>
                     <FoodQuantityButtons foodItemId={food.id}/>
                 </CardActions>
             </Card>

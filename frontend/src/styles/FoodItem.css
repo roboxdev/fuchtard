@@ -6,10 +6,9 @@
   margin-top: 8px;
 }
 
-.pricing {
-  display: flex;
+.card {
+  height: 100%;
   justify-content: space-between;
-  padding: 0 16px 16px;
 }
 
 .plusminus {
@@ -19,19 +18,6 @@
 
 .oldPrice {
   text-decoration: line-through;
-}
-
-.priceSpacer {
-  justify-content: space-between;
-}
-
-.card {
-  height: 100%;
-  justify-content: space-between;
-}
-
-.cardActions {
-  flex-direction: row-reverse;
 }
 
 .foodQuantityButtons {
