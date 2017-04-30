@@ -17,10 +17,35 @@
   <link rel="stylesheet" href="/assets/index.css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #ff5722;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 1s linear infinite;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="js-react-app">Чтобы продолжить пользоваться сайтом, необходимо включить JavaScript</div>
-<script src="/assets/bundle.js"></script>
+<div id="js-react-app"><div id="loader"></div></div>
+<!--<script src="/assets/bundle.js"></script>-->
 <!-- Google Tag Manager -->
 <!--<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-T3HKMV"-->
 <!--height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>-->
