@@ -20,10 +20,10 @@ services:
     volumes:
       - ./nginx.conf.template:/etc/nginx/conf.d/default.conf.template
       - ./uwsgi_params:/etc/nginx/uwsgi_params
-      - ./frontend/public/.:/usr/src/app/public
-      - ./frontend/dist/.:/usr/src/app/dist
-      - ./static_content/media/.:/usr/src/app/media
-      - ./static_content/static/.:/usr/src/app/static
+      - ./frontend/public/.:/usr/src/app/frontend/public
+      - ./frontend/dist/.:/usr/src/app/frontend/dist
+      - ./static_content/media/.:/usr/src/app/static_content/media
+      - ./static_content/static/.:/usr/src/app/static_content/static
     command: >
       /bin/bash -c "envsubst '$$FOO'
       < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
@@ -35,17 +35,17 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
-      - ./static_content/media/.:/usr/src/static_content/media
+      - ./static_content/media/.:/usr/src/app/static_content/media
     entrypoint: uwsgi --socket :8000 --module fuchtard.wsgi
   collectstatic:
     build: ./backend
     env_file: .env
     volumes:
-      - ./static_content/static/.:/usr/src/static_content/static
+      - ./static_content/static/.:/usr/src/app/static_content/static
     command: collectstatic --noinput
   frontend:
     image: node:7.9
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/frontend
     volumes:
-      - ./frontend/.:/usr/src/app
+      - ./frontend/.:/usr/src/app/frontend
     command: npm run build

@@ -25,22 +25,22 @@ server {
     gzip_disable     "msie6";
     gzip_static  on;
 
-    root /usr/src/app/public;
+    root /usr/src/app/frontend/public;
 
     location / {
         try_files $uri $uri/ /index.html;
     }
 
     location /assets {
-        alias /usr/src/app/dist/assets;
+        alias /usr/src/app/frontend/dist/assets;
     }
 
     location /media  {
-        alias /usr/src/app/media;
+        alias /usr/src/app/static_content/media;
     }
 
     location /static {
-        alias /usr/src/app/static;
+        alias /usr/src/app/static_content/static;
     }
 
     location ~ ^/(api|suramar|o)/ {
