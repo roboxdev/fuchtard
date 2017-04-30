@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { minimalOrderRequirementSatisfiedSelector, cartIsEmptySelector } from 'selectors/app';
 
-import { Link, Route, withRouter } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { Button } from 'react-toolbox/lib/button';
 
 import Cart from 'components/Cart';
@@ -45,9 +45,14 @@ export class SidebarCart extends React.Component {
     }
 }
 
-export default withRouter(connect(
+const ConnectedSidebarCart = connect(
     state => ({
         minimalOrderRequirementSatisfied: minimalOrderRequirementSatisfiedSelector(state),
         cartIsEmpty: cartIsEmptySelector(state),
     })
-)(SidebarCart));
+)(SidebarCart);
+
+// HACK. Pathless routes and withRouter are broken
+// Follow this: https://github.com/ReactTraining/react-router/pull/4704
+export default () => <Route path='*' component={ConnectedSidebarCart}/>;
+

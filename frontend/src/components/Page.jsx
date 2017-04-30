@@ -41,6 +41,19 @@ class RightSidebar extends React.Component {
     }
 }
 
+const Main = () => <div className={styles.mainBlock}>
+    <main className={styles.content}>
+        <Content/>
+    </main>
+</div>;
+
+const MainWithSidebars = () => <div className={styles.mainBlock}>
+    <LeftSidebar/>
+    <main className={styles.content}>
+        <Content/>
+    </main>
+    <RightSidebar/>
+</div>;
 
 class MainBlock extends React.Component {
     render() {
@@ -48,18 +61,8 @@ class MainBlock extends React.Component {
             <Route exact path="/" children={
                 ({match, ...rest}) =>
                     match
-                        ? <div className={styles.mainBlock}>
-                            <main className={styles.content}>
-                                <Content/>
-                            </main>
-                        </div>
-                        : <div className={styles.mainBlock}>
-                            <LeftSidebar/>
-                            <main className={styles.content}>
-                                <Content/>
-                            </main>
-                            <RightSidebar/>
-                        </div>
+                        ? <Main />
+                        : <MainWithSidebars />
             }/>
         </div>
     }
