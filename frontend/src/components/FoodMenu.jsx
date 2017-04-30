@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {List, ListItem} from 'react-toolbox/lib/list';
 
 import styles from 'styles/FoodMenu.css';
@@ -32,8 +32,8 @@ export class FoodMenu extends React.Component {
 }
 
 
-export default withRouter(connect(
+export default connect(
     state => ({
         foodCategories: state.entities.foodCategories.filter(v => v.visible),
     })
-)(FoodMenu))
+)(FoodMenu)

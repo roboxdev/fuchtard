@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Route } from 'react-router-dom';
+
 import MediaQuery from 'react-responsive';
 import Sticky from 'react-stickynode';
 
@@ -43,13 +45,22 @@ class RightSidebar extends React.Component {
 class MainBlock extends React.Component {
     render() {
         return <div>
-            <div className={styles.mainBlock}>
-                <LeftSidebar/>
-                <main className={styles.content}>
-                    <Content/>
-                </main>
-                <RightSidebar/>
-            </div>
+            <Route exact path="/" children={
+                ({match, ...rest}) =>
+                    match
+                        ? <div className={styles.mainBlock}>
+                            <main className={styles.content}>
+                                <Content/>
+                            </main>
+                        </div>
+                        : <div className={styles.mainBlock}>
+                            <LeftSidebar/>
+                            <main className={styles.content}>
+                                <Content/>
+                            </main>
+                            <RightSidebar/>
+                        </div>
+            }/>
         </div>
     }
 }
