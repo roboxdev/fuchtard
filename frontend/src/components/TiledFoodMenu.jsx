@@ -2,36 +2,38 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Card, CardMedia, CardTitle } from 'react-toolbox/lib/card';
+import { CardMedia } from 'react-toolbox/lib/card';
 import { visibleFoodCategoriesWithAvatarSelector } from 'selectors/app';
 
 import styles from 'styles/TiledFoodMenu.css';
 
 
-const Tile = ({category: {title, avatar}}) => <Card theme={{card: styles.card}}>
-    <CardTitle theme={{cardTitle: styles.cardTitle}}
-        title={title}
-    />
-    <CardMedia
-        aspectRatio="wide"
-        image={avatar}
-    />
-</Card>;
+const Tile = ({category: {title, avatar}}) =>
+    <div className={styles.tile}>
+        <CardMedia
+            theme={{cardMedia: styles.cardMedia}}
+            aspectRatio="wide"
+            image={avatar}
+        />
+        <div className={styles.title}>
+            {title}
+        </div>
+    </div>;
 
 
 
 export class TiledFoodMenu extends React.Component {
     render() {
         return (
-            <div className={styles.z1}>
-                <nav className={styles.a1}>
+            <div className={styles.menuWrapper}>
+                <nav className={styles.tiledFoodMenu}>
                         {this.props.foodCategories.map(
                             (category) =>
                                 <Link key={category.url}
                                       to={`/${category.slug}/`}
-                                      className={styles.b1}
+                                      className={styles.link}
                                 >
-                                    <div className={styles.c1}>
+                                    <div className={styles.tileWrapper}>
                                         <Tile category={category}/>
                                     </div>
                                 </Link>

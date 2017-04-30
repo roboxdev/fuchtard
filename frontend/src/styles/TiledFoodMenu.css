@@ -1,16 +1,17 @@
 @import "_constants.css";
 
-.z1 {
-  margin: 16px -4px;
+.menuWrapper {
+  margin: 4px -2px;
 }
 
-.a1 {
+.tiledFoodMenu {
   display: flex;
   flex-wrap: wrap;
-  //align-items: stretch;
 }
 
-.b1 {
+.link {
+  margin-top: 2px;
+  margin-bottom: 2px;
   width: 50%;
   @media (--bp2) {
     width: 33%;
@@ -20,22 +21,33 @@
   }
 }
 
-.c1 {
-  padding: 4px;
+.tileWrapper {
+  padding-left: 2px;
+  padding-right: 2px;
   height: 100%;
 }
 
-.card {
+.cardMedia {
+  height: 100%;
+}
+
+.tile {
   height: 100%;
   position: relative;
 }
 
-.cardTitle {
+.title {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  z-index: 300;
+  z-index: 50;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  //margin: 0;
+  padding: 16px;
 }
