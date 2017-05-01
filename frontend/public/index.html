@@ -15,8 +15,6 @@
   <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
   <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
   <link rel="stylesheet" href="/assets/index.css" />
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     #loader {
       position: absolute;
@@ -46,6 +44,14 @@
 <body>
 <div id="js-react-app"><div id="loader"></div></div>
 <script src="/assets/bundle.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Roboto', 'Material Icons']
+    }
+  });
+</script>
 <!-- Google Tag Manager -->
 <!--<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-T3HKMV"-->
 <!--height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>-->
