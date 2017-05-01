@@ -10,7 +10,8 @@ export class FoodItem extends React.Component {
     render() {
         const {food} = this.props;
         return <div className={styles.itemWrapper}>
-            <Card theme={{card: styles.card}}>
+            <div className={styles.itemWrapperInner}>
+                <Card theme={{card: styles.card}}>
                 <div>
                     <CardMedia
                         aspectRatio="wide"
@@ -34,6 +35,7 @@ export class FoodItem extends React.Component {
                     <FoodQuantityButtons foodItemId={food.id}/>
                 </CardActions>
             </Card>
+            </div>
         </div>
     }
 }
