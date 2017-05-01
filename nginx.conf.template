@@ -38,10 +38,12 @@ server {
 
     location /media  {
         alias /usr/src/app/static_content/media;
+        expires 1d;
     }
 
     location /static {
         alias /usr/src/app/static_content/static;
+        expires 1d;
     }
 
     location ~ ^/(api|suramar|o)/ {
