@@ -38,6 +38,7 @@ server {
     location /assets {
         alias /usr/src/app/frontend/dist/assets;
         add_header Cache-Control no-cache;
+#        TODO: consider increasing when bundles will have hash in their names
         expires 5m;
     }
 
