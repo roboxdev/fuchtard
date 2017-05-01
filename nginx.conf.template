@@ -52,5 +52,6 @@ server {
     location ~ ^/(api|suramar|o)/ {
         uwsgi_pass  uwsgi;
         include     /etc/nginx/uwsgi_params;
+        expires off;
     }
 }
