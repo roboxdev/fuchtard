@@ -1,0 +1,5 @@
+.howTo {
+  & p {
+    margin-bottom: 8px;
+  }
+}

@@ -19,7 +19,7 @@ export const AddToCardButtonHowto = () => <span>
 export class CheckoutHowto extends React.Component {
     render() {
         const {cheapestGift} = this.props;
-        return <div>
+        return <div className={styles.howTo}>
             <p>Принимаем заказы с&nbsp;{workdayStart}&nbsp;до&nbsp;{workdayEnd}</p>
             <p>
                 <MinimalOrderInfo />
