@@ -16,6 +16,7 @@ server {
     client_max_body_size 10M;
     keepalive_timeout 5;
 
+    etag on;
     gzip on;
     gzip_min_length  500;
     gzip_proxied expired no-cache no-store private auth;
