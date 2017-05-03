@@ -3,8 +3,6 @@ import thunk from 'redux-thunk';
 
 import reducer from 'core/reducers/app';
 
-import {actions} from 'core/reducers/entities';
-
 
 export const store = createStore(
     reducer,
@@ -22,7 +20,5 @@ const placeCartIntoLocalStorage = () => {
 };
 
 store.subscribe(placeCartIntoLocalStorage);
-
-store.dispatch(actions.fetchData());
 
 window.store = store;

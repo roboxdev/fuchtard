@@ -1,10 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from 'components/App';
+import {actions} from 'core/reducers/entities';
+import {store} from 'core/store';
+
 import { BrowserRouter as Router } from 'browserHistory';
+
+import App from 'components/App';
+
 
 const BrowserApp = () => <Router>
     <App/>
 </Router>;
 
-render(<BrowserApp/>, document.getElementById('js-react-app'));
+
+store.dispatch(actions.fetchData()).then(() => {
+  render(<BrowserApp/>, document.getElementById('js-react-app'));
+});
+

@@ -61,11 +61,11 @@ function fetchGifts() {
 
 
 function fetchData() {
-    return dispatch => {
-        dispatch(fetchFoodItems());
-        dispatch(fetchFoodCategories());
-        dispatch(fetchGifts());
-    }
+    return dispatch => Promise.all([
+        dispatch(fetchFoodItems()),
+        dispatch(fetchFoodCategories()),
+        dispatch(fetchGifts()),
+    ]);
 }
 
 
