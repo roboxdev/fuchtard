@@ -7,3 +7,5 @@ node_modules/
 local_settings.py
 .env
 /client/dist/
+.expo/
+npm-debug.*
