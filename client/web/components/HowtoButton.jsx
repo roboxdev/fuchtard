@@ -34,7 +34,7 @@ export class HowtoButton extends React.Component {
                     active={this.state.howtoVisible}
                     onEscKeyDown={this.howtoToggle}
                     onOverlayClick={this.howtoToggle}
-                    title='Справка'
+                    theme={{body: styles.dialogBody}}
                 >
                     <CheckoutHowto/>
                 </Dialog>

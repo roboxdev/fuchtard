@@ -10,3 +10,7 @@
   bottom: -28px;
   right: 24px;
 }
+
+.dialogBody {
+  overflow: auto;
+}
