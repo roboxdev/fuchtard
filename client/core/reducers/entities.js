@@ -29,23 +29,42 @@ export default function (state=initialState, action) {
 };
 
 
-function fetchData() {
-    return (dispatch) => {
+function fetchFoodItems() {
+    return dispatch => {
         fetch(endpoints.foodItems).then(
             response => response.json()
         ).then(
             json => dispatch({type: types.SET_FOOD_ITEMS, payload: json})
         );
+    }
+}
+
+function fetchFoodCategories() {
+    return dispatch => {
         fetch(endpoints.foodCategories).then(
             response => response.json()
         ).then(
             json => dispatch({type: types.SET_FOOD_CATEGORIES, payload: json})
         );
+    }
+}
+
+function fetchGifts() {
+    return dispatch => {
         fetch(endpoints.gifts).then(
             response => response.json()
         ).then(
             json => dispatch({type: types.SET_GIFTS, payload: json})
         );
+    }
+}
+
+
+function fetchData() {
+    return dispatch => {
+        dispatch(fetchFoodItems());
+        dispatch(fetchFoodCategories());
+        dispatch(fetchGifts());
     }
 }
 
