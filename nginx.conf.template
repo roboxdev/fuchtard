@@ -26,7 +26,7 @@ server {
     gzip_disable     "msie6";
     gzip_static  on;
 
-    root /usr/src/app/frontend/public;
+    root /usr/src/app/client/web/public;
 
     location / {
         try_files $uri $uri/ /index.html;
@@ -36,7 +36,7 @@ server {
     }
 
     location /assets {
-        alias /usr/src/app/frontend/dist/assets;
+        alias /usr/src/app/client/dist/assets;
         add_header Cache-Control no-cache;
 #        TODO: consider increasing when bundles will have hash in their names
         expires 5m;

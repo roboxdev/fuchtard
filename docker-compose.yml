@@ -20,8 +20,8 @@ services:
     volumes:
       - ./nginx.conf.template:/etc/nginx/conf.d/default.conf.template
       - ./uwsgi_params:/etc/nginx/uwsgi_params
-      - ./frontend/public/.:/usr/src/app/frontend/public
-      - ./frontend/dist/.:/usr/src/app/frontend/dist
+      - ./client/web/public/.:/usr/src/app/client/web/public
+      - ./client/dist/.:/usr/src/app/client/dist
       - ./static_content/media/.:/usr/src/app/static_content/media
       - ./static_content/static/.:/usr/src/app/static_content/static
     command: >
@@ -45,7 +45,7 @@ services:
     command: collectstatic --noinput
   frontend:
     image: node:7.9
-    working_dir: /usr/src/app/frontend
+    working_dir: /usr/src/app/client
     volumes:
-      - ./frontend/.:/usr/src/app/frontend
+      - ./client/.:/usr/src/app/client
     command: npm run build

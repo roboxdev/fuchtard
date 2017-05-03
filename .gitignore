@@ -3,9 +3,7 @@ node_modules/
 *.log
 /logs/
 /static_content/
-/webpack_bundles/
-/webpack-stats.json
 .floo
 local_settings.py
 .env
-/frontend/dist/
+/client/dist/
