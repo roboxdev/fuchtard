@@ -16,7 +16,8 @@ export class ThankyouPage extends React.Component {
         }
         return <div>
             <h2>Спасибо за заказ!</h2>
-            <h4>Вашему заказу присвоен номер {order.hashed_id}</h4>
+            <p>Вашему заказу присвоен номер {order.hashed_id}</p>
+            <p>Наши операторы свяжутся с вами в ближайшее время</p>
         </div>
     }
 }
