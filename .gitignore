@@ -9,3 +9,4 @@ local_settings.py
 /client/dist/
 .expo/
 npm-debug.*
+*.bak
