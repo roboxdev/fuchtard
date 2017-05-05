@@ -1,3 +1,5 @@
+from django.utils.log import DEFAULT_LOGGING
+
 from .base import *
 
 DEBUG = True
@@ -29,3 +31,5 @@ FUCHTARD_ORDERS_EMAIL = 'roboxv+fuchtardorder@gmail.com'
 TELEGRAM_BOT_NOTIFICATION_CHANNEL_ID = '119702721'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+LOGGING = DEFAULT_LOGGING
