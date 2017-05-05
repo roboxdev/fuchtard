@@ -10,11 +10,15 @@ module.exports = {
     devtool: 'eval',
     devServer: {
         contentBase: './web/public',
-        publicPath: '/assets/',
+        publicPath: '/',
         hot: true,
         compress: true,
         port: 3000,
-        historyApiFallback: true,
+        historyApiFallback: {
+            rewrites: [
+                {from: 'bundle.js', to: '/bundle.js'},
+            ]
+        },
     },
 
     plugins: [
@@ -25,6 +29,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: 'web/index.ejs',
+            inject: false,
         }),
     ],
     module: {
