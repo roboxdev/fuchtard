@@ -4,13 +4,13 @@ upstream uwsgi {
 
 server {
     listen 80;
-    server_name  www.uwsgi;
-    rewrite ^/(.*) http://uwsgi/$1 permanent;
+    server_name  www.servername;
+    rewrite ^/(.*) http://servername/$1 permanent;
 }
 
 server {
     listen 80 default_server;
-    server_name uwsgi;
+    server_name servername;
 
     charset     utf-8;
     client_max_body_size 10M;
