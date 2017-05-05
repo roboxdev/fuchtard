@@ -11,7 +11,7 @@ export class ThankyouPage extends React.Component {
 
     render() {
         const {order, fetchOrderByHashid} = this.props;
-        if (!order.cart || Object.keys(order.cart).length === 0) {
+        if (!(order && order.cart_meta)) {
             fetchOrderByHashid();
         }
         return <div>
