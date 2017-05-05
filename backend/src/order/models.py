@@ -4,12 +4,13 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 from django.db.models import Sum, F
 
 from hashid_field import HashidAutoField
 
 from food.models import FoodItem
-from .helpers import shifthash, send_templated_email, telegram_notify_channel
+from .helpers import shifthash, send_templated_email, telegram_notify_channel, CartMeta
 
 
 class CartManager(models.Manager):
@@ -85,6 +86,10 @@ class OrderManager(models.Manager):
     def get_by_hash(self, hashed_id):
         return self.get(id=shifthash(hashed_id))
 
+    def create_from_cart_data(self, cart_data, *args, **kwargs):
+        cart_meta = CartMeta.from_cart_data(cart_data)
+        return self.create(cart_meta=cart_meta.as_dict, *args, **kwargs)
+
 
 class Order(models.Model):
     class Meta:
@@ -99,7 +104,8 @@ class Order(models.Model):
     building = models.CharField(verbose_name='Дом', max_length=20, blank=True)
     apartment = models.CharField(verbose_name='Квартира', max_length=60, blank=True)
     floor = models.CharField(verbose_name='Этаж', max_length=20, blank=True)
-    cart = models.OneToOneField(Cart)
+    cart = models.OneToOneField(Cart, null=True)
+    cart_meta = JSONField(default=dict())
     deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', blank=True)
     gift_food_item = models.ForeignKey(FoodItem, verbose_name='Подарок', null=True, blank=True)
@@ -118,6 +124,14 @@ class Order(models.Model):
     @property
     def hashed_id(self):
         return shifthash(self.id.id)
+
+    @property
+    def cart_items(self):
+        return '\n'.join([
+            (
+                lambda x: '{0[quantity]} × {0[title]} {0[amount]} = {1} ₸'.format(x, x['quantity'] * x['price'])
+            )(self.cart_meta['cart_items'][str(cart_item_id)]) for cart_item_id in self.cart_meta['cart_item_ids']
+        ])
 
     def notify_restaurant(self):
         order_hashed_id = self.hashed_id

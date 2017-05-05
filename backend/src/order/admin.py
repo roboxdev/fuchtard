@@ -38,6 +38,7 @@ class OrderDetailsAdmin(admin.ModelAdmin):
         'total',
         'gift_food_item',
         'cart_items',
+        'cart_meta',
     ]
 
     def get_readonly_fields(self, request, obj=None):
@@ -66,11 +67,13 @@ class OrderDetailsAdmin(admin.ModelAdmin):
     order_number.short_description = 'Номер заказа'
 
     def total(self, obj):
-        return '{} ₸'.format(obj.cart.total_price)
+        if obj.cart_meta:
+            return '{} ₸'.format(obj.cart_meta['subtotal'])
     total.short_description = 'Итого'
 
     def cart_items(self, obj):
-        return obj.cart.cart_items
+        if obj.cart_meta:
+            return obj.cart_items
     cart_items.short_description = 'Корзина'
 
 

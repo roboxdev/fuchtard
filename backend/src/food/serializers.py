@@ -28,6 +28,27 @@ class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
         return obj.price
 
 
+class FoodItemMetaSerializer(serializers.ModelSerializer):
+    price = serializers.SerializerMethodField()
+    category = serializers.CharField(source='category.title')
+
+    class Meta:
+        model = FoodItem
+        fields = (
+            'id',
+            'slug',
+            'title',
+            'photo',
+            'raw_price',
+            'price',
+            'category',
+            'amount',
+        )
+
+    def get_price(self, obj):
+        return obj.price
+
+
 class FoodCategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FoodCategory

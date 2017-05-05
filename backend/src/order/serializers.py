@@ -57,8 +57,7 @@ class CheckoutSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         cart_data = validated_data.pop('cart')
-        cart = Cart.objects.create_from_dict(cart_data=cart_data)
-        order = Order.objects.create(cart=cart, **validated_data)
+        order = Order.objects.create_from_cart_data(cart_data=cart_data, **validated_data)
         order.notify_restaurant()
         # TODO: check gift
         return order
