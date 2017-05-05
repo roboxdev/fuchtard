@@ -104,7 +104,6 @@ class Order(models.Model):
     building = models.CharField(verbose_name='Дом', max_length=20, blank=True)
     apartment = models.CharField(verbose_name='Квартира', max_length=60, blank=True)
     floor = models.CharField(verbose_name='Этаж', max_length=20, blank=True)
-    cart = models.OneToOneField(Cart, null=True)
     cart_meta = JSONField(default=dict())
     deliver_at = models.DateTimeField(verbose_name='Доставка ко времени', null=True, blank=True)
     comment = models.TextField(verbose_name='Комментарий', blank=True)

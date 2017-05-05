@@ -1,22 +1,11 @@
 from hashid_field.rest import HashidSerializerCharField
 from rest_framework import serializers
 
-from .models import Cart, Order, Gift, CartItem
-
-
-class CartItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CartItem
-        fields = (
-            'product',
-            'quantity',
-            'history_price',
-        )
+from .models import Order, Gift
 
 
 class OrderSerializer(serializers.ModelSerializer):
     id = HashidSerializerCharField(source_field='order.Order.id')
-    cart = CartItemSerializer(source='cart.cartitem_set', many=True)
 
     class Meta:
         model = Order
@@ -24,7 +13,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'id',
             'hashed_id',
             'order_created_timestamp',
-            'cart',
+            'cart_meta',
             'gift_food_item',
         )
 

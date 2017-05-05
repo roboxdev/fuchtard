@@ -38,19 +38,10 @@ class OrderDetailsAdmin(admin.ModelAdmin):
         'total',
         'gift_food_item',
         'cart_items',
-        'cart_meta',
     ]
 
     def get_readonly_fields(self, request, obj=None):
         return self.fields
-
-    def get_queryset(self, request):
-        qs = super(OrderDetailsAdmin, self).get_queryset(request)
-        return qs.prefetch_related(
-            'cart__cartitem_set__product__tags__discount',
-            'cart__cartitem_set__product__category__discount',
-            'cart__cartitem_set__product__discount',
-        )
 
     def has_add_permission(self, request):
         return False
