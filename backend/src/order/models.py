@@ -13,29 +13,7 @@ from food.models import FoodItem
 from .helpers import shifthash, send_templated_email, telegram_notify_channel, CartMeta
 
 
-class CartManager(models.Manager):
-    def create_from_dict(self, cart_data):
-        cart = self.create()
-        cart_items = []
-        for i, (food_item_id, quantity) in enumerate(cart_data):
-            try:
-                food_item = FoodItem.objects.get(id=int(food_item_id))
-            except FoodItem.DoesNotExist:
-                continue
-            cart_items.append(CartItem(
-                position=i,
-                cart=cart,
-                product=food_item,
-                quantity=quantity,
-                history_price=food_item.price,
-            ))
-        CartItem.objects.bulk_create(cart_items)
-        return cart
-
-
 class Cart(models.Model):
-    objects = CartManager()
-
     class Meta:
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзины'
