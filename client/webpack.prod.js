@@ -121,6 +121,7 @@ var browserConfig = {
         new HtmlWebpackPlugin({
             template: 'web/index.ejs',
             filename: '../index.html',
+            inject: false,
         }),
     ],
     module: baseConfig.module,

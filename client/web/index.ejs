@@ -41,9 +41,15 @@
       }
     }
   </style>
+  <% for (var css in data.htmlWebpackPlugin.files.css) { %>
+    <link href="<%= data.htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+  <% } %>
 </head>
 <body>
 <div id="js-react-app"><div id="loader"></div></div>
+<% for (var chunk in data.htmlWebpackPlugin.files.chunks) { %>
+  <script src="<%= data.htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+<% } %>
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 <script>
   WebFont.load({
