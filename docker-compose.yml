@@ -21,7 +21,7 @@ services:
       - ./nginx.conf.template:/etc/nginx/conf.d/default.conf.template
       - ./uwsgi_params:/etc/nginx/uwsgi_params
       - ./client/web/public/.:/usr/src/app/client/web/public
-      - ./client/dist/.:/usr/src/app/client/dist
+      - ./client/dist/browser/.:/usr/src/app/client/dist/browser
       - ./static_content/media/.:/usr/src/app/static_content/media
       - ./static_content/static/.:/usr/src/app/static_content/static
     command: >

@@ -1,16 +1,17 @@
-var path = require("path");
+var path = require('path');
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
-var CompressionPlugin = require("compression-webpack-plugin");
+var CompressionPlugin = require('compression-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 var baseConfig = {
     plugins: [
         new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
-            asset: "[path].gz[query]",
-            algorithm: "gzip",
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0.8,
@@ -20,7 +21,7 @@ var baseConfig = {
             debug: false
         }),
         new ExtractTextPlugin({
-            filename: 'index.css',
+            filename: 'styles.hash-[hash].css',
             allChunks: true,
             ignoreOrder: true,
         }),
@@ -55,7 +56,18 @@ var baseConfig = {
                         },
                     ],
                 })
-            }
+            },
+            {
+                test: /\.ejs$/,
+                use: [
+                    {
+                        loader: 'ejs-loader',
+                        options: {
+                            variable: 'data',
+                        }
+                    }
+                ],
+            },
         ]
     },
     resolve: {
@@ -76,7 +88,7 @@ var serverConfig = {
     target: 'node',
     entry: './web/server.js',
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, 'dist', 'server'),
         filename: 'server.js',
         libraryTarget: 'commonjs2',
         publicPath: '/'
@@ -95,21 +107,27 @@ var serverConfig = {
     resolve: baseConfig.resolve,
 };
 
-var clientConfig = {
+var browserConfig = {
     context: __dirname,
     target: 'web',
     entry: './web/index',
     output: {
-        path: path.resolve(__dirname, "dist", "assets"),
-        publicPath: "/assets/",
-        filename: "bundle.js",
+        path: path.resolve(__dirname, 'dist', 'browser', 'assets'),
+        publicPath: '/assets/',
+        filename: 'bundle.hash-[hash].js',
     },
-    plugins: baseConfig.plugins,
+    plugins: [
+        ...baseConfig.plugins,
+        new HtmlWebpackPlugin({
+            template: 'web/index.ejs',
+            filename: '../index.html',
+        }),
+    ],
     module: baseConfig.module,
     resolve: baseConfig.resolve,
 };
 
 module.exports = [
     serverConfig,
-    clientConfig,
+    browserConfig,
 ];

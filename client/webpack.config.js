@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
@@ -21,6 +22,9 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+        }),
+        new HtmlWebpackPlugin({
+            template: 'web/index.ejs',
         }),
     ],
     module: {
@@ -54,6 +58,17 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         // has separate config, see postcss.config.js nearby
+                    }
+                ],
+            },
+            {
+                test: /\.ejs$/,
+                use: [
+                    {
+                        loader: 'ejs-loader',
+                        options: {
+                            variable: 'data',
+                        }
                     }
                 ],
             },

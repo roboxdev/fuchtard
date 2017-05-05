@@ -28,27 +28,27 @@ server {
 
     root /usr/src/app/client/web/public;
 
+    location = / {
+        root /usr/src/app/client/dist/browser;
+        try_files /index.html /index.html;
+    }
+
     location / {
-        try_files $uri $uri/ /index.html;
-        location ~* \.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {
+        try_files $uri $uri/ /;
+        location ~* ^/[^/]+\.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm|htc)$ {
             expires 7d;
         }
     }
 
     location /assets {
-        alias /usr/src/app/client/dist/assets;
-        add_header Cache-Control no-cache;
-#        TODO: consider increasing when bundles will have hash in their names
-        expires 5m;
+        root /usr/src/app/client/dist/browser;
+        location ~* ^/assets/.+\.hash-\w+\. {
+            expires 1y;
+        }
     }
 
-    location /media  {
-        alias /usr/src/app/static_content/media;
-        expires 1d;
-    }
-
-    location /static {
-        alias /usr/src/app/static_content/static;
+    location ~ ^/(media|static)/ {
+        root /usr/src/app/static_content;
         expires 1d;
     }
 
