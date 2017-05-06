@@ -1,6 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
@@ -16,8 +16,8 @@ module.exports = {
         port: 3000,
         historyApiFallback: {
             rewrites: [
-                {from: 'bundle.js', to: '/bundle.js'},
-            ]
+                { from: 'bundle.js', to: '/bundle.js' },
+            ],
         },
     },
 
@@ -25,7 +25,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
         }),
         new HtmlWebpackPlugin({
             template: 'web/index.ejs',
@@ -44,7 +44,7 @@ module.exports = {
                     {
 
                         loader: 'babel-loader',
-                    }
+                    },
                 ],
             },
             {
@@ -58,12 +58,12 @@ module.exports = {
                             localIdentName: '[name]__[local]___[hash:base64:5]',
                             modules: true,
                             sourceMap: true,
-                        }
+                        },
                     },
                     {
                         loader: 'postcss-loader',
                         // has separate config, see postcss.config.js nearby
-                    }
+                    },
                 ],
             },
             {
@@ -73,11 +73,11 @@ module.exports = {
                         loader: 'ejs-loader',
                         options: {
                             variable: 'data',
-                        }
-                    }
+                        },
+                    },
                 ],
             },
-        ]
+        ],
     },
 
     resolve: {
@@ -88,6 +88,6 @@ module.exports = {
         alias: {
             core: path.resolve(__dirname, './core/'),
         },
-        extensions: ['.js', '.jsx']
-    }
+        extensions: ['.js', '.jsx'],
+    },
 };

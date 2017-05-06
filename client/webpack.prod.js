@@ -1,12 +1,12 @@
-var path = require('path');
-var webpack = require('webpack');
-var nodeExternals = require('webpack-node-externals');
-var CompressionPlugin = require('compression-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
+const CompressionPlugin = require('compression-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-var baseConfig = {
+const baseConfig = {
     plugins: [
         new webpack.optimize.AggressiveMergingPlugin(),
         new CompressionPlugin({
@@ -18,7 +18,7 @@ var baseConfig = {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
-            debug: false
+            debug: false,
         }),
         new ExtractTextPlugin({
             filename: 'styles.hash-[hash].css',
@@ -34,7 +34,7 @@ var baseConfig = {
                 use: [
                     {
                         loader: 'babel-loader',
-                    }
+                    },
                 ],
             },
             {
@@ -49,13 +49,13 @@ var baseConfig = {
                                 localIdentName: '[name]__[local]___[hash:base64:5]',
                                 modules: true,
                                 sourceMap: true,
-                            }
+                            },
                         },
                         {
-                            loader: 'postcss-loader'
+                            loader: 'postcss-loader',
                         },
                     ],
-                })
+                }),
             },
             {
                 test: /\.ejs$/,
@@ -64,11 +64,11 @@ var baseConfig = {
                         loader: 'ejs-loader',
                         options: {
                             variable: 'data',
-                        }
-                    }
+                        },
+                    },
                 ],
             },
-        ]
+        ],
     },
     resolve: {
         modules: [
@@ -78,12 +78,12 @@ var baseConfig = {
         alias: {
             core: path.resolve(__dirname, './core/'),
         },
-        extensions: ['.js', '.jsx']
-    }
+        extensions: ['.js', '.jsx'],
+    },
 };
 
 
-var serverConfig = {
+const serverConfig = {
     context: __dirname,
     target: 'node',
     entry: './web/server.js',
@@ -91,7 +91,7 @@ var serverConfig = {
         path: path.resolve(__dirname, 'dist', 'server'),
         filename: 'server.js',
         libraryTarget: 'commonjs2',
-        publicPath: '/'
+        publicPath: '/',
     },
     node: {
         console: true,
@@ -99,7 +99,7 @@ var serverConfig = {
         process: false,
         Buffer: false,
         __filename: false,
-        __dirname: false
+        __dirname: false,
     },
     externals: nodeExternals(),
     plugins: baseConfig.plugins,
@@ -107,7 +107,7 @@ var serverConfig = {
     resolve: baseConfig.resolve,
 };
 
-var browserConfig = {
+const browserConfig = {
     context: __dirname,
     target: 'web',
     entry: './web/index',
