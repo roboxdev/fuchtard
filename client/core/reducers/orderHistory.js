@@ -66,6 +66,5 @@ function fetchOrderByHashid(hashid) {
 
 
 export const actions = {
-    addHistoryEntry,
     fetchOrderByHashid,
 };
