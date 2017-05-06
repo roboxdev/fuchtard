@@ -1,4 +1,3 @@
-from django.views.generic import RedirectView
 from rest_framework import viewsets, mixins
 
 from .models import Order, Gift
@@ -25,11 +24,3 @@ class CheckoutViewset(mixins.CreateModelMixin,
     queryset = Order.objects.all()
     serializer_class = CheckoutSerializer
     permission_classes = []
-
-
-class OrderDetailRedirectView(RedirectView):
-    permanent = True
-
-    def get_redirect_url(self, *args, **kwargs):
-        # TODO: broken
-        return Order.objects.get_by_hash(self.kwargs.get('hashed_id')).get_absolute_url()

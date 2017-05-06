@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    url(r'^', include('order.urls', namespace='order')),
     url(r'^suramar/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api')),
 ]
