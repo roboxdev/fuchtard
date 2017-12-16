@@ -5,8 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     context: __dirname,
-
-    entry: './web/index',
+    entry: [
+      'react-hot-loader/patch',
+      './web/index',
+    ],
     devtool: 'eval',
     devServer: {
         contentBase: './web/public',
@@ -39,10 +41,6 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'react-hot-loader',
-                    },
-                    {
-
                         loader: 'babel-loader',
                     },
                 ],

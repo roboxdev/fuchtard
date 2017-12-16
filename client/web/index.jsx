@@ -1,10 +1,21 @@
 import React from 'react';
-import { render } from 'react-dom';
-import App from 'components/App';
-import { BrowserRouter as Router } from 'browserHistory';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader'
+import BrowserApp from './browser';
 
-const BrowserApp = () => <Router>
-    <App/>
-</Router>;
 
-render(<BrowserApp/>, document.getElementById('js-react-app'));
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('js-react-app'),
+  )
+};
+
+render(BrowserApp);
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./browser', () => { render(BrowserApp) })
+}
