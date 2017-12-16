@@ -1,12 +1,9 @@
-const apiHost = process.env.NODE_ENV !== 'production' ? 'http://localhost:8000' : '';
-
-
 export const endpoints = {
-    orders: `${apiHost}/api/orders/`,
-    checkout: `${apiHost}/api/checkout/`,
-    foodItems: `${apiHost}/api/food_items/`,
-    foodCategories: `${apiHost}/api/food_categories/`,
-    gifts: `${apiHost}/api/gifts/`,
+    orders: `/api/orders/`,
+    checkout: `/api/checkout/`,
+    foodItems: `/api/food_items/`,
+    foodCategories: `/api/food_categories/`,
+    gifts: `/api/gifts/`,
 
 };
 

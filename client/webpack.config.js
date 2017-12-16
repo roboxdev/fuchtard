@@ -21,6 +21,11 @@ module.exports = {
                 { from: 'bundle.js', to: '/bundle.js' },
             ],
         },
+        proxy: {
+          "/api": "http://localhost:8000",
+          "/media": "http://localhost:8000",
+          "/static": "http://localhost:8000",
+        }
     },
 
     plugins: [

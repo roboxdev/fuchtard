@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django_extensions',
     'adminsortable',
-    'corsheaders',
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
@@ -63,7 +62,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
