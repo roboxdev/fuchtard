@@ -1,3 +1,5 @@
+const reactToolBoxConfig = require('./reacttoolbox.config');
+
 module.exports = {
     plugins: {
         'postcss-import': {
@@ -8,9 +10,9 @@ module.exports = {
         'postcss-cssnext': {
             features: {
                 customProperties: {
-                    variables: require('./reacttoolbox.config').variables,
+                    variables: reactToolBoxConfig.variables,
                 },
             },
         },
-    }
+    },
 };
