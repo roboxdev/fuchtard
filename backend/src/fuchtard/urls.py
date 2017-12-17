@@ -24,8 +24,16 @@ from rest_framework.authtoken import views
 urlpatterns = [
     url(r'^suramar/', admin.site.urls),
     url(r'^api/', include('api.urls', namespace='api')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api-token-auth/', views.obtain_auth_token),
+]
+
+
+# auth
+urlpatterns += [
+    url(r'^token-auth/', views.obtain_auth_token),
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    # url(r'^rest-auth/user/$', CustomUserDetailsView.as_view(), name='rest_user_details'),  # Overrides default one
+    # url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 if settings.DEBUG:
