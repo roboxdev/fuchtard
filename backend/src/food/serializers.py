@@ -59,6 +59,5 @@ class FoodCategorySerializer(serializers.HyperlinkedModelSerializer):
             'visible',
             'enabled',
             'position',
-            'expanded',
             'title',
         )

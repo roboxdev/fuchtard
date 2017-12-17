@@ -61,7 +61,6 @@ class FoodCategory(SortableMixin):
     visible = models.BooleanField('Видимая', default=True)
     enabled = models.BooleanField('Включено', default=True)
     position = models.PositiveIntegerField('Позиция', default=0, editable=False, db_index=True)
-    expanded = models.BooleanField('Развёрнута', default=True)
     title = models.CharField('Название', max_length=60)
     discount = GenericRelation(Discount, related_query_name='food_categories')
 
