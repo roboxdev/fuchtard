@@ -2,7 +2,7 @@ import { combineReducers } from 'redux-seamless-immutable';
 import auth from './auth';
 import cart from './cart';
 import categories from './categories';
-import entities from './entities';
+import gifts from './gifts';
 import notifications from './notifications';
 import order from './order';
 import orderHistory from './orderHistory';
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   auth,
   cart,
   categories,
-  entities,
+  gifts,
   notifications,
   order,
   orderHistory,

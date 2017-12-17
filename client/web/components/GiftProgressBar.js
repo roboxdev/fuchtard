@@ -28,6 +28,6 @@ export class GiftProgressBar extends React.Component {
 export default connect(
     state => ({
         cartSubtotal: subtotalSelector(state),
-        gifts: state.entities.gifts,
+        gifts: Object.values(state.gifts.resources),
     })
 )(GiftProgressBar)

@@ -18,7 +18,7 @@ export const getFoodItemsBySlugOrID = (state, props) => {
 };
 
 const foodItemsSelector = state => Object.values(state.products.resources);
-const giftsSelector = state => state.entities.gifts;
+const giftsSelector = state => Object.values(state.gifts.resources);
 export const cartSelector = state => state.cart.present.foodItems;
 export const cartOrderingSelector = state => state.cart.present.ordering;
 export const cartAsOrderedMap = state => new Map(cartOrderingSelector(state).map(v => [v, cartSelector(state)[v]]));
