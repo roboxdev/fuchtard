@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { getCategoryBySlug, getFoodItemsBySlugOrID } from 'core/selectors/app';
+import { getFoodItemsBySlugOrID } from 'core/selectors/app';
+import { getCategoryBySlug } from 'core/reducers/products';
 
 import FoodItem from './FoodItem';
 

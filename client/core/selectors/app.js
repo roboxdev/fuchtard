@@ -9,29 +9,15 @@ import { restaurantSettings } from 'core/config';
 const {minimalOrderRequirement} = restaurantSettings;
 
 export const getQuantityByFoodId = (state, props) => cartSelector(state)[props.foodItemId];
-export const getCategoryBySlug = (state, props) => (
-    state.entities.foodCategories.find(cat => cat.slug === props.match.params.slug)
-);
 
-const getFirstFoodItemOfCategory = (category, foodItems) => foodItems.find(v => v.category === category.url);
 
-const getFoodCategoryAvatar = (category, foodItems) => {
-    const foodItem = getFirstFoodItemOfCategory(category, foodItems);
-    return foodItem ? foodItem.photo : '';
-};
-
-export const getFoodItemsOfCategory = (state, props) => {
-    const category = getCategoryBySlug(state, props);
-    return category ? state.entities.foodItems.filter(v => v.category === category.url) : []
-};
 
 export const getFoodItemsBySlugOrID = (state, props) => {
     const foodItems = getFoodItemsOfCategory(state, props);
     return foodItems.find(food => food.slug === props.match.params.foodSlug || food.id === +props.match.params.foodSlug)
 };
 
-const foodItemsSelector = state => state.entities.foodItems;
-const foodCategoriesSelector = state => state.entities.foodCategories;
+const foodItemsSelector = state => Object.values(state.products.resources);
 const giftsSelector = state => state.entities.gifts;
 export const cartSelector = state => state.cart.present.foodItems;
 export const cartOrderingSelector = state => state.cart.present.ordering;
@@ -81,19 +67,3 @@ const getFoodItemAnnotatedGifts = (gifts, foodItems) => gifts.map(
 );
 
 export const foodItemAnnotatedGifts = createSelector(giftsSelector, foodItemsSelector, getFoodItemAnnotatedGifts);
-
-export const visibleFoodCategoriesSelector = createSelector(
-    foodCategoriesSelector,
-    categories => categories.filter(v => v.visible)
-);
-
-export const visibleFoodCategoriesWithAvatarSelector = createSelector(
-    visibleFoodCategoriesSelector,
-    foodItemsSelector,
-    (categories, foodItems) => categories.map(
-        category => ({
-                ...category,
-                avatar: getFoodCategoryAvatar(category, foodItems),
-            }
-        ))
-);

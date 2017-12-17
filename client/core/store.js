@@ -4,6 +4,8 @@ import thunk from 'redux-thunk';
 import reducer from 'core/reducers';
 
 import {actions} from 'core/reducers/entities';
+import {actions as categoriesActions} from 'core/reducers/categories';
+import {actions as productsActions} from 'core/reducers/products';
 
 
 export const store = createStore(
@@ -23,6 +25,8 @@ const placeCartIntoLocalStorage = () => {
 
 store.subscribe(placeCartIntoLocalStorage);
 
-store.dispatch(actions.fetchData());
+store.dispatch(actions.fetchGifts());
+store.dispatch(categoriesActions.list());
+store.dispatch(productsActions.list());
 
 window.store = store;

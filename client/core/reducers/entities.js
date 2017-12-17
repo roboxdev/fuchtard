@@ -28,27 +28,6 @@ export default function (state=initialState, action) {
     }
 };
 
-
-function fetchFoodItems() {
-    return dispatch => {
-        fetch(endpoints.foodItems).then(
-            response => response.json()
-        ).then(
-            json => dispatch({type: types.SET_FOOD_ITEMS, payload: json})
-        );
-    }
-}
-
-function fetchFoodCategories() {
-    return dispatch => {
-        fetch(endpoints.foodCategories).then(
-            response => response.json()
-        ).then(
-            json => dispatch({type: types.SET_FOOD_CATEGORIES, payload: json})
-        );
-    }
-}
-
 function fetchGifts() {
     return dispatch => {
         fetch(endpoints.gifts).then(
@@ -60,15 +39,6 @@ function fetchGifts() {
 }
 
 
-function fetchData() {
-    return dispatch => {
-        dispatch(fetchFoodItems());
-        dispatch(fetchFoodCategories());
-        dispatch(fetchGifts());
-    }
-}
-
-
 export const actions = {
-    fetchData,
+    fetchGifts,
 };
