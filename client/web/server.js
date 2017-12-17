@@ -2,7 +2,7 @@ import express from 'express';
 import 'isomorphic-fetch';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import App from 'components/app';
+import App from 'components/App';
 import template from './template';
 
 const app = express();
