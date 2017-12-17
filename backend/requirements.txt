@@ -4,6 +4,7 @@ django-extensions==1.7.8
 django-hashid-field==1.2.1
 Django==1.11
 djangorestframework==3.6.2
+djangorestframework-camel-case==0.2.0
 envparse==0.2.0
 Pillow==4.1.0  # required for ImageField
 psycopg2==2.7.1
