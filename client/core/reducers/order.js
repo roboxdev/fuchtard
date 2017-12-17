@@ -4,7 +4,7 @@ import history from 'browserHistory';
 
 import { actions as cartActions } from './cart';
 
-import { endpoints } from 'core/config';
+import endpoints from 'core/endpoints';
 
 import { cartAsOrderedMap } from 'core/selectors/app';
 

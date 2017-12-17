@@ -1,7 +1,7 @@
 import Immutable from 'seamless-immutable';
 
 
-import { endpoints } from 'core/config';
+import endpoints from 'core/endpoints';
 
 const types = {
     ADD_HISTORY_ENTRY: 'ADD_HISTORY_ENTRY',
