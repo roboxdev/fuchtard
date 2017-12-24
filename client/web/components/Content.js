@@ -16,6 +16,7 @@ export class Content extends React.Component {
                 <Route path="/checkout/" component={CheckoutPage}/>
                 <Route path="/orders/:hashid/" component={ThankyouPage}/>
                 <Route path="/:slug/:foodSlug/" component={FoodItemDetailed}/>
+                <Route path="/create_category/" component={FoodCategory}/>
                 <Route path="/:slug/" component={FoodCategory}/>
             </Switch>
         );

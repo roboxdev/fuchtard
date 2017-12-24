@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {connect} from 'react-redux';
 import { compose, defaultProps } from 'recompose';
 
@@ -7,6 +7,7 @@ import FoodItem from './FoodItem';
 import { PageTitleUpdater } from './PageTitle';
 
 import styles from 'styles/FoodCategory.css';
+import CategoryForm from 'components/CategoryForm';
 
 
 const FoodCategory = ({category, foodItems, category: {title}, ...rest}) => (
@@ -22,9 +23,16 @@ const FoodCategory = ({category, foodItems, category: {title}, ...rest}) => (
         />
     )}
   </div>
-)
+);
 
-export default compose(
+const Category = (props) => (
+  <Fragment>
+    <CategoryForm />
+    <FoodCategory {...props} />
+  </Fragment>
+);
+
+const CategoryHOC = compose(
   connect(
     (state, props) => ({
         category: getCategoryBySlug(state, props),
@@ -36,4 +44,6 @@ export default compose(
       title: '',
     }
   })
-)(FoodCategory);
+);
+
+export default CategoryHOC(Category);

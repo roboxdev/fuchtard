@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose, withState, withHandlers } from 'recompose';
+import { compose } from 'recompose';
 import { Link } from 'react-router-dom';
-import slug from 'slug';
 
 import { CardMedia } from 'react-toolbox/lib/card';
-import Input from 'react-toolbox/lib/input';
-import { actions, visibleCategoriesWithAvatarSelector } from 'core/reducers/categories';
+
+import { visibleCategoriesWithAvatarSelector } from 'core/reducers/categories';
 
 import styles from 'styles/TiledFoodMenu.css';
 
@@ -24,24 +23,31 @@ const Tile = ({
     <div className={styles.title}>
       {title}
     </div>
-    <button onClick={onDelete}>×</button>
   </div>
 );
 
 const TiledFoodMenu = ({
   categories,
-  createCategory,
-  deleteCategory,
-  title,
-  onTitleChange,
-  slug,
-  onSlugChange,
 }) => (
   <div className={styles.menuWrapper}>
-    <Input value={title} onChange={onTitleChange}/>
-    <Input value={slug} onChange={v => onSlugChange(v)}/>
-    <button onClick={createCategory}>add</button>
     <nav className={styles.tiledFoodMenu}>
+      <Link
+        to={`/create_category/`}
+        className={styles.link}
+      >
+        <div className={styles.tileWrapper}>
+          <div className={styles.tile}>
+              <CardMedia
+                theme={{cardMedia: styles.cardMedia}}
+                aspectRatio="wide"
+                // image={}
+              />
+              <div className={styles.title}>
+                Создать категорию
+              </div>
+            </div>
+        </div>
+      </Link>
       {categories.map(
         (category) =>
           <Link
@@ -50,7 +56,7 @@ const TiledFoodMenu = ({
             className={styles.link}
           >
             <div className={styles.tileWrapper}>
-              <Tile category={category} onDelete={() => deleteCategory(category.id)}/>
+              <Tile category={category} />
             </div>
           </Link>
       )}
@@ -58,31 +64,12 @@ const TiledFoodMenu = ({
   </div>
 );
 
-
-export default compose(
+const TiledFoodMenuHOC = compose(
   connect(
     state => ({
       categories: visibleCategoriesWithAvatarSelector(state),
     }),
-    {
-      createCategory: actions.create,
-      deleteCategory: actions.destroy,
-    }
   ),
-  withState('title', 'onTitleChange', ''),
-  withState('slug', 'onSlugChange', ''),
-  withHandlers({
-    onTitleChange: ({ onTitleChange, onSlugChange }) => v => {
-      onTitleChange(v);
-      onSlugChange(slug(v));
-    },
-    createCategory: ({ createCategory, title, slug, onTitleChange, onSlugChange }) => () => {
-      createCategory({
-        title,
-        slug,
-      });
-      onTitleChange('');
-      onSlugChange('');
-    },
-  })
-)(TiledFoodMenu);
+);
+
+export default TiledFoodMenuHOC(TiledFoodMenu);
