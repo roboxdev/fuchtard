@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { withFormik } from 'formik';
 import slug from 'slug';
-
 import { Link } from 'react-router-dom';
 
 import Input from 'react-toolbox/lib/input';
@@ -20,6 +19,7 @@ const CategoryForm =  ({
   handleBlur,
   handleSubmit,
   isSubmitting,
+  onDelete,
 }) => (
   <form
     onSubmit={handleSubmit}
@@ -46,6 +46,13 @@ const CategoryForm =  ({
     >
       Submit
     </Button>
+    <Button
+      // type={'submit'}
+      disabled={isSubmitting}
+      onClick={onDelete}
+    >
+      Delete
+    </Button>
   </form>
 );
 
@@ -57,11 +64,13 @@ const CategoryFormHOC = compose(
     }),
     {
       createCategory: actions.create,
+      updateCategory: actions.update,
       deleteCategory: actions.destroy,
     }
   ),
   withFormik({
-    mapPropsToValues: props => ({title: '', slug: ''}),
+    mapPropsToValues: ({category: {title, slug}}) => ({title, slug}),
+    enableReinitialize: true,
     validate: (values, props) => {
       const errors = {};
       if (!values.slug) {
@@ -73,26 +82,32 @@ const CategoryFormHOC = compose(
       }
       return errors;
     },
-    handleSubmit: ({title, slug},
+    handleSubmit: (values,
                    {
-                     props: {createCategory},
+                     props: {category: {id}, createCategory, updateCategory},
                      resetForm,
                    }) => {
-      createCategory({
-        title,
-        slug,
-      });
-      resetForm();
+      if (id) {
+        updateCategory(id, values);
+      } else {
+        createCategory(values);
+        resetForm();
+      }
     },
   }),
   withHandlers({
-    onTitleChange: ({ setFieldValue }) => v => {
+    onTitleChange: ({ setFieldValue, category: {id} }) => v => {
       setFieldValue('title', v);
-      setFieldValue('slug', slug(v));
+      if (!id) {
+        setFieldValue('slug', slug(v).toLowerCase());
+      }
     },
     onSlugChange: ({ setFieldValue }) => v => {
-      setFieldValue('slug', v);
+      setFieldValue('slug', v.toLowerCase());
     },
+    onDelete: ({ deleteCategory, category: {id} }) => () => {
+      deleteCategory(id);
+    }
   }),
 );
 

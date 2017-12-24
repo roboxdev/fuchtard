@@ -31,7 +31,11 @@ const CategoryViewHOC = compose(
     category: slugKeyedCategoriesSelector(state, props),
   })),
   defaultProps({
-    category: {},
+    category: {
+      id: undefined,
+      title: '',
+      slug: '',
+    },
   }),
   withProps(({category: {id}}) => ({
     categoryId: id,
