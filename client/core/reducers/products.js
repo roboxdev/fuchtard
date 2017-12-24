@@ -110,6 +110,8 @@ export const actions = {
     destroy,
 };
 
+const productsSelector = state => state.products.resources;
+
 export const getCategoryBySlug = (state, props) => (
     Object.values(state.categories.resources).find(cat => cat.slug === props.match.params.slug)
 );
@@ -118,3 +120,11 @@ export const getFoodItemsOfCategory = (state, props) => {
     const category = getCategoryBySlug(state, props);
     return category ? Object.values(state.products.resources).filter(v => v.category === category.url) : []
 };
+
+export const getCategoryProducts = createSelector(
+  [
+    productsSelector,
+    (_, {categoryId}) => categoryId
+  ],
+  (products, categoryId) => Object.values(products).filter(v => v.category === categoryId)
+);

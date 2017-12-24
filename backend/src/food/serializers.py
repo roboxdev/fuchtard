@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import FoodCategory, FoodItem
 
 
-class FoodItemSerializer(serializers.HyperlinkedModelSerializer):
+class FoodItemSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
 
     class Meta:
@@ -49,7 +49,7 @@ class FoodItemMetaSerializer(serializers.ModelSerializer):
         return obj.price
 
 
-class FoodCategorySerializer(serializers.HyperlinkedModelSerializer):
+class FoodCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = FoodCategory
         fields = (

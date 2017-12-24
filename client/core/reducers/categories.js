@@ -6,6 +6,9 @@ import endpoints from 'core/endpoints';
 import { resourceReducer } from 'redux-resource';
 import { crudRequest } from 'redux-resource-xhr';
 
+import {getSlugKeyedObj} from 'core/helpers';
+
+
 const MODEL_NAME = 'categories';
 const endpoint = endpoints.categories;
 
@@ -112,6 +115,19 @@ export const actions = {
 
 const categoriesSelector = state => state.categories.resources;
 
+export const slugKeyedCategoriesSelector = createSelector(
+  [
+    categoriesSelector,
+    (state, props) => props.categorySlug,
+  ],
+  (categories, categorySlug) => getSlugKeyedObj(categories)[categorySlug],
+);
+
+export const getCategoryBySlug = (state, props) => (
+    Object.values(state.categories.resources).find(cat => cat.slug === props.match.params.slug)
+);
+
+
 export const visibleCategoriesSelector = createSelector(
     categoriesSelector,
     categories => Object.values(categories).filter(v => v && v.visible)
@@ -136,3 +152,4 @@ export const visibleCategoriesWithAvatarSelector = createSelector(
             }
         ))
 );
+
