@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { cartAsAnnotatedMapSelector } from 'core/selectors/app';
 
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import TransitionGroup from 'react-transition-group';
 import { Card, CardTitle } from 'react-toolbox/lib/card';
 
 import CartItem from './CartItem';
@@ -32,15 +32,15 @@ export class Cart extends React.Component {
         const cartEntries = [...cart.entries()];
         return <div>
             <p className={styles.subheader}>Корзина</p>
-            <CSSTransitionGroup
-                transitionName={{
-                    enter: styles.animationEnter,
-                    enterActive: styles.animationEnterActive,
-                    leave: styles.animationLeave,
-                    leaveActive: styles.animationLeaveActive,
-                }}
-                transitionEnterTimeout={400}
-                transitionLeaveTimeout={400}>
+            {/*<TransitionGroup*/}
+                {/*transitionName={{*/}
+                    {/*enter: styles.animationEnter,*/}
+                    {/*enterActive: styles.animationEnterActive,*/}
+                    {/*leave: styles.animationLeave,*/}
+                    {/*leaveActive: styles.animationLeaveActive,*/}
+                {/*}}*/}
+                {/*transitionEnterTimeout={400}*/}
+                {/*transitionLeaveTimeout={400}>*/}
                 {cartEntries.map(([foodItemId, rest]) =>
                     <div
                         className={styles.cartItemAnimationWrapper}
@@ -59,7 +59,7 @@ export class Cart extends React.Component {
                         <EmptyCart/>
                     </div>
                 }
-            </CSSTransitionGroup>
+            {/*</TransitionGroup>*/}
         </div>
 
     }
