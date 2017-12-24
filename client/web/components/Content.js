@@ -4,8 +4,8 @@ import {Route, Switch} from 'react-router-dom';
 import IndexPage from './IndexPage';
 import CheckoutPage from './CheckoutPage';
 import ThankyouPage from './ThankyouPage';
-import FoodCategory from './CategoryView';
-import FoodItemDetailed from './FoodItemDetailed';
+import Category from './CategoryView';
+import ProductView from './ProductView';
 
 
 export class Content extends React.Component {
@@ -15,9 +15,9 @@ export class Content extends React.Component {
                 <Route exact path="/" component={IndexPage}/>
                 <Route path="/checkout/" component={CheckoutPage}/>
                 <Route path="/orders/:hashid/" component={ThankyouPage}/>
-                <Route path="/:slug/:foodSlug/" component={FoodItemDetailed}/>
-                <Route path="/create_category/" component={FoodCategory}/>
-                <Route path="/:categorySlug/" component={FoodCategory}/>
+                <Route path="/:categorySlug/:productSlug/" component={ProductView}/>
+                <Route path="/create_category/" component={Category}/>
+                <Route path="/:categorySlug/" component={Category}/>
             </Switch>
         );
     }

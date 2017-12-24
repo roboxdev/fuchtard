@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { compose, withProps, withHandlers, defaultProps } from 'recompose';
 
 
-import FoodItem from './FoodItem';
+import ProductCard from './ProductCard';
 import styles from 'styles/FoodCategory.css';
 
 import {getCategoryProducts} from 'core/reducers/products';
@@ -11,10 +11,10 @@ import {getCategoryProducts} from 'core/reducers/products';
 const CategoryContent = ({category, products, ...rest}) => (
   <div className={styles.foodItemCategory}>
     {Object.values(products).map(
-      food =>
-        <FoodItem
-          food={food}
-          key={food.url}
+      product =>
+        <ProductCard
+          product={product}
+          key={product.url}
           category={category}
           {...rest}
         />

@@ -5,6 +5,7 @@ import endpoints from 'core/endpoints';
 
 import { resourceReducer } from 'redux-resource';
 import { crudRequest } from 'redux-resource-xhr';
+import {getSlugKeyedObj} from 'core/helpers';
 
 const MODEL_NAME = 'products';
 const endpoint = endpoints.foodItems;
@@ -111,6 +112,15 @@ export const actions = {
 };
 
 const productsSelector = state => state.products.resources;
+
+export const slugKeyedProductsSelector = createSelector(
+  [
+    productsSelector,
+    (state, props) => props.productSlug,
+  ],
+  (products, productSlug) => getSlugKeyedObj(products)[productSlug],
+);
+
 
 export const getCategoryBySlug = (state, props) => (
     Object.values(state.categories.resources).find(cat => cat.slug === props.match.params.slug)
