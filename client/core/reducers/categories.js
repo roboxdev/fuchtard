@@ -1,6 +1,11 @@
 import Immutable from 'seamless-immutable';
 import { createSelector } from 'reselect';
 
+import flow from 'lodash/fp/flow';
+import uniqBy from 'lodash/fp/uniqBy';
+import keyBy from 'lodash/fp/keyBy';
+import mapValues from 'lodash/fp/mapValues';
+
 import endpoints from 'core/endpoints';
 
 import { resourceReducer } from 'redux-resource';
@@ -8,6 +13,7 @@ import { crudRequest } from 'redux-resource-xhr';
 
 import {getSlugKeyedObj} from 'core/helpers';
 import history from 'browserHistory';
+import {productsSelector} from 'core/reducers/products';
 
 
 const MODEL_NAME = 'categories';
@@ -127,6 +133,11 @@ export const actions = {
 
 const categoriesSelector = state => state.categories.resources;
 
+export const visibleCategoriesSelector = createSelector(
+    categoriesSelector,
+    categories => Object.values(categories).filter(v => v && v.visible)
+);
+
 export const slugKeyedCategoriesSelector = createSelector(
   [
     categoriesSelector,
@@ -135,33 +146,25 @@ export const slugKeyedCategoriesSelector = createSelector(
   (categories, categorySlug) => getSlugKeyedObj(categories)[categorySlug],
 );
 
-export const getCategoryBySlug = (state, props) => (
-    Object.values(state.categories.resources).find(cat => cat.slug === props.match.params.slug)
+const categoriesAvatarSelector = createSelector(
+  productsSelector,
+  (products) => flow(
+    uniqBy('category'),
+    keyBy('category'),
+    mapValues('photo'),
+  )(Object.values(products))
 );
-
-
-export const visibleCategoriesSelector = createSelector(
-    categoriesSelector,
-    categories => Object.values(categories).filter(v => v && v.visible)
-);
-
-const getFirstFoodItemOfCategory = (category, foodItems) => Object.values(foodItems).find(v => v.category === category.url);
-
-const getFoodCategoryAvatar = (category, foodItems) => {
-    const foodItem = getFirstFoodItemOfCategory(category, foodItems);
-    return foodItem ? foodItem.photo : '';
-};
-
-const foodItemsSelector = state => state.products.resources;
 
 export const visibleCategoriesWithAvatarSelector = createSelector(
     visibleCategoriesSelector,
-    foodItemsSelector,
-    (categories, foodItems) => categories.map(
-        category => ({
-                ...category,
-                avatar: getFoodCategoryAvatar(category, foodItems),
+    categoriesAvatarSelector,
+    (categories, products) => categories.map(
+        category => {
+          return ({
+              ...category,
+              avatar: products[category.id],
             }
-        ))
+          );
+        })
 );
 

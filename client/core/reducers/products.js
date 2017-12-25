@@ -111,7 +111,7 @@ export const actions = {
     destroy,
 };
 
-const productsSelector = state => state.products.resources;
+export const productsSelector = state => state.products.resources;
 
 export const slugKeyedProductsSelector = createSelector(
   [

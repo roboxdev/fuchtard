@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import Input from 'react-toolbox/lib/input';
 import { Button } from 'react-toolbox/lib/button';
-import {actions, visibleCategoriesWithAvatarSelector} from 'core/reducers/categories';
+import {actions} from 'core/reducers/categories';
 import {isSlug} from 'core/helpers';
 
 const CategoryForm =  ({
@@ -59,9 +59,7 @@ const CategoryForm =  ({
 
 const CategoryFormHOC = compose(
   connect(
-    state => ({
-      categories: visibleCategoriesWithAvatarSelector(state),
-    }),
+    null,
     {
       createCategory: actions.create,
       updateCategory: actions.update,
