@@ -159,12 +159,10 @@ export const visibleCategoriesWithAvatarSelector = createSelector(
     visibleCategoriesSelector,
     categoriesAvatarSelector,
     (categories, products) => categories.map(
-        category => {
-          return ({
-              ...category,
-              avatar: products[category.id],
-            }
-          );
-        })
+      category => ({
+        ...category,
+        avatar: products[category.id],
+      })
+    )
 );
 
