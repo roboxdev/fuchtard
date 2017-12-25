@@ -32,7 +32,6 @@ const CategoryViewHOC = compose(
   })),
   defaultProps({
     category: {
-      id: undefined,
       title: '',
       slug: '',
     },

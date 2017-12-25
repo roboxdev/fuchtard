@@ -8,11 +8,13 @@ import {slugKeyedCategoriesSelector} from 'core/reducers/categories';
 import {slugKeyedProductsSelector} from 'core/reducers/products';
 
 import ProductCard from './ProductCard';
+import ProductForm from './ProductForm';
 
 
 const ProductView = ({product, category}) => (
   <div>
     <Link to={`/${category.slug}/`}>← {category.title}</Link>
+    <ProductForm product={product} />
     <ProductCard product={product} category={category}/>
   </div>
 );
@@ -31,7 +33,11 @@ const ProductViewHOC = compose(
     }),
   ),
   defaultProps({
-    product: {},
+    product: {
+      title: '',
+      slug: '',
+    },
+    category: {},
   }),
 );
 

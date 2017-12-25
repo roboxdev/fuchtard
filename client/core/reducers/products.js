@@ -6,6 +6,7 @@ import endpoints from 'core/endpoints';
 import { resourceReducer } from 'redux-resource';
 import { crudRequest } from 'redux-resource-xhr';
 import {getSlugKeyedObj} from 'core/helpers';
+import history from 'browserHistory';
 
 const MODEL_NAME = 'products';
 const endpoint = endpoints.foodItems;
@@ -45,27 +46,38 @@ const create = (data) => (dispatch, getState) => (
       }
     },
     transformData: data => [data],
+    onSucceeded: (action, res, body) => {
+      dispatch(action);
+      // TODO
+      // history.push(`/${body.slug}/`);
+    }
   })
 );
 
-const update = (id) => (dispatch, getState) => (
+const update = (id, data) => (dispatch, getState) => (
   crudRequest('update', {
     dispatch,
     actionDefaults: {
       resourceName: MODEL_NAME,
       resources: [id]
     },
-    request: 'update',
     xhrOptions: {
       url: `${endpoint}${id}/`,
-      method: 'PUT',
+      // method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Authorization': `Token ${getState().auth.authToken}`,
       },
       json: {
+        ...data
       }
     },
     transformData: data => [data],
+    onSucceeded: (action, res, body) => {
+      dispatch(action);
+      // TODO
+      // history.push(`/${body.slug}/`);
+    }
   })
 );
 
@@ -76,7 +88,6 @@ const destroy = (id) => (dispatch, getState) => (
       resourceName: MODEL_NAME,
       resources: [id],
     },
-    request: 'delete',
     xhrOptions: {
       url: `${endpoint}${id}/`,
       method: 'DELETE',
@@ -85,6 +96,11 @@ const destroy = (id) => (dispatch, getState) => (
       },
       json: true
     },
+    onSucceeded: (action, res, body) => {
+      dispatch(action);
+      // TODO
+      // history.push(`/${body.slug}/`);
+    }
   })
 );
 
