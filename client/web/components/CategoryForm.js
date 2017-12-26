@@ -82,11 +82,11 @@ const CategoryFormHOC = compose(
     },
     handleSubmit: (values,
                    {
-                     props: {category: {id}, createCategory, updateCategory},
+                     props: {category: {id, url}, createCategory, updateCategory},
                      resetForm,
                    }) => {
       if (id) {
-        updateCategory(id, values);
+        updateCategory(id, url, values);
       } else {
         createCategory(values);
         resetForm();
@@ -103,8 +103,8 @@ const CategoryFormHOC = compose(
     onSlugChange: ({ setFieldValue }) => v => {
       setFieldValue('slug', v.toLowerCase());
     },
-    onDelete: ({ deleteCategory, category: {id} }) => () => {
-      deleteCategory(id);
+    onDelete: ({ deleteCategory, category: {id, url} }) => () => {
+      deleteCategory(id, url);
     }
   }),
 );

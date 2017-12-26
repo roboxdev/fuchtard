@@ -81,11 +81,11 @@ const ProductFormHOC = compose(
     },
     handleSubmit: (values,
                    {
-                     props: {product: {id}, createProduct, updateProduct},
+                     props: {product: {id, url}, createProduct, updateProduct},
                      resetForm,
                    }) => {
       if (id) {
-        updateProduct(id, values);
+        updateProduct(id, url, values);
       } else {
         createProduct(values);
         resetForm();
@@ -102,8 +102,8 @@ const ProductFormHOC = compose(
     onSlugChange: ({ setFieldValue }) => v => {
       setFieldValue('slug', v.toLowerCase());
     },
-    onDelete: ({ deleteProduct, product: {id} }) => () => {
-      deleteProduct(id);
+    onDelete: ({ deleteProduct, product: {id, url} }) => () => {
+      deleteProduct(id, url);
     }
   }),
 );

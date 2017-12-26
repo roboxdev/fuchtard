@@ -54,7 +54,7 @@ const create = (data) => (dispatch, getState) => (
   })
 );
 
-const update = (id, data) => (dispatch, getState) => (
+const update = (id, url, data) => (dispatch, getState) => (
   crudRequest('update', {
     dispatch,
     actionDefaults: {
@@ -62,7 +62,7 @@ const update = (id, data) => (dispatch, getState) => (
       resources: [id]
     },
     xhrOptions: {
-      url: `${endpoint}${id}/`,
+      url,
       // method: 'PUT',
       method: 'PATCH',
       headers: {
@@ -81,7 +81,7 @@ const update = (id, data) => (dispatch, getState) => (
   })
 );
 
-const destroy = (id) => (dispatch, getState) => (
+const destroy = (id, url) => (dispatch, getState) => (
   crudRequest('delete', {
     dispatch,
     actionDefaults: {
@@ -89,7 +89,7 @@ const destroy = (id) => (dispatch, getState) => (
       resources: [id],
     },
     xhrOptions: {
-      url: `${endpoint}${id}/`,
+      url,
       method: 'DELETE',
       headers: {
         'Authorization': `Token ${getState().auth.authToken}`,
