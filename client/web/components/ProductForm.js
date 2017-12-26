@@ -40,6 +40,38 @@ const ProductForm =  ({
       onChange={onSlugChange}
       onBlur={handleBlur}
     />
+    <Input
+      name={'category'}
+      label={'category'}
+      value={values.category}
+      error={touched.category && errors.category}
+      onChange={onSlugChange}
+      onBlur={handleBlur}
+    />
+    <Input
+      name={'description'}
+      label={'description'}
+      value={values.description}
+      error={touched.description && errors.description}
+      onChange={onSlugChange}
+      onBlur={handleBlur}
+    />
+    <Input
+      name={'photo'}
+      label={'photo'}
+      value={values.photo}
+      error={touched.photo && errors.photo}
+      onChange={onSlugChange}
+      onBlur={handleBlur}
+    />
+    <Input
+      name={'rawPrice'}
+      label={'rawPrice'}
+      value={values.rawPrice}
+      error={touched.rawPrice && errors.rawPrice}
+      onChange={onSlugChange}
+      onBlur={handleBlur}
+    />
     <Button
       type={'submit'}
       disabled={isSubmitting}
@@ -66,7 +98,21 @@ const ProductFormHOC = compose(
     }
   ),
   withFormik({
-    mapPropsToValues: ({product: {title, slug}}) => ({title, slug}),
+    mapPropsToValues: ({product: {
+      title,
+      slug,
+      category,
+      description,
+      photo,
+      rawPrice,
+    }}) => ({
+      title,
+      slug,
+      category,
+      description,
+      photo,
+      rawPrice,
+    }),
     enableReinitialize: true,
     validate: (values, props) => {
       const errors = {};
