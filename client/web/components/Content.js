@@ -15,6 +15,7 @@ export class Content extends React.Component {
                 <Route exact path="/" component={IndexPage}/>
                 <Route path="/checkout/" component={CheckoutPage}/>
                 <Route path="/orders/:hashid/" component={ThankyouPage}/>
+                <Route path="/:categorySlug/new/" component={ProductView}/>
                 <Route path="/:categorySlug/:productSlug/" component={ProductView}/>
                 <Route path="/create_category/" component={Category}/>
                 <Route path="/:categorySlug/" component={Category}/>
