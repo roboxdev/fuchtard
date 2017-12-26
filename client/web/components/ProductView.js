@@ -15,7 +15,9 @@ const ProductView = ({product, category}) => (
   <div>
     <Link to={`/${category.slug}/`}>← {category.title}</Link>
     <ProductForm product={product} />
-    <ProductCard product={product} category={category}/>
+    {product.id && (
+      <ProductCard product={product} category={category}/>
+    )}
   </div>
 );
 
@@ -36,6 +38,10 @@ const ProductViewHOC = compose(
     product: {
       title: '',
       slug: '',
+      category: '',
+      description: '',
+      photo: '',
+      rawPrice: '',
     },
     category: {},
   }),
